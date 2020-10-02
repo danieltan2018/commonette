@@ -15,3 +15,5 @@ services:
       - db
     ports:
       - "80:80"
+volumes:
+  db:
