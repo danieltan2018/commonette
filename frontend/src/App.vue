@@ -1,10 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <v-app>
+      <v-app-bar app color="white" height="100">
+        <v-avatar class="mr-3" color="grey lighten-5" size="70">
+          <v-img contain max-height="70%" src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"></v-img>
+        </v-avatar>
+        <v-toolbar-title class="font-weight-black headline">
+          COMMONETTE
+        </v-toolbar-title>
+      </v-app-bar>
+
+      <v-content>
+        <v-container fluid>
+          <router-view></router-view>
+        </v-container>
+      </v-content>
+
+      <v-footer class="justify-center" color="#292929" height="100">
+        <div class="title font-weight-light grey--text text--lighten-1 text-center">
+          &copy; {{ (new Date()).getFullYear() }} — Commonette — IS216 G6T5
+        </div>
+      </v-footer>
+    </v-app>
   </div>
 </template>
 
@@ -15,18 +32,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
