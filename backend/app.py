@@ -17,8 +17,8 @@ CORS(app)
 
 class Room(db.Model):
     __tablename__ = 'room'
-    code = db.Column(db.String, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    code = db.Column(db.String(6), primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
 
     def json(self):
         dto = {
