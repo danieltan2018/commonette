@@ -7,7 +7,7 @@ import json
 import utility
 
 app = Flask(__name__)
-dbURL = 'mysql+mysqlconnector://root@db:3306/commonette'
+dbURL = 'mysql+mysqlconnector://admin:Commonette234!@commonette.ciygr11ayijs.ap-southeast-1.rds.amazonaws.com:3306/commonette'
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
