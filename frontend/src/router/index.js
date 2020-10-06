@@ -14,6 +14,11 @@ const routes = [
     path: '/recommend',
     name: 'Recommend',
     component: () => import('../views/Recommend.vue')
+  },
+  {
+    path: '/questionnaire',
+    name: 'Questionnaire',
+    component: () => import('../views/Questionnaire.vue')
   }
 ]
 
