@@ -1,6 +1,18 @@
 <template>
   <div class="home">
     <v-content>
+      <v-dialog v-model="roompopup" max-width="350">
+        <v-card>
+          <v-card-title class="headline justify-center">Let's get started</v-card-title>
+          <v-card-text>
+            Enter the room code to join or create a new room
+            <v-text-field label="Room" v-model="room" required></v-text-field>
+          </v-card-text>
+          <v-card-actions class="justify-center">
+            <v-btn color="primary" v-on:click="navigateRoute('/login')">Return to login page</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <section id="hero">
         <v-row no-gutters>
           <v-img :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'" src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80">
@@ -120,6 +132,7 @@
 export default {
   data() {
     return {
+      roompopup: true,
       articles: [
         {
           src:
