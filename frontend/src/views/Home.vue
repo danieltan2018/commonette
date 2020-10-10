@@ -157,8 +157,25 @@
         </v-parallax>
       </section> -->
 
-      <section id="">
+      <section id="hero2">
+        <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 200" src="https://images.pexels.com/photos/936048/pexels-photo-936048.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260">
+          <v-container fill-height>
+            <h2 class="mx-auto display-2 font-weight-bold mb-3" max-width="720">
+              info about commonette here
+            </h2>
+            <v-row class="mx-auto" justify="center">
+              
+              <v-btn elevation="2" large class="ma-2" v-on:click="createroompopup = true">
+                Create Room
+              </v-btn>
 
+              <v-btn elevation="2" large v-on:click="roompopup = true" class="ma-2">
+                Join Room
+              </v-btn>
+
+            </v-row>
+          </v-container>
+        </v-parallax>
       </section>
 
 
