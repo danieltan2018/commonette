@@ -43,63 +43,48 @@
                   COMMONETTE
                 </span>
               </v-col>
-
               <v-row justify="center">
                 <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true">
                   Create Room
                 </v-btn>
-
                 <v-btn elevation="2" large class="ma-2" @click="$vuetify.goTo('#about')">
                   About
                 </v-btn>
-
                 <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2">
                   Join Room
                 </v-btn>
               </v-row>
-
             </v-row>
           </v-container>
         </v-theme-provider>
       </v-img>
 
-      <section id="about">
-        <div class="py-12"></div>
-
-        <v-container class="text-center">
-          <h2 class="display-2 font-weight-bold mb-3">What is commonette?</h2>
-
-          <v-responsive class="mx-auto mb-8" width="56">
-            <v-divider class="mb-1"></v-divider>
-            <v-divider></v-divider>
-          </v-responsive>
-
-          <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
-            info about commonette here
-          </v-responsive>
-
-          <v-btn color="grey" v-on:click="navigateRoute('/recommend')" outlined large>
-            <span class="grey--text text--darken-1 font-weight-bold">
-              Recommendation Page (temporary)
-            </span>
-          </v-btn>
-        </v-container>
-
-        <div class="py-12"></div>
-      </section>
+      <div class="py-12"></div>
+      <v-container class="text-center">
+        <h2 class="display-2 font-weight-bold mb-3">What is commonette?</h2>
+        <v-responsive class="mx-auto mb-8" width="56">
+          <v-divider class="mb-1"></v-divider>
+          <v-divider></v-divider>
+        </v-responsive>
+        <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
+          info about commonette here
+        </v-responsive>
+        <v-btn color="grey" v-on:click="navigateRoute('/recommend')" outlined large>
+          <span class="grey--text text--darken-1 font-weight-bold">
+            Recommendation Page (temporary)
+          </span>
+        </v-btn>
+      </v-container>
+      <div class="py-12"></div>
 
       <section id="mediums" class="grey lighten-3">
         <div class="py-12"></div>
-
         <v-container class="text-center">
           <h2 class="display-2 font-weight-bold mb-3">Mediums</h2>
-
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1"></v-divider>
-
             <v-divider></v-divider>
           </v-responsive>
-
           <v-row>
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" md="3">
               <v-card class="py-12 px-4" color="grey lighten-5" flat>
@@ -110,39 +95,33 @@
                     </v-avatar>
                   </div>
                 </v-theme-provider>
-
                 <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title"></v-card-title>
-
                 <v-card-text class="subtitle-1" v-text="text">
                 </v-card-text>
               </v-card>
             </v-col>
           </v-row>
         </v-container>
-
         <div class="py-12"></div>
       </section>
 
-      <section id="hero2">
+      <v-theme-provider dark>
         <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 200" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80">
           <v-container fill-height>
-            <h2 class="mx-auto display-2 font-weight-bold mb-3" max-width="720">
+            <h2 class="mx-auto black--text display-2 font-weight-bold mb-3" max-width="720">
               info about commonette here
             </h2>
             <v-row class="mx-auto" justify="center">
-
               <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true">
                 Create Room
               </v-btn>
-
               <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2">
                 Join Room
               </v-btn>
-
             </v-row>
           </v-container>
         </v-parallax>
-      </section>
+      </v-theme-provider>
 
     </v-main>
   </div>
@@ -200,7 +179,7 @@ export default {
           .then((response) => {
             localStorage.setItem("roomCode", response.data.code);
             localStorage.setItem("roomName", response.data.name);
-            this.navigateRoute('/questionnaire');
+            this.navigateRoute("/questionnaire");
           })
           .catch((error) => {
             this.errors = true;
@@ -221,7 +200,7 @@ export default {
           .then((response) => {
             localStorage.setItem("roomCode", response.data.code);
             localStorage.setItem("roomName", response.data.name);
-            this.navigateRoute('/questionnaire');
+            this.navigateRoute("/questionnaire");
           })
           .catch((error) => {
             this.errors = true;
