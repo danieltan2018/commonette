@@ -198,7 +198,6 @@ export default {
           method: "GET",
         })
           .then((response) => {
-            console.log(response.data);
             localStorage.setItem("roomCode", response.data.code);
             localStorage.setItem("roomName", response.data.name);
             this.navigateRoute('/questionnaire');
@@ -220,7 +219,6 @@ export default {
           method: "GET",
         })
           .then((response) => {
-            console.log(response.data);
             localStorage.setItem("roomCode", response.data.code);
             localStorage.setItem("roomName", response.data.name);
             this.navigateRoute('/questionnaire');
