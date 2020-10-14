@@ -1,4 +1,4 @@
-# frontend
+# Commonette
 
 ## Project setup
 ```

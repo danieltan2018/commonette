@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <v-app>
-      <v-app-bar app color="white" height="100">
-        <v-avatar class="mr-3" color="grey lighten-5" size="70">
+      <v-app-bar app color="blue darken-2" height="70" v-on:click="navigateRoute('/')">
+        <v-avatar class="mr-3" color="grey lighten-5" size="40">
           <v-img contain max-height="70%" src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"></v-img>
         </v-avatar>
         <v-toolbar-title class="font-weight-black headline">
@@ -37,8 +37,10 @@
 
 <script>
 export default {
-  created() {
-    document.title = "Commonette";
+  methods: {
+    navigateRoute(newpath) {
+      this.$router.push(newpath);
+    },
   },
 };
 </script>
