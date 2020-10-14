@@ -6,7 +6,7 @@ import Axios from "axios";
 
 Vue.config.productionTip = false
 Vue.prototype.$http = Axios;
-Vue.prototype.$http.defaults.baseURL = "http://commonapi.smusis.com";
+Vue.prototype.$http.defaults.baseURL = "https://commonapi.smusis.com";
 Vue.prototype.$appName = 'Commonette'
 
 
