@@ -1,13 +1,5 @@
 <template>
   <v-container fluid justify-center>
-    <v-layout row wrap justify-center>
-      <v-flex xs12 md6>
-        Room Name: {{roomName}}
-        <br>
-        Room Code: {{roomCode}}
-        <h1>Let's get to know you!</h1>
-      </v-flex>
-    </v-layout>
     <v-form ref="form">
 
       <v-layout row wrap justify-center mb-8>
@@ -619,8 +611,6 @@
 export default {
   data: () => {
     return {
-      roomName: localStorage.getItem("roomName"),
-      roomCode: localStorage.getItem("roomCode"),
       name: "",
       youtubeCategory1: "",
       youtubeCategory2: "",

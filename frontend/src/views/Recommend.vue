@@ -1,28 +1,44 @@
 <template>
-  <v-sheet class="mx-auto" elevation="8">
+  <v-main>
     <span>
-      <h2>YouTube Recommendations</h2>
+      <br>
+      <h1>Recommendations for {{roomName}}</h1>
+      <br>
+      <h3>Get your friends to join this room using the code <b>{{roomCode}}</b></h3>
+      <br>
     </span>
-    <v-slide-group class="pa-4" active-class="success" show-arrows>
-      <v-slide-item v-for="video in youtubeResults" :key="video.id">
-        <v-container grid-list-md>
-          <v-card class="mx-auto" max-width="300px">
-            <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
-            <v-card-title v-text="video.snippet.title" class="h3"></v-card-title>
-            <v-card-subtitle>
-              {{video.snippet.channelTitle}}
-            </v-card-subtitle>
-          </v-card>
-        </v-container>
-      </v-slide-item>
-    </v-slide-group>
-  </v-sheet>
+    <v-sheet class="mx-auto" elevation="8">
+      <v-toolbar color="grey" dense>
+        <v-toolbar-title>
+          <v-icon large color="red">
+            mdi-youtube
+          </v-icon>
+          YouTube
+        </v-toolbar-title>
+      </v-toolbar>
+      <v-slide-group class="pa-4" active-class="success" show-arrows>
+        <v-slide-item v-for="video in youtubeResults" :key="video.id">
+          <v-container grid-list-md>
+            <v-card class="mx-auto" max-width="300px">
+              <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
+              <v-card-title v-text="video.snippet.title" class="h3"></v-card-title>
+              <v-card-subtitle>
+                {{video.snippet.channelTitle}}
+              </v-card-subtitle>
+            </v-card>
+          </v-container>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
+  </v-main>
 </template>
 
 <script>
 import axios from "axios";
 export default {
   data: () => ({
+    roomName: localStorage.getItem("roomName"),
+    roomCode: localStorage.getItem("roomCode"),
     youtubeParams: {
       category: 0,
     },
