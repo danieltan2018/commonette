@@ -22,16 +22,16 @@ def create(room_name):
     # checks if random_code already exists
     room = room_ref.document(random_code).get()
     while (room.to_dict() != None):
-        print ("here")
         random_code = utility.get_random_string(6)
         room = room_ref.document(random_code).get()
 
     try:
-        obj = {"room_name": room_name, "questionnaire":[]}
+        obj = {"room_name": room_name, "questionnaire": []}
         room_ref.document(random_code).set(obj)
         return jsonify({"room_code": random_code, "room_name": room_name}), 200
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return f"{e}", 400
+
 
 @app.route('/room/<string:room_code>', methods=['GET'])
 def get_room(room_code):
@@ -42,11 +42,12 @@ def get_room(room_code):
     """
     try:
         room = room_ref.document(room_code).get()
-        if room.to_dict() == None: #room code doesn't exist
-            return jsonify({'message': 'Invalid room code'}), 404
+        if room.to_dict() == None:  # room code doesn't exist
+            return "Invalid room code", 400
         return jsonify(room.to_dict()), 200
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return f"{e}", 400
+
 
 @app.route('/add-questionnaire/<string:room_code>', methods=['POST'])
 def add_questionnaire(room_code):
@@ -61,7 +62,8 @@ def add_questionnaire(room_code):
         room_ref.document(room_code).set(room)
         return jsonify({"success": True}), 200
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return f"{e}", 400
+
 
 @app.route('/recommend/<string:room_code>', methods=['GET'])
 def update(room_code):
@@ -71,10 +73,11 @@ def update(room_code):
 
         room = room_ref.document(room_code).get()
         room = room.to_dict()
-        
+
         return jsonify(utility.generate_api(room["questionnaire"])), 200
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return f"{e}", 400
+
 
 # This is for flask app
 if __name__ == '__main__':
