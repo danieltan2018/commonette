@@ -1,0 +1,15 @@
+{
+	"name": "user3",
+	"youtube": ["1", "24"],
+	"book": ["Business"],
+	"movie": {
+		"genre": ["Comedy", "Biography"],
+		"imdb": 9,
+		"language": ["English"]
+	},
+	"spotify": {
+		"genre": ["k-pop"],
+		"artist": ["002", "003"],
+		"track": ["02", "03", "05"]
+	}
+}
