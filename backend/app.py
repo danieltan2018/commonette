@@ -31,7 +31,7 @@ def create(room_name):
         room_ref.document(random_code).set(obj)
         return jsonify({"room_code": random_code, "room_name": room_name}), 200
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return jsonify({"message": f"An Error Occured: {e}"}), 400
 
 @app.route('/room/<string:room_code>', methods=['GET'])
 def get_room(room_code):
@@ -46,7 +46,7 @@ def get_room(room_code):
             return jsonify({'message': 'Invalid room code'}), 404
         return jsonify(room.to_dict()), 200
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return jsonify({"message": f"An Error Occured: {e}"}), 400
 
 @app.route('/add-questionnaire/<string:room_code>', methods=['POST'])
 def add_questionnaire(room_code):
@@ -61,7 +61,7 @@ def add_questionnaire(room_code):
         room_ref.document(room_code).set(room)
         return jsonify({"success": True}), 200
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return jsonify({"message": f"An Error Occured: {e}"}), 400
 
 @app.route('/recommend/<string:room_code>', methods=['GET'])
 def update(room_code):
@@ -74,7 +74,7 @@ def update(room_code):
         
         return jsonify(utility.generate_api(room["questionnaire"])), 200
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return jsonify({"message": f"An Error Occured: {e}"}), 400
 
 # This is for flask app
 if __name__ == '__main__':
