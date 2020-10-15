@@ -1,13 +1,39 @@
 <template>
   <div id="app">
     <v-app>
-      <v-app-bar app color="blue darken-2" height="70" v-on:click="navigateRoute('/')">
-        <v-avatar class="mr-3" color="grey lighten-5" size="40">
-          <v-img contain max-height="70%" src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"></v-img>
-        </v-avatar>
-        <v-toolbar-title class="font-weight-black headline">
-          COMMONETTE
+      <v-app-bar app fixed dark clipped-left color="primary" v-on:click="navigateRoute('/')">
+        <v-img class="mr-3" src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png" max-height="30" max-width="30"></v-img>
+        <v-toolbar-title class="headline">
+          <span>Commonette</span>
         </v-toolbar-title>
+        <v-spacer></v-spacer>
+
+        <v-menu offset-y v-if="roomName">
+          <template v-slot:activator="{ on }">
+            <v-btn text icon color="white" v-on="on">
+              <v-icon dark>mdi-account-group</v-icon>
+            </v-btn>
+            {{ roomName }}'s Room
+          </template>
+          <v-list dense>
+            <v-list-item>
+              <v-list-item-title>Hi, Person A</v-list-item-title>
+            </v-list-item>
+            <!-- To replace with v-for -->
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-account-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Person B</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-account-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Person C</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-app-bar>
 
       <router-view></router-view>
@@ -33,6 +59,10 @@
 
 <script>
 export default {
+  data: () => ({
+    roomName: localStorage.getItem("roomName"),
+    roomCode: localStorage.getItem("roomCode"),
+  }),
   methods: {
     navigateRoute(newpath) {
       this.$router.push(newpath);
