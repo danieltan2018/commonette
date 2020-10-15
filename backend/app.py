@@ -7,6 +7,7 @@ import utility
 
 
 app = Flask(__name__)
+CORS(app)
 
 # Initialize Firestore DB
 cred = credentials.Certificate('key.json')
