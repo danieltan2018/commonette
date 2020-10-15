@@ -329,8 +329,8 @@ export default {
           method: "GET",
         })
           .then((response) => {
-            localStorage.setItem("roomCode", response.data.room_code);
             localStorage.setItem("roomName", response.data.room_name);
+            localStorage.setItem("roomCode", this.roomCode);
             this.navigateRoute("/questionnaire");
           })
           .catch((error) => {
