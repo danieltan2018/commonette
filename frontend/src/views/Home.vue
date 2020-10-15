@@ -3,112 +3,58 @@
     <v-main>
       <v-dialog v-model="createRoomPopup" max-width="350">
         <v-card>
-          <v-card-title class="headline justify-center"
-            >Create New Room</v-card-title
-          >
+          <v-card-title class="headline justify-center">Create New Room</v-card-title>
           <v-card-text>
             <v-form @submit.prevent v-model="valid" ref="form">
-              <v-text-field
-                label="Enter a room name"
-                v-model="roomName"
-                :rules="inputRequiredRule"
-                autofocus
-              ></v-text-field>
+              <v-text-field label="Enter a room name" v-model="roomName" :rules="inputRequiredRule" autofocus></v-text-field>
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
-              <v-btn
-                color="primary"
-                :loading="loading1"
-                @click="loader = 'loading1'"
-                :disabled="!valid"
-                v-on:click="createRoom"
-                >Enter</v-btn
-              >
+              <v-btn color="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
       </v-dialog>
       <v-dialog v-model="joinRoomPopup" max-width="350">
         <v-card>
-          <v-card-title class="headline justify-center"
-            >Join Existing Room</v-card-title
-          >
+          <v-card-title class="headline justify-center">Join Existing Room</v-card-title>
           <v-card-text>
             <v-form @submit.prevent v-model="valid" ref="form">
-              <v-text-field
-                label="Enter the room code"
-                v-model="roomCode"
-                :rules="inputRequiredRule"
-                autofocus
-              ></v-text-field>
+              <v-text-field label="Enter the room code" v-model="roomCode" :rules="inputRequiredRule" autofocus></v-text-field>
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
-              <v-btn
-                color="primary"
-                :loading="loading2"
-                @click="loader = 'loading2'"
-                :disabled="!valid"
-                v-on:click="joinRoom"
-                >Enter</v-btn
-              >
+              <v-btn color="primary" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom">Enter</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
       </v-dialog>
 
-      <v-img
-        src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80"
-      >
+      <v-img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80">
         <v-theme-provider dark>
           <v-container fill-height>
             <v-row align="center" class="white--text mx-auto" justify="center">
               <v-col class="white--text text-center" cols="12" tag="h1">
-                <span
-                  :class="[
+                <span :class="[
                     $vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2',
-                  ]"
-                  class="font-weight-light"
-                >
+                  ]" class="font-weight-light">
                   WELCOME TO
                 </span>
                 <br />
-                <span
-                  :class="[
+                <span :class="[
                     $vuetify.breakpoint.smAndDown ? 'display-3' : 'display-4',
-                  ]"
-                  class="font-weight-black"
-                >
+                  ]" class="font-weight-black">
                   COMMONETTE
                 </span>
               </v-col>
               <v-row justify="center">
-                <v-btn
-                  elevation="2"
-                  large
-                  class="ma-2"
-                  color="primary"
-                  v-on:click="createRoomPopup = true"
-                >
+                <v-btn elevation="2" large class="ma-2" color="primary" v-on:click="createRoomPopup = true">
                   Create Room
                 </v-btn>
-                <v-btn
-                  elevation="2"
-                  large
-                  class="ma-2"
-                  color="secondary"
-                  @click="$vuetify.goTo('#about')"
-                >
+                <v-btn elevation="2" large class="ma-2" color="secondary" @click="$vuetify.goTo('#about')">
                   About
                 </v-btn>
-                <v-btn
-                  elevation="2"
-                  large
-                  class="ma-2"
-                  color="primary"
-                  v-on:click="joinRoomPopup = true"
-                >
+                <v-btn elevation="2" large class="ma-2" color="primary" v-on:click="joinRoomPopup = true">
                   Join Room
                 </v-btn>
               </v-row>
@@ -125,18 +71,10 @@
             <v-divider class="mb-1"></v-divider>
             <v-divider></v-divider>
           </v-responsive>
-          <v-responsive
-            class="mx-auto title font-weight-light mb-8"
-            max-width="720"
-          >
+          <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
             info about commonette here
           </v-responsive>
-          <v-btn
-            color="grey"
-            v-on:click="navigateRoute('/recommend')"
-            outlined
-            large
-          >
+          <v-btn color="grey" v-on:click="navigateRoute('/recommend')" outlined large>
             <span class="grey--text text--darken-1 font-weight-bold">
               Recommendation Page (temporary)
             </span>
@@ -154,12 +92,7 @@
             <v-divider></v-divider>
           </v-responsive>
           <v-row>
-            <v-col
-              v-for="({ icon, title, text }, i) in mediums"
-              :key="i"
-              cols="12"
-              md="3"
-            >
+            <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" md="3">
               <v-card class="py-12 px-4" color="grey lighten-5" flat>
                 <v-theme-provider dark>
                   <div>
@@ -168,10 +101,7 @@
                     </v-avatar>
                   </div>
                 </v-theme-provider>
-                <v-card-title
-                  class="justify-center font-weight-black text-uppercase"
-                  v-text="title"
-                ></v-card-title>
+                <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title"></v-card-title>
                 <v-card-text class="subtitle-1" v-text="text"> </v-card-text>
               </v-card>
             </v-col>
@@ -181,10 +111,7 @@
       </section>
 
       <v-theme-provider dark>
-        <v-parallax
-          :height="$vuetify.breakpoint.smAndDown ? 700 : 1000"
-          src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80"
-        >
+        <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80">
           <v-container>
             <div class="py-12"></div>
             <h2 class="display-2 font-weight-bold mb-3">APIs Used</h2>
@@ -197,41 +124,17 @@
                 <v-card :color="item.color" dark>
                   <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
-                      <v-card-title
-                        class="headline"
-                        v-text="item.title"
-                        :style="item.textcolor"
-                      ></v-card-title>
+                      <v-card-title class="headline" v-text="item.title" :style="item.textcolor"></v-card-title>
 
-                      <v-card-subtitle
-                        v-text="item.description"
-                        :style="item.textcolor"
-                        style="text-align: left;"
-                      ></v-card-subtitle>
+                      <v-card-subtitle v-text="item.description" :style="item.textcolor" style="text-align: left"></v-card-subtitle>
 
                       <v-card-actions>
                         <!-- custom button here -->
-                        <v-btn
-                          v-if="item.artist === 'Ellie Goulding'"
-                          class="ml-2 mt-3"
-                          fab
-                          icon
-                          height="40px"
-                          right
-                          width="40px"
-                        >
+                        <v-btn v-if="item.artist === 'Ellie Goulding'" class="ml-2 mt-3" fab icon height="40px" right width="40px">
                           <v-icon>mdi-play</v-icon>
                         </v-btn>
 
-                        <v-btn
-                          v-else
-                          class="ml-2 mt-5"
-                          color="secondary"
-                          rounded
-                          small
-                          :href="item.site"
-                          target="_blank"
-                        >
+                        <v-btn v-else class="ml-2 mt-5" color="secondary" rounded small :href="item.site" target="_blank">
                           ABOUT API
                         </v-btn>
                       </v-card-actions>
@@ -254,20 +157,10 @@
               What are you waiting for?
             </h2>
             <v-row class="mx-auto" justify="center">
-              <v-btn
-                elevation="2"
-                large
-                class="ma-2"
-                v-on:click="createRoomPopup = true"
-              >
+              <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true">
                 Create Room
               </v-btn>
-              <v-btn
-                elevation="2"
-                large
-                v-on:click="joinRoomPopup = true"
-                class="ma-2"
-              >
+              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2">
                 Join Room
               </v-btn>
             </v-row>
