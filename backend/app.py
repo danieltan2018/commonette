@@ -49,15 +49,30 @@ def get_room(room_code):
         return f"An Error Occured: {e}"
 
 @app.route('/add-questionnaire/<string:room_code>', methods=['POST'])
+def add_questionnaire(room_code):
+
+    try:
+        questionnaire_data = request.get_json()
+
+        room = room_ref.document(room_code).get()
+        room = room.to_dict()
+        room["questionnaire"].append(questionnaire_data)
+
+        room_ref.document(room_code).set(room)
+        return jsonify({"success": True}), 200
+    except Exception as e:
+        return f"An Error Occured: {e}"
+
+@app.route('/recommend/<string:room_code>', methods=['GET'])
 def update(room_code):
 
     try:
         questionnaire_data = request.get_json()
+
         room = room_ref.document(room_code).get()
         room = room.to_dict()
-        room["questionnaire"].append(questionnaire_data)
-        room_ref.document(room_code).set(room)
-        return jsonify({"success": True}), 200
+        
+        return jsonify(utility.generate_api(room["questionnaire"])), 200
     except Exception as e:
         return f"An Error Occured: {e}"
 
