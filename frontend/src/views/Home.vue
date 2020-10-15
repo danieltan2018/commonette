@@ -10,7 +10,7 @@
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
-              <v-btn color="primary" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
+              <v-btn color="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -24,7 +24,7 @@
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
-              <v-btn color="primary" :disabled="!valid" v-on:click="joinRoom">Enter</v-btn>
+              <v-btn color="primary" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom">Enter</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -44,13 +44,13 @@
                 </span>
               </v-col>
               <v-row justify="center">
-                <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true">
+                <v-btn elevation="2" large class="ma-2" color="primary" v-on:click="createRoomPopup = true">
                   Create Room
                 </v-btn>
-                <v-btn elevation="2" large class="ma-2" @click="$vuetify.goTo('#about')">
+                <v-btn elevation="2" large class="ma-2" color="secondary" @click="$vuetify.goTo('#about')">
                   About
                 </v-btn>
-                <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2">
+                <v-btn elevation="2" large class="ma-2" color="primary" v-on:click="joinRoomPopup = true">
                   Join Room
                 </v-btn>
               </v-row>
@@ -142,6 +142,12 @@ export default {
       errors: false,
       errorMessage: "",
       inputRequiredRule: [(v) => v.length > 0 || "Required"],
+
+      loader: null,
+      loading1: false,
+      loading2: false,
+      loading3: false,
+
       mediums: [
         {
           icon: "mdi-youtube",
@@ -167,6 +173,18 @@ export default {
       ],
     };
   },
+  
+  watch: {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 1500)
+
+        this.loader = null
+      },
+    },
+
   methods: {
     navigateRoute(newpath) {
       this.$router.push(newpath);
