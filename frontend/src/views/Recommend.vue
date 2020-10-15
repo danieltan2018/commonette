@@ -56,6 +56,32 @@
           </v-slide-item>
         </v-slide-group>
       </v-sheet>
+
+      <v-sheet class="mx-auto" elevation="8" v-if="movieResults">
+        <v-toolbar color="grey" dense>
+          <v-toolbar-title>
+            <v-icon large color="yellow">
+              mdi-movie-open
+            </v-icon>
+            Movies & Shows
+          </v-toolbar-title>
+        </v-toolbar>
+        <v-slide-group class="pa-4" active-class="success" show-arrows>
+          <v-slide-item v-for="movie in movieResults" :key="movie.id">
+            <!-- Excluding movies with no thumbnails -->
+            <v-container grid-list-md v-if="movie.imageurl[0]">
+              <v-card class="mx-auto" max-width="200px">
+                <v-img :src="movie.imageurl[0]" contain></v-img>
+                <v-card-title v-text="movie.title" class="h3"></v-card-title>
+                <v-card-subtitle>
+                  {{movie.released}}
+                </v-card-subtitle>
+              </v-card>
+            </v-container>
+          </v-slide-item>
+        </v-slide-group>
+      </v-sheet>
+
     </section>
   </v-main>
 </template>
@@ -69,6 +95,7 @@ export default {
     recommend: false,
     youtubeResults: false,
     bookResults: false,
+    movieResults: false,
   }),
   created() {
     this.initialise();
@@ -86,6 +113,7 @@ export default {
           this.recommend = response.data;
           this.renderYoutube();
           this.renderBooks();
+          // this.renderMovies(); // Limited API calls per month
         })
         .catch(() => {
           this.navigateRoute("/questionnaire");
@@ -106,7 +134,6 @@ export default {
           console.log(e.response.data);
         });
     },
-
     renderBooks() {
       axios
         .get(
@@ -115,6 +142,25 @@ export default {
         )
         .then((response) => {
           this.bookResults = response.data.items;
+        })
+        .catch((e) => {
+          console.log(e.response.data);
+        });
+    },
+    renderMovies() {
+      this.recommend.movie["min_imdb"] = 9; // TODO: Fix backend variable name
+      axios({
+        method: "GET",
+        url: "https://rapidapi.p.rapidapi.com/advancedsearch",
+        params: this.recommend.movie,
+        headers: {
+          "x-rapidapi-host": "ott-details.p.rapidapi.com",
+          "x-rapidapi-key":
+            "9027419c0amshce93712d7412181p1dba86jsne0772b3fcfe5",
+        },
+      })
+        .then((response) => {
+          this.movieResults = response.data.results;
         })
         .catch((e) => {
           console.log(e.response.data);
