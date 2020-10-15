@@ -74,9 +74,14 @@
           <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
             info about commonette here
           </v-responsive>
+          <v-btn color="grey" v-on:click="navigateRoute('/questionnaire')" outlined large>
+            <span class="grey--text text--darken-1 font-weight-bold">
+              Questionnaire Page (Temporary)
+            </span>
+          </v-btn>
           <v-btn color="grey" v-on:click="navigateRoute('/recommend')" outlined large>
             <span class="grey--text text--darken-1 font-weight-bold">
-              Recommendation Page (temporary)
+              Recommendation Page (Temporary)
             </span>
           </v-btn>
         </v-container>
@@ -303,15 +308,15 @@ export default {
           method: "GET",
         })
           .then((response) => {
-            localStorage.setItem("roomCode", response.data.code);
-            localStorage.setItem("roomName", response.data.name);
+            localStorage.setItem("roomCode", response.data.room_code);
+            localStorage.setItem("roomName", response.data.room_name);
             this.navigateRoute("/questionnaire");
           })
           .catch((error) => {
             this.errors = true;
             this.errorMessage = "API Connection Error";
             if (error.response) {
-              this.errorMessage = "Unable to create room";
+              this.errorMessage = error.response.data;
             }
           });
       }
@@ -320,19 +325,19 @@ export default {
       if (this.$refs.form.validate()) {
         let roomCode = this.roomCode;
         axios({
-          url: "/join-room/" + roomCode,
+          url: "/room/" + roomCode,
           method: "GET",
         })
           .then((response) => {
-            localStorage.setItem("roomCode", response.data.code);
-            localStorage.setItem("roomName", response.data.name);
+            localStorage.setItem("roomCode", response.data.room_code);
+            localStorage.setItem("roomName", response.data.room_name);
             this.navigateRoute("/questionnaire");
           })
           .catch((error) => {
             this.errors = true;
             this.errorMessage = "API Connection Error";
             if (error.response) {
-              this.errorMessage = "Unable to join room";
+              this.errorMessage = error.response.data;
             }
           });
       }

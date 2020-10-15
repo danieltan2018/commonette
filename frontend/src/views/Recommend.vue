@@ -51,7 +51,7 @@ export default {
     initialise() {
       // Insert api call to backend
       // Update dummy values
-      this.youtubeParams.category = 28;
+      this.youtubeParams.category = 1;
       this.renderYoutube();
     },
     renderYoutube() {
