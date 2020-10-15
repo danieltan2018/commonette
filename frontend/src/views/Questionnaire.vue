@@ -58,8 +58,8 @@
           <v-col cols="6">
             <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
               <v-card-text>
-                <v-chip-group v-model="bookGenre" column active-class="primary--text">
-                  <draggable v-model="bookGenre" @start="dragStartBook" @end="dragEndBook">
+                <v-chip-group v-model="bookSelection" column active-class="primary--text">
+                  <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
                     <v-chip v-for="(tag, i) in books" :key="i" draggable>{{
                       tag
                     }}</v-chip>
@@ -92,8 +92,8 @@
           <v-col cols="6">
             <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
               <v-card-text>
-                <v-chip-group v-model="movieGenre" column active-class="primary--text">
-                  <draggable v-model="movieGenre" @start="dragStartMovie" @end="dragEndMovie">
+                <v-chip-group v-model="movieSelection" column active-class="primary--text">
+                  <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
                     <v-chip v-for="(m, i) in movies" :key="i" draggable>{{
                       m
                     }}</v-chip>
@@ -139,8 +139,8 @@
           <v-col cols="6">
             <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
               <v-card-text>
-                <v-chip-group v-model="spotifyArtist" column active-class="primary--text">
-                  <draggable v-model="spotifyArtist" @start="dragStartSArtist" @end="dragEndSArtist">
+                <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
+                  <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
                     <v-chip v-for="(tag, i) in sArtists" :key="i" draggable>{{
                       tag
                     }}</v-chip>
@@ -172,8 +172,8 @@
           <v-col cols="6">
             <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
               <v-card-text>
-                <v-chip-group v-model="spotifyTrack" column active-class="primary--text">
-                  <draggable v-model="spotifyTrack" @start="dragStartSTrack" @end="dragEndSTrack">
+                <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
+                  <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
                     <v-chip v-for="(tag, i) in sTracks" :key="i" draggable>{{
                       tag
                     }}</v-chip>
@@ -205,8 +205,8 @@
           <v-col cols="6">
             <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
               <v-card-text>
-                <v-chip-group v-model="spotifyGenre" column active-class="primary--text">
-                  <draggable v-model="spotifyGenre" @start="dragStartSGenre" @end="dragEndSGenre">
+                <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
+                  <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
                     <v-chip v-for="(tag, i) in sGenres" :key="i" draggable>{{
                       tag
                     }}</v-chip>
@@ -413,7 +413,7 @@ export default {
     dragEndSArtist() {
       if (this.sArtistTag) {
         this.sArtists.forEach((x, i) => {
-          if (x === this.currentTag) this.sArtistSelection = i;
+          if (x === this.sArtistTag) this.sArtistSelection = i;
         });
       }
     },
@@ -425,7 +425,7 @@ export default {
     dragEndSTrack() {
       if (this.sTrackTag) {
         this.sTrack.forEach((x, i) => {
-          if (x === this.currentTag) this.sTrackSelection = i;
+          if (x === this.sTrackTag) this.sTrackSelection = i;
         });
       }
     },
