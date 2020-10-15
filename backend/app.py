@@ -74,6 +74,9 @@ def update(room_code):
         room = room_ref.document(room_code).get()
         room = room.to_dict()
 
+        if (len(room["questionnaire"]) == 0):
+            return "At least one user needs to complete the questionnaire", 400
+
         return jsonify(utility.generate_api(room["questionnaire"])), 200
     except Exception as e:
         return f"{e}", 400
