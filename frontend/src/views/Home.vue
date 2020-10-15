@@ -206,6 +206,7 @@
                       <v-card-subtitle
                         v-text="item.description"
                         :style="item.textcolor"
+                        style="text-align: left;"
                       ></v-card-subtitle>
 
                       <v-card-actions>
@@ -228,6 +229,8 @@
                           color="secondary"
                           rounded
                           small
+                          :href="item.site"
+                          target="_blank"
                         >
                           ABOUT API
                         </v-btn>
@@ -333,7 +336,7 @@ export default {
             "https://upload.wikimedia.org/wikipedia/commons/b/ba/Google_Books_logo_2015.svg",
           title: "Google Books API",
           description: "Info about google books here",
-          site: "",
+          site: "https://developers.google.com/books",
         },
         {
           color: "#fafafa",
