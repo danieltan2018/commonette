@@ -15,7 +15,6 @@ db = firestore.client()
 room_ref = db.collection('rooms')
 
 
-
 @app.route('/create-room/<string:room_name>', methods=['GET'])
 def create(room_name):
     random_code = utility.get_random_string(6)
@@ -26,7 +25,6 @@ def create(room_name):
         print ("here")
         random_code = utility.get_random_string(6)
         room = room_ref.document(random_code).get()
-
 
     try:
         obj = {"room_name": room_name, "questionnaire":[]}
@@ -47,6 +45,19 @@ def get_room(room_code):
         if room.to_dict() == None: #room code doesn't exist
             return jsonify({'message': 'Invalid room code'}), 404
         return jsonify(room.to_dict()), 200
+    except Exception as e:
+        return f"An Error Occured: {e}"
+
+@app.route('/add-questionnaire/<string:room_code>', methods=['POST'])
+def update(room_code):
+
+    try:
+        questionnaire_data = request.get_json()
+        room = room_ref.document(room_code).get()
+        room = room.to_dict()
+        room["questionnaire"].append(questionnaire_data)
+        room_ref.document(room_code).set(room)
+        return jsonify({"success": True}), 200
     except Exception as e:
         return f"An Error Occured: {e}"
 
