@@ -74,9 +74,14 @@
           <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
             info about commonette here
           </v-responsive>
+          <v-btn color="grey" v-on:click="navigateRoute('/questionnaire')" outlined large>
+            <span class="grey--text text--darken-1 font-weight-bold">
+              Questionnaire Page (Temporary)
+            </span>
+          </v-btn>
           <v-btn color="grey" v-on:click="navigateRoute('/recommend')" outlined large>
             <span class="grey--text text--darken-1 font-weight-bold">
-              Recommendation Page (temporary)
+              Recommendation Page (Temporary)
             </span>
           </v-btn>
         </v-container>
