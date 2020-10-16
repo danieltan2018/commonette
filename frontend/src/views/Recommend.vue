@@ -41,7 +41,7 @@
       </span>
 
       <v-sheet class="mx-auto" elevation="8" v-if="youtubeResults">
-        <v-toolbar color="grey" dense>
+        <v-toolbar color="grey lighten-1" dense>
           <v-toolbar-title>
             <v-icon large color="red">
               mdi-youtube
@@ -68,7 +68,7 @@
       </v-sheet>
 
       <v-sheet class="mx-auto" elevation="8" v-if="bookResults">
-        <v-toolbar color="grey" dense>
+        <v-toolbar color="grey lighten-1" dense>
           <v-toolbar-title>
             <v-icon large color="blue">
               mdi-book
@@ -97,7 +97,7 @@
       </v-sheet>
 
       <v-sheet class="mx-auto" elevation="8" v-if="movieResults">
-        <v-toolbar color="grey" dense>
+        <v-toolbar color="grey lighten-1" dense>
           <v-toolbar-title>
             <v-icon large color="yellow">
               mdi-movie-open
@@ -117,6 +117,34 @@
                     {{movie.title}}
                   </div>
                   {{movie.released}} {{movie.type}}
+                </v-card-text>
+              </v-card>
+            </v-container>
+          </v-slide-item>
+        </v-slide-group>
+      </v-sheet>
+
+      <v-sheet class="mx-auto" elevation="8" v-if="youtubeResults">
+        <v-toolbar color="grey lighten-1" dense>
+          <v-toolbar-title>
+            <v-icon large color="green">
+              mdi-spotify
+            </v-icon>
+            Spotify
+          </v-toolbar-title>
+        </v-toolbar>
+        WORK IN PROGRESS
+        <v-slide-group class="pa-4" active-class="success" show-arrows>
+          <v-slide-item v-for="video in youtubeResults" :key="video.id">
+            <v-container v-if="video.id" grid-list-md>
+              <v-icon class="d-flex justify-end" color="black" v-on:click="video.id=false">mdi-minus-circle-outline</v-icon>
+              <v-card class="mx-auto" max-width="300px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
+                <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
+                <v-card-text>
+                  <div class="subtitle-1 black--text text-truncate">
+                    {{video.snippet.title}}
+                  </div>
+                  {{video.snippet.channelTitle}}
                 </v-card-text>
               </v-card>
             </v-container>
