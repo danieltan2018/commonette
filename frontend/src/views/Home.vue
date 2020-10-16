@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-main>
-      <v-dialog v-model="createRoomPopup" width="350">
+      <v-dialog v-model="createRoomPopup" max-width="350">
         <v-card>
           <v-card-title class="headline justify-center">Create New Room</v-card-title>
           <v-card-text>
@@ -15,7 +15,7 @@
           </v-card-text>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="joinRoomPopup" width="350">
+      <v-dialog v-model="joinRoomPopup" max-width="350">
         <v-card>
           <v-card-title class="headline justify-center">Join Existing Room</v-card-title>
           <v-card-text>
@@ -26,9 +26,9 @@
               </p>
             </v-form>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="justify-center">
             <v-btn color="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
-            <v-btn color="success" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">View Recommendations</v-btn>
+            <v-btn color="success" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">Recommendations</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
