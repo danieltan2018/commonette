@@ -113,14 +113,13 @@ export default {
           this.recommend = response.data;
           this.renderYoutube();
           this.renderBooks();
-          // this.renderMovies(); // Limited API calls per month
+          this.renderMovies();
         })
         .catch(() => {
           this.navigateRoute("/questionnaire");
         });
     },
     renderYoutube() {
-      this.recommend.youtube.videoCategory = 0; // TODO: Fix backend to single value
       axios
         .get(
           "https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=10&regionCode=SG&videoCategoryId=" +
@@ -148,7 +147,6 @@ export default {
         });
     },
     renderMovies() {
-      this.recommend.movie["min_imdb"] = 9; // TODO: Fix backend variable name
       axios({
         method: "GET",
         url: "https://rapidapi.p.rapidapi.com/advancedsearch",
