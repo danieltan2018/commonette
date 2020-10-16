@@ -2,7 +2,6 @@
   <div id="app">
     <v-app>
       <v-app-bar app fixed dark clipped-left color="primary" v-on:click="navigateRoute('/')">
-        <v-img class="mr-3" src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png" max-height="30" max-width="30"></v-img>
         <v-toolbar-title class="headline">
           <span>Commonette</span>
         </v-toolbar-title>
