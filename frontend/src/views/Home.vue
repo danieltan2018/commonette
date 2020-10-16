@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-main>
-      <v-dialog v-model="createRoomPopup" max-width="350">
+      <v-dialog v-model="createRoomPopup" width="350">
         <v-card>
           <v-card-title class="headline justify-center">Create New Room</v-card-title>
           <v-card-text>
@@ -15,7 +15,7 @@
           </v-card-text>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="joinRoomPopup" max-width="350">
+      <v-dialog v-model="joinRoomPopup" width="350">
         <v-card>
           <v-card-title class="headline justify-center">Join Existing Room</v-card-title>
           <v-card-text>
@@ -24,9 +24,12 @@
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
-              <v-btn color="primary" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom">Enter</v-btn>
             </v-form>
           </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
+            <v-btn color="success" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">View Recommendations</v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
 
@@ -74,18 +77,7 @@
           <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
             info about commonette here
           </v-responsive>
-          <v-btn color="grey" v-on:click="navigateRoute('/questionnaire')" outlined large>
-            <span class="grey--text text--darken-1 font-weight-bold">
-              Questionnaire Page (Temporary)
-            </span>
-          </v-btn>
-          <v-btn color="grey" v-on:click="navigateRoute('/recommend')" outlined large>
-            <span class="grey--text text--darken-1 font-weight-bold">
-              Recommendation Page (Temporary)
-            </span>
-          </v-btn>
         </v-container>
-        <div class="py-12"></div>
       </section>
 
       <section id="mediums" class="grey lighten-3">
@@ -240,16 +232,6 @@ export default {
           color: "#fafafa",
           textcolor: "color: black",
           src:
-            "https://s3.amazonaws.com/mashape-production-logos/apis/5c35064ce4b0ddd96d1a3a36_medium",
-          title: "Entertainment Data Hub API",
-          description: "Info about Data Hub API here",
-          site:
-            "https://rapidapi.com/IVALLC/api/entertainment-data-hub/details",
-        },
-        {
-          color: "#fafafa",
-          textcolor: "color: black",
-          src:
             "https://rapidapi-prod-apis.s3.amazonaws.com/64ed0ed2-6103-4f9b-ab95-f8cc98c7e40c.png",
           title: "OTT details API",
           description:
@@ -308,6 +290,7 @@ export default {
           method: "GET",
         })
           .then((response) => {
+            localStorage.clear();
             localStorage.setItem("roomCode", response.data.room_code);
             localStorage.setItem("roomName", response.data.room_name);
             this.navigateRoute("/questionnaire");
@@ -321,7 +304,7 @@ export default {
           });
       }
     },
-    joinRoom() {
+    joinRoom(flag) {
       if (this.$refs.form.validate()) {
         let roomCode = this.roomCode;
         axios({
@@ -329,6 +312,7 @@ export default {
           method: "GET",
         })
           .then((response) => {
+            localStorage.clear();
             localStorage.setItem("roomName", response.data.room_name);
             localStorage.setItem("roomCode", this.roomCode);
             if (response.data.questionnaire) {
@@ -337,7 +321,11 @@ export default {
                 JSON.stringify(response.data.questionnaire)
               );
             }
-            this.navigateRoute("/questionnaire");
+            if (flag) {
+              this.navigateRoute("/questionnaire");
+            } else {
+              this.navigateRoute("/recommend");
+            }
           })
           .catch((error) => {
             this.errors = true;
