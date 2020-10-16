@@ -38,9 +38,8 @@
     <section id="all" v-if="recommend">
       <span>
         <br>
-        <h1>Recommendations for {{roomName}}</h1>
-        <br>
-        <h3>Get your friends to join this room using the code <b>{{roomCode}}</b></h3>
+        <h1>Recommendations for <b>{{roomName}}</b></h1>
+        <h3>Invite your friends to join this room using the code <b>{{roomCode}}</b></h3>
         <br>
       </span>
 
