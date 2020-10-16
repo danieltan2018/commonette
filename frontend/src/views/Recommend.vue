@@ -1,5 +1,36 @@
 <template>
   <v-main>
+
+    <v-dialog v-model="showDetails" max-width="900px">
+      <v-card>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-icon large color="black" v-on:click="showDetails=false">
+            mdi-close-circle-outline
+          </v-icon>
+        </v-card-actions>
+        <v-img v-if="details.img" contain :src="details.img"></v-img>
+        <iframe v-if="details.youtube" width="100%" height="400px" :src="details.youtube" allowfullscreen></iframe>
+        <br><br>
+        <v-card-text class="black--text">
+          <h1>{{details.title}}</h1>
+        </v-card-text>
+        <v-card-text>
+          <h2>{{details.subtitle}}</h2>
+        </v-card-text>
+        <v-card-text v-html="details.desc"></v-card-text>
+        <v-card-text>
+          <b>Share</b>
+          <v-btn icon :href="'https://t.me/share?url=' + details.shareUrl + '&text=Let%27s%20see%20this%20together!'" target="_blank">
+            <v-icon color="blue">mdi-telegram</v-icon>
+          </v-btn>
+          <v-btn icon :href="'https://api.whatsapp.com/send?text=Let%27s%20see%20this%20together!%20' + details.shareUrl" target="_blank">
+            <v-icon color="green">mdi-whatsapp</v-icon>
+          </v-btn>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <section id="all" v-if="recommend">
       <span>
         <br>
@@ -21,12 +52,14 @@
         <v-slide-group class="pa-4" active-class="success" show-arrows>
           <v-slide-item v-for="video in youtubeResults" :key="video.id">
             <v-container grid-list-md>
-              <v-card class="mx-auto" max-width="200px">
+              <v-card class="mx-auto" max-width="300px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
                 <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
-                <v-card-title v-text="video.snippet.title" class="h3"></v-card-title>
-                <v-card-subtitle>
+                <v-card-text>
+                  <div class="subtitle-1 black--text text-truncate">
+                    {{video.snippet.title}}
+                  </div>
                   {{video.snippet.channelTitle}}
-                </v-card-subtitle>
+                </v-card-text>
               </v-card>
             </v-container>
           </v-slide-item>
@@ -47,10 +80,12 @@
             <v-container grid-list-md>
               <v-card class="mx-auto" max-width="200px">
                 <v-img :src="book.volumeInfo.imageLinks.thumbnail" contain></v-img>
-                <v-card-title v-text="book.volumeInfo.title" class="h3"></v-card-title>
-                <v-card-subtitle>
+                <v-card-text>
+                  <div class="subtitle-1 black--text">
+                    {{book.volumeInfo.title}}
+                  </div>
                   {{book.volumeInfo.authors.toString()}}
-                </v-card-subtitle>
+                </v-card-text>
               </v-card>
             </v-container>
           </v-slide-item>
@@ -92,10 +127,12 @@ export default {
   data: () => ({
     roomName: localStorage.getItem("roomName"),
     roomCode: localStorage.getItem("roomCode"),
-    recommend: false,
-    youtubeResults: false,
-    bookResults: false,
-    movieResults: false,
+    recommend: null,
+    youtubeResults: null,
+    bookResults: null,
+    movieResults: null,
+    showDetails: false,
+    details: {},
   }),
   created() {
     this.initialise();
@@ -163,6 +200,15 @@ export default {
         .catch((e) => {
           console.log(e.response.data);
         });
+    },
+    youtubeCard(title, subtitle, desc, id) {
+      this.details = {};
+      this.details.title = title;
+      this.details.subtitle = subtitle;
+      this.details.desc = desc.replace(/(?:\r\n|\r|\n)/g, "<br/>");
+      this.details.shareUrl = "https://www.youtube.com/watch?v=" + id;
+      this.details.youtube = "https://www.youtube.com/embed/" + id;
+      this.showDetails = true;
     },
   },
 };
