@@ -11,6 +11,7 @@
         </v-card-actions>
         <v-img v-if="details.img" max-height="300px" contain :src="details.img"></v-img>
         <iframe v-if="details.youtube" width="100%" height="400px" :src="details.youtube" allowfullscreen></iframe>
+        <iframe v-if="details.spotify" width="100%" height="400px" :src="details.spotify" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         <br><br>
         <v-card-text class="black--text">
           <h1>{{details.title}}</h1>
@@ -140,7 +141,7 @@
           <v-slide-item v-for="song in spotifyResults" :key="song.id">
             <v-container v-if="song.id" grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="song.id=false">mdi-minus-circle-outline</v-icon>
-              <v-card class="mx-auto" max-width="150px">
+              <v-card class="mx-auto" max-width="150px" v-on:click="spotifyCard(song.name, song.album.name, song.album.release_date, song.artists, song.id)">
                 <v-img :src="song.album.images[1].url" contain></v-img>
                 <v-card-text>
                   <div class="subtitle-1 black--text text-truncate">
@@ -286,6 +287,21 @@ export default {
       this.details.desc = desc;
       this.details.url = "https://www.imdb.com/title/" + id;
       this.details.img = img;
+      this.showDetails = true;
+    },
+    spotifyCard(title, subtitle, release, artists, id) {
+      this.details = {};
+      this.details.title = title;
+      this.details.subtitle = subtitle;
+      let artistList = [];
+      for (var i in artists) {
+        artistList.push(artists[i].name);
+      }
+      artistList = artistList.toString();
+      this.details.desc =
+        "Release Date: " + release + "<br/>Artist(s): " + artistList;
+      this.details.url = "https://open.spotify.com/track/" + id;
+      this.details.spotify = "https://open.spotify.com/embed/track/" + id;
       this.showDetails = true;
     },
   },
