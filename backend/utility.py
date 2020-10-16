@@ -139,7 +139,7 @@ def generate_api(questionnaire_data):
     api_param["book"] = {"subject": list(book_weights.keys())[0]}
     api_param["movie"] = {"genre": ",".join(list(movie_genre_weights.keys())[0:no_movie_genre]), "language": ",".join(
         list(movie_language_weights.keys())[0:no_movie_language]), "min_imdb": movie_min_imdb}
-    api_param["spotify"] = {"genre": ",".join(list(spotify_genre_weights.keys())[0:no_spotify_genre]), "artist": ",".join(list(
-        spotify_artist_weights.keys())[0:no_spotify_artist]), "track": ",".join(list(spotify_track_weights.keys())[0:no_spotify_track])}
+    api_param["spotify"] = {"seed_genres": ",".join(list(spotify_genre_weights.keys())[0:no_spotify_genre]), "seed_artists": ",".join(list(
+        spotify_artist_weights.keys())[0:no_spotify_artist]), "seed_tracks": ",".join(list(spotify_track_weights.keys())[0:no_spotify_track])}
 
     return api_param
