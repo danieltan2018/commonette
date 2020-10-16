@@ -293,6 +293,7 @@ export default {
             localStorage.clear();
             localStorage.setItem("roomCode", response.data.room_code);
             localStorage.setItem("roomName", response.data.room_name);
+            this.$bus.$emit("updated", "created");
             this.navigateRoute("/questionnaire");
           })
           .catch((error) => {
@@ -315,6 +316,7 @@ export default {
             localStorage.clear();
             localStorage.setItem("roomName", response.data.room_name);
             localStorage.setItem("roomCode", this.roomCode);
+            this.$bus.$emit("updated", "joined");
             if (response.data.questionnaire) {
               localStorage.setItem(
                 "roomUsers",

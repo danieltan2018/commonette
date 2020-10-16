@@ -53,12 +53,22 @@
 <script>
 export default {
   data: () => ({
-    roomName: localStorage.getItem("roomName"),
-    roomUsers: JSON.parse(localStorage.getItem("roomUsers")),
+    roomName: null,
+    roomUsers: null,
   }),
+  created() {
+    this.updateUsers();
+    this.$bus.$on("updated", () => {
+      this.updateUsers();
+    });
+  },
   methods: {
     navigateRoute(newpath) {
       this.$router.push(newpath);
+    },
+    updateUsers() {
+      this.roomName = localStorage.getItem("roomName");
+      this.roomUsers = JSON.parse(localStorage.getItem("roomUsers"));
     },
   },
 };

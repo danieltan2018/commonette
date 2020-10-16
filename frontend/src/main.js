@@ -7,7 +7,7 @@ import Axios from "axios";
 Vue.config.productionTip = false
 Vue.prototype.$http = Axios;
 Vue.prototype.$http.defaults.baseURL = "https://commonapi.smusis.com";
-
+Vue.prototype.$bus = new Vue()
 
 new Vue({
   vuetify,
