@@ -16,20 +16,14 @@
           </template>
           <v-list dense>
             <v-list-item>
-              <v-list-item-title>Hi, Person A</v-list-item-title>
+              <v-list-item-title>
+                <h3>In this room:</h3>
+              </v-list-item-title>
             </v-list-item>
-            <!-- To replace with v-for -->
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-account-outline</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Person B</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-account-outline</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Person C</v-list-item-title>
+            <v-list-item v-for="item in roomUsers" :key="item.name">
+              <v-list-item-title>
+                <v-icon>mdi-account-outline</v-icon> {{item.name}}
+              </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -60,7 +54,7 @@
 export default {
   data: () => ({
     roomName: localStorage.getItem("roomName"),
-    roomCode: localStorage.getItem("roomCode"),
+    roomUsers: JSON.parse(localStorage.getItem("roomUsers")),
   }),
   methods: {
     navigateRoute(newpath) {

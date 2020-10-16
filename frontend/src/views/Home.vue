@@ -331,6 +331,12 @@ export default {
           .then((response) => {
             localStorage.setItem("roomName", response.data.room_name);
             localStorage.setItem("roomCode", this.roomCode);
+            if (response.data.questionnaire) {
+              localStorage.setItem(
+                "roomUsers",
+                JSON.stringify(response.data.questionnaire)
+              );
+            }
             this.navigateRoute("/questionnaire");
           })
           .catch((error) => {
