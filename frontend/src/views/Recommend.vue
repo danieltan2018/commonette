@@ -20,6 +20,9 @@
         </v-card-text>
         <v-card-text v-html="details.desc"></v-card-text>
         <v-card-text>
+          <v-btn elevation="8" large rounded color="primary" :href="details.url">VIEW</v-btn>
+        </v-card-text>
+        <v-card-text>
           <b>Share</b>
           <v-btn icon :href="'https://t.me/share?url=' + details.url + '&text=Let%27s%20see%20this%20together!'" target="_blank">
             <v-icon color="blue">mdi-telegram</v-icon>
@@ -110,7 +113,7 @@
             <!-- Excluding movies with no thumbnails -->
             <v-container v-if="movie.imageurl[0]" grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="movie.imageurl=false">mdi-minus-circle-outline</v-icon>
-              <v-card class="mx-auto" max-width="200px">
+              <v-card class="mx-auto" max-width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.type, movie.imageurl[0], movie.imdbid)">
                 <v-img :src="movie.imageurl[0]" contain></v-img>
                 <v-card-text>
                   <div class="subtitle-1 black--text">
@@ -252,6 +255,15 @@ export default {
       this.details.subtitle = subtitle;
       this.details.desc = desc;
       this.details.url = url;
+      this.details.img = img;
+      this.showDetails = true;
+    },
+    movieCard(title, desc, sub1, sub2, img, id) {
+      this.details = {};
+      this.details.title = title;
+      this.details.subtitle = sub1 + " " + sub2;
+      this.details.desc = desc;
+      this.details.url = "https://www.imdb.com/title/" + id;
       this.details.img = img;
       this.showDetails = true;
     },
