@@ -9,7 +9,7 @@
             mdi-close-circle-outline
           </v-icon>
         </v-card-actions>
-        <v-img v-if="details.img" contain :src="details.img"></v-img>
+        <v-img v-if="details.img" max-height="300px" contain :src="details.img"></v-img>
         <iframe v-if="details.youtube" width="100%" height="400px" :src="details.youtube" allowfullscreen></iframe>
         <br><br>
         <v-card-text class="black--text">
@@ -21,10 +21,10 @@
         <v-card-text v-html="details.desc"></v-card-text>
         <v-card-text>
           <b>Share</b>
-          <v-btn icon :href="'https://t.me/share?url=' + details.shareUrl + '&text=Let%27s%20see%20this%20together!'" target="_blank">
+          <v-btn icon :href="'https://t.me/share?url=' + details.url + '&text=Let%27s%20see%20this%20together!'" target="_blank">
             <v-icon color="blue">mdi-telegram</v-icon>
           </v-btn>
-          <v-btn icon :href="'https://api.whatsapp.com/send?text=Let%27s%20see%20this%20together!%20' + details.shareUrl" target="_blank">
+          <v-btn icon :href="'https://api.whatsapp.com/send?text=Let%27s%20see%20this%20together!%20' + details.url" target="_blank">
             <v-icon color="green">mdi-whatsapp</v-icon>
           </v-btn>
         </v-card-text>
@@ -78,13 +78,15 @@
         <v-slide-group class="pa-4" active-class="success" show-arrows>
           <v-slide-item v-for="book in bookResults" :key="book.id">
             <v-container grid-list-md>
-              <v-card class="mx-auto" max-width="200px">
+              <v-card class="mx-auto" max-width="200px" v-on:click="bookCard(book.volumeInfo.title, book.volumeInfo.authors.toString(), book.volumeInfo.description, book.volumeInfo.previewLink, book.volumeInfo.imageLinks.thumbnail)">
                 <v-img :src="book.volumeInfo.imageLinks.thumbnail" contain></v-img>
                 <v-card-text>
                   <div class="subtitle-1 black--text">
                     {{book.volumeInfo.title}}
                   </div>
-                  {{book.volumeInfo.authors.toString()}}
+                  <div class="text-truncate">
+                    {{book.volumeInfo.authors.toString()}}
+                  </div>
                 </v-card-text>
               </v-card>
             </v-container>
@@ -107,10 +109,12 @@
             <v-container grid-list-md v-if="movie.imageurl[0]">
               <v-card class="mx-auto" max-width="200px">
                 <v-img :src="movie.imageurl[0]" contain></v-img>
-                <v-card-title v-text="movie.title" class="h3"></v-card-title>
-                <v-card-subtitle>
-                  {{movie.released}}
-                </v-card-subtitle>
+                <v-card-text>
+                  <div class="subtitle-1 black--text">
+                    {{movie.title}}
+                  </div>
+                  {{movie.released}} {{movie.type}}
+                </v-card-text>
               </v-card>
             </v-container>
           </v-slide-item>
@@ -174,7 +178,8 @@ export default {
       axios
         .get(
           "https://www.googleapis.com/books/v1/volumes?q=subject:" +
-            this.recommend.book.subject
+            this.recommend.book.subject +
+            "&langRestrict=en"
         )
         .then((response) => {
           this.bookResults = response.data.items;
@@ -206,8 +211,17 @@ export default {
       this.details.title = title;
       this.details.subtitle = subtitle;
       this.details.desc = desc.replace(/(?:\r\n|\r|\n)/g, "<br/>");
-      this.details.shareUrl = "https://www.youtube.com/watch?v=" + id;
+      this.details.url = "https://www.youtube.com/watch?v=" + id;
       this.details.youtube = "https://www.youtube.com/embed/" + id;
+      this.showDetails = true;
+    },
+    bookCard(title, subtitle, desc, url, img) {
+      this.details = {};
+      this.details.title = title;
+      this.details.subtitle = subtitle;
+      this.details.desc = desc;
+      this.details.url = url;
+      this.details.img = img;
       this.showDetails = true;
     },
   },
