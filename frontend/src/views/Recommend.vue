@@ -51,7 +51,8 @@
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
           <v-slide-item v-for="video in youtubeResults" :key="video.id">
-            <v-container grid-list-md>
+            <v-container v-if="video.id" grid-list-md>
+              <v-icon class="d-flex justify-end" color="black" v-on:click="video.id = false">mdi-minus-circle-outline</v-icon>
               <v-card class="mx-auto" max-width="300px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
                 <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
                 <v-card-text>
@@ -77,7 +78,8 @@
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
           <v-slide-item v-for="book in bookResults" :key="book.id">
-            <v-container grid-list-md>
+            <v-container v-if="book.id" grid-list-md>
+              <v-icon class="d-flex justify-end" color="black" v-on:click="book.id = false">mdi-minus-circle-outline</v-icon>
               <v-card class="mx-auto" max-width="200px" v-on:click="bookCard(book.volumeInfo.title, book.volumeInfo.authors.toString(), book.volumeInfo.description, book.volumeInfo.previewLink, book.volumeInfo.imageLinks.thumbnail)">
                 <v-img :src="book.volumeInfo.imageLinks.thumbnail" contain></v-img>
                 <v-card-text>
@@ -106,7 +108,8 @@
         <v-slide-group class="pa-4" active-class="success" show-arrows>
           <v-slide-item v-for="movie in movieResults" :key="movie.id">
             <!-- Excluding movies with no thumbnails -->
-            <v-container grid-list-md v-if="movie.imageurl[0]">
+            <v-container v-if="movie.imageurl[0]" grid-list-md>
+              <v-icon class="d-flex justify-end" color="black" v-on:click="movie.imageurl[0] = false">mdi-minus-circle-outline</v-icon>
               <v-card class="mx-auto" max-width="200px">
                 <v-img :src="movie.imageurl[0]" contain></v-img>
                 <v-card-text>
@@ -136,7 +139,7 @@ export default {
     bookResults: null,
     movieResults: null,
     showDetails: false,
-    details: {},
+    details: {}
   }),
   created() {
     this.initialise();
@@ -148,9 +151,9 @@ export default {
     initialise() {
       axios({
         url: "/recommend/" + this.roomCode,
-        method: "GET",
+        method: "GET"
       })
-        .then((response) => {
+        .then(response => {
           this.recommend = response.data;
           this.renderYoutube();
           this.renderBooks();
@@ -167,10 +170,10 @@ export default {
             this.recommend.youtube.videoCategory +
             "&key=AIzaSyA7Y61l8cbCs3iBaovaUT9iv8eczTikK9k"
         )
-        .then((response) => {
+        .then(response => {
           this.youtubeResults = response.data.items;
         })
-        .catch((e) => {
+        .catch(e => {
           console.log(e.response.data);
         });
     },
@@ -181,10 +184,10 @@ export default {
             this.recommend.book.subject +
             "&langRestrict=en&maxResults=40"
         )
-        .then((response) => {
+        .then(response => {
           this.bookResults = response.data.items;
         })
-        .catch((e) => {
+        .catch(e => {
           console.log(e.response.data);
         });
     },
@@ -195,14 +198,13 @@ export default {
         params: this.recommend.movie,
         headers: {
           "x-rapidapi-host": "ott-details.p.rapidapi.com",
-          "x-rapidapi-key":
-            "9027419c0amshce93712d7412181p1dba86jsne0772b3fcfe5",
-        },
+          "x-rapidapi-key": "9027419c0amshce93712d7412181p1dba86jsne0772b3fcfe5"
+        }
       })
-        .then((response) => {
+        .then(response => {
           this.movieResults = response.data.results;
         })
-        .catch((e) => {
+        .catch(e => {
           console.log(e.response.data);
         });
     },
@@ -223,7 +225,7 @@ export default {
       this.details.url = url;
       this.details.img = img;
       this.showDetails = true;
-    },
-  },
+    }
+  }
 };
 </script>
