@@ -4,6 +4,7 @@ from firebase_admin import credentials, firestore, initialize_app
 
 import json
 import utility
+import spotify
 
 
 app = Flask(__name__)
@@ -81,6 +82,11 @@ def update(room_code):
         return jsonify(utility.generate_api(room["questionnaire"])), 200
     except Exception as e:
         return f"{e}", 400
+
+
+@app.route('/spotify-token', methods=['GET'])
+def get_spotify_token():
+    return {"Authorization": spotify.get_token()}, 200
 
 
 # This is for flask app
