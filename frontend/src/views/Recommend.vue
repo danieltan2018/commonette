@@ -127,7 +127,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto" elevation="8" v-if="youtubeResults">
+      <v-sheet class="mx-auto" elevation="8" v-if="spotifyResults">
         <v-toolbar color="grey lighten-1" dense>
           <v-toolbar-title>
             <v-icon large color="green">
@@ -136,18 +136,17 @@
             Spotify
           </v-toolbar-title>
         </v-toolbar>
-        WORK IN PROGRESS
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="video in youtubeResults" :key="video.id">
-            <v-container v-if="video.id" grid-list-md>
-              <v-icon class="d-flex justify-end" color="black" v-on:click="video.id=false">mdi-minus-circle-outline</v-icon>
-              <v-card class="mx-auto" max-width="300px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
-                <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
+          <v-slide-item v-for="song in spotifyResults" :key="song.id">
+            <v-container v-if="song.id" grid-list-md>
+              <v-icon class="d-flex justify-end" color="black" v-on:click="song.id=false">mdi-minus-circle-outline</v-icon>
+              <v-card class="mx-auto" max-width="150px">
+                <v-img :src="song.album.images[1].url" contain></v-img>
                 <v-card-text>
                   <div class="subtitle-1 black--text text-truncate">
-                    {{video.snippet.title}}
+                    {{song.name}}
                   </div>
-                  {{video.snippet.channelTitle}}
+                  {{song.album.name}}
                 </v-card-text>
               </v-card>
             </v-container>
@@ -169,6 +168,7 @@ export default {
     youtubeResults: null,
     bookResults: null,
     movieResults: null,
+    spotifyResults: null,
     showDetails: false,
     details: {},
   }),
@@ -189,6 +189,7 @@ export default {
           this.renderYoutube();
           this.renderBooks();
           this.renderMovies();
+          this.renderSpotify();
         })
         .catch(() => {
           this.navigateRoute("/questionnaire");
@@ -239,6 +240,26 @@ export default {
         .catch((e) => {
           console.log(e.response.data);
         });
+    },
+    renderSpotify() {
+      this.recommend.spotify.limit = 100;
+      axios({
+        url: "/spotify-token",
+        method: "GET",
+      }).then((auth) => {
+        axios({
+          method: "GET",
+          url: "https://api.spotify.com/v1/recommendations",
+          params: this.recommend.spotify,
+          headers: auth.data,
+        })
+          .then((response) => {
+            this.spotifyResults = response.data.tracks;
+          })
+          .catch((e) => {
+            console.log(e.response.data);
+          });
+      });
     },
     youtubeCard(title, subtitle, desc, id) {
       this.details = {};
