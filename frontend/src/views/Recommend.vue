@@ -163,7 +163,7 @@ export default {
     renderYoutube() {
       axios
         .get(
-          "https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=10&regionCode=SG&videoCategoryId=" +
+          "https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=SG&videoCategoryId=" +
             this.recommend.youtube.videoCategory +
             "&key=AIzaSyA7Y61l8cbCs3iBaovaUT9iv8eczTikK9k"
         )
@@ -179,7 +179,7 @@ export default {
         .get(
           "https://www.googleapis.com/books/v1/volumes?q=subject:" +
             this.recommend.book.subject +
-            "&langRestrict=en"
+            "&langRestrict=en&maxResults=40"
         )
         .then((response) => {
           this.bookResults = response.data.items;
