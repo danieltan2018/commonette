@@ -128,8 +128,11 @@
       <div id="spotifyArtist">
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="spotifyArtist" :items="inputSpotifyArtist" label="Artist">
-            </v-autocomplete>
+            <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')"></v-text-field>
+            <div v-if="artist">
+                <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
+            </div>
+            
           </v-flex>
         </v-layout>
         <div class="mb-4">Drag to Rank</div>
@@ -228,6 +231,7 @@
 
 <script>
 import draggable from "vuedraggable";
+import axios from "axios";
 
 export default {
   components: {
@@ -265,6 +269,8 @@ export default {
       sTrackTag: null,
       sGenreSelection: null,
       sGenreTag: null,
+      artist: null,
+      artistSuggestions: [],
       inputRequiredRule: [(v) => v.length > 0 || "Required"],
       autocompleteMax3Rule: [
         (v) => v.length > 0 || "Required",
@@ -734,19 +740,6 @@ export default {
         "Yoruba",
         "Zulu",
       ],
-      inputSpotifyArtist: [
-        "name1",
-        "name2",
-        "name3",
-        "name4",
-        "name5",
-        "name6",
-        "name7",
-        "name8",
-        "name9",
-        "name10",
-        "name11",
-      ],
       inputSpotifyTrack: [
         "track1",
         "track2",
@@ -915,14 +908,6 @@ export default {
         }
       },
     },
-    spotifyArtist: {
-      immediate: true,
-      handler(value) {
-        if (!this.sArtists.includes(value) && value != "") {
-          this.sArtists.push(value);
-        }
-      },
-    },
     spotifyTrack: {
       immediate: true,
       handler(value) {
@@ -1025,6 +1010,43 @@ export default {
         });
       }
     },
+    searchSpotify(query, type) {
+        console.log("query", query);
+      axios({
+        url: "/spotify-token",
+        method: "GET",
+      }).then((auth) => {
+        axios({
+          method: "GET",
+          url: "https://api.spotify.com/v1/search",
+          params: {
+              q: query,
+              type: type,
+              limit: 8,
+          },
+          headers: auth.data,
+        })
+          .then((response) => {
+            // artists > items > name
+            var items = response.data.artists.items;
+            // make array of names
+            var names = [];
+            for (var i = 0; i < items.length; i++) {
+                names.push(items[i]["name"]);
+            }
+            console.log(names);
+            this.artistSuggestions = names;
+          })
+          .catch((e) => {
+            console.log(e.response.data);
+          });
+      });
+    },
+    addSpotifyArtist(value) {
+        if (!this.sArtists.includes(value) && value != "") {
+          this.sArtists.push(value);
+        }
+    }
   },
 };
 </script>
@@ -1069,5 +1091,10 @@ export default {
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent rgb(90, 90, 90) transparent;
+}
+
+.suggest-button {
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 </style>
