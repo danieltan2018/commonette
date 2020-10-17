@@ -128,11 +128,10 @@
       <div id="spotifyArtist">
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
-            <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')"></v-text-field>
+            <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
             <div v-if="artist">
                 <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
             </div>
-            
           </v-flex>
         </v-layout>
         <div class="mb-4">Drag to Rank</div>
@@ -164,8 +163,10 @@
       <div id="spotifyTrack">
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="spotifyTrack" :items="inputSpotifyTrack" label="Track">
-            </v-autocomplete>
+            <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
+            <div v-if="track">
+                <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
+            </div>
           </v-flex>
         </v-layout>
         <div class="mb-4">Drag to Rank</div>
@@ -248,8 +249,6 @@ export default {
       movieGenre: "",
       movieLanguage: [],
       movieImdb: 0,
-      spotifyArtist: "",
-      spotifyTrack: "",
       spotifyGenre: "",
       youtubes: [],
       books: [],
@@ -271,6 +270,8 @@ export default {
       sGenreTag: null,
       artist: null,
       artistSuggestions: [],
+      track: null,
+      trackSuggestions: [],
       inputRequiredRule: [(v) => v.length > 0 || "Required"],
       autocompleteMax3Rule: [
         (v) => v.length > 0 || "Required",
@@ -740,19 +741,6 @@ export default {
         "Yoruba",
         "Zulu",
       ],
-      inputSpotifyTrack: [
-        "track1",
-        "track2",
-        "track3",
-        "track4",
-        "track5",
-        "track6",
-        "track7",
-        "track8",
-        "track9",
-        "track10",
-        "track11",
-      ],
       inputSpotifyGenre: [
         "acoustic",
         "afrobeat",
@@ -908,14 +896,6 @@ export default {
         }
       },
     },
-    spotifyTrack: {
-      immediate: true,
-      handler(value) {
-        if (!this.sTracks.includes(value) && value != "") {
-          this.sTracks.push(value);
-        }
-      },
-    },
     spotifyGenre: {
       immediate: true,
       handler(value) {
@@ -1022,20 +1002,29 @@ export default {
           params: {
               q: query,
               type: type,
-              limit: 8,
+              limit: 5,
           },
           headers: auth.data,
         })
           .then((response) => {
-            // artists > items > name
-            var items = response.data.artists.items;
-            // make array of names
-            var names = [];
-            for (var i = 0; i < items.length; i++) {
-                names.push(items[i]["name"]);
+            if (type === "artist") {
+                // artists > items > name
+                let items = response.data.artists.items;
+                let names = [];
+                for (let i = 0; i < items.length; i++) {
+                    names.push(items[i]["name"]);
+                }
+                console.log("names:", names);
+                this.artistSuggestions = names;
+            } else if (type === "track") {
+                let items = response.data.tracks.items;
+                let names = [];
+                for (let i = 0; i < items.length; i++) {
+                    names.push(items[i]["name"]);
+                }
+                console.log("names:", names);
+                this.trackSuggestions = names;
             }
-            console.log(names);
-            this.artistSuggestions = names;
           })
           .catch((e) => {
             console.log(e.response.data);
@@ -1045,6 +1034,11 @@ export default {
     addSpotifyArtist(value) {
         if (!this.sArtists.includes(value) && value != "") {
           this.sArtists.push(value);
+        }
+    },
+    addSpotifyTrack(value) {
+        if (!this.sTracks.includes(value) && value != "") {
+          this.sTracks.push(value);
         }
     }
   },
