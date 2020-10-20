@@ -25,21 +25,26 @@
             </v-autocomplete>
           </v-flex>
         </v-layout>
-        <div>Drag to Rank</div>
-        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-        <v-layout row wrap justify-center>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
-            <v-card-text style="align-items:center">
-              <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
-                <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
-                  <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')">{{
-                      tag
-                    }}</v-chip>
-                </draggable>
-              </v-chip-group>
-            </v-card-text>
-          </v-card>
-        </v-layout>
+        <div id="ytDisplay" style="display:none">
+          <div>Drag to Rank</div>
+          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+          <v-layout row wrap justify-center>
+            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+              <v-card-text style="align-items:center">
+                <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
+                  <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
+                    <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')">
+                      <v-avatar left class="white">
+                        {{i+1}}
+                      </v-avatar>
+                      {{tag}}
+                    </v-chip>
+                  </draggable>
+                </v-chip-group>
+              </v-card-text>
+            </v-card>
+          </v-layout>
+        </div>
         <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="ytNone">Please Select At Least ONE!</v-alert>
@@ -57,21 +62,26 @@
             </v-autocomplete>
           </v-flex>
         </v-layout>
-        <div>Drag to Rank</div>
-        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-        <v-layout row wrap justify-center>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
-            <v-card-text>
-              <v-chip-group v-model="bookSelection" column active-class="primary--text">
-                <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
-                  <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')">{{
-                    tag
-                  }}</v-chip>
-                </draggable>
-              </v-chip-group>
-            </v-card-text>
-          </v-card>
-        </v-layout>
+        <div id="bkDisplay" style="display:none">
+          <div>Drag to Rank</div>
+          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+          <v-layout row wrap justify-center>
+            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+              <v-card-text>
+                <v-chip-group v-model="bookSelection" column active-class="primary--text">
+                  <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
+                    <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')">
+                      <v-avatar left class="white">
+                        {{i+1}}
+                      </v-avatar>
+                      {{tag}}
+                    </v-chip>
+                  </draggable>
+                </v-chip-group>
+              </v-card-text>
+            </v-card>
+          </v-layout>
+        </div>
         <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="bkNone">Please Select At Least ONE!</v-alert>
@@ -89,21 +99,26 @@
             </v-autocomplete>
           </v-flex>
         </v-layout>
-        <div>Drag to Rank</div>
-        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-        <v-layout row wrap justify-center mb-4>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
-            <v-card-text>
-              <v-chip-group v-model="movieSelection" column active-class="primary--text">
-                <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
-                  <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')">{{
-                      tag
-                    }}</v-chip>
-                </draggable>
-              </v-chip-group>
-            </v-card-text>
-          </v-card>
-        </v-layout>
+        <div id="mvDisplay" style="display:none">
+          <div>Drag to Rank</div>
+          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+          <v-layout row wrap justify-center mb-4>
+            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+              <v-card-text>
+                <v-chip-group v-model="movieSelection" column active-class="primary--text">
+                  <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
+                    <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')">
+                      <v-avatar left class="white">
+                        {{i+1}}
+                      </v-avatar>
+                      {{tag}}
+                    </v-chip>
+                  </draggable>
+                </v-chip-group>
+              </v-card-text>
+            </v-card>
+          </v-layout>
+        </div>
         <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvNone">Please Select At Least ONE!</v-alert>
@@ -142,21 +157,26 @@
             </div>
           </v-flex>
         </v-layout>
-        <div>Drag to Rank</div>
-        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-        <v-layout row wrap justify-center>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
-            <v-card-text>
-              <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
-                <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
-                  <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')">{{
-                      tag
-                    }}</v-chip>
-                </draggable>
-              </v-chip-group>
-            </v-card-text>
-          </v-card>
-        </v-layout>
+        <div id="sADisplay" style="display:none">
+          <div>Drag to Rank</div>
+          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+          <v-layout row wrap justify-center>
+            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+              <v-card-text>
+                <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
+                  <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
+                    <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')">
+                      <v-avatar left class="white">
+                        {{i+1}}
+                      </v-avatar>
+                      {{tag}}
+                    </v-chip>
+                  </draggable>
+                </v-chip-group>
+              </v-card-text>
+            </v-card>
+          </v-layout>
+        </div>
         <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="sANone">Please Select At Least ONE!</v-alert>
@@ -175,21 +195,26 @@
             </div>
           </v-flex>
         </v-layout>
-        <div>Drag to Rank</div>
-        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-        <v-layout row wrap justify-center mb-4>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
-            <v-card-text>
-              <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
-                <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
-                  <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')">{{
-                      tag
-                    }}</v-chip>
-                </draggable>
-              </v-chip-group>
-            </v-card-text>
-          </v-card>
-        </v-layout>
+        <div id="sTDisplay" style="display:none">
+          <div>Drag to Rank</div>
+          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+          <v-layout row wrap justify-center mb-4>
+            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+              <v-card-text>
+                <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
+                  <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
+                    <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')">
+                      <v-avatar left class="white">
+                        {{i+1}}
+                      </v-avatar>
+                      {{tag}}
+                    </v-chip>
+                  </draggable>
+                </v-chip-group>
+              </v-card-text>
+            </v-card>
+          </v-layout>
+        </div>
         <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTNone">Please Select At Least ONE!</v-alert>
@@ -207,27 +232,33 @@
             </v-autocomplete>
           </v-flex>
         </v-layout>
-        <div class="mb-4">Drag to Rank</div>
-        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-        <v-layout row wrap justify-center mb-4>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
-            <v-card-text>
-              <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
-                <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
-                  <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')">{{
-                      tag
-                    }}</v-chip>
-                </draggable>
-              </v-chip-group>
-            </v-card-text>
-          </v-card>
-        </v-layout>
+        <div id="sGDisplay" style="display:none">
+          <div class="mb-4">Drag to Rank</div>
+          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+          <v-layout row wrap justify-center mb-4>
+            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+              <v-card-text>
+                <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
+                  <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
+                    <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')">
+                      <v-avatar left class="white">
+                        {{i+1}}
+                      </v-avatar>
+                      {{tag}}
+                    </v-chip>
+                  </draggable>
+                </v-chip-group>
+              </v-card-text>
+            </v-card>
+          </v-layout>
+        </div>
         <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGNone">Please Select At Least ONE!</v-alert>
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGExceed">Please Select Maximum FIVE!</v-alert>
           </div>
         </v-layout>
+
       </v-container>
       <v-btn text class="success mx-0 mb-6" @click="submit">Let's Go</v-btn>
     </v-form>
@@ -894,6 +925,7 @@ export default {
       immediate: true,
       handler(value) {
         if (!this.movies.includes(value) && value != "") {
+          document.getElementById("mvDisplay").style.display = "inline";
           this.movies.push(value);
         }
       },
@@ -902,6 +934,7 @@ export default {
       immediate: true,
       handler(value) {
         if (!this.youtubes.includes(value) && value != "") {
+          document.getElementById("ytDisplay").style.display = "inline";
           this.youtubes.push(value);
         }
       },
@@ -910,6 +943,7 @@ export default {
       immediate: true,
       handler(value) {
         if (!this.books.includes(value) && value != "") {
+          document.getElementById("bkDisplay").style.display = "inline";
           this.books.push(value);
         }
       },
@@ -918,10 +952,27 @@ export default {
       immediate: true,
       handler(value) {
         if (!this.sGenres.includes(value) && value != "") {
+          document.getElementById("sGDisplay").style.display = "inline";
           this.sGenres.push(value);
         }
       },
     },
+    sTracks: {
+      immediate: true,
+      handler() {
+        if (this.sTracks != []) {
+          document.getElementById("sTDisplay").style.display = "inline";
+        }
+      }
+    },
+    sArtists: {
+      immediate: true,
+      handler() {
+        if (this.sArtists != []) {
+          document.getElementById("sADisplay").style.display = "inline";
+        }
+      }
+    }
   },
   methods: {
     submit() {
