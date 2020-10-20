@@ -1,3 +1,8 @@
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+
+Vue.use(Vuetify);
+
 <template>
   <div id="app">
     <v-app>
