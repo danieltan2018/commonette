@@ -10,10 +10,15 @@
           <v-text-field label="Name" v-model="name" :rules="inputRequiredRule"></v-text-field>
         </v-flex>
       </v-layout>
+      <v-layout>
+        <div class="mx-auto mb-6">
+          <v-alert color="red" elevation="4" dense outlined type="error" v-if="nameNone">Please Enter Your Name!</v-alert>
+        </div>
+      </v-layout>
 
-      <v-container id="youtubeCategory" class="category-container" mb-12>
+      <v-container id="youtubeCategory" class="category-container mb-12">
         <p class="text-h5 font-weight-medium mb-4">Youtube</p>
-        <div mb-2>Select up to 5 of your favourite Youtube video categories</div>
+        <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
             <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category">
@@ -21,9 +26,9 @@
           </v-flex>
         </v-layout>
         <div>Drag to Rank</div>
-        <div>(1 - Most Favourite, 5 - Least Favourite)</div>
+        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
         <v-layout row wrap justify-center>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto">
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
             <v-card-text style="align-items:center">
               <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
                 <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
@@ -35,14 +40,17 @@
             </v-card-text>
           </v-card>
         </v-layout>
-        <v-row>
-          <div id="ytError"></div>
-        </v-row>
+        <v-layout>
+          <div class="mx-auto mb-6">
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="ytNone">Please Select At Least ONE!</v-alert>
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="ytExceed">Please Select Maximum FIVE!</v-alert>
+          </div>
+        </v-layout>
       </v-container>
 
-      <v-container id="bookCategory" class="category-container" mb-12>
+      <v-container id="bookCategory" class="category-container mb-12">
         <p class="text-h5 font-weight-medium mb-4">Books</p>
-        <div mb-2>Select up to 5 of your favourite book subjects</div>
+        <div class="mb-4">Select up to 5 of your favourite book subjects</div>
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
             <v-autocomplete v-model="bookGenre" :items="inputBook" label="Genre">
@@ -50,9 +58,9 @@
           </v-flex>
         </v-layout>
         <div>Drag to Rank</div>
-        <div>(1 - Most Favourite, 5 - Least Favourite)</div>
+        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
         <v-layout row wrap justify-center>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto">
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
             <v-card-text>
               <v-chip-group v-model="bookSelection" column active-class="primary--text">
                 <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
@@ -64,11 +72,17 @@
             </v-card-text>
           </v-card>
         </v-layout>
+        <v-layout>
+          <div class="mx-auto mb-6">
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="bkNone">Please Select At Least ONE!</v-alert>
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="bkExceed">Please Select Maximum FIVE!</v-alert>
+          </div>
+        </v-layout>
       </v-container>
 
-      <v-container id="movieCategory" class="category-container" mb-12>
+      <v-container id="movieCategory" class="category-container mb-12">
         <p class="text-h5 font-weight-medium mb-4">Movies</p>
-        <div mb-2>Select up to 5 of your favourite movie genres</div>
+        <div mb-4>Select up to 5 of your favourite movie genres</div>
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
             <v-autocomplete v-model="movieGenre" :items="inputMovieGenre" label="Genre">
@@ -76,9 +90,9 @@
           </v-flex>
         </v-layout>
         <div>Drag to Rank</div>
-        <div>(1 - Most Favourite, 5 - Least Favourite)</div>
-        <v-layout row wrap justify-center mb-8>
-          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto">
+        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+        <v-layout row wrap justify-center mb-4>
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
             <v-card-text>
               <v-chip-group v-model="movieSelection" column active-class="primary--text">
                 <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
@@ -90,12 +104,25 @@
             </v-card-text>
           </v-card>
         </v-layout>
-        <v-layout row wrap justify-center mb-8>
+        <v-layout>
+          <div class="mx-auto mb-6">
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvNone">Please Select At Least ONE!</v-alert>
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvExceed">Please Select Maximum FIVE!</v-alert>
+          </div>
+        </v-layout>
+
+        <v-layout row wrap justify-center mb-0>
           <v-flex xs12 md6 lg4>
             <div>List your preferred languages</div>
             <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple chips deletable-chips :rules="inputRequiredRule"></v-autocomplete>
           </v-flex>
         </v-layout>
+        <v-layout>
+          <div class="mx-auto mb-12">
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvLangNone">Please Select At Least ONE!</v-alert>
+          </div>
+        </v-layout>
+
         <v-layout row wrap justify-center mb-8>
           <v-flex xs12 md6 lg4>
             <div>Pick a minimum IMDB value</div>
@@ -104,7 +131,7 @@
         </v-layout>
       </v-container>
 
-      <v-container id="Spotify" class="category-container" mb-12>
+      <v-container id="Spotify" class="category-container" mb-8>
         <p class="text-h5 font-weight-medium mb-4">Spotify</p>
         <div mb-2>Select up to 3 of your favourite artists</div>
         <div id="spotifyArtist">
@@ -118,7 +145,7 @@
           </v-layout>
           <div>Drag to Rank</div>
           <v-layout row wrap justify-center>
-            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto">
+            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
               <v-card-text>
                 <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
                   <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
@@ -130,7 +157,15 @@
               </v-card-text>
             </v-card>
           </v-layout>
+          <v-layout>
+          <div class="mx-auto mb-6">
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sANone">Please Select At Least ONE!</v-alert>
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sAExceed">Please Select Maximum THREE!</v-alert>
+          </div>
+        </v-layout>
         </div>
+
+        <div class="mb-12"></div>
 
         <div mb-2>Select up to 3 of your favourite tracks</div>
         <div id="spotifyTrack">
@@ -163,6 +198,12 @@
             <v-col cols="2"></v-col>
           </v-row>
         </div>
+        <v-layout>
+          <div class="mx-auto mb-6">
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTNone">Please Select At Least ONE!</v-alert>
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTExceed">Please Select Maximum THREE!</v-alert>
+          </div>
+        </v-layout>
 
         <div class="mb-12"></div>
 
@@ -196,6 +237,12 @@
             <v-col cols="2"></v-col>
           </v-row>
         </div>
+        <v-layout>
+          <div class="mx-auto mb-6">
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGNone">Please Select At Least ONE!</v-alert>
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGExceed">Please Select Maximum FIVE!</v-alert>
+          </div>
+        </v-layout>
       </v-container>
       <div class="mb-12"></div>
       <v-btn text class="success mx-0 mt-3" @click="submit">Let's Go</v-btn>
@@ -254,6 +301,20 @@ export default {
         (v) => v.length > 0 || "Required",
         (v) => v.length <= 5 || "Maximum 5 choices",
       ],
+      ytNone: false,
+      ytExceed: false,
+      bkNone: false,
+      bkExceed: false,
+      mvNone: false,
+      mvExceed: false,
+      mvLangNone: false,
+      sANone: false,
+      sAExceed: false,
+      sTNone: false,
+      sTExceed: false,
+      sGNone: false,
+      sGExceed: false,
+      nameNone: false,
       languages: ["English", "Mandarin", "Malay", "Tamil"],
       inputYoutube: [
         "Shorts",
@@ -880,11 +941,15 @@ export default {
   },
   methods: {
     submit() {
-      // if (this.$refs.form.validate()) {
-      console.log(this.youtubes);
-      console.log(this.movies);
-      console.log(this.books);
-      // }
+      if (this.validate()) {
+        console.log("All Clear");
+        // Send data to backend
+      }
+      else {
+        this.showAlerts();
+        console.log("Error la");
+        this.$vuetify.goTo(0)
+      }
     },
     dragStartYoutube() {
       if (this.youtubes[this.youtubeSelection]) {
@@ -1041,7 +1106,56 @@ export default {
         });
       // console.log(list);
     },
-  },
+    validate() {
+      this.resetAlerts();
+      if (this.youtubes.length == 0 || this.movies.length == 0 || this.books.length == 0 || this.movieLanguage.length == 0 || this.sArtists.length == 0 || this.sTracks.length == 0 || this.sGenres.length == 0) {
+        return false;
+      }
+      else if (this.name == "" || this.youtubes.length > 5 || this.movies.length > 5 || this.books.length > 5 || this.sArtists.length > 3 || this.sTracks.length > 3 || this.sGenres.length > 5) {
+        return false;
+      }
+      return true;
+    },
+    showAlerts() {
+      if (this.name == "") this.nameNone = true;
+
+      if (this.youtubes.length == 0) this.ytNone = true;
+      else if (this.youtubes.length > 5) this.ytExceed = true;
+
+      if (this.movies.length == 0) this.mvNone = true;
+      else if (this.movies.length > 5) this.mvExceed = true;
+
+      if (this.books.length == 0) this.bkNone = true;
+      else if (this.books.length > 5) this.bkExceed = true;
+
+      if (this.movieLanguage.length == 0) this.mvLangNone = true;
+
+      if (this.sArtists.length == 0) this.sANone = true;
+      else if (this.sArtists.length > 3) this.sAExceed = true;
+
+      if (this.sTracks.length == 0) this.sTNone = true;
+      else if (this.sTracks.length > 3) this.sTExceed = true;
+
+      if (this.sGenres.length == 0) this.sGNone = true;
+      else if (this.sGenres.length > 5) this.sGExceed = true;
+    },
+    resetAlerts(){
+      this.ytNone = false;
+      this.ytExceed = false; 
+      this.mvNone = false;
+      this.mvExceed = false;
+      this.bkNone = false;
+      this.bkExceed = false;
+      this.mvLangNone = false;
+      this.sANone = false;
+      this.sAExceed = false;
+      this.sTNone = false;
+      this.sTExceed = false;
+      this.sGNone = false;
+      this.sGExceed = false;
+      this.nameNone = false;
+    }
+  }
 };
 </script>
 
