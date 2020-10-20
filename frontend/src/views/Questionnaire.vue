@@ -11,175 +11,114 @@
         </v-flex>
       </v-layout>
 
-      <v-container id="youtubeCategory" class="category-container">
+      <v-container id="youtubeCategory" class="category-container" mb-12>
         <p class="text-h5 font-weight-medium mb-4">Youtube</p>
-        <div>Select up to 5 of your favourite Youtube video categories</div>
-        <div id="youtubeCategory">
-          <v-layout row wrap justify-center>
-            <v-flex xs12 md6 lg4>
-              <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category" >
-              </v-autocomplete>
-            </v-flex>
-          </v-layout>
-          <div>Drag to Rank</div>
-          <v-row>
-            <v-col cols="2"></v-col>
-            <v-col cols="1"> Most Favourite </v-col>
-            <v-col cols="6">
-              <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
-                <v-card-text style="align-items:center">
-                  <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
-                    <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
-                      <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')">{{
-                        tag
-                      }}</v-chip>
-                    </draggable>
-                  </v-chip-group>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col cols="1"> Least Favourite </v-col>
-            <v-col cols="2"></v-col>
-          </v-row>
-          <v-row>
-            <div id="ytError"></div>
-          </v-row>
-        </div>
+        <div mb-2>Select up to 5 of your favourite Youtube video categories</div>
+        <v-layout row wrap justify-center>
+          <v-flex xs12 md6 lg4>
+            <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category">
+            </v-autocomplete>
+          </v-flex>
+        </v-layout>
+        <div>Drag to Rank</div>
+        <div>(1 - Most Favourite, 5 - Least Favourite)</div>
+        <v-layout row wrap justify-center>
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto">
+            <v-card-text style="align-items:center">
+              <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
+                <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
+                  <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')">{{
+                      tag
+                    }}</v-chip>
+                </draggable>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+        </v-layout>
+        <v-row>
+          <div id="ytError"></div>
+        </v-row>
       </v-container>
 
-
-      <h1 class="mb-4">Books</h1>
-      <div>Select up to 5 of your favourite book subjects</div>
-
-      <div id="book">
+      <v-container id="bookCategory" class="category-container" mb-12>
+        <p class="text-h5 font-weight-medium mb-4">Books</p>
+        <div mb-2>Select up to 5 of your favourite book subjects</div>
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
             <v-autocomplete v-model="bookGenre" :items="inputBook" label="Genre">
             </v-autocomplete>
           </v-flex>
         </v-layout>
-        <div class="mb-4">Drag to Rank</div>
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="1"> Most Favourite </v-col>
-          <v-col cols="6">
-            <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
-              <v-card-text>
-                <v-chip-group v-model="bookSelection" column active-class="primary--text">
-                  <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
-                    <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')">{{
-                      tag
-                    }}</v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col cols="1"> Least Favourite </v-col>
-          <v-col cols="2"></v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-          </v-col>
-          <v-col cols="4">
-            <div id="bookError">
-              
-            </div>
-          </v-col>
-          <v-col cols="4">
-          </v-col>
-        </v-row>
-      </div>
+        <div>Drag to Rank</div>
+        <div>(1 - Most Favourite, 5 - Least Favourite)</div>
+        <v-layout row wrap justify-center>
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto">
+            <v-card-text>
+              <v-chip-group v-model="bookSelection" column active-class="primary--text">
+                <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
+                  <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')">{{
+                    tag
+                  }}</v-chip>
+                </draggable>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+        </v-layout>
+      </v-container>
 
-      <div class="mb-12"></div>
-
-      <h1 class="mb-4">Movies</h1>
-      <div>Select up to 5 of your favourite movie genres</div>
-
-      <div id="movieGenre">
+      <v-container id="movieCategory" class="category-container" mb-12>
+        <p class="text-h5 font-weight-medium mb-4">Movies</p>
+        <div mb-2>Select up to 5 of your favourite movie genres</div>
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
             <v-autocomplete v-model="movieGenre" :items="inputMovieGenre" label="Genre">
             </v-autocomplete>
           </v-flex>
         </v-layout>
-        <div class="mb-4">Drag to Rank</div>
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="1"> Most Favourite </v-col>
-          <v-col cols="6">
-            <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
-              <v-card-text>
-                <v-chip-group v-model="movieSelection" column active-class="primary--text">
-                  <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
-                    <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')">{{
+        <div>Drag to Rank</div>
+        <div>(1 - Most Favourite, 5 - Least Favourite)</div>
+        <v-layout row wrap justify-center mb-8>
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto">
+            <v-card-text>
+              <v-chip-group v-model="movieSelection" column active-class="primary--text">
+                <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
+                  <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')">{{
                       tag
                     }}</v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col cols="1"> Least Favourite </v-col>
-          <v-col cols="2"></v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-          </v-col>
-          <v-col cols="4">
-            <div id="mGenreError">
-              
-            </div>
-          </v-col>
-          <v-col cols="4">
-          </v-col>
-        </v-row>
-      </div>
-
-      <div class="mb-12"></div>
-
-      <v-layout row wrap justify-center mb-8>
-        <v-flex xs12 md6 lg4>
-          <div>List your preferred languages</div>
-          <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple chips deletable-chips :rules="inputRequiredRule"></v-autocomplete>
-        </v-flex>
-      </v-layout>
-      <v-row>
-          <v-col cols="4">
-          </v-col>
-          <v-col cols="4">
-            <div id="mLangError">
-              
-            </div>
-          </v-col>
-          <v-col cols="4">
-          </v-col>
-        </v-row>
-
-      <v-layout row wrap justify-center mb-8>
-        <v-flex xs12 md6 lg4>
-          <div>Pick a minimum IMDB value</div>
-          <v-slider v-model="movieImdb" :max="10" :min="0" :step="0.1" :thumb-size="30" thumb-label mb-8></v-slider>
-        </v-flex>
-      </v-layout>
-
-      <h1 class="mb-4">Spotify</h1>
-      <div>Select up to 3 of your favourite artists</div>
-      <div id="spotifyArtist">
-        <v-layout row wrap justify-center>
+                </draggable>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+        </v-layout>
+        <v-layout row wrap justify-center mb-8>
           <v-flex xs12 md6 lg4>
-            <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
-            <div v-if="artist">
-              <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
-            </div>
+            <div>List your preferred languages</div>
+            <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple chips deletable-chips :rules="inputRequiredRule"></v-autocomplete>
           </v-flex>
         </v-layout>
-        <div class="mb-4">Drag to Rank</div>
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="1"> Most Favourite </v-col>
-          <v-col cols="6">
-            <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
+        <v-layout row wrap justify-center mb-8>
+          <v-flex xs12 md6 lg4>
+            <div>Pick a minimum IMDB value</div>
+            <v-slider v-model="movieImdb" :max="10" :min="0" :step="0.1" :thumb-size="30" thumb-label mb-8></v-slider>
+          </v-flex>
+        </v-layout>
+      </v-container>
+
+      <v-container id="Spotify" class="category-container" mb-12>
+        <p class="text-h5 font-weight-medium mb-4">Spotify</p>
+        <div mb-2>Select up to 3 of your favourite artists</div>
+        <div id="spotifyArtist">
+          <v-layout row wrap justify-center>
+            <v-flex xs12 md6 lg4>
+              <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
+              <div v-if="artist">
+                <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
+              </div>
+            </v-flex>
+          </v-layout>
+          <div>Drag to Rank</div>
+          <v-layout row wrap justify-center>
+            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto">
               <v-card-text>
                 <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
                   <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
@@ -190,113 +129,74 @@
                 </v-chip-group>
               </v-card-text>
             </v-card>
-          </v-col>
-          <v-col cols="1"> Least Favourite </v-col>
-          <v-col cols="2"></v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-          </v-col>
-          <v-col cols="4">
-            <div id="sArtistError">
-              
-            </div>
-          </v-col>
-          <v-col cols="4">
-          </v-col>
-        </v-row>
-      </div>
+          </v-layout>
+        </div>
 
-      <div class="mb-12"></div>
-
-      <div class="mb-8"></div>
-      <div>Select up to 3 of your favourite tracks</div>
-      <div id="spotifyTrack">
-        <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
-            <div v-if="track">
-              <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
-            </div>
-          </v-flex>
-        </v-layout>
-        <div class="mb-4">Drag to Rank</div>
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="1"> Most Favourite </v-col>
-          <v-col cols="6">
-            <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
-              <v-card-text>
-                <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
-                  <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
-                    <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')">{{
+        <div mb-2>Select up to 3 of your favourite tracks</div>
+        <div id="spotifyTrack">
+          <v-layout row wrap justify-center>
+            <v-flex xs12 md6 lg4>
+              <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
+              <div v-if="track">
+                <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
+              </div>
+            </v-flex>
+          </v-layout>
+          <div class="mb-4">Drag to Rank</div>
+          <v-row>
+            <v-col cols="2"></v-col>
+            <v-col cols="1"> Most Favourite </v-col>
+            <v-col cols="6">
+              <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
+                <v-card-text>
+                  <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
+                    <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
+                      <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')">{{
                       tag
                     }}</v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col cols="1"> Least Favourite </v-col>
-          <v-col cols="2"></v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-          </v-col>
-          <v-col cols="4">
-            <div id="sTrackError">
-              
-            </div>
-          </v-col>
-          <v-col cols="4">
-          </v-col>
-        </v-row>
-      </div>
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="1"> Least Favourite </v-col>
+            <v-col cols="2"></v-col>
+          </v-row>
+        </div>
 
-      <div class="mb-12"></div>
+        <div class="mb-12"></div>
 
-      <div class="mb-8"></div>
-      <div>Select up to 5 of your favourite genres</div>
-      <div id="spotifyGenre">
-        <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="spotifyGenre" :items="inputSpotifyGenre" label="Genre">
-            </v-autocomplete>
-          </v-flex>
-        </v-layout>
-        <div class="mb-4">Drag to Rank</div>
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="1"> Most Favourite </v-col>
-          <v-col cols="6">
-            <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
-              <v-card-text>
-                <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
-                  <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
-                    <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')">{{
+        <div class="mb-8"></div>
+        <div>Select up to 5 of your favourite genres</div>
+        <div id="spotifyGenre">
+          <v-layout row wrap justify-center>
+            <v-flex xs12 md6 lg4>
+              <v-autocomplete v-model="spotifyGenre" :items="inputSpotifyGenre" label="Genre">
+              </v-autocomplete>
+            </v-flex>
+          </v-layout>
+          <div class="mb-4">Drag to Rank</div>
+          <v-row>
+            <v-col cols="2"></v-col>
+            <v-col cols="1"> Most Favourite </v-col>
+            <v-col cols="6">
+              <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
+                <v-card-text>
+                  <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
+                    <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
+                      <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')">{{
                       tag
                     }}</v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col cols="1"> Least Favourite </v-col>
-          <v-col cols="2"></v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-          </v-col>
-          <v-col cols="4">
-            <div id="sGenreError">
-              
-            </div>
-          </v-col>
-          <v-col cols="4">
-          </v-col>
-        </v-row>
-      </div>
-
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="1"> Least Favourite </v-col>
+            <v-col cols="2"></v-col>
+          </v-row>
+        </div>
+      </v-container>
       <div class="mb-12"></div>
       <v-btn text class="success mx-0 mt-3" @click="submit">Let's Go</v-btn>
     </v-form>
@@ -355,10 +255,38 @@ export default {
         (v) => v.length <= 5 || "Maximum 5 choices",
       ],
       languages: ["English", "Mandarin", "Malay", "Tamil"],
-      inputYoutube: ["Shorts", "Entertainment", "News & Politics", "Howto & Style", "Education", "Gaming", "Videoblogging", "People & Blogs",
-        "Comedy", "Trailers", "Science & Technology", "Shows", "Sci-Fi/Fantasy", "Thriller", "Film & Animation", "Autos & Vehicles",
-        "Music", "Horror", "Foreign", "Pets & Animals", "Sports", "Travel & Events", "Short Movies", "Anime/Animation", "Movies",
-        "Family", "Drama", "Documentary", "Comedy", "Classics", "Action/Adventure"
+      inputYoutube: [
+        "Shorts",
+        "Entertainment",
+        "News & Politics",
+        "Howto & Style",
+        "Education",
+        "Gaming",
+        "Videoblogging",
+        "People & Blogs",
+        "Comedy",
+        "Trailers",
+        "Science & Technology",
+        "Shows",
+        "Sci-Fi/Fantasy",
+        "Thriller",
+        "Film & Animation",
+        "Autos & Vehicles",
+        "Music",
+        "Horror",
+        "Foreign",
+        "Pets & Animals",
+        "Sports",
+        "Travel & Events",
+        "Short Movies",
+        "Anime/Animation",
+        "Movies",
+        "Family",
+        "Drama",
+        "Documentary",
+        "Comedy",
+        "Classics",
+        "Action/Adventure",
       ],
       youtubeCategories: {
         "Sci-Fi/Fantasy": "40",
@@ -392,32 +320,527 @@ export default {
         Horror: "39",
         "Film & Animation": "1",
       },
-      inputBook: ["Adult", "Anthologies", "Art", "Audiobooks", "Biographies", "Body", "Business", "Children", "Comics", "Contemporary", "Cooking", "Crime", "Engineering",
-        "Entertainment", "Fantasy", "Fiction", "Food", "Health", "History", "Horror", "Investing", "Literary", "Literature", "Manga", "Media-help", "Memoirs", "Mind",
-        "Mystery", "Nonfiction", "Religion", "Romance", "Science", "Self", "Spirituality", "Sports", "Superheroes", "Technology", "Thrillers", "Travel", "Women", "Young",
+      inputBook: [
+        "Adult",
+        "Anthologies",
+        "Art",
+        "Audiobooks",
+        "Biographies",
+        "Body",
+        "Business",
+        "Children",
+        "Comics",
+        "Contemporary",
+        "Cooking",
+        "Crime",
+        "Engineering",
+        "Entertainment",
+        "Fantasy",
+        "Fiction",
+        "Food",
+        "Health",
+        "History",
+        "Horror",
+        "Investing",
+        "Literary",
+        "Literature",
+        "Manga",
+        "Media-help",
+        "Memoirs",
+        "Mind",
+        "Mystery",
+        "Nonfiction",
+        "Religion",
+        "Romance",
+        "Science",
+        "Self",
+        "Spirituality",
+        "Sports",
+        "Superheroes",
+        "Technology",
+        "Thrillers",
+        "Travel",
+        "Women",
+        "Young",
       ],
-      inputMovieGenre: ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "Game-Show",
-        "History", "Horror", "Music", "Musical", "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western",
+      inputMovieGenre: [
+        "Action",
+        "Adult",
+        "Adventure",
+        "Animation",
+        "Biography",
+        "Comedy",
+        "Crime",
+        "Documentary",
+        "Drama",
+        "Family",
+        "Fantasy",
+        "Game-Show",
+        "History",
+        "Horror",
+        "Music",
+        "Musical",
+        "Mystery",
+        "News",
+        "Reality-TV",
+        "Romance",
+        "Sci-Fi",
+        "Short",
+        "Sport",
+        "Talk-Show",
+        "Thriller",
+        "War",
+        "Western",
       ],
-      inputMovieLang: ["Abkhazian", "Aboriginal", "Acholi", "Afar", "Afrikaans", "Akan", "Albanian", "Algonquin", "American Sign Language", "Amharic", "Apache languages", "Arabic", "Aragonese", "Aramaic", "Armenian", "Aromanian", "Assamese", "Assyrian Neo-Aramaic", "Athapascan languages", "Australian Sign Language", "Awadhi", "Aymara", "Azerbaijani", "Bable", "Baka", "Balinese", "Bambara", "Bashkir", "Basque", "Bassari",
-        "Belarusian", "Bemba", "Bengali", "Berber languages", "Bhojpuri", "Bicolano", "Bislama", "Bodo", "Bosnian", "Brazilian Sign Language", "Breton", "British Sign Language", "Bulgarian", "Burmese", "Cantonese", "Catalan", "Central American Indian languages", "Chamorro", "Chaozhou", "Chechen", "Cherokee", "Cheyenne", "Chhattisgarhi",
-        "Chinese", "Cornish", "Corsican", "Cree", "Creek", "Crimean Tatar", "Croatian", "Crow", "Czech", "Danish", "Dari", "Dinka", "Divehi", "Dogri", "Dutch", "Dyula", "Dzongkha", "East-Greenlandic", "Eastern Frisian", "Egyptian (Ancient)", "English", "Esperanto", "Estonian", "Ewe",
-        "Faliasch", "Faroese", "Filipino", "Finnish", "Flemish", "Fon", "French", "French Sign Language", "Frisian", "Fulah", "Fur", "Ga", "Gaelic", "Galician", "Gallegan", "Georgian", "German", "German Sign Language", "Greek", "Greek, Ancient (to 1453)", "Greenlandic", "Guarani", "Gujarati", "Gumatj", "Haida", "Haitian", "Haitian; Haitian Creole",
-        "Hakka", "Haryanvi", "Hassanya", "Hausa", "Hawaiian", "Hebrew", "Herero", "Himachali", "Hindi", "Hmong", "Hokkien", "Hopi", "Hungarian", "Ibo", "Icelandic", "Icelandic Sign Language", "Igbo", "Indian Sign Language", "Indonesian", "Interlingue", "Inuktitut", "Inupiaq", "Irish", "Irula",
-        "Italian", "Japanese", "Japanese Sign Language", "Javanese", "Jola-Fonyi", "Ju'hoan", "Kabuverdianu", "Kabyle", "Kalaallisut", "Kalmyk-Oirat", "Kannada", "Karen", "Kashmiri", "Kazakh", "Khanty", "Khasi", "Khmer", "Kikuyu", "Kinyarwanda", "Kirghiz", "Kirundi", "Klingon", "Kodava", "Konkani", "Korean", "Korean Sign Language", "Kriolu", "Kru", "Kudmali", "Kuna", "Kurdish", "Ladakhi", "Ladino", "Lao", "Latin", "Latvian", "Letzeburgesch",
-        "Lingala", "Lithuanian", "Low German", "Luxembourgish", "Macedonian", "Magahi", "Maithili", "Malagasy", "Malay", "Malayalam", "Malinka", "Maltese", "Mandarin", "Mandingo", "Manipuri", "Maori", "Mapudungun", "Marathi", "Mari", "Marshall", "Marshallese", "Masai", "Maya", "Mende", "Micmac", "Middle English", "Min Nan", "Minangkabau", "Mirandese",
-        "Mixtec", "Mizo", "Mohawk", "Moldavian", "Mongolian", "Montagnais", "Morisyen", "Nagpuri", "Nahuatl", "Nama", "Navajo", "Neapolitan", "Nenets", "Nepali", "Norse, Old", "North American Indian", "North Ndebele", "Northern Sami", "Norwegian", "Norwegian Nynorsk", "Nushi", "Nyanja", "Occitan", "Ojibwa", "Ojihimba", "Old English", "Oriya", "Papiamento", "Parsee", "Pawnee", "Persian", "Peul", "Polish", "Polynesian", "Portuguese", "Pular", "Punjabi", "Purepecha", "Pushto", "Quechua", "Quenya",
-        "Raeto-Romance", "Rajasthani", "Rhaetian", "Romanian", "Romany", "Russian", "Russian Sign Language", "Ryukyuan", "Saami", "Samoan", "Sanskrit", "Sardinian", "Scanian", "Scots", "Scottish Gaelic", "Serbian", "Serbo-Croatian", "Shanghainese", "Shona", "Shoshoni", "Shuar", "Sicilian", "Sign Languages", "Sindarin", "Sindhi", "Sinhalese", "Sioux", "Slovak", "Slovenian", "Somali", "Songhay", "Soninke", "Sorbian languages", "Southern Sotho", "Spanish", "Spanish Sign Language",
-        "Sranan", "Sumerian", "Swahili", "Swati", "Swedish", "Swiss German", "Syriac", "Tagalog", "Tahitian", "Tajik", "Tamashek", "Tamil", "Tarahumara", "Tatar", "Telugu", "Teochew", "Thai", "Tibetan", "Tigrigna", "Tigrinya", "Tlingit", "Tok Pisin", "Tonga", "Tsonga", "Tswana", "Tulu", "Tupi", "Turkish", "Turkmen", "Tuvinian", "Tzotzil", "Uighur", "Ukrainian", "Ukrainian Sign Language", "Ungwatsi", "Urdu",
-        "Uzbek", "Vietnamese", "Vimeo - Official Chinese Language Version", "Visayan", "Washoe", "Wayuu", "Welsh", "Wolof", "Xhosa", "Yakut", "Yiddish", "Yoruba", "Zulu",
+      inputMovieLang: [
+        "Abkhazian",
+        "Aboriginal",
+        "Acholi",
+        "Afar",
+        "Afrikaans",
+        "Akan",
+        "Albanian",
+        "Algonquin",
+        "American Sign Language",
+        "Amharic",
+        "Apache languages",
+        "Arabic",
+        "Aragonese",
+        "Aramaic",
+        "Armenian",
+        "Aromanian",
+        "Assamese",
+        "Assyrian Neo-Aramaic",
+        "Athapascan languages",
+        "Australian Sign Language",
+        "Awadhi",
+        "Aymara",
+        "Azerbaijani",
+        "Bable",
+        "Baka",
+        "Balinese",
+        "Bambara",
+        "Bashkir",
+        "Basque",
+        "Bassari",
+        "Belarusian",
+        "Bemba",
+        "Bengali",
+        "Berber languages",
+        "Bhojpuri",
+        "Bicolano",
+        "Bislama",
+        "Bodo",
+        "Bosnian",
+        "Brazilian Sign Language",
+        "Breton",
+        "British Sign Language",
+        "Bulgarian",
+        "Burmese",
+        "Cantonese",
+        "Catalan",
+        "Central American Indian languages",
+        "Chamorro",
+        "Chaozhou",
+        "Chechen",
+        "Cherokee",
+        "Cheyenne",
+        "Chhattisgarhi",
+        "Chinese",
+        "Cornish",
+        "Corsican",
+        "Cree",
+        "Creek",
+        "Crimean Tatar",
+        "Croatian",
+        "Crow",
+        "Czech",
+        "Danish",
+        "Dari",
+        "Dinka",
+        "Divehi",
+        "Dogri",
+        "Dutch",
+        "Dyula",
+        "Dzongkha",
+        "East-Greenlandic",
+        "Eastern Frisian",
+        "Egyptian (Ancient)",
+        "English",
+        "Esperanto",
+        "Estonian",
+        "Ewe",
+        "Faliasch",
+        "Faroese",
+        "Filipino",
+        "Finnish",
+        "Flemish",
+        "Fon",
+        "French",
+        "French Sign Language",
+        "Frisian",
+        "Fulah",
+        "Fur",
+        "Ga",
+        "Gaelic",
+        "Galician",
+        "Gallegan",
+        "Georgian",
+        "German",
+        "German Sign Language",
+        "Greek",
+        "Greek, Ancient (to 1453)",
+        "Greenlandic",
+        "Guarani",
+        "Gujarati",
+        "Gumatj",
+        "Haida",
+        "Haitian",
+        "Haitian; Haitian Creole",
+        "Hakka",
+        "Haryanvi",
+        "Hassanya",
+        "Hausa",
+        "Hawaiian",
+        "Hebrew",
+        "Herero",
+        "Himachali",
+        "Hindi",
+        "Hmong",
+        "Hokkien",
+        "Hopi",
+        "Hungarian",
+        "Ibo",
+        "Icelandic",
+        "Icelandic Sign Language",
+        "Igbo",
+        "Indian Sign Language",
+        "Indonesian",
+        "Interlingue",
+        "Inuktitut",
+        "Inupiaq",
+        "Irish",
+        "Irula",
+        "Italian",
+        "Japanese",
+        "Japanese Sign Language",
+        "Javanese",
+        "Jola-Fonyi",
+        "Ju'hoan",
+        "Kabuverdianu",
+        "Kabyle",
+        "Kalaallisut",
+        "Kalmyk-Oirat",
+        "Kannada",
+        "Karen",
+        "Kashmiri",
+        "Kazakh",
+        "Khanty",
+        "Khasi",
+        "Khmer",
+        "Kikuyu",
+        "Kinyarwanda",
+        "Kirghiz",
+        "Kirundi",
+        "Klingon",
+        "Kodava",
+        "Konkani",
+        "Korean",
+        "Korean Sign Language",
+        "Kriolu",
+        "Kru",
+        "Kudmali",
+        "Kuna",
+        "Kurdish",
+        "Ladakhi",
+        "Ladino",
+        "Lao",
+        "Latin",
+        "Latvian",
+        "Letzeburgesch",
+        "Lingala",
+        "Lithuanian",
+        "Low German",
+        "Luxembourgish",
+        "Macedonian",
+        "Magahi",
+        "Maithili",
+        "Malagasy",
+        "Malay",
+        "Malayalam",
+        "Malinka",
+        "Maltese",
+        "Mandarin",
+        "Mandingo",
+        "Manipuri",
+        "Maori",
+        "Mapudungun",
+        "Marathi",
+        "Mari",
+        "Marshall",
+        "Marshallese",
+        "Masai",
+        "Maya",
+        "Mende",
+        "Micmac",
+        "Middle English",
+        "Min Nan",
+        "Minangkabau",
+        "Mirandese",
+        "Mixtec",
+        "Mizo",
+        "Mohawk",
+        "Moldavian",
+        "Mongolian",
+        "Montagnais",
+        "Morisyen",
+        "Nagpuri",
+        "Nahuatl",
+        "Nama",
+        "Navajo",
+        "Neapolitan",
+        "Nenets",
+        "Nepali",
+        "Norse, Old",
+        "North American Indian",
+        "North Ndebele",
+        "Northern Sami",
+        "Norwegian",
+        "Norwegian Nynorsk",
+        "Nushi",
+        "Nyanja",
+        "Occitan",
+        "Ojibwa",
+        "Ojihimba",
+        "Old English",
+        "Oriya",
+        "Papiamento",
+        "Parsee",
+        "Pawnee",
+        "Persian",
+        "Peul",
+        "Polish",
+        "Polynesian",
+        "Portuguese",
+        "Pular",
+        "Punjabi",
+        "Purepecha",
+        "Pushto",
+        "Quechua",
+        "Quenya",
+        "Raeto-Romance",
+        "Rajasthani",
+        "Rhaetian",
+        "Romanian",
+        "Romany",
+        "Russian",
+        "Russian Sign Language",
+        "Ryukyuan",
+        "Saami",
+        "Samoan",
+        "Sanskrit",
+        "Sardinian",
+        "Scanian",
+        "Scots",
+        "Scottish Gaelic",
+        "Serbian",
+        "Serbo-Croatian",
+        "Shanghainese",
+        "Shona",
+        "Shoshoni",
+        "Shuar",
+        "Sicilian",
+        "Sign Languages",
+        "Sindarin",
+        "Sindhi",
+        "Sinhalese",
+        "Sioux",
+        "Slovak",
+        "Slovenian",
+        "Somali",
+        "Songhay",
+        "Soninke",
+        "Sorbian languages",
+        "Southern Sotho",
+        "Spanish",
+        "Spanish Sign Language",
+        "Sranan",
+        "Sumerian",
+        "Swahili",
+        "Swati",
+        "Swedish",
+        "Swiss German",
+        "Syriac",
+        "Tagalog",
+        "Tahitian",
+        "Tajik",
+        "Tamashek",
+        "Tamil",
+        "Tarahumara",
+        "Tatar",
+        "Telugu",
+        "Teochew",
+        "Thai",
+        "Tibetan",
+        "Tigrigna",
+        "Tigrinya",
+        "Tlingit",
+        "Tok Pisin",
+        "Tonga",
+        "Tsonga",
+        "Tswana",
+        "Tulu",
+        "Tupi",
+        "Turkish",
+        "Turkmen",
+        "Tuvinian",
+        "Tzotzil",
+        "Uighur",
+        "Ukrainian",
+        "Ukrainian Sign Language",
+        "Ungwatsi",
+        "Urdu",
+        "Uzbek",
+        "Vietnamese",
+        "Vimeo - Official Chinese Language Version",
+        "Visayan",
+        "Washoe",
+        "Wayuu",
+        "Welsh",
+        "Wolof",
+        "Xhosa",
+        "Yakut",
+        "Yiddish",
+        "Yoruba",
+        "Zulu",
       ],
       inputSpotifyGenre: [
-        "acoustic", "afrobeat", "alt-rock", "alternative", "ambient", "anime", "black-metal", "bluegrass", "blues", "bossanova", "brazil", "breakbeat", "british", "cantopop", "chicago-house", "children", "chill", "classical", "club", "comedy", "country", "dance", "dancehall", "death-metal",
-        "deep-house", "detroit-techno", "disco", "disney", "drum-and-bass", "dub", "dubstep", "edm", "electro", "electronic", "emo", "folk", "forro", "french", "funk", "garage", "german", "gospel", "goth", "grindcore", "groove", "grunge", "guitar", "happy", "hard-rock",
-        "hardcore", "hardstyle", "heavy-metal", "hip-hop", "holidays", "honky-tonk", "house", "idm", "indian", "indie", "indie-pop", "industrial", "iranian", "j-dance", "j-idol", "j-pop", "j-rock", "jazz", "k-pop", "kids", "latin", "latino", "malay", "mandopop",
-        "metal", "metal-misc", "metalcore", "minimal-techno", "movies", "mpb", "new-age", "new-release", "opera", "pagode", "party", "philippines-opm", "piano", "pop", "pop-film", "post-dubstep", "power-pop", "progressive-house", "psych-rock", "punk", "punk-rock", "r-n-b", "rainy-day", "reggae", "reggaeton",
-        "road-trip", "rock", "rock-n-roll", "rockabilly", "romance", "sad", "salsa", "samba", "sertanejo", "show-tunes", "singer-songwriter", "ska", "sleep", "songwriter", "soul", "soundtracks", "spanish", "study", "summer", "swedish", "synth-pop", "tango", "techno", "trance", "trip-hop",
-        "turkish", "work-out", "world-music",
+        "acoustic",
+        "afrobeat",
+        "alt-rock",
+        "alternative",
+        "ambient",
+        "anime",
+        "black-metal",
+        "bluegrass",
+        "blues",
+        "bossanova",
+        "brazil",
+        "breakbeat",
+        "british",
+        "cantopop",
+        "chicago-house",
+        "children",
+        "chill",
+        "classical",
+        "club",
+        "comedy",
+        "country",
+        "dance",
+        "dancehall",
+        "death-metal",
+        "deep-house",
+        "detroit-techno",
+        "disco",
+        "disney",
+        "drum-and-bass",
+        "dub",
+        "dubstep",
+        "edm",
+        "electro",
+        "electronic",
+        "emo",
+        "folk",
+        "forro",
+        "french",
+        "funk",
+        "garage",
+        "german",
+        "gospel",
+        "goth",
+        "grindcore",
+        "groove",
+        "grunge",
+        "guitar",
+        "happy",
+        "hard-rock",
+        "hardcore",
+        "hardstyle",
+        "heavy-metal",
+        "hip-hop",
+        "holidays",
+        "honky-tonk",
+        "house",
+        "idm",
+        "indian",
+        "indie",
+        "indie-pop",
+        "industrial",
+        "iranian",
+        "j-dance",
+        "j-idol",
+        "j-pop",
+        "j-rock",
+        "jazz",
+        "k-pop",
+        "kids",
+        "latin",
+        "latino",
+        "malay",
+        "mandopop",
+        "metal",
+        "metal-misc",
+        "metalcore",
+        "minimal-techno",
+        "movies",
+        "mpb",
+        "new-age",
+        "new-release",
+        "opera",
+        "pagode",
+        "party",
+        "philippines-opm",
+        "piano",
+        "pop",
+        "pop-film",
+        "post-dubstep",
+        "power-pop",
+        "progressive-house",
+        "psych-rock",
+        "punk",
+        "punk-rock",
+        "r-n-b",
+        "rainy-day",
+        "reggae",
+        "reggaeton",
+        "road-trip",
+        "rock",
+        "rock-n-roll",
+        "rockabilly",
+        "romance",
+        "sad",
+        "salsa",
+        "samba",
+        "sertanejo",
+        "show-tunes",
+        "singer-songwriter",
+        "ska",
+        "sleep",
+        "songwriter",
+        "soul",
+        "soundtracks",
+        "spanish",
+        "study",
+        "summer",
+        "swedish",
+        "synth-pop",
+        "tango",
+        "techno",
+        "trance",
+        "trip-hop",
+        "turkish",
+        "work-out",
+        "world-music",
       ],
     };
   },
@@ -457,36 +880,11 @@ export default {
   },
   methods: {
     submit() {
-      if (this.youtubes.length != 0 && this.movies.length != 0 && this.books.length != 0 && this.movieLanguage.length != 0 && this.sArtists.length != 0 && this.sGenres.length != 0 && this.sTracks.length != 0) {
-        console.log("All Cleared");
-      }
-      else {
-        var selectOneMsg = "<v-alert show dismissible elevation='4' outlined type='error'>Please select at least ONE choice!</v-alert>";
-        var maxFiveMsg = "<v-alert show dismissible elevation='4' outlined type='error'>Please select maximum FIVE choice!</v-alert>";
-        var maxThreeMsg = "<v-alert show dismissible elevation='4' outlined type='error'>Please select maximum THREE choice!</v-alert>";
-        console.log(this.youtubes.length);
-        if (this.youtubes.length == 0) document.getElementById("ytError").innerHTML = selectOneMsg;
-        else if (this.youtubes.length > 5) document.getElementById("ytError").innerHTML = maxFiveMsg;
-
-        if (this.books.length == 0) document.getElementById("bookError").innerHTML = selectOneMsg;
-        else if (this.books.length > 5) document.getElementById("bookError").innerHTML = maxFiveMsg;
-
-        if (this.movies.length == 0) document.getElementById("mGenreError").innerHTML = selectOneMsg;
-        else if (this.movies.length > 5) document.getElementById("mGenreError").innerHTML = maxFiveMsg;
-
-        if (this.movieLanguage.length == 0) document.getElementById("mLangError").innerHTML = selectOneMsg;
-
-        if (this.sArtists.length == 0) document.getElementById("sArtistError").innerHTML = selectOneMsg;
-        else if (this.sArtists.length > 5) document.getElementById("sArtistError").innerHTML = maxThreeMsg;
-
-        if (this.sTracks.length == 0) document.getElementById("sTrackError").innerHTML = selectOneMsg;
-        else if (this.sTracks.length > 5) document.getElementById("sTrackError").innerHTML = maxThreeMsg;
-
-        if (this.sGenres.length == 0) document.getElementById("sGenreError").innerHTML = selectOneMsg;
-        else if (this.sGenres.length > 5) document.getElementById("sGenreError").innerHTML = maxFiveMsg;
-
-        this.$vuetify.goTo(0);
-      }
+      // if (this.$refs.form.validate()) {
+      console.log(this.youtubes);
+      console.log(this.movies);
+      console.log(this.books);
+      // }
     },
     dragStartYoutube() {
       if (this.youtubes[this.youtubeSelection]) {
@@ -617,32 +1015,33 @@ export default {
       }
     },
     remove(tag, list) {
-      if (list == 'youtubes') this.youtubes = this.youtubes.filter(function (e) {
-        return e !== tag;
-      });
-
-      else if (list == 'books') this.books = this.books.filter(function (e) {
-        return e !== tag;
-      });
-
-      else if (list == 'movies') this.movies = this.movies.filter(function (e) {
-        return e !== tag;
-      });
-
-      else if (list == 'sArtists') this.sArtists = this.sArtists.filter(function (e) {
-        return e !== tag;
-      });
-
-      else if (list == 'sTracks') this.sTracks = this.sTracks.filter(function (e) {
-        return e !== tag;
-      });
-
-      else if (list == 'sGenres') this.sGenres = this.sGenres.filter(function (e) {
-        return e !== tag;
-      });
+      if (list == "youtubes")
+        this.youtubes = this.youtubes.filter(function (e) {
+          return e !== tag;
+        });
+      else if (list == "books")
+        this.books = this.books.filter(function (e) {
+          return e !== tag;
+        });
+      else if (list == "movies")
+        this.movies = this.movies.filter(function (e) {
+          return e !== tag;
+        });
+      else if (list == "sArtists")
+        this.sArtists = this.sArtists.filter(function (e) {
+          return e !== tag;
+        });
+      else if (list == "sTracks")
+        this.sTracks = this.sTracks.filter(function (e) {
+          return e !== tag;
+        });
+      else if (list == "sGenres")
+        this.sGenres = this.sGenres.filter(function (e) {
+          return e !== tag;
+        });
       // console.log(list);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -689,15 +1088,15 @@ export default {
 }
 
 .suggest-button {
-    margin-right: 10px;
-    margin-bottom: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 #main-container {
   margin-top: 56px;
 }
 
-.category-container{
+.category-container {
   margin-top: 24px;
   margin-bottom: 24px;
 }
