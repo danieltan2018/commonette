@@ -1,9 +1,12 @@
 <template>
-  <v-container fluid justify-center>
+  <v-container fluid justify-center id="main-container">
     <v-form ref="form">
 
-      <v-layout row wrap justify-center mb-8>
-        <v-flex xs12 md6 lg4>
+      <p class="text-h4 font-weight-medium my-6">Questionnaire</p>
+
+      <div>Share your name</div>
+      <v-layout row wrap justify-center>
+        <v-flex xs12 md6 lg4 mx-4>
           <v-text-field label="Name" v-model="name" :rules="inputRequiredRule"></v-text-field>
         </v-flex>
       </v-layout>
@@ -695,5 +698,9 @@ export default {
 .suggest-button {
     margin-right: 10px;
     margin-bottom: 10px;
+}
+
+#main-container {
+  margin-top: 56px;
 }
 </style>
