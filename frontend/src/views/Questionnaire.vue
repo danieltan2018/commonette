@@ -13,7 +13,7 @@
       <div id="youtubeCategory">
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category" >
+            <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category">
             </v-autocomplete>
           </v-flex>
         </v-layout>
@@ -38,7 +38,15 @@
           <v-col cols="2"></v-col>
         </v-row>
         <v-row>
-          <div id="ytError"></div>
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
+            <div id="ytError">
+              
+            </div>
+          </v-col>
+          <v-col cols="4">
+          </v-col>
         </v-row>
       </div>
 
@@ -74,6 +82,17 @@
           <v-col cols="1"> Least Favourite </v-col>
           <v-col cols="2"></v-col>
         </v-row>
+        <v-row>
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
+            <div id="bookError">
+              
+            </div>
+          </v-col>
+          <v-col cols="4">
+          </v-col>
+        </v-row>
       </div>
 
       <div class="mb-12"></div>
@@ -108,6 +127,17 @@
           <v-col cols="1"> Least Favourite </v-col>
           <v-col cols="2"></v-col>
         </v-row>
+        <v-row>
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
+            <div id="mGenreError">
+              
+            </div>
+          </v-col>
+          <v-col cols="4">
+          </v-col>
+        </v-row>
       </div>
 
       <div class="mb-12"></div>
@@ -118,6 +148,17 @@
           <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple chips deletable-chips :rules="inputRequiredRule"></v-autocomplete>
         </v-flex>
       </v-layout>
+      <v-row>
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
+            <div id="mLangError">
+              
+            </div>
+          </v-col>
+          <v-col cols="4">
+          </v-col>
+        </v-row>
 
       <v-layout row wrap justify-center mb-8>
         <v-flex xs12 md6 lg4>
@@ -157,6 +198,17 @@
           <v-col cols="1"> Least Favourite </v-col>
           <v-col cols="2"></v-col>
         </v-row>
+        <v-row>
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
+            <div id="sArtistError">
+              
+            </div>
+          </v-col>
+          <v-col cols="4">
+          </v-col>
+        </v-row>
       </div>
 
       <div class="mb-12"></div>
@@ -192,6 +244,17 @@
           <v-col cols="1"> Least Favourite </v-col>
           <v-col cols="2"></v-col>
         </v-row>
+        <v-row>
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
+            <div id="sTrackError">
+              
+            </div>
+          </v-col>
+          <v-col cols="4">
+          </v-col>
+        </v-row>
       </div>
 
       <div class="mb-12"></div>
@@ -224,6 +287,17 @@
           </v-col>
           <v-col cols="1"> Least Favourite </v-col>
           <v-col cols="2"></v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
+            <div id="sGenreError">
+              
+            </div>
+          </v-col>
+          <v-col cols="4">
+          </v-col>
         </v-row>
       </div>
 
@@ -285,10 +359,10 @@ export default {
         (v) => v.length <= 5 || "Maximum 5 choices",
       ],
       languages: ["English", "Mandarin", "Malay", "Tamil"],
-      inputYoutube: ["Shorts", "Entertainment", "News & Politics", "Howto & Style", "Education", "Gaming","Videoblogging","People & Blogs",
-        "Comedy","Trailers", "Science & Technology","Shows","Sci-Fi/Fantasy","Thriller","Film & Animation", "Autos & Vehicles",
-        "Music","Horror","Foreign","Pets & Animals","Sports", "Travel & Events","Short Movies","Anime/Animation", "Movies",
-        "Family","Drama","Documentary","Comedy","Classics","Action/Adventure"
+      inputYoutube: ["Shorts", "Entertainment", "News & Politics", "Howto & Style", "Education", "Gaming", "Videoblogging", "People & Blogs",
+        "Comedy", "Trailers", "Science & Technology", "Shows", "Sci-Fi/Fantasy", "Thriller", "Film & Animation", "Autos & Vehicles",
+        "Music", "Horror", "Foreign", "Pets & Animals", "Sports", "Travel & Events", "Short Movies", "Anime/Animation", "Movies",
+        "Family", "Drama", "Documentary", "Comedy", "Classics", "Action/Adventure"
       ],
       youtubeCategories: {
         "Sci-Fi/Fantasy": "40",
@@ -322,32 +396,32 @@ export default {
         Horror: "39",
         "Film & Animation": "1",
       },
-      inputBook: ["Adult","Anthologies","Art","Audiobooks","Biographies","Body","Business","Children","Comics","Contemporary","Cooking","Crime","Engineering",
-        "Entertainment","Fantasy","Fiction","Food","Health","History","Horror","Investing","Literary","Literature","Manga","Media-help","Memoirs","Mind",
-        "Mystery","Nonfiction", "Religion","Romance","Science","Self","Spirituality","Sports","Superheroes","Technology","Thrillers","Travel","Women","Young",
+      inputBook: ["Adult", "Anthologies", "Art", "Audiobooks", "Biographies", "Body", "Business", "Children", "Comics", "Contemporary", "Cooking", "Crime", "Engineering",
+        "Entertainment", "Fantasy", "Fiction", "Food", "Health", "History", "Horror", "Investing", "Literary", "Literature", "Manga", "Media-help", "Memoirs", "Mind",
+        "Mystery", "Nonfiction", "Religion", "Romance", "Science", "Self", "Spirituality", "Sports", "Superheroes", "Technology", "Thrillers", "Travel", "Women", "Young",
       ],
-      inputMovieGenre: ["Action","Adult","Adventure", "Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Game-Show",
-        "History","Horror","Music","Musical","Mystery","News","Reality-TV","Romance","Sci-Fi","Short","Sport","Talk-Show","Thriller","War","Western",
+      inputMovieGenre: ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "Game-Show",
+        "History", "Horror", "Music", "Musical", "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western",
       ],
-      inputMovieLang: ["Abkhazian","Aboriginal","Acholi", "Afar","Afrikaans","Akan","Albanian","Algonquin","American Sign Language","Amharic","Apache languages","Arabic","Aragonese","Aramaic","Armenian","Aromanian","Assamese","Assyrian Neo-Aramaic","Athapascan languages","Australian Sign Language","Awadhi","Aymara","Azerbaijani","Bable","Baka","Balinese","Bambara","Bashkir", "Basque","Bassari",
-        "Belarusian","Bemba","Bengali","Berber languages","Bhojpuri","Bicolano","Bislama","Bodo","Bosnian","Brazilian Sign Language","Breton","British Sign Language","Bulgarian","Burmese","Cantonese","Catalan","Central American Indian languages","Chamorro","Chaozhou","Chechen","Cherokee","Cheyenne","Chhattisgarhi",
-        "Chinese","Cornish","Corsican","Cree","Creek","Crimean Tatar","Croatian","Crow","Czech","Danish","Dari","Dinka","Divehi","Dogri","Dutch","Dyula","Dzongkha","East-Greenlandic","Eastern Frisian","Egyptian (Ancient)","English","Esperanto","Estonian","Ewe",
-        "Faliasch","Faroese","Filipino","Finnish","Flemish","Fon","French","French Sign Language","Frisian","Fulah","Fur","Ga","Gaelic","Galician", "Gallegan","Georgian","German","German Sign Language","Greek","Greek, Ancient (to 1453)", "Greenlandic","Guarani","Gujarati","Gumatj","Haida","Haitian","Haitian; Haitian Creole",
-        "Hakka","Haryanvi","Hassanya","Hausa","Hawaiian","Hebrew","Herero","Himachali","Hindi","Hmong","Hokkien","Hopi","Hungarian","Ibo","Icelandic","Icelandic Sign Language","Igbo","Indian Sign Language","Indonesian","Interlingue","Inuktitut","Inupiaq", "Irish","Irula",
-        "Italian","Japanese","Japanese Sign Language","Javanese","Jola-Fonyi","Ju'hoan","Kabuverdianu","Kabyle","Kalaallisut","Kalmyk-Oirat","Kannada","Karen","Kashmiri","Kazakh","Khanty","Khasi","Khmer","Kikuyu","Kinyarwanda","Kirghiz","Kirundi","Klingon","Kodava","Konkani","Korean","Korean Sign Language","Kriolu","Kru","Kudmali","Kuna","Kurdish","Ladakhi","Ladino","Lao","Latin","Latvian","Letzeburgesch",
-        "Lingala","Lithuanian","Low German","Luxembourgish","Macedonian","Magahi","Maithili","Malagasy","Malay","Malayalam","Malinka","Maltese","Mandarin","Mandingo","Manipuri","Maori","Mapudungun","Marathi","Mari","Marshall","Marshallese","Masai","Maya","Mende","Micmac","Middle English","Min Nan","Minangkabau","Mirandese",
-        "Mixtec","Mizo","Mohawk","Moldavian","Mongolian","Montagnais","Morisyen","Nagpuri","Nahuatl","Nama","Navajo","Neapolitan","Nenets","Nepali","Norse, Old","North American Indian","North Ndebele","Northern Sami","Norwegian","Norwegian Nynorsk","Nushi","Nyanja","Occitan","Ojibwa","Ojihimba","Old English","Oriya","Papiamento","Parsee","Pawnee","Persian","Peul","Polish","Polynesian","Portuguese","Pular","Punjabi","Purepecha","Pushto","Quechua","Quenya",
-        "Raeto-Romance","Rajasthani","Rhaetian","Romanian","Romany","Russian","Russian Sign Language","Ryukyuan","Saami","Samoan","Sanskrit","Sardinian","Scanian","Scots","Scottish Gaelic","Serbian","Serbo-Croatian","Shanghainese","Shona","Shoshoni","Shuar","Sicilian","Sign Languages","Sindarin","Sindhi","Sinhalese","Sioux","Slovak","Slovenian","Somali","Songhay","Soninke","Sorbian languages","Southern Sotho","Spanish","Spanish Sign Language",
-        "Sranan","Sumerian","Swahili","Swati","Swedish","Swiss German","Syriac","Tagalog","Tahitian","Tajik","Tamashek","Tamil","Tarahumara","Tatar","Telugu","Teochew","Thai","Tibetan","Tigrigna","Tigrinya","Tlingit","Tok Pisin","Tonga","Tsonga","Tswana","Tulu","Tupi","Turkish","Turkmen","Tuvinian","Tzotzil","Uighur","Ukrainian","Ukrainian Sign Language","Ungwatsi","Urdu",
-        "Uzbek","Vietnamese","Vimeo - Official Chinese Language Version","Visayan","Washoe","Wayuu","Welsh","Wolof","Xhosa","Yakut","Yiddish","Yoruba","Zulu",
+      inputMovieLang: ["Abkhazian", "Aboriginal", "Acholi", "Afar", "Afrikaans", "Akan", "Albanian", "Algonquin", "American Sign Language", "Amharic", "Apache languages", "Arabic", "Aragonese", "Aramaic", "Armenian", "Aromanian", "Assamese", "Assyrian Neo-Aramaic", "Athapascan languages", "Australian Sign Language", "Awadhi", "Aymara", "Azerbaijani", "Bable", "Baka", "Balinese", "Bambara", "Bashkir", "Basque", "Bassari",
+        "Belarusian", "Bemba", "Bengali", "Berber languages", "Bhojpuri", "Bicolano", "Bislama", "Bodo", "Bosnian", "Brazilian Sign Language", "Breton", "British Sign Language", "Bulgarian", "Burmese", "Cantonese", "Catalan", "Central American Indian languages", "Chamorro", "Chaozhou", "Chechen", "Cherokee", "Cheyenne", "Chhattisgarhi",
+        "Chinese", "Cornish", "Corsican", "Cree", "Creek", "Crimean Tatar", "Croatian", "Crow", "Czech", "Danish", "Dari", "Dinka", "Divehi", "Dogri", "Dutch", "Dyula", "Dzongkha", "East-Greenlandic", "Eastern Frisian", "Egyptian (Ancient)", "English", "Esperanto", "Estonian", "Ewe",
+        "Faliasch", "Faroese", "Filipino", "Finnish", "Flemish", "Fon", "French", "French Sign Language", "Frisian", "Fulah", "Fur", "Ga", "Gaelic", "Galician", "Gallegan", "Georgian", "German", "German Sign Language", "Greek", "Greek, Ancient (to 1453)", "Greenlandic", "Guarani", "Gujarati", "Gumatj", "Haida", "Haitian", "Haitian; Haitian Creole",
+        "Hakka", "Haryanvi", "Hassanya", "Hausa", "Hawaiian", "Hebrew", "Herero", "Himachali", "Hindi", "Hmong", "Hokkien", "Hopi", "Hungarian", "Ibo", "Icelandic", "Icelandic Sign Language", "Igbo", "Indian Sign Language", "Indonesian", "Interlingue", "Inuktitut", "Inupiaq", "Irish", "Irula",
+        "Italian", "Japanese", "Japanese Sign Language", "Javanese", "Jola-Fonyi", "Ju'hoan", "Kabuverdianu", "Kabyle", "Kalaallisut", "Kalmyk-Oirat", "Kannada", "Karen", "Kashmiri", "Kazakh", "Khanty", "Khasi", "Khmer", "Kikuyu", "Kinyarwanda", "Kirghiz", "Kirundi", "Klingon", "Kodava", "Konkani", "Korean", "Korean Sign Language", "Kriolu", "Kru", "Kudmali", "Kuna", "Kurdish", "Ladakhi", "Ladino", "Lao", "Latin", "Latvian", "Letzeburgesch",
+        "Lingala", "Lithuanian", "Low German", "Luxembourgish", "Macedonian", "Magahi", "Maithili", "Malagasy", "Malay", "Malayalam", "Malinka", "Maltese", "Mandarin", "Mandingo", "Manipuri", "Maori", "Mapudungun", "Marathi", "Mari", "Marshall", "Marshallese", "Masai", "Maya", "Mende", "Micmac", "Middle English", "Min Nan", "Minangkabau", "Mirandese",
+        "Mixtec", "Mizo", "Mohawk", "Moldavian", "Mongolian", "Montagnais", "Morisyen", "Nagpuri", "Nahuatl", "Nama", "Navajo", "Neapolitan", "Nenets", "Nepali", "Norse, Old", "North American Indian", "North Ndebele", "Northern Sami", "Norwegian", "Norwegian Nynorsk", "Nushi", "Nyanja", "Occitan", "Ojibwa", "Ojihimba", "Old English", "Oriya", "Papiamento", "Parsee", "Pawnee", "Persian", "Peul", "Polish", "Polynesian", "Portuguese", "Pular", "Punjabi", "Purepecha", "Pushto", "Quechua", "Quenya",
+        "Raeto-Romance", "Rajasthani", "Rhaetian", "Romanian", "Romany", "Russian", "Russian Sign Language", "Ryukyuan", "Saami", "Samoan", "Sanskrit", "Sardinian", "Scanian", "Scots", "Scottish Gaelic", "Serbian", "Serbo-Croatian", "Shanghainese", "Shona", "Shoshoni", "Shuar", "Sicilian", "Sign Languages", "Sindarin", "Sindhi", "Sinhalese", "Sioux", "Slovak", "Slovenian", "Somali", "Songhay", "Soninke", "Sorbian languages", "Southern Sotho", "Spanish", "Spanish Sign Language",
+        "Sranan", "Sumerian", "Swahili", "Swati", "Swedish", "Swiss German", "Syriac", "Tagalog", "Tahitian", "Tajik", "Tamashek", "Tamil", "Tarahumara", "Tatar", "Telugu", "Teochew", "Thai", "Tibetan", "Tigrigna", "Tigrinya", "Tlingit", "Tok Pisin", "Tonga", "Tsonga", "Tswana", "Tulu", "Tupi", "Turkish", "Turkmen", "Tuvinian", "Tzotzil", "Uighur", "Ukrainian", "Ukrainian Sign Language", "Ungwatsi", "Urdu",
+        "Uzbek", "Vietnamese", "Vimeo - Official Chinese Language Version", "Visayan", "Washoe", "Wayuu", "Welsh", "Wolof", "Xhosa", "Yakut", "Yiddish", "Yoruba", "Zulu",
       ],
       inputSpotifyGenre: [
-        "acoustic","afrobeat","alt-rock","alternative","ambient","anime","black-metal","bluegrass","blues","bossanova","brazil","breakbeat","british","cantopop","chicago-house","children","chill","classical","club","comedy","country","dance","dancehall","death-metal",
-        "deep-house","detroit-techno","disco","disney","drum-and-bass","dub","dubstep","edm","electro","electronic","emo","folk","forro","french","funk","garage","german","gospel","goth","grindcore","groove","grunge","guitar","happy","hard-rock",
-        "hardcore","hardstyle","heavy-metal","hip-hop","holidays","honky-tonk","house","idm","indian","indie","indie-pop","industrial","iranian","j-dance","j-idol","j-pop","j-rock","jazz","k-pop","kids","latin","latino","malay","mandopop",
-        "metal","metal-misc","metalcore","minimal-techno","movies","mpb","new-age","new-release","opera","pagode","party","philippines-opm","piano","pop","pop-film","post-dubstep","power-pop","progressive-house","psych-rock","punk","punk-rock","r-n-b","rainy-day","reggae","reggaeton",
-        "road-trip","rock","rock-n-roll","rockabilly","romance","sad","salsa","samba","sertanejo","show-tunes","singer-songwriter","ska","sleep","songwriter","soul","soundtracks","spanish","study","summer","swedish","synth-pop","tango","techno","trance","trip-hop",
-        "turkish","work-out","world-music",
+        "acoustic", "afrobeat", "alt-rock", "alternative", "ambient", "anime", "black-metal", "bluegrass", "blues", "bossanova", "brazil", "breakbeat", "british", "cantopop", "chicago-house", "children", "chill", "classical", "club", "comedy", "country", "dance", "dancehall", "death-metal",
+        "deep-house", "detroit-techno", "disco", "disney", "drum-and-bass", "dub", "dubstep", "edm", "electro", "electronic", "emo", "folk", "forro", "french", "funk", "garage", "german", "gospel", "goth", "grindcore", "groove", "grunge", "guitar", "happy", "hard-rock",
+        "hardcore", "hardstyle", "heavy-metal", "hip-hop", "holidays", "honky-tonk", "house", "idm", "indian", "indie", "indie-pop", "industrial", "iranian", "j-dance", "j-idol", "j-pop", "j-rock", "jazz", "k-pop", "kids", "latin", "latino", "malay", "mandopop",
+        "metal", "metal-misc", "metalcore", "minimal-techno", "movies", "mpb", "new-age", "new-release", "opera", "pagode", "party", "philippines-opm", "piano", "pop", "pop-film", "post-dubstep", "power-pop", "progressive-house", "psych-rock", "punk", "punk-rock", "r-n-b", "rainy-day", "reggae", "reggaeton",
+        "road-trip", "rock", "rock-n-roll", "rockabilly", "romance", "sad", "salsa", "samba", "sertanejo", "show-tunes", "singer-songwriter", "ska", "sleep", "songwriter", "soul", "soundtracks", "spanish", "study", "summer", "swedish", "synth-pop", "tango", "techno", "trance", "trip-hop",
+        "turkish", "work-out", "world-music",
       ],
     };
   },
@@ -387,11 +461,36 @@ export default {
   },
   methods: {
     submit() {
-      // if (this.$refs.form.validate()) {
-      console.log(this.youtubes);
-      console.log(this.movies);
-      console.log(this.books);
-      // }
+      if (this.youtubes.length != 0 && this.movies.length != 0 && this.books.length != 0 && this.movieLanguage.length != 0 && this.sArtists.length != 0 && this.sGenres.length != 0 && this.sTracks.length != 0) {
+        console.log("All Cleared");
+      }
+      else {
+        var selectOneMsg = "<v-alert show dismissible elevation='4' outlined type='error'>Please select at least ONE choice!</v-alert>";
+        var maxFiveMsg = "<v-alert show dismissible elevation='4' outlined type='error'>Please select maximum FIVE choice!</v-alert>";
+        var maxThreeMsg = "<v-alert show dismissible elevation='4' outlined type='error'>Please select maximum THREE choice!</v-alert>";
+        console.log(this.youtubes.length);
+        if (this.youtubes.length == 0) document.getElementById("ytError").innerHTML = selectOneMsg;
+        else if (this.youtubes.length > 5) document.getElementById("ytError").innerHTML = maxFiveMsg;
+
+        if (this.books.length == 0) document.getElementById("bookError").innerHTML = selectOneMsg;
+        else if (this.books.length > 5) document.getElementById("bookError").innerHTML = maxFiveMsg;
+
+        if (this.movies.length == 0) document.getElementById("mGenreError").innerHTML = selectOneMsg;
+        else if (this.movies.length > 5) document.getElementById("mGenreError").innerHTML = maxFiveMsg;
+
+        if (this.movieLanguage.length == 0) document.getElementById("mLangError").innerHTML = selectOneMsg;
+
+        if (this.sArtists.length == 0) document.getElementById("sArtistError").innerHTML = selectOneMsg;
+        else if (this.sArtists.length > 5) document.getElementById("sArtistError").innerHTML = maxThreeMsg;
+
+        if (this.sTracks.length == 0) document.getElementById("sTrackError").innerHTML = selectOneMsg;
+        else if (this.sTracks.length > 5) document.getElementById("sTrackError").innerHTML = maxThreeMsg;
+
+        if (this.sGenres.length == 0) document.getElementById("sGenreError").innerHTML = selectOneMsg;
+        else if (this.sGenres.length > 5) document.getElementById("sGenreError").innerHTML = maxFiveMsg;
+
+        this.$vuetify.goTo(0);
+      }
     },
     dragStartYoutube() {
       if (this.youtubes[this.youtubeSelection]) {
