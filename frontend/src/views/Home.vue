@@ -32,6 +32,29 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+      <main class="l-main">
+        <!--===== HOME =====-->
+        <section class="home" id="home">
+          <div class="home">
+            <div class="home__container bd-grid">
+              <div class="home__img">
+                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img1.png" data-speed="-2" alt="" class="move">
+                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img2.png" data-speed="2" alt="" class="move">
+                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img3.png" data-speed="2" alt="" class="move">
+                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img4.png" data-speed="-2" alt="" class="move">
+                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img5.png" data-speed="-2" alt="" class="move">
+                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img6.png" data-speed="2" alt="" class="move">
+              </div>
+              <div class="home__data">
+                <h1 class="home__title">Commonette<br>Find commonalities</h1>
+                <p class="home__description">Enjoy your favourite entertainment<br> with your friends!</p>
+                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room
+                </v-btn>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
 
       <v-img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80">
         <v-theme-provider dark>
@@ -167,8 +190,9 @@
     </v-main>
   </div>
 </template>
-
+        
 <script>
+import { gsap } from "gsap";
 import axios from "axios";
 export default {
   data() {
@@ -340,4 +364,290 @@ export default {
     },
   },
 };
+
+// /*===== MENU SHOW Y HIDDEN =====*/
+// const navMenu = document.getElementById('nav-menu'),
+//     toggleMenu = document.getElementById('nav-toggle'),
+//     closeMenu = document.getElementById('nav-close')
+
+// // SHOW
+// toggleMenu.addEventListener('click', ()=>{
+//     navMenu.classList.toggle('show')
+// })
+
+// // HIDDEN
+// closeMenu.addEventListener('click', ()=>{
+//     navMenu.classList.remove('show')
+// })
+
+// /*===== MOUSEMOVE HOME IMG =====*/
+document.addEventListener("mousemove", move);
+function move(e) {
+  this.querySelectorAll(".move").forEach((layer) => {
+    const speed = layer.getAttribute("data-speed");
+
+    const x = (window.innerWidth - e.pageX * speed) / 120;
+    const y = (window.innerHeight - e.pageY * speed) / 120;
+
+    layer.style.transform = `translateX(${x}px) translateY(${y}px)`;
+  });
+}
+
+/*===== GSAP ANIMATION =====*/
+// // NAV
+// gsap.from('.nav__logo, .nav__toggle', {opacity: 0, duration: 1, delay:2, y: 10})
+// gsap.from('.nav__item', {opacity: 0, duration: 1, delay: 2.1, y: 30, stagger: 0.2,})
+
+// HOME
+gsap.from(".home__title", { opacity: 0, duration: 1, delay: 1.6, y: 30 });
+gsap.from(".home__description", { opacity: 0, duration: 1, delay: 1.8, y: 30 });
+gsap.from(".home__button", { opacity: 0, duration: 1, delay: 2.1, y: 30 });
+gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
 </script>
+
+<style lang="scss">
+
+/*===== GOOGLE FONTS =====*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/*===== VARIABLES CSS =====*/
+:root{
+    --header-height: 3rem;
+
+    /*===== Colors =====*/
+    --first-color: #FCA4A6;
+    --first-color-dark: #C1576A;
+    --first-color-darken: #A83E51;
+    --white-color: #FCF8F8;
+
+    /*===== Font and typography =====*/
+    --body-font: 'Poppins', sans-serif;
+    --big-font-size: 2.5rem;
+    --normal-font-size: .938rem;
+  
+    /*===== z index =====*/
+    --z-fixed: 100;
+}
+
+@media screen and (min-width: 768px){
+    :root{
+        --big-font-size: 5rem;
+        --normal-font-size: 1rem;
+    }
+}
+
+/*===== BASE =====*/
+*,::before,::after{
+    box-sizing: border-box;
+}
+
+body{
+    margin: var(--header-height) 0 0 0;
+    padding: 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    font-weight: 500;
+}
+
+h1,p,ul{
+    margin: 0;
+}
+
+ul{
+    padding: 0;
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+/*===== LAYOUT =====*/
+.bd-grid{
+    max-width: 1024px;
+    display: grid;
+    grid-template-columns: 100%;
+    column-gap: 2rem;
+    width: calc(100% - 2rem);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.l-header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+    background-color: var(--first-color);
+}
+
+/*===== NAV =====*/
+.nav{
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__menu{
+        @media screen and (max-width: 768px){
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100%;
+            padding: 3.5rem 1.5rem 0;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: .5s;
+        }
+    }
+    &__close{
+        position: absolute;
+        top: .75rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    &__item{
+        margin-bottom: 2rem;
+    }
+
+    &__close, &__link, &__logo, &__toggle{
+        color: var(--white-color);
+    }
+    &__link{
+        &:hover{
+            color: var(--first-color-dark);
+        }
+    }
+    &__toggle{
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
+
+/*=== Show menu ===*/
+.show{
+    right: 0;
+}
+
+/*===== HOME =====*/
+.home{
+    background-color: var(--first-color);
+    overflow: hidden;
+
+    &__container{
+        height: calc(100vh - var(--header-height));
+        grid-template-rows: repeat(2, max-content);
+        row-gap: 1.5rem;
+    }
+    &__img{
+        position: relative;
+        padding-top: 1.5rem;
+        justify-self: center;
+        width: 302px;
+        height: 233px;
+
+        & img{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    &__data{
+        color: var(--white-color);
+    }
+    &__title{
+        font-size: var(--big-font-size);
+        line-height: 1.3;
+        margin-bottom: 1rem;
+    }
+    &__description{
+        margin-bottom: 2.5rem;
+    }
+
+    &__button{
+        display: inline-block;
+        background-color: var(--first-color-dark);
+        color: var(--white-color);
+        padding: 1.125rem 2rem;
+        border-radius: .5rem; 
+    
+        &:hover{
+            background-color: var(--first-color-darken);
+        }
+    }
+    &__h1{
+        
+    }
+}
+
+/* ===== MEDIA QUERIES=====*/
+@media screen and(min-width: 768px){
+    body{
+        margin: 0;
+    }
+
+    .nav{
+        height: calc(var(--header-height) + 1.5rem);
+
+        &__toggle,&__close{
+            display: none;
+        }
+        &__list{
+            display: flex;
+        }
+        &__item{
+            margin-left: 3rem;
+            margin-bottom: 0;
+        }
+    }
+
+    .home{
+        &__container{
+            height: 100vh;
+            grid-template-columns: repeat(2, max-content);
+            grid-template-rows: 1fr;
+            row-gap: 0;
+            align-items: center;
+            justify-content: center;
+        }
+        &__img{
+            order: 1;
+            width: 375px;
+            height: 289px;
+
+            & img{
+                width: 375px;
+            }
+        }
+    }
+}
+
+@media screen and(min-width: 1024px){
+    .bd-grid{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .home{
+        &__container{
+            justify-content: initial;
+            column-gap: 4.5rem;
+        }
+        &__img{
+            width: 604px;
+            height: 466px;
+            & img{
+                width: 604px;
+            }
+        }
+    }
+}
+
+</style>
