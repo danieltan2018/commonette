@@ -16,7 +16,7 @@
         </div>
       </v-layout>
 
-      <v-container id="youtubeCategory" class="category-container mb-12">
+      <v-container id="youtubeCategory" class="category-container">
         <p class="text-h5 font-weight-medium mb-4">Youtube</p>
         <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
         <v-layout row wrap justify-center>
@@ -48,7 +48,7 @@
         </v-layout>
       </v-container>
 
-      <v-container id="bookCategory" class="category-container mb-12">
+      <v-container id="bookCategory" class="category-container">
         <p class="text-h5 font-weight-medium mb-4">Books</p>
         <div class="mb-4">Select up to 5 of your favourite book subjects</div>
         <v-layout row wrap justify-center>
@@ -80,9 +80,9 @@
         </v-layout>
       </v-container>
 
-      <v-container id="movieCategory" class="category-container mb-12">
+      <v-container id="movieCategory" class="category-container">
         <p class="text-h5 font-weight-medium mb-4">Movies</p>
-        <div mb-4>Select up to 5 of your favourite movie genres</div>
+        <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4>
             <v-autocomplete v-model="movieGenre" :items="inputMovieGenre" label="Genre">
@@ -134,70 +134,62 @@
       <v-container id="Spotify" class="category-container" mb-8>
         <p class="text-h5 font-weight-medium mb-4">Spotify</p>
         <div mb-2>Select up to 3 of your favourite artists</div>
-        <div id="spotifyArtist">
-          <v-layout row wrap justify-center>
-            <v-flex xs12 md6 lg4>
-              <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
-              <div v-if="artist">
-                <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
-              </div>
-            </v-flex>
-          </v-layout>
-          <div>Drag to Rank</div>
-          <v-layout row wrap justify-center>
-            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
-              <v-card-text>
-                <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
-                  <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
-                    <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')">{{
+        <v-layout row wrap justify-center>
+          <v-flex xs12 md6 lg4>
+            <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
+            <div v-if="artist">
+              <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
+            </div>
+          </v-flex>
+        </v-layout>
+        <div>Drag to Rank</div>
+        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+        <v-layout row wrap justify-center>
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+            <v-card-text>
+              <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
+                <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
+                  <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')">{{
                       tag
                     }}</v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-layout>
-          <v-layout>
+                </draggable>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+        </v-layout>
+        <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="sANone">Please Select At Least ONE!</v-alert>
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="sAExceed">Please Select Maximum THREE!</v-alert>
           </div>
         </v-layout>
-        </div>
 
         <div class="mb-12"></div>
 
         <div mb-2>Select up to 3 of your favourite tracks</div>
-        <div id="spotifyTrack">
-          <v-layout row wrap justify-center>
-            <v-flex xs12 md6 lg4>
-              <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
-              <div v-if="track">
-                <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
-              </div>
-            </v-flex>
-          </v-layout>
-          <div class="mb-4">Drag to Rank</div>
-          <v-row>
-            <v-col cols="2"></v-col>
-            <v-col cols="1"> Most Favourite </v-col>
-            <v-col cols="6">
-              <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
-                <v-card-text>
-                  <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
-                    <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
-                      <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')">{{
+        <v-layout row wrap justify-center>
+          <v-flex xs12 md6 lg4>
+            <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
+            <div v-if="track">
+              <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
+            </div>
+          </v-flex>
+        </v-layout>
+        <div>Drag to Rank</div>
+        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+        <v-layout row wrap justify-center mb-4>
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+            <v-card-text>
+              <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
+                <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
+                  <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')">{{
                       tag
                     }}</v-chip>
-                    </draggable>
-                  </v-chip-group>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col cols="1"> Least Favourite </v-col>
-            <v-col cols="2"></v-col>
-          </v-row>
-        </div>
+                </draggable>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+        </v-layout>
         <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTNone">Please Select At Least ONE!</v-alert>
@@ -209,34 +201,27 @@
 
         <div class="mb-8"></div>
         <div>Select up to 5 of your favourite genres</div>
-        <div id="spotifyGenre">
-          <v-layout row wrap justify-center>
-            <v-flex xs12 md6 lg4>
-              <v-autocomplete v-model="spotifyGenre" :items="inputSpotifyGenre" label="Genre">
-              </v-autocomplete>
-            </v-flex>
-          </v-layout>
-          <div class="mb-4">Drag to Rank</div>
-          <v-row>
-            <v-col cols="2"></v-col>
-            <v-col cols="1"> Most Favourite </v-col>
-            <v-col cols="6">
-              <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
-                <v-card-text>
-                  <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
-                    <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
-                      <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')">{{
+        <v-layout row wrap justify-center>
+          <v-flex xs12 md6 lg4>
+            <v-autocomplete v-model="spotifyGenre" :items="inputSpotifyGenre" label="Genre">
+            </v-autocomplete>
+          </v-flex>
+        </v-layout>
+        <div class="mb-4">Drag to Rank</div>
+        <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+        <v-layout row wrap justify-center mb-4>
+          <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+            <v-card-text>
+              <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
+                <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
+                  <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')">{{
                       tag
                     }}</v-chip>
-                    </draggable>
-                  </v-chip-group>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col cols="1"> Least Favourite </v-col>
-            <v-col cols="2"></v-col>
-          </v-row>
-        </div>
+                </draggable>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+        </v-layout>
         <v-layout>
           <div class="mx-auto mb-6">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGNone">Please Select At Least ONE!</v-alert>
@@ -244,8 +229,7 @@
           </div>
         </v-layout>
       </v-container>
-      <div class="mb-12"></div>
-      <v-btn text class="success mx-0 mt-3" @click="submit">Let's Go</v-btn>
+      <v-btn text class="success mx-0 mb-6" @click="submit">Let's Go</v-btn>
     </v-form>
   </v-container>
 </template>
@@ -944,11 +928,10 @@ export default {
       if (this.validate()) {
         console.log("All Clear");
         // Send data to backend
-      }
-      else {
+      } else {
         this.showAlerts();
         console.log("Error la");
-        this.$vuetify.goTo(0)
+        this.$vuetify.goTo(0);
       }
     },
     dragStartYoutube() {
@@ -1108,10 +1091,25 @@ export default {
     },
     validate() {
       this.resetAlerts();
-      if (this.youtubes.length == 0 || this.movies.length == 0 || this.books.length == 0 || this.movieLanguage.length == 0 || this.sArtists.length == 0 || this.sTracks.length == 0 || this.sGenres.length == 0) {
+      if (
+        this.youtubes.length == 0 ||
+        this.movies.length == 0 ||
+        this.books.length == 0 ||
+        this.movieLanguage.length == 0 ||
+        this.sArtists.length == 0 ||
+        this.sTracks.length == 0 ||
+        this.sGenres.length == 0
+      ) {
         return false;
-      }
-      else if (this.name == "" || this.youtubes.length > 5 || this.movies.length > 5 || this.books.length > 5 || this.sArtists.length > 3 || this.sTracks.length > 3 || this.sGenres.length > 5) {
+      } else if (
+        this.name == "" ||
+        this.youtubes.length > 5 ||
+        this.movies.length > 5 ||
+        this.books.length > 5 ||
+        this.sArtists.length > 3 ||
+        this.sTracks.length > 3 ||
+        this.sGenres.length > 5
+      ) {
         return false;
       }
       return true;
@@ -1139,9 +1137,9 @@ export default {
       if (this.sGenres.length == 0) this.sGNone = true;
       else if (this.sGenres.length > 5) this.sGExceed = true;
     },
-    resetAlerts(){
+    resetAlerts() {
       this.ytNone = false;
-      this.ytExceed = false; 
+      this.ytExceed = false;
       this.mvNone = false;
       this.mvExceed = false;
       this.bkNone = false;
@@ -1154,8 +1152,8 @@ export default {
       this.sGNone = false;
       this.sGExceed = false;
       this.nameNone = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
