@@ -11,49 +11,42 @@
         </v-flex>
       </v-layout>
 
-      <h1 class="mb-4">Youtube</h1>
-      <div>Select up to 5 of your favourite Youtube video categories</div>
-      <div id="youtubeCategory">
-        <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category">
-            </v-autocomplete>
-          </v-flex>
-        </v-layout>
-        <div class="mb-4">Drag to Rank</div>
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="1"> Most Favourite </v-col>
-          <v-col cols="6">
-            <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
-              <v-card-text style="align-items:center">
-                <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
-                  <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
-                    <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')">{{
-                      tag
-                    }}</v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col cols="1"> Least Favourite </v-col>
-          <v-col cols="2"></v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-          </v-col>
-          <v-col cols="4">
-            <div id="ytError">
-              
-            </div>
-          </v-col>
-          <v-col cols="4">
-          </v-col>
-        </v-row>
-      </div>
+      <v-container id="youtubeCategory" class="category-container">
+        <p class="text-h5 font-weight-medium mb-4">Youtube</p>
+        <div>Select up to 5 of your favourite Youtube video categories</div>
+        <div id="youtubeCategory">
+          <v-layout row wrap justify-center>
+            <v-flex xs12 md6 lg4>
+              <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category" >
+              </v-autocomplete>
+            </v-flex>
+          </v-layout>
+          <div>Drag to Rank</div>
+          <v-row>
+            <v-col cols="2"></v-col>
+            <v-col cols="1"> Most Favourite </v-col>
+            <v-col cols="6">
+              <v-card style="padding-left: 10px" max-width="700" class="mx-auto">
+                <v-card-text style="align-items:center">
+                  <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
+                    <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
+                      <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')">{{
+                        tag
+                      }}</v-chip>
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="1"> Least Favourite </v-col>
+            <v-col cols="2"></v-col>
+          </v-row>
+          <v-row>
+            <div id="ytError"></div>
+          </v-row>
+        </div>
+      </v-container>
 
-      <div class="mb-12"></div>
 
       <h1 class="mb-4">Books</h1>
       <div>Select up to 5 of your favourite book subjects</div>
@@ -702,5 +695,10 @@ export default {
 
 #main-container {
   margin-top: 56px;
+}
+
+.category-container{
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 </style>
