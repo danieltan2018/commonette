@@ -33,9 +33,9 @@
               <v-card-text style="align-items:center">
                 <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
                   <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
-                    <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')">
-                      <v-avatar left class="white">
-                        {{i+1}}
+                    <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')" outlined color="pink">
+                      <v-avatar left color="pink">
+                        <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
                     </v-chip>
@@ -70,9 +70,9 @@
               <v-card-text>
                 <v-chip-group v-model="bookSelection" column active-class="primary--text">
                   <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
-                    <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')">
-                      <v-avatar left class="white">
-                        {{i+1}}
+                    <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')" outlined color="pink">
+                      <v-avatar left class="pink">
+                        <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
                     </v-chip>
@@ -107,9 +107,9 @@
               <v-card-text>
                 <v-chip-group v-model="movieSelection" column active-class="primary--text">
                   <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
-                    <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')">
-                      <v-avatar left class="white">
-                        {{i+1}}
+                    <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')" outlined color="pink">
+                      <v-avatar left class="pink">
+                        <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
                     </v-chip>
@@ -153,7 +153,7 @@
           <v-flex xs12 md6 lg4>
             <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
             <div v-if="artist">
-              <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
+              <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" small rounded outlined color="indigo">{{suggest}}</v-btn>
             </div>
           </v-flex>
         </v-layout>
@@ -165,9 +165,9 @@
               <v-card-text>
                 <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
                   <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
-                    <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')">
-                      <v-avatar left class="white">
-                        {{i+1}}
+                    <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')" outlined color="pink">
+                      <v-avatar left class="pink">
+                        <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
                     </v-chip>
@@ -191,7 +191,7 @@
           <v-flex xs12 md6 lg4>
             <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
             <div v-if="track">
-              <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" rounded outlined color="indigo">{{suggest}}</v-btn>
+              <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" small rounded outlined color="indigo">{{suggest}}</v-btn>
             </div>
           </v-flex>
         </v-layout>
@@ -203,9 +203,9 @@
               <v-card-text>
                 <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
                   <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
-                    <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')">
-                      <v-avatar left class="white">
-                        {{i+1}}
+                    <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')" outlined color="pink">
+                      <v-avatar left class="pink">
+                        <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
                     </v-chip>
@@ -240,9 +240,9 @@
               <v-card-text>
                 <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
                   <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
-                    <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')">
-                      <v-avatar left class="white">
-                        {{i+1}}
+                    <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')" outlined color="pink">
+                      <v-avatar left class="pink">
+                        <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
                     </v-chip>
