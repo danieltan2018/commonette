@@ -57,7 +57,7 @@
       </main>
 
       <v-img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80">
-        <v-theme-provider dark>
+        <v-theme-provider light>
           <v-container fill-height>
             <v-row align="center" class="white--text mx-auto" justify="center">
               <v-col class="white--text text-center" cols="12" tag="h1">
@@ -90,23 +90,43 @@
       </v-img>
 
       <section id="about">
+
+
         <div class="py-12"></div>
-        <v-container class="text-center">
-          <h2 class="display-2 font-weight-bold mb-3">What is commonette?</h2>
-          <v-responsive class="mx-auto mb-8" width="56">
-            <v-divider class="mb-1"></v-divider>
-            <v-divider></v-divider>
-          </v-responsive>
-          <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
-            info about commonette here
-          </v-responsive>
-        </v-container>
+        <h2 class="display-2 font-weight-light mb-3">Optional Title Here?</h2>
+        <v-responsive class="mx-auto mb-8" width="56">
+          <v-divider class="mb-1"></v-divider>
+          <v-divider></v-divider>
+        </v-responsive>
+        
+        
+        <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
+          <v-row>
+            <v-col cols='6' md='6'>
+              <v-parallax class="" height="500" contained :src="story.src"></v-parallax>
+            </v-col>
+            <v-col cols='6' lg='6' class="py-6 px-12 fluid">
+              <div class="py-10"></div>
+              <h2 class="display-4 text-right mx-auto">{{ story.title }}</h2>
+              <h2 class="display-2 text-right mx-auto my-4">{{ story.subtitle }}</h2>
+              <p class="headline text-right mx-6">{{ story.message }}</p>
+            </v-col>
+          </v-row>
+        </v-responsive>
+
+        
+        <!-- align-center body text -->
+        <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
+          break text
+        </v-responsive>
+
+
       </section>
 
       <section id="mediums" class="grey lighten-3">
         <div class="py-12"></div>
         <v-container class="text-center">
-          <h2 class="display-2 font-weight-bold mb-3">Mediums</h2>
+          <h2 class="display-2 font-weight-bold mb-3">What recommendations you can expect</h2>
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1"></v-divider>
             <v-divider></v-divider>
@@ -130,7 +150,7 @@
         <div class="py-12"></div>
       </section>
 
-      <v-theme-provider dark>
+      <v-theme-provider ligth>
         <!-- <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80"> -->
         <div>  
           <v-container>
@@ -212,6 +232,21 @@ export default {
       loading1: false,
       loading2: false,
       loading3: false,
+
+      stories: [
+        {
+          title: "Suprise yourself",
+          subtitle: "and your friends",
+          message: "Tired of ...",
+          src: "https://images.pexels.com/photos/3768177/pexels-photo-3768177.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        },
+        {
+          title: "Recommendations",
+          subtitle: "catered to you and your friends",
+          message: "Tired of ...",
+          src: "https://images.pexels.com/photos/2719510/pexels-photo-2719510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        },
+      ],
 
       items: [
         {
@@ -653,3 +688,10 @@ img{
 }
 
 </style>
+
+<style>
+  .bottom-gradient {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
+  }
+</style>
+
