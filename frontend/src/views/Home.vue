@@ -180,7 +180,7 @@
                 <v-card color="#50587C" shaped>
                   <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
-                      <v-card-title class="headline mb-4" v-text="item.title" style="color: #ebebeb; text-align: left;"></v-card-title>
+                      <v-card-text class="headline" v-text="item.title" style="color: #ebebeb; text-align: left;"></v-card-text>
 
                       <v-card-subtitle v-text="item.description" style="color:#ebebeb; text-align: left"></v-card-subtitle>
 
