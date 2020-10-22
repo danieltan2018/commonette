@@ -56,7 +56,7 @@
         </section>
       </main>
 
-      <v-img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80">
+      <!-- <v-img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80">
         <v-theme-provider light>
           <v-container fill-height>
             <v-row align="center" class="white--text mx-auto" justify="center">
@@ -87,9 +87,9 @@
             </v-row>
           </v-container>
         </v-theme-provider>
-      </v-img>
+      </v-img> -->
 
-      <section id="about">
+      <section id="about" class="white">
 
 
         <div class="py-12"></div>
@@ -104,7 +104,7 @@
           <div v-if="i % 2 == 0">
             <v-row height=500>
               <v-col cols='5' md='5'>
-                <v-parallax class="bottom-gradient" height=500 :src="story.src"></v-parallax>
+                <v-parallax class="bottom-gradient" height=700 :src="story.src"></v-parallax>
               </v-col>
               <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
                 <div class="py-10"></div>
@@ -131,24 +131,24 @@
 
         
         <!-- align-center body text -->
-        <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
-          break text
+        <v-responsive class="mx-auto title font-weight-light " max-width="720">
+          <br><br>
         </v-responsive>
 
 
       </section>
 
-      <section id="mediums" class="grey lighten-3">
+      <section id="mediums" color="rgb(54, 54, 79)">
         <div class="py-12"></div>
         <v-container class="text-center">
-          <h2 class="display-2 font-weight-bold mb-3">What recommendations you can expect</h2>
+          <h2 class="display-2 font-weight-bold mb-3" style="color:#ebebeb">What recommendations you can expect</h2>
           <v-responsive class="mx-auto mb-12" width="56">
-            <v-divider class="mb-1"></v-divider>
-            <v-divider></v-divider>
+            <v-divider class="mb-1" color="#ebebeb"></v-divider>
+            <v-divider color="#ebebeb"></v-divider>
           </v-responsive>
           <v-row>
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" md="3">
-              <v-card class="py-12 px-4" color="grey lighten-5" flat>
+              <v-card class="py-12 px-4 rounded-xl" color="grey lighten-3" flat>
                 <v-theme-provider dark>
                   <div>
                     <v-avatar color="primary" size="88">
@@ -156,8 +156,8 @@
                     </v-avatar>
                   </div>
                 </v-theme-provider>
-                <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title"></v-card-title>
-                <v-card-text class="subtitle-1" v-text="text"> </v-card-text>
+                <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title" style="color:rgb(48, 48, 68);"></v-card-title>
+                <v-card-text class="subtitle-1" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
               </v-card>
             </v-col>
           </v-row>
@@ -165,24 +165,24 @@
         <div class="py-12"></div>
       </section>
 
-      <v-theme-provider ligth>
+      <v-theme-provider light class="white">
         <!-- <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80"> -->
         <div>  
           <v-container>
             <div class="py-12"></div>
-            <h2 class="display-2 font-weight-bold mb-3">APIs Used</h2>
+            <h2 class="display-2 font-weight-bold mb-3" color="rgb(72, 72, 103)">APIs Used</h2>
             <v-responsive class="mx-auto mb-12" width="56">
               <v-divider class="mb-1"></v-divider>
               <v-divider></v-divider>
             </v-responsive>
             <v-row dense>
-              <v-col v-for="(item, i) in items" :key="i" cols="12" lg='4'>
-                <v-card :color="item.color" dark>
+              <v-col v-for="(item, i) in items" :key="i" cols="12" lg='4' style="padding:10px">
+                <v-card color="#50587C" shaped>
                   <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
-                      <v-card-title class="headline" v-text="item.title" :style="item.textcolor + '; text-align: left;'"></v-card-title>
+                      <v-card-title class="headline mb-4" v-text="item.title" style="color: #ebebeb; text-align: left;"></v-card-title>
 
-                      <v-card-subtitle v-text="item.description" :style="item.textcolor" style="text-align: left"></v-card-subtitle>
+                      <v-card-subtitle v-text="item.description" style="color:#ebebeb; text-align: left"></v-card-subtitle>
 
                       <v-card-actions>
                         <!-- custom button here -->
@@ -190,13 +190,13 @@
                           <v-icon>mdi-play</v-icon>
                         </v-btn>
 
-                        <v-btn v-else class="ml-2 mt-5" color="secondary" rounded small :href="item.site" target="_blank">
+                        <v-btn v-else class="ml-2 mt-5 mb-3" color="grey lighten-3" rounded small :href="item.site" target="_blank">
                           ABOUT API
                         </v-btn>
                       </v-card-actions>
                     </div>
 
-                    <v-avatar class="ma-3" size="125" tile>
+                    <v-avatar class="ma-4" size="105" tile>
                       <v-img :src="item.src" contain></v-img>
                     </v-avatar>
                   </div>
@@ -209,14 +209,14 @@
             <v-divider></v-divider>
           </v-responsive>
           <v-container>
-            <h2 class="display-1 font-weight-bold mb-3 black--text">
+            <h2 class="display-1 font-weight-bold mb-3" style="color:rgb(54, 54, 79)">
               What are you waiting for?
             </h2>
             <v-row class="mx-auto" justify="center">
-              <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true">
+              <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true" color="#50587C" style="color:white">
                 Create Room
               </v-btn>
-              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2">
+              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2" color="#50587C" style="color:white">
                 Join Room
               </v-btn>
             </v-row>
@@ -317,7 +317,7 @@ export default {
           color: "#fafafa",
           textcolor: "color: black",
           src:
-            "https://rapidapi-prod-apis.s3.amazonaws.com/64ed0ed2-6103-4f9b-ab95-f8cc98c7e40c.png",
+            require("../images/OTT.png"),
           title: "OTT details API",
           description:
             "Get Streaming details of Movie and TV Shows. We support 150+ Streaming platforms in US and India such as HBO, YouTube, Netflix , Primve Video, Hotstar, Hulu, etc . ",
@@ -328,23 +328,23 @@ export default {
 
       mediums: [
         {
-          icon: "mdi-youtube",
+          icon: "mdi-youtube red",
           title: "YouTube",
           text: "See recommended videos for you and your friends.",
         },
         {
-          icon: "mdi-spotify",
+          icon: "mdi-spotify green",
           title: "Spotify",
           text:
             "Generate Spotify recommendations from you and your friends' favourite songs.",
         },
         {
-          icon: "mdi-book",
+          icon: "mdi-book blue",
           title: "Books",
           text: "Find books ",
         },
         {
-          icon: "mdi-filmstrip",
+          icon: "mdi-filmstrip pink",
           title: "Movies",
           text: "I don't know what I'm doing",
         },
@@ -476,10 +476,11 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
     --header-height: 3rem;
 
     /*===== Colors =====*/
-    --first-color: #FCA4A6;
-    --first-color-dark: #C1576A;
-    --first-color-darken: #A83E51;
-    --white-color: #FCF8F8;
+    --first-color: rgb(81, 81, 118);
+    --first-color-dark: rgb(72, 72, 103);
+    --first-color-darken: rgb(48, 48, 68);
+    --white-color: #ebebeb;
+    // #FCF8F8
 
     /*===== Font and typography =====*/
     --body-font: 'Poppins', sans-serif;

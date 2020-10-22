@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <v-app-bar app fixed dark clipped-left color="primary" v-on:click="navigateRoute('/')">
+      <v-app-bar app fixed dark clipped-left color="rgb(54, 54, 79)" v-on:click="navigateRoute('/')">
         <v-toolbar-title class="headline">
           <span>Commonette</span>
         </v-toolbar-title>
@@ -9,8 +9,8 @@
 
         <v-menu offset-y v-if="roomName">
           <template v-slot:activator="{ on }">
-            <v-btn text icon color="white" v-on="on">
-              <v-icon dark>mdi-account-group</v-icon>
+            <v-btn text icon v-on="on">
+              <v-icon>mdi-account-group</v-icon>
             </v-btn>
             {{ roomName }}'s Room
           </template>
@@ -31,7 +31,7 @@
 
       <router-view></router-view>
 
-      <v-footer class="justify-center" color="#292929" height="100">
+      <v-footer class="justify-center" color="rgb(54, 54, 79)" height="100">
         <div class="title font-weight-light grey--text text--lighten-1 text-center">
           &copy; {{ (new Date()).getFullYear() }} — Commonette — IS216 G6T5
         </div>
