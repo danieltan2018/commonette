@@ -89,7 +89,7 @@
         </v-theme-provider>
       </v-img> -->
 
-      <section id="about" class="white">
+      <section id="about">
 
 
         <div class="py-12"></div>
@@ -148,7 +148,7 @@
           </v-responsive>
           <v-row>
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" md="3">
-              <v-card class="py-12 px-4 rounded-xl" color="grey lighten-3" flat>
+              <v-card class="py-12 px-4 rounded-xl" color="#E3E9F2" flat>
                 <v-theme-provider dark>
                   <div>
                     <v-avatar color="primary" size="88">
@@ -162,14 +162,14 @@
             </v-col>
           </v-row>
         </v-container>
-        <div class="py-12"></div>
+        <div class="py-10"></div>
       </section>
 
-      <v-theme-provider light class="white">
+      <v-theme-provider id="api" light>
         <!-- <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80"> -->
         <div>  
           <v-container>
-            <div class="py-12"></div>
+            <div class="py-6"></div>
             <h2 class="display-2 font-weight-bold mb-3" color="rgb(72, 72, 103)">APIs Used</h2>
             <v-responsive class="mx-auto mb-12" width="56">
               <v-divider class="mb-1"></v-divider>
@@ -190,7 +190,7 @@
                           <v-icon>mdi-play</v-icon>
                         </v-btn>
 
-                        <v-btn v-else class="ml-2 mt-5 mb-3" color="grey lighten-3" rounded small :href="item.site" target="_blank">
+                        <v-btn v-else class="ml-2 mt-5 mb-3" color="#F1F4F9" rounded small :href="item.site" target="_blank">
                           ABOUT API
                         </v-btn>
                       </v-card-actions>
@@ -647,6 +647,10 @@ img{
     &__h1{
         
     }
+}
+
+#api, #about{
+  background-color:#E3E9F2;
 }
 
 /* ===== MEDIA QUERIES=====*/
