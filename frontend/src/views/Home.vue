@@ -132,6 +132,7 @@
 
       <v-theme-provider dark>
         <!-- <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80"> -->
+        <div>  
           <v-container>
             <div class="py-12"></div>
             <h2 class="display-2 font-weight-bold mb-3">APIs Used</h2>
@@ -185,6 +186,7 @@
               </v-btn>
             </v-row>
           </v-container>
+        </div>
         <!-- </v-parallax> -->
       </v-theme-provider>
     </v-main>
