@@ -131,7 +131,7 @@
       </section>
 
       <v-theme-provider dark>
-        <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80">
+        <!-- <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80"> -->
           <v-container>
             <div class="py-12"></div>
             <h2 class="display-2 font-weight-bold mb-3">APIs Used</h2>
@@ -140,11 +140,11 @@
               <v-divider></v-divider>
             </v-responsive>
             <v-row dense>
-              <v-col v-for="(item, i) in items" :key="i" cols="4">
+              <v-col v-for="(item, i) in items" :key="i" cols="12" lg='4'>
                 <v-card :color="item.color" dark>
                   <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
-                      <v-card-title class="headline" v-text="item.title" :style="item.textcolor"></v-card-title>
+                      <v-card-title class="headline" v-text="item.title" :style="item.textcolor + '; text-align: left;'"></v-card-title>
 
                       <v-card-subtitle v-text="item.description" :style="item.textcolor" style="text-align: left"></v-card-subtitle>
 
@@ -185,7 +185,7 @@
               </v-btn>
             </v-row>
           </v-container>
-        </v-parallax>
+        <!-- </v-parallax> -->
       </v-theme-provider>
     </v-main>
   </div>
@@ -218,7 +218,7 @@ export default {
           src:
             "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
           title: "YouTube Data API",
-          description: "YouTube info here",
+          description: "The YouTube Data API lets you incorporate functions normally executed on the YouTube website into your own website or application. ",
           site: "https://developers.google.com/youtube/v3/docs/videos/list",
         },
         {
@@ -249,7 +249,7 @@ export default {
           src:
             "https://upload.wikimedia.org/wikipedia/commons/b/ba/Google_Books_logo_2015.svg",
           title: "Google Books API",
-          description: "Info about google books here",
+          description: "The Books API is a way to search and access the world's book contents, as well as to create and view personalization around that content.",
           site: "https://developers.google.com/books",
         },
         {
