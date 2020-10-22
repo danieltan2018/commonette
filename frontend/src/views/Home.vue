@@ -101,17 +101,32 @@
         
         
         <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
-          <v-row>
-            <v-col cols='6' md='6'>
-              <v-parallax class="" height="500" contained :src="story.src"></v-parallax>
-            </v-col>
-            <v-col cols='6' lg='6' class="py-6 px-12 fluid">
+          <div v-if="i % 2 == 0">
+            <v-row height=500>
+              <v-col cols='5' md='5'>
+                <v-parallax class="bottom-gradient" height=500 :src="story.src"></v-parallax>
+              </v-col>
+              <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
+                <div class="py-10"></div>
+                <h2 class="display-4 text-right mx-auto">{{ story.title }}</h2>
+                <h2 class="display-2 text-right mx-auto my-4">{{ story.subtitle }}</h2>
+                <p class="headline text-right mx-6">{{ story.message }}</p>
+              </v-col>
+            </v-row>
+          </div>
+          <div v-else>
+            <v-row height=500>
+            <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
               <div class="py-10"></div>
-              <h2 class="display-4 text-right mx-auto">{{ story.title }}</h2>
-              <h2 class="display-2 text-right mx-auto my-4">{{ story.subtitle }}</h2>
-              <p class="headline text-right mx-6">{{ story.message }}</p>
+              <h2 class="display-4 text-left mx-auto">{{ story.title }}</h2>
+              <h2 class="display-2 text-left mx-auto my-4">{{ story.subtitle }}</h2>
+              <p class="headline text-left mx-6">{{ story.message }}</p>
+            </v-col>
+            <v-col cols='5' md='5'>
+              <v-parallax class="bottom-gradient align-left" height=500 :src="story.src"></v-parallax>
             </v-col>
           </v-row>
+          </div>
         </v-responsive>
 
         
@@ -237,14 +252,23 @@ export default {
         {
           title: "Suprise yourself",
           subtitle: "and your friends",
-          message: "Tired of ...",
+          message: "Tired of being indecisive about what movie to watch? Not sure what kind of music to listen to when you're with a group of friends? Trying to find the perfect movie watch with your date without yawning? We have...",
           src: "https://images.pexels.com/photos/3768177/pexels-photo-3768177.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          alt: "https://images.pexels.com/photos/2253849/pexels-photo-2253849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
         {
           title: "Recommendations",
           subtitle: "catered to you and your friends",
-          message: "Tired of ...",
+          message: "We will ask you to fill a questionnaire where...",
           src: "https://images.pexels.com/photos/2719510/pexels-photo-2719510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          alt: "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        },
+        {
+          title: "Countless of recommendations",
+          subtitle: "all at your fingertips",
+          message: "The results are then aggregated and sent to...",
+          src: "https://images.pexels.com/photos/4488194/pexels-photo-4488194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          alt: "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
       ],
 
@@ -690,8 +714,13 @@ img{
 </style>
 
 <style>
+  /* for stories */
   .bottom-gradient {
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
+  }
+  .v-parallax__image {
+    /* transform: none !important; */
+    /* width: 100% !important; */
   }
 </style>
 
