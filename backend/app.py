@@ -89,6 +89,27 @@ def get_spotify_token():
     return {"Authorization": spotify.get_token()}, 200
 
 
+@app.route('/dislike', methods=['POST'])
+def dislike():
+    try:
+        data = request.get_json()
+        room_code = data['roomCode']
+        remove_type = data['type']
+        remove_id = data['id']
+
+        room = room_ref.document(room_code).get()
+        room = room.to_dict()
+        if "blacklist" not in room:
+            room["blacklist"] = {"youtube": [],
+                                 "books": [], "movies": [], "spotify": []}
+        room["blacklist"][remove_type].append(remove_id)
+
+        room_ref.document(room_code).set(room)
+        return jsonify({"success": True}), 200
+    except Exception as e:
+        return f"{e}", 400
+
+
 # This is for flask app
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, threaded=True, debug=True)
