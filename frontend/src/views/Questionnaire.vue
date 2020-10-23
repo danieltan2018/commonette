@@ -33,8 +33,8 @@
               <v-card-text style="align-items:center">
                 <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
                   <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
-                    <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')" outlined color="pink">
-                      <v-avatar left color="pink">
+                    <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')" outlined color="rgb(90, 90, 160)">
+                      <v-avatar left color="rgb(90, 90, 160)">
                         <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
@@ -70,8 +70,8 @@
               <v-card-text>
                 <v-chip-group v-model="bookSelection" column active-class="primary--text">
                   <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
-                    <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')" outlined color="pink">
-                      <v-avatar left class="pink">
+                    <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')" outlined color="rgb(90, 90, 160)">
+                      <v-avatar left color="rgb(90, 90, 160)">
                         <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
@@ -107,8 +107,8 @@
               <v-card-text>
                 <v-chip-group v-model="movieSelection" column active-class="primary--text">
                   <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
-                    <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')" outlined color="pink">
-                      <v-avatar left class="pink">
+                    <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')" outlined color="rgb(90, 90, 160)">
+                      <v-avatar left color="rgb(90, 90, 160)">
                         <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
@@ -129,7 +129,11 @@
         <v-layout row wrap justify-center mb-0>
           <v-flex xs12 md6 lg4>
             <div>List your preferred languages</div>
-            <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple chips deletable-chips :rules="inputRequiredRule"></v-autocomplete>
+            <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple :rules="inputRequiredRule">
+              <template #selection="{ item }">
+                <v-chip close color="rgb(90, 90, 160)" outlined @click:close="delLang(item)">{{ item }}</v-chip>
+              </template>
+            </v-autocomplete>
           </v-flex>
         </v-layout>
         <v-layout>
@@ -153,7 +157,7 @@
           <v-flex xs12 md6 lg4>
             <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
             <div v-if="artist">
-              <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" small rounded outlined color="indigo">{{suggest}}</v-btn>
+              <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" small rounded outlined color="blue">{{suggest}}</v-btn>
             </div>
           </v-flex>
         </v-layout>
@@ -165,8 +169,8 @@
               <v-card-text>
                 <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
                   <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
-                    <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')" outlined color="pink">
-                      <v-avatar left class="pink">
+                    <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')" outlined color="rgb(90, 90, 160)">
+                      <v-avatar left color="rgb(90, 90, 160)">
                         <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
@@ -191,7 +195,7 @@
           <v-flex xs12 md6 lg4>
             <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
             <div v-if="track">
-              <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" small rounded outlined color="indigo">{{suggest}}</v-btn>
+              <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" small rounded outlined color="blue">{{suggest}}</v-btn>
             </div>
           </v-flex>
         </v-layout>
@@ -203,8 +207,8 @@
               <v-card-text>
                 <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
                   <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
-                    <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')" outlined color="pink">
-                      <v-avatar left class="pink">
+                    <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')" outlined color="rgb(90, 90, 160)">
+                      <v-avatar left color="rgb(90, 90, 160)">
                         <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
@@ -240,8 +244,8 @@
               <v-card-text>
                 <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
                   <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
-                    <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')" outlined color="pink">
-                      <v-avatar left class="pink">
+                    <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')" outlined color="rgb(90, 90, 160)">
+                      <v-avatar left color="rgb(90, 90, 160)">
                         <span style="color:white;">{{i+1}}</span>
                       </v-avatar>
                       {{tag}}
@@ -790,134 +794,7 @@ export default {
         "Yoruba",
         "Zulu",
       ],
-      inputSpotifyGenre: [
-        "acoustic",
-        "afrobeat",
-        "alt-rock",
-        "alternative",
-        "ambient",
-        "anime",
-        "black-metal",
-        "bluegrass",
-        "blues",
-        "bossanova",
-        "brazil",
-        "breakbeat",
-        "british",
-        "cantopop",
-        "chicago-house",
-        "children",
-        "chill",
-        "classical",
-        "club",
-        "comedy",
-        "country",
-        "dance",
-        "dancehall",
-        "death-metal",
-        "deep-house",
-        "detroit-techno",
-        "disco",
-        "disney",
-        "drum-and-bass",
-        "dub",
-        "dubstep",
-        "edm",
-        "electro",
-        "electronic",
-        "emo",
-        "folk",
-        "forro",
-        "french",
-        "funk",
-        "garage",
-        "german",
-        "gospel",
-        "goth",
-        "grindcore",
-        "groove",
-        "grunge",
-        "guitar",
-        "happy",
-        "hard-rock",
-        "hardcore",
-        "hardstyle",
-        "heavy-metal",
-        "hip-hop",
-        "holidays",
-        "honky-tonk",
-        "house",
-        "idm",
-        "indian",
-        "indie",
-        "indie-pop",
-        "industrial",
-        "iranian",
-        "j-dance",
-        "j-idol",
-        "j-pop",
-        "j-rock",
-        "jazz",
-        "k-pop",
-        "kids",
-        "latin",
-        "latino",
-        "malay",
-        "mandopop",
-        "metal",
-        "metal-misc",
-        "metalcore",
-        "minimal-techno",
-        "movies",
-        "mpb",
-        "new-age",
-        "new-release",
-        "opera",
-        "pagode",
-        "party",
-        "philippines-opm",
-        "piano",
-        "pop",
-        "pop-film",
-        "post-dubstep",
-        "power-pop",
-        "progressive-house",
-        "psych-rock",
-        "punk",
-        "punk-rock",
-        "r-n-b",
-        "rainy-day",
-        "reggae",
-        "reggaeton",
-        "road-trip",
-        "rock",
-        "rock-n-roll",
-        "rockabilly",
-        "romance",
-        "sad",
-        "salsa",
-        "samba",
-        "sertanejo",
-        "show-tunes",
-        "singer-songwriter",
-        "ska",
-        "sleep",
-        "songwriter",
-        "soul",
-        "soundtracks",
-        "spanish",
-        "study",
-        "summer",
-        "swedish",
-        "synth-pop",
-        "tango",
-        "techno",
-        "trance",
-        "trip-hop",
-        "turkish",
-        "work-out",
-        "world-music",
-      ],
+      inputSpotifyGenre: ['Acoustic', 'Afrobeat', 'Alt-Rock', 'Alternative', 'Ambient', 'Anime', 'Black-Metal', 'Bluegrass', 'Blues', 'Bossanova', 'Brazil', 'Breakbeat', 'British', 'Cantopop', 'Chicago-House', 'Children', 'Chill', 'Classical', 'Club', 'Comedy', 'Country', 'Dance', 'Dancehall', 'Death-Metal', 'Deep-House', 'Detroit-Techno', 'Disco', 'Disney', 'Drum-And-Bass', 'Dub', 'Dubstep', 'Edm', 'Electro', 'Electronic', 'Emo', 'Folk', 'Forro', 'French', 'Funk', 'Garage', 'German', 'Gospel', 'Goth', 'Grindcore', 'Groove', 'Grunge', 'Guitar', 'Happy', 'Hard-Rock', 'Hardcore', 'Hardstyle', 'Heavy-Metal', 'Hip-Hop', 'Holidays', 'Honky-Tonk', 'House', 'Idm', 'Indian', 'Indie', 'Indie-Pop', 'Industrial', 'Iranian', 'J-Dance', 'J-Idol', 'J-Pop', 'J-Rock', 'Jazz', 'K-Pop', 'Kids', 'Latin', 'Latino', 'Malay', 'Mandopop', 'Metal', 'Metal-Misc', 'Metalcore', 'Minimal-Techno', 'Movies', 'Mpb', 'New-Age', 'New-Release', 'Opera', 'Pagode', 'Party', 'Philippines-Opm', 'Piano', 'Pop', 'Pop-Film', 'Post-Dubstep', 'Power-Pop', 'Progressive-House', 'Psych-Rock', 'Punk', 'Punk-Rock', 'R-N-B', 'Rainy-Day', 'Reggae', 'Reggaeton', 'Road-Trip', 'Rock', 'Rock-N-Roll', 'Rockabilly', 'Romance', 'Sad', 'Salsa', 'Samba', 'Sertanejo', 'Show-Tunes', 'Singer-Songwriter', 'Ska', 'Sleep', 'Songwriter', 'Soul', 'Soundtracks', 'Spanish', 'Study', 'Summer', 'Swedish', 'Synth-Pop', 'Tango', 'Techno', 'Trance', 'Trip-Hop', 'Turkish', 'Work-Out', 'World-Music'],
     };
   },
   watch: {
@@ -972,6 +849,14 @@ export default {
           document.getElementById("sADisplay").style.display = "inline";
         }
       }
+    },
+    movies:{
+      immediate: true,
+      handler(){
+        if(this.movies == [] && document.getElementById("mvDisplay").style.display == "inline"){
+          document.getElementById("mvDisplay").style.display = "none";
+        }
+      }
     }
   },
   methods: {
@@ -984,6 +869,11 @@ export default {
         console.log("Error la");
         this.$vuetify.goTo(0);
       }
+    },
+    delLang(item){
+      this.movieLanguage = this.movieLanguage.filter(function (e) {
+        return e !== item;
+      });
     },
     dragStartYoutube() {
       if (this.youtubes[this.youtubeSelection]) {
