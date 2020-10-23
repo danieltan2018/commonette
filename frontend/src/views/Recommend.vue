@@ -56,7 +56,7 @@
           <v-slide-item v-for="video in youtubeDisplay" :key="video.id">
             <v-container v-if="video.id" grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="video.id=false">mdi-minus-circle-outline</v-icon>
-              <v-card class="mx-auto" width="200px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
+              <v-card class="mx-auto" width="250px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
                 <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
                 <v-card-text>
                   <div class="subtitle-1 black--text text-truncate">
@@ -82,7 +82,7 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="book in bookResults" :key="book.id">
+          <v-slide-item v-for="book in bookDisplay" :key="book.id">
             <v-container v-if="book.id" grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="book.id=false">mdi-minus-circle-outline</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="bookCard(book.volumeInfo.title, book.volumeInfo.authors.toString(), book.volumeInfo.description, book.volumeInfo.previewLink, book.volumeInfo.imageLinks.thumbnail)">
@@ -111,7 +111,7 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="movie in movieResults" :key="movie.id">
+          <v-slide-item v-for="movie in movieDisplay" :key="movie.id">
             <v-container grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="movie.imageurl=false">mdi-minus-circle-outline</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.imageurl[0], movie.imdbid)">
@@ -140,7 +140,7 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="song in spotifyResults" :key="song.id">
+          <v-slide-item v-for="song in spotifyDisplay" :key="song.id">
             <v-container v-if="song.id" grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="song.id=false">mdi-minus-circle-outline</v-icon>
               <v-card class="mx-auto" max-width="150px" v-on:click="spotifyCard(song.name, song.album.name, song.album.release_date, song.artists, song.id)">
@@ -228,6 +228,7 @@ export default {
         )
         .then((response) => {
           this.bookResults = this.shuffle(response.data.items);
+          this.bookDisplay = this.bookResults.splice(0, 10);
         })
         .catch((e) => {
           console.log(e.response.data);
@@ -247,6 +248,7 @@ export default {
       })
         .then((response) => {
           this.movieResults = this.shuffle(response.data.results);
+          this.movieDisplay = this.movieResults.splice(0, 10);
         })
         .catch((e) => {
           console.log(e.response.data);
@@ -266,6 +268,7 @@ export default {
         })
           .then((response) => {
             this.spotifyResults = this.shuffle(response.data.tracks);
+            this.spotifyDisplay = this.spotifyResults.splice(0, 10);
           })
           .catch((e) => {
             console.log(e.response.data);
