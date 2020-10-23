@@ -1,7 +1,7 @@
 <template>
   <v-main>
 
-    <v-dialog v-model="showDetails" max-width="900px">
+    <v-dialog v-model="showDetails" @keydown.esc="closeDetails" max-width="900px">
       <v-card>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -113,13 +113,13 @@
             <!-- Excluding movies with no thumbnails -->
             <v-container v-if="movie.imageurl[0]" grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="movie.imageurl=false">mdi-minus-circle-outline</v-icon>
-              <v-card class="mx-auto" max-width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.type, movie.imageurl[0], movie.imdbid)">
+              <v-card class="mx-auto" max-width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.imageurl[0], movie.imdbid)">
                 <v-img :src="movie.imageurl[0]" contain></v-img>
                 <v-card-text>
                   <div class="subtitle-1 black--text">
                     {{movie.title}}
                   </div>
-                  {{movie.released}} {{movie.type}}
+                  {{movie.released}}
                 </v-card-text>
               </v-card>
             </v-container>
@@ -224,6 +224,7 @@ export default {
         });
     },
     renderMovies() {
+      this.recommend.movie.type = "movie";
       axios({
         method: "GET",
         url: "https://rapidapi.p.rapidapi.com/advancedsearch",
@@ -279,10 +280,10 @@ export default {
       this.details.img = img;
       this.showDetails = true;
     },
-    movieCard(title, desc, sub1, sub2, img, id) {
+    movieCard(title, desc, subtitle, img, id) {
       this.details = {};
       this.details.title = title;
-      this.details.subtitle = sub1 + " " + sub2;
+      this.details.subtitle = subtitle;
       this.details.desc = desc;
       this.details.url = "https://www.imdb.com/title/" + id;
       this.details.img = img;
@@ -302,6 +303,9 @@ export default {
       this.details.url = "https://open.spotify.com/track/" + id;
       this.details.spotify = "https://open.spotify.com/embed/track/" + id;
       this.showDetails = true;
+    },
+    closeDetails() {
+      this.showDetails = !this.showDetails;
     },
   },
 };
