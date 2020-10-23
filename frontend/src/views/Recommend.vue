@@ -178,6 +178,7 @@ export default {
     bookDisplay: null,
     movieDisplay: null,
     spotifyDisplay: null,
+    youtubeBlacklist: [],
     showDetails: false,
     details: {},
   }),
@@ -190,19 +191,27 @@ export default {
     },
     initialise() {
       axios({
-        url: "/recommend/" + this.roomCode,
+        url: "/room/" + this.roomCode,
         method: "GET",
-      })
-        .then((response) => {
-          this.recommend = response.data;
-          this.renderYoutube();
-          this.renderBooks();
-          this.renderMovies();
-          this.renderSpotify();
+      }).then((response) => {
+        if (typeof response.data.blacklist !== "undefined") {
+          this.youtubeBlacklist = response.data.blacklist.youtube;
+        }
+        axios({
+          url: "/recommend/" + this.roomCode,
+          method: "GET",
         })
-        .catch(() => {
-          this.navigateRoute("/questionnaire");
-        });
+          .then((response) => {
+            this.recommend = response.data;
+            this.renderYoutube();
+            this.renderBooks();
+            this.renderMovies();
+            this.renderSpotify();
+          })
+          .catch(() => {
+            this.navigateRoute("/questionnaire");
+          });
+      });
     },
     renderYoutube() {
       axios
@@ -213,6 +222,12 @@ export default {
         )
         .then((response) => {
           this.youtubeResults = this.shuffle(response.data.items);
+          for (var item of this.youtubeBlacklist) {
+            this.youtubeResults.splice(
+              this.youtubeResults.findIndex((e) => e.id === item),
+              1
+            );
+          }
           this.youtubeDisplay = this.youtubeResults.splice(0, 10);
         })
         .catch((e) => {
@@ -339,13 +354,15 @@ export default {
           type: type,
           id: id,
         },
-      }).then(function () {
+      }).then(() => {
         if (type == "youtube") {
           this.youtubeDisplay.splice(
             this.youtubeDisplay.findIndex((e) => e.id === id),
             1
           );
-          this.youtubeDisplay.push(this.youtubeResults.pop());
+          if (this.youtubeResults.length > 0) {
+            this.youtubeDisplay.push(this.youtubeResults.pop());
+          }
         }
       });
     },
