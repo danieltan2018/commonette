@@ -101,7 +101,7 @@ def dislike():
         room = room.to_dict()
         if "blacklist" not in room:
             room["blacklist"] = {"youtube": [],
-                                 "books": [], "movies": [], "spotify": []}
+                                 "book": [], "movie": [], "spotify": []}
         room["blacklist"][remove_type].append(remove_id)
 
         room_ref.document(room_code).set(room)
