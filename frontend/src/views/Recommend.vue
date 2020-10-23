@@ -53,16 +53,18 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="video in youtubeResults" :key="video.id">
+          <v-slide-item v-for="video in youtubeDisplay" :key="video.id">
             <v-container v-if="video.id" grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="video.id=false">mdi-minus-circle-outline</v-icon>
-              <v-card class="mx-auto" max-width="300px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
+              <v-card class="mx-auto" width="200px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
                 <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
                 <v-card-text>
                   <div class="subtitle-1 black--text text-truncate">
                     {{video.snippet.title}}
                   </div>
-                  {{video.snippet.channelTitle}}
+                  <div class="text-truncate">
+                    {{video.snippet.channelTitle}}
+                  </div>
                 </v-card-text>
               </v-card>
             </v-container>
@@ -83,10 +85,10 @@
           <v-slide-item v-for="book in bookResults" :key="book.id">
             <v-container v-if="book.id" grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="book.id=false">mdi-minus-circle-outline</v-icon>
-              <v-card class="mx-auto" max-width="200px" v-on:click="bookCard(book.volumeInfo.title, book.volumeInfo.authors.toString(), book.volumeInfo.description, book.volumeInfo.previewLink, book.volumeInfo.imageLinks.thumbnail)">
-                <v-img :src="book.volumeInfo.imageLinks.thumbnail" contain></v-img>
+              <v-card class="mx-auto" width="200px" v-on:click="bookCard(book.volumeInfo.title, book.volumeInfo.authors.toString(), book.volumeInfo.description, book.volumeInfo.previewLink, book.volumeInfo.imageLinks.thumbnail)">
+                <v-img :src="book.volumeInfo.imageLinks.thumbnail" height="300px" contain></v-img>
                 <v-card-text>
-                  <div class="subtitle-1 black--text">
+                  <div class="subtitle-1 black--text text-truncate">
                     {{book.volumeInfo.title}}
                   </div>
                   <div class="text-truncate">
@@ -110,16 +112,17 @@
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
           <v-slide-item v-for="movie in movieResults" :key="movie.id">
-            <!-- Excluding movies with no thumbnails -->
-            <v-container v-if="movie.imageurl[0]" grid-list-md>
+            <v-container grid-list-md>
               <v-icon class="d-flex justify-end" color="black" v-on:click="movie.imageurl=false">mdi-minus-circle-outline</v-icon>
-              <v-card class="mx-auto" max-width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.imageurl[0], movie.imdbid)">
-                <v-img :src="movie.imageurl[0]" contain></v-img>
+              <v-card class="mx-auto" width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.imageurl[0], movie.imdbid)">
+                <v-img :src="movie.imageurl[0]" height="300px" contain></v-img>
                 <v-card-text>
-                  <div class="subtitle-1 black--text">
+                  <div class="subtitle-1 black--text text-truncate">
                     {{movie.title}}
                   </div>
-                  {{movie.released}}
+                  <div class="text-truncate">
+                    {{movie.released}}
+                  </div>
                 </v-card-text>
               </v-card>
             </v-container>
@@ -146,7 +149,9 @@
                   <div class="subtitle-1 black--text text-truncate">
                     {{song.name}}
                   </div>
-                  {{song.album.name}}
+                  <div class="text-truncate">
+                    {{song.album.name}}
+                  </div>
                 </v-card-text>
               </v-card>
             </v-container>
@@ -169,6 +174,10 @@ export default {
     bookResults: null,
     movieResults: null,
     spotifyResults: null,
+    youtubeDisplay: null,
+    bookDisplay: null,
+    movieDisplay: null,
+    spotifyDisplay: null,
     showDetails: false,
     details: {},
   }),
@@ -203,7 +212,8 @@ export default {
             "&key=AIzaSyA7Y61l8cbCs3iBaovaUT9iv8eczTikK9k"
         )
         .then((response) => {
-          this.youtubeResults = response.data.items;
+          this.youtubeResults = this.shuffle(response.data.items);
+          this.youtubeDisplay = this.youtubeResults.splice(0, 10);
         })
         .catch((e) => {
           console.log(e.response.data);
@@ -217,7 +227,7 @@ export default {
             "&langRestrict=en&maxResults=40"
         )
         .then((response) => {
-          this.bookResults = response.data.items;
+          this.bookResults = this.shuffle(response.data.items);
         })
         .catch((e) => {
           console.log(e.response.data);
@@ -236,7 +246,7 @@ export default {
         },
       })
         .then((response) => {
-          this.movieResults = response.data.results;
+          this.movieResults = this.shuffle(response.data.results);
         })
         .catch((e) => {
           console.log(e.response.data);
@@ -255,7 +265,7 @@ export default {
           headers: auth.data,
         })
           .then((response) => {
-            this.spotifyResults = response.data.tracks;
+            this.spotifyResults = this.shuffle(response.data.tracks);
           })
           .catch((e) => {
             console.log(e.response.data);
