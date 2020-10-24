@@ -25,6 +25,14 @@ const routes = [
     meta: {
       requiresRoom: true
     }
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import('../views/Dashboard.vue'),
+    meta: {
+      requiresRoom: true
+    }
   }
 ]
 
