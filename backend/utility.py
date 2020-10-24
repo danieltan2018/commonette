@@ -128,14 +128,24 @@ def generate_api(questionnaire_data):
         spotify_track_weights.items(), key=lambda item: item[1], reverse=True)}
 
     # number of items to return
+    no_youtube = min(len(youtube_weights), 3)
     no_movie_genre = min(len(movie_genre_weights), 3)
     no_movie_language = min(len(movie_language_weights), 3)
     no_spotify_genre = min(len(spotify_genre_weights), 3)
     no_spotify_artist = min(len(spotify_artist_weights), 3)
     no_spotify_track = min(len(spotify_track_weights), 3)
 
+    youtube_categories = {'1': 'Film & Animation', '2': 'Autos & Vehicles', '10': 'Music', '15': 'Pets & Animals', '17': 'Sports', '19': 'Travel & Events', '20': 'Gaming',
+                          '22': 'People & Blogs', '23': 'Comedy', '24': 'Entertainment', '25': 'News & Politics', '26': 'Howto & Style', '27': 'Education', '28': 'Science & Technology'}
+
     api_param = {}
-    api_param["youtube"] = {"videoCategory": list(youtube_weights.keys())[0]}
+    youtube_encoded = list(youtube_weights.keys())[0:no_youtube]
+    youtube_decoded = []
+    for item in youtube_encoded:
+        youtube_decoded.append(youtube_categories[item])
+
+    api_param["youtube"] = {"videoCategory": list(youtube_weights.keys())[
+        0], "videoMore": ",".join(youtube_decoded)}
     api_param["book"] = {"subject": list(book_weights.keys())[0]}
     api_param["movie"] = {"genre": ",".join(list(movie_genre_weights.keys())[0:no_movie_genre]), "language": ",".join(
         list(movie_language_weights.keys())[0:no_movie_language]), "min_imdb": movie_min_imdb}
