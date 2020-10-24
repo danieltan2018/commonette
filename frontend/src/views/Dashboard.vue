@@ -8,9 +8,7 @@
 import axios from "axios";
 export default {
   data: () => ({
-    roomName: localStorage.getItem("roomName"),
-    roomCode: localStorage.getItem("roomCode"),
-    userCount: localStorage.getItem("roomUsers").length,
+    userCount: JSON.parse(localStorage.getItem("roomUsers")).length,
     youtubeTop: [],
     bookTop: [],
     movieTop: [],
@@ -25,9 +23,9 @@ export default {
     },
     initialise() {
       axios
-        .get("/recommend/" + this.roomCode)
+        .get("/recommend/" + localStorage.getItem("roomCode"))
         .then((response) => {
-          this.youtubeTop = response.data.youtube.videoCategory.split(",");
+          this.youtubeTop = response.data.youtube.videoMore.split(",");
           this.bookTop = response.data.book.subject.split(",");
           this.movieTop = response.data.movie.genre.split(",");
           this.spotifyTop = response.data.spotify.seed_genres.split(",");
