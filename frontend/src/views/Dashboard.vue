@@ -8,6 +8,8 @@
 import axios from "axios";
 export default {
   data: () => ({
+    roomName: localStorage.getItem("roomName"),
+    roomCode: localStorage.getItem("roomCode"),
     userCount: localStorage.getItem("roomUsers").length,
     youtubeTop: [],
     bookTop: [],
@@ -22,10 +24,8 @@ export default {
       this.$router.push(newpath);
     },
     initialise() {
-      axios({
-        url: "/recommend/" + this.roomCode,
-        method: "GET",
-      })
+      axios
+        .get("/recommend/" + this.roomCode)
         .then((response) => {
           this.youtubeTop = response.data.youtube.videoCategory.split(",");
           this.bookTop = response.data.book.subject.split(",");
