@@ -1,11 +1,11 @@
 <template>
   <v-main>
 
-    <v-dialog v-model="showDetails" @keydown.esc="showDetails=false" max-width="800px">
+    <v-dialog v-model="showDetails" @keydown.esc="showDetails=false; details={};" max-width="800px" persistent>
       <v-card>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-icon large color="red" v-on:click="showDetails=false">
+          <v-icon large color="red" v-on:click="showDetails=false; details={};">
             mdi-close
           </v-icon>
         </v-card-actions>
@@ -315,7 +315,6 @@ export default {
       });
     },
     youtubeCard(title, subtitle, desc, id) {
-      this.details = {};
       this.details.title = title;
       this.details.subtitle = subtitle;
       this.details.desc = desc.replace(/(?:\r\n|\r|\n)/g, "<br/>");
@@ -324,7 +323,6 @@ export default {
       this.showDetails = true;
     },
     bookCard(title, subtitle, desc, url, img) {
-      this.details = {};
       this.details.title = title;
       this.details.subtitle = subtitle;
       this.details.desc = desc;
@@ -333,7 +331,6 @@ export default {
       this.showDetails = true;
     },
     movieCard(title, desc, subtitle, img, id) {
-      this.details = {};
       this.details.title = title;
       this.details.subtitle = subtitle;
       this.details.desc = desc;
@@ -342,7 +339,6 @@ export default {
       this.showDetails = true;
     },
     spotifyCard(title, subtitle, release, artists, id) {
-      this.details = {};
       this.details.title = title;
       this.details.subtitle = subtitle;
       let artistList = [];
@@ -420,5 +416,4 @@ export default {
 };
 </script>
 <style>
-
 </style>
