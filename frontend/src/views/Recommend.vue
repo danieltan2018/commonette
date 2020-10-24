@@ -111,9 +111,9 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="movie in movieDisplay" :key="movie.id">
+          <v-slide-item v-for="movie in movieDisplay" :key="movie.imdbid">
             <v-container grid-list-md>
-              <v-icon class="d-flex justify-end" color="black" v-on:click="remove('movie', movie.id)">mdi-minus-circle-outline</v-icon>
+              <v-icon class="d-flex justify-end" color="black" v-on:click="remove('movie', movie.imdbid)">mdi-minus-circle-outline</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.imageurl[0], movie.imdbid)">
                 <v-img :src="movie.imageurl[0]" height="300px" contain></v-img>
                 <v-card-text>
@@ -179,6 +179,9 @@ export default {
     movieDisplay: null,
     spotifyDisplay: null,
     youtubeBlacklist: [],
+    bookBlacklist: [],
+    movieBlacklist: [],
+    spotifyBlacklist: [],
     showDetails: false,
     details: {},
   }),
@@ -196,6 +199,9 @@ export default {
       }).then((response) => {
         if (typeof response.data.blacklist !== "undefined") {
           this.youtubeBlacklist = response.data.blacklist.youtube;
+          this.bookBlacklist = response.data.blacklist.book;
+          this.movieBlacklist = response.data.blacklist.movie;
+          this.spotifyBlacklist = response.data.blacklist.spotify;
         }
         axios({
           url: "/recommend/" + this.roomCode,
@@ -243,6 +249,12 @@ export default {
         )
         .then((response) => {
           this.bookResults = this.shuffle(response.data.items);
+          for (var item of this.bookBlacklist) {
+            this.bookResults.splice(
+              this.bookResults.findIndex((e) => e.id === item),
+              1
+            );
+          }
           this.bookDisplay = this.bookResults.splice(0, 10);
         })
         .catch((e) => {
@@ -263,6 +275,12 @@ export default {
       })
         .then((response) => {
           this.movieResults = this.shuffle(response.data.results);
+          for (var item of this.movieBlacklist) {
+            this.movieResults.splice(
+              this.movieResults.findIndex((e) => e.imdbid === item),
+              1
+            );
+          }
           this.movieDisplay = this.movieResults.splice(0, 10);
         })
         .catch((e) => {
@@ -283,6 +301,12 @@ export default {
         })
           .then((response) => {
             this.spotifyResults = this.shuffle(response.data.tracks);
+            for (var item of this.spotifyBlacklist) {
+              this.spotifyResults.splice(
+                this.spotifyResults.findIndex((e) => e.id === item),
+                1
+              );
+            }
             this.spotifyDisplay = this.spotifyResults.splice(0, 10);
           })
           .catch((e) => {
@@ -362,6 +386,32 @@ export default {
           );
           if (this.youtubeResults.length > 0) {
             this.youtubeDisplay.push(this.youtubeResults.pop());
+          }
+        } else if (type == "book") {
+          this.bookDisplay.splice(
+            this.bookDisplay.findIndex((e) => e.id === id),
+            1
+          );
+          if (this.bookResults.length > 0) {
+            this.bookDisplay.push(this.bookResults.pop());
+          }
+        }
+        if (type == "movie") {
+          this.movieDisplay.splice(
+            this.movieDisplay.findIndex((e) => e.imdbid === id),
+            1
+          );
+          if (this.movieResults.length > 0) {
+            this.movieDisplay.push(this.movieResults.pop());
+          }
+        }
+        if (type == "spotify") {
+          this.spotifyDisplay.splice(
+            this.spotifyDisplay.findIndex((e) => e.id === id),
+            1
+          );
+          if (this.spotifyResults.length > 0) {
+            this.spotifyDisplay.push(this.spotifyResults.pop());
           }
         }
       });
