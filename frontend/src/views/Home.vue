@@ -344,7 +344,7 @@ export default {
           text: "Find books ",
         },
         {
-          icon: "mdi-filmstrip pink",
+          icon: "mdi-movie-open pink",
           title: "Movies",
           text: "I don't know what I'm doing",
         },
