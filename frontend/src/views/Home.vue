@@ -38,16 +38,14 @@
           <div class="home">
             <div class="home__container bd-grid">
               <div class="home__img">
-                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img1.png" data-speed="-2" alt="" class="move">
-                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img2.png" data-speed="2" alt="" class="move">
-                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img3.png" data-speed="2" alt="" class="move">
-                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img4.png" data-speed="-2" alt="" class="move">
-                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img5.png" data-speed="-2" alt="" class="move">
-                <img src="https://raw.githubusercontent.com/bedimcode/responsive-landing-page-coffee3d/master/assets/img/img6.png" data-speed="2" alt="" class="move">
+                <img src="../images/landing1.png" data-speed="5" alt="" class="move">
+                <img src="../images/landing2.png" data-speed="5" alt="" class="move">
+                <img src="../images/landing3.png" data-speed="-2" alt="" class="move">
+                <img src="../images/landing4.png" alt="" class="move">
+                <img src="../images/landing5.png" alt="" class="move">
               </div>
               <div class="home__data">
-                <h1 class="home__title">Commonette<br>Find commonalities</h1>
-                <p class="home__description">Enjoy your favourite entertainment<br> with your friends!</p>
+                <h1 class="home__title">Commonette</h1>
                 <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room
                 </v-btn>
               </div>
@@ -548,50 +546,6 @@ img{
     background-color: var(--first-color);
 }
 
-/*===== NAV =====*/
-.nav{
-    height: var(--header-height);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    &__menu{
-        @media screen and (max-width: 768px){
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 70%;
-            height: 100%;
-            padding: 3.5rem 1.5rem 0;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            transition: .5s;
-        }
-    }
-    &__close{
-        position: absolute;
-        top: .75rem;
-        right: 1rem;
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
-    &__item{
-        margin-bottom: 2rem;
-    }
-
-    &__close, &__link, &__logo, &__toggle{
-        color: var(--white-color);
-    }
-    &__link{
-        &:hover{
-            color: var(--first-color-dark);
-        }
-    }
-    &__toggle{
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
-}
 
 /*=== Show menu ===*/
 .show{
@@ -644,9 +598,6 @@ img{
             background-color: var(--first-color-darken);
         }
     }
-    &__h1{
-        
-    }
 }
 
 #api, #about{
@@ -682,6 +633,9 @@ img{
             row-gap: 0;
             align-items: center;
             justify-content: center;
+        }
+        &__data{
+          text-align: left;
         }
         &__img{
             order: 1;
