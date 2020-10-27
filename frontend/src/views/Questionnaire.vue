@@ -1279,6 +1279,7 @@ export default {
 #progress-el {
   /* progress bar */
   background-color: pink !important;
+  height: 6px !important;
 }
 
 .category-container {
