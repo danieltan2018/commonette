@@ -1,277 +1,285 @@
 <template>
-  <v-container fluid justify-center id="main-container">
-    <v-form ref="form">
+  <v-container>
+    <VueScrollProgress></VueScrollProgress>
+    <v-container fluid justify-center id="main-container">
 
-      <p class="text-h4 font-weight-medium my-6">Questionnaire</p>
+      <v-form ref="form">
 
-      <div>Share your name</div>
-      <v-layout row wrap justify-center>
-        <v-flex xs12 md6 lg4 mx-4>
-          <v-text-field label="Name" v-model="name"></v-text-field>
-        </v-flex>
-      </v-layout>
-      <v-layout>
-        <div class="mx-auto mb-6">
-          <v-alert color="red" elevation="4" dense outlined type="error" v-if="nameNone">Please Enter Your Name!</v-alert>
-        </div>
-      </v-layout>
+        <p class="text-h4 font-weight-medium my-6">Questionnaire</p>
 
-      <v-container id="youtubeCategory" class="category-container">
-        <p class="text-h5 font-weight-medium mb-4">Youtube</p>
-        <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
+        <div>Share your name</div>
         <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category">
-            </v-autocomplete>
+          <v-flex xs12 md6 lg4 mx-4>
+            <v-text-field label="Name" v-model="name"></v-text-field>
           </v-flex>
         </v-layout>
-        <div id="ytDisplay" style="display:none">
-          <div>Drag to Rank</div>
-          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+        <v-layout>
+          <div class="mx-auto mb-6">
+            <v-alert color="red" elevation="4" dense outlined type="error" v-if="nameNone">Please Enter Your Name!</v-alert>
+          </div>
+        </v-layout>
+
+        <v-container id="youtubeCategory" class="category-container">
+          <p class="text-h5 font-weight-medium mb-4">Youtube</p>
+          <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
           <v-layout row wrap justify-center>
-            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
-              <v-card-text style="align-items:center">
-                <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
-                  <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
-                    <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')" outlined color="rgb(90, 90, 160)">
-                      <v-avatar left color="rgb(90, 90, 160)">
-                        <span style="color:white;">{{i+1}}</span>
-                      </v-avatar>
-                      {{tag}}
-                    </v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
+            <v-flex xs12 md6 lg4>
+              <v-autocomplete v-model="youtubeCategory" :items="inputYoutube" label="Category">
+              </v-autocomplete>
+            </v-flex>
           </v-layout>
-        </div>
-        <v-layout>
-          <div class="mx-auto mb-6">
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="ytNone">Please Select At Least ONE!</v-alert>
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="ytExceed">Please Select Maximum FIVE!</v-alert>
+          <div id="ytDisplay" style="display:none">
+            <div>Drag to Rank</div>
+            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+            <v-layout row wrap justify-center>
+              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+                <v-card-text style="align-items:center">
+                  <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
+                    <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
+                      <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')" outlined color="rgb(90, 90, 160)">
+                        <v-avatar left color="rgb(90, 90, 160)">
+                          <span style="color:white;">{{i+1}}</span>
+                        </v-avatar>
+                        {{tag}}
+                      </v-chip>
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-layout>
           </div>
-        </v-layout>
-      </v-container>
-
-      <v-container id="bookCategory" class="category-container">
-        <p class="text-h5 font-weight-medium mb-4">Books</p>
-        <div class="mb-4">Select up to 5 of your favourite book subjects</div>
-        <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="bookGenre" :items="inputBook" label="Genre">
-            </v-autocomplete>
-          </v-flex>
-        </v-layout>
-        <div id="bkDisplay" style="display:none">
-          <div>Drag to Rank</div>
-          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-          <v-layout row wrap justify-center>
-            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
-              <v-card-text>
-                <v-chip-group v-model="bookSelection" column active-class="primary--text">
-                  <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
-                    <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')" outlined color="rgb(90, 90, 160)">
-                      <v-avatar left color="rgb(90, 90, 160)">
-                        <span style="color:white;">{{i+1}}</span>
-                      </v-avatar>
-                      {{tag}}
-                    </v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-layout>
-        </div>
-        <v-layout>
-          <div class="mx-auto mb-6">
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="bkNone">Please Select At Least ONE!</v-alert>
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="bkExceed">Please Select Maximum FIVE!</v-alert>
-          </div>
-        </v-layout>
-      </v-container>
-
-      <v-container id="movieCategory" class="category-container">
-        <p class="text-h5 font-weight-medium mb-4">Movies</p>
-        <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
-        <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="movieGenre" :items="inputMovieGenre" label="Genre">
-            </v-autocomplete>
-          </v-flex>
-        </v-layout>
-        <div id="mvDisplay" style="display:none">
-          <div>Drag to Rank</div>
-          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-          <v-layout row wrap justify-center mb-4>
-            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
-              <v-card-text>
-                <v-chip-group v-model="movieSelection" column active-class="primary--text">
-                  <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
-                    <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')" outlined color="rgb(90, 90, 160)">
-                      <v-avatar left color="rgb(90, 90, 160)">
-                        <span style="color:white;">{{i+1}}</span>
-                      </v-avatar>
-                      {{tag}}
-                    </v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-layout>
-        </div>
-        <v-layout>
-          <div class="mx-auto mb-6">
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvNone">Please Select At Least ONE!</v-alert>
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvExceed">Please Select Maximum FIVE!</v-alert>
-          </div>
-        </v-layout>
-
-        <v-layout row wrap justify-center mb-0>
-          <v-flex xs12 md6 lg4>
-            <div>List your preferred languages</div>
-            <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple>
-              <template #selection="{ item }">
-                <v-chip close color="rgb(90, 90, 160)" outlined @click:close="delLang(item)">{{ item }}</v-chip>
-              </template>
-            </v-autocomplete>
-          </v-flex>
-        </v-layout>
-        <v-layout>
-          <div class="mx-auto mb-12">
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvLangNone">Please Select At Least ONE!</v-alert>
-          </div>
-        </v-layout>
-
-        <v-layout row wrap justify-center mb-8>
-          <v-flex xs12 md6 lg4>
-            <div>Pick a minimum IMDB value</div>
-            <v-slider v-model="movieImdb" :max="10" :min="0" :step="0.1" :thumb-size="30" thumb-label mb-8></v-slider>
-          </v-flex>
-        </v-layout>
-      </v-container>
-
-      <v-container id="Spotify" class="category-container" mb-8>
-        <p class="text-h5 font-weight-medium mb-4">Spotify</p>
-        <div mb-2>Select up to 3 of your favourite artists</div>
-        <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
-            <div v-if="artist">
-              <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" small rounded outlined color="blue">{{suggest}}</v-btn>
+          <v-layout>
+            <div class="mx-auto mb-6">
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="ytNone">Please Select At Least ONE!</v-alert>
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="ytExceed">Please Select Maximum FIVE!</v-alert>
             </div>
-          </v-flex>
-        </v-layout>
-        <div id="sADisplay" style="display:none">
-          <div>Drag to Rank</div>
-          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+          </v-layout>
+        </v-container>
+
+        <v-container id="bookiCategory" class="category-container">
+          <p class="text-h5 font-weight-medium mb-4">Books</p>
+          <div class="mb-4">Select up to 5 of your favourite book subjects</div>
           <v-layout row wrap justify-center>
-            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
-              <v-card-text>
-                <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
-                  <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
-                    <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')" outlined color="rgb(90, 90, 160)">
-                      <v-avatar left color="rgb(90, 90, 160)">
-                        <span style="color:white;">{{i+1}}</span>
-                      </v-avatar>
-                      {{tag}}
-                    </v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
+            <v-flex xs12 md6 lg4>
+              <v-autocomplete v-model="bookGenre" :items="inputBook" label="Genre">
+              </v-autocomplete>
+            </v-flex>
           </v-layout>
-        </div>
-        <v-layout>
-          <div class="mx-auto mb-6">
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sANone">Please Select At Least ONE!</v-alert>
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sAExceed">Please Select Maximum THREE!</v-alert>
+          <div id="bkDisplay" style="display:none">
+            <div>Drag to Rank</div>
+            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+            <v-layout row wrap justify-center>
+              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+                <v-card-text>
+                  <v-chip-group v-model="bookSelection" column active-class="primary--text">
+                    <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
+                      <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')" outlined color="rgb(90, 90, 160)">
+                        <v-avatar left color="rgb(90, 90, 160)">
+                          <span style="color:white;">{{i+1}}</span>
+                        </v-avatar>
+                        {{tag}}
+                      </v-chip>
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-layout>
           </div>
-        </v-layout>
-
-        <div class="mb-12"></div>
-
-        <div mb-2>Select up to 3 of your favourite tracks</div>
-        <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
-            <div v-if="track">
-              <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" small rounded outlined color="blue">{{suggest}}</v-btn>
+          <v-layout>
+            <div class="mx-auto mb-6">
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="bkNone">Please Select At Least ONE!</v-alert>
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="bkExceed">Please Select Maximum FIVE!</v-alert>
             </div>
-          </v-flex>
-        </v-layout>
-        <div id="sTDisplay" style="display:none">
-          <div>Drag to Rank</div>
-          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-          <v-layout row wrap justify-center mb-4>
-            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
-              <v-card-text>
-                <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
-                  <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
-                    <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')" outlined color="rgb(90, 90, 160)">
-                      <v-avatar left color="rgb(90, 90, 160)">
-                        <span style="color:white;">{{i+1}}</span>
-                      </v-avatar>
-                      {{tag}}
-                    </v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
           </v-layout>
-        </div>
-        <v-layout>
-          <div class="mx-auto mb-6">
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTNone">Please Select At Least ONE!</v-alert>
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTExceed">Please Select Maximum THREE!</v-alert>
-          </div>
-        </v-layout>
+        </v-container>
 
-        <div class="mb-12"></div>
-
-        <div class="mb-8"></div>
-        <div>Select up to 5 of your favourite genres</div>
-        <v-layout row wrap justify-center>
-          <v-flex xs12 md6 lg4>
-            <v-autocomplete v-model="spotifyGenre" :items="inputSpotifyGenre" label="Genre">
-            </v-autocomplete>
-          </v-flex>
-        </v-layout>
-        <div id="sGDisplay" style="display:none">
-          <div class="mb-4">Drag to Rank</div>
-          <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-          <v-layout row wrap justify-center mb-4>
-            <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
-              <v-card-text>
-                <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
-                  <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
-                    <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')" outlined color="rgb(90, 90, 160)">
-                      <v-avatar left color="rgb(90, 90, 160)">
-                        <span style="color:white;">{{i+1}}</span>
-                      </v-avatar>
-                      {{tag}}
-                    </v-chip>
-                  </draggable>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
+        <v-container id="movieCategory" class="category-container">
+          <p class="text-h5 font-weight-medium mb-4">Movies</p>
+          <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
+          <v-layout row wrap justify-center>
+            <v-flex xs12 md6 lg4>
+              <v-autocomplete v-model="movieGenre" :items="inputMovieGenre" label="Genre">
+              </v-autocomplete>
+            </v-flex>
           </v-layout>
-        </div>
-        <v-layout>
-          <div class="mx-auto mb-6">
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGNone">Please Select At Least ONE!</v-alert>
-            <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGExceed">Please Select Maximum FIVE!</v-alert>
+          <div id="mvDisplay" style="display:none">
+            <div>Drag to Rank</div>
+            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+            <v-layout row wrap justify-center mb-4>
+              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+                <v-card-text>
+                  <v-chip-group v-model="movieSelection" column active-class="primary--text">
+                    <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
+                      <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')" outlined color="rgb(90, 90, 160)">
+                        <v-avatar left color="rgb(90, 90, 160)">
+                          <span style="color:white;">{{i+1}}</span>
+                        </v-avatar>
+                        {{tag}}
+                      </v-chip>
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-layout>
           </div>
-        </v-layout>
+          <v-layout>
+            <div class="mx-auto mb-6">
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvNone">Please Select At Least ONE!</v-alert>
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvExceed">Please Select Maximum FIVE!</v-alert>
+            </div>
+          </v-layout>
 
-      </v-container>
-      <v-btn text class="success mx-0 mb-6" @click="submit">Let's Go</v-btn>
-    </v-form>
+          <v-layout row wrap justify-center mb-0>
+            <v-flex xs12 md6 lg4>
+              <div>List your preferred languages</div>
+              <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple>
+                <template #selection="{ item }">
+                  <v-chip close color="rgb(90, 90, 160)" outlined @click:close="delLang(item)">{{ item }}</v-chip>
+                </template>
+              </v-autocomplete>
+            </v-flex>
+          </v-layout>
+          <v-layout>
+            <div class="mx-auto mb-12">
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="mvLangNone">Please Select At Least ONE!</v-alert>
+            </div>
+          </v-layout>
+
+          <v-layout row wrap justify-center mb-8>
+            <v-flex xs12 md6 lg4>
+              <div>Pick a minimum IMDB value</div>
+              <v-slider v-model="movieImdb" :max="10" :min="0" :step="0.1" :thumb-size="30" thumb-label mb-8></v-slider>
+            </v-flex>
+          </v-layout>
+        </v-container>
+
+        <v-container id="Spotfy" class="category-container" mb-8>
+          <p class="text-h5 font-weight-medium mb-4">Spotify</p>
+          <div mb-2>Select up to 3 of your favourite artists</div>
+          <v-layout row wrap justify-center>
+            <v-flex xs12 md6 lg4>
+              <v-text-field v-model="artist" v-on:keyup="searchSpotify(artist, 'artist')" label="Artist"></v-text-field>
+              <div v-if="artist">
+                <v-btn v-for="suggest in artistSuggestions" :key="suggest" v-on:click="addSpotifyArtist(suggest)" class="suggest-button" small rounded outlined color="blue">{{suggest}}</v-btn>
+              </div>
+            </v-flex>
+          </v-layout>
+          <div id="sADisplay" style="display:none">
+            <div>Drag to Rank</div>
+            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+            <v-layout row wrap justify-center>
+              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+                <v-card-text>
+                  <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
+                    <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
+                      <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')" outlined color="rgb(90, 90, 160)">
+                        <v-avatar left color="rgb(90, 90, 160)">
+                          <span style="color:white;">{{i+1}}</span>
+                        </v-avatar>
+                        {{tag}}
+                      </v-chip>
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-layout>
+          </div>
+          <v-layout>
+            <div class="mx-auto mb-6">
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sANone">Please Select At Least ONE!</v-alert>
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sAExceed">Please Select Maximum THREE!</v-alert>
+            </div>
+          </v-layout>
+
+          <div class="mb-12"></div>
+
+          <div mb-2>Select up to 3 of your favourite tracks</div>
+          <v-layout row wrap justify-center>
+            <v-flex xs12 md6 lg4>
+              <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
+              <div v-if="track">
+                <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" small rounded outlined color="blue">{{suggest}}</v-btn>
+              </div>
+            </v-flex>
+          </v-layout>
+          <div id="sTDisplay" style="display:none">
+            <div>Drag to Rank</div>
+            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+            <v-layout row wrap justify-center mb-4>
+              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+                <v-card-text>
+                  <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
+                    <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
+                      <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')" outlined color="rgb(90, 90, 160)">
+                        <v-avatar left color="rgb(90, 90, 160)">
+                          <span style="color:white;">{{i+1}}</span>
+                        </v-avatar>
+                        {{tag}}
+                      </v-chip>
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-layout>
+          </div>
+          <v-layout>
+            <div class="mx-auto mb-6">
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTNone">Please Select At Least ONE!</v-alert>
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTExceed">Please Select Maximum THREE!</v-alert>
+            </div>
+          </v-layout>
+
+          <div class="mb-12"></div>
+
+          <div class="mb-8"></div>
+          <div>Select up to 5 of your favourite genres</div>
+          <v-layout row wrap justify-center>
+            <v-flex xs12 md6 lg4>
+              <v-autocomplete v-model="spotifyGenre" :items="inputSpotifyGenre" label="Genre">
+              </v-autocomplete>
+            </v-flex>
+          </v-layout>
+          <div id="sGDisplay" style="display:none">
+            <div class="mb-4">Drag to Rank</div>
+            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+            <v-layout row wrap justify-center mb-4>
+              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+                <v-card-text>
+                  <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
+                    <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
+                      <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')" outlined color="rgb(90, 90, 160)">
+                        <v-avatar left color="rgb(90, 90, 160)">
+                          <span style="color:white;">{{i+1}}</span>
+                        </v-avatar>
+                        {{tag}}
+                      </v-chip>
+                    </draggable>
+                  </v-chip-group>
+                </v-card-text>
+              </v-card>
+            </v-layout>
+          </div>
+          <v-layout>
+            <div class="mx-auto mb-6">
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGNone">Please Select At Least ONE!</v-alert>
+              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sGExceed">Please Select Maximum FIVE!</v-alert>
+            </div>
+          </v-layout>
+
+        </v-container>
+        <v-btn text class="success mx-0 mb-6" @click="submit">Let's Go</v-btn>
+      </v-form>
+    </v-container>
   </v-container>
 </template>
 
 <script>
+import Vue from "vue";
 import draggable from "vuedraggable";
 import axios from "axios";
+import VueScrollProgress from "vue-scroll-progress";
+
+Vue.use(VueScrollProgress);
 
 export default {
   components: {
@@ -282,6 +290,7 @@ export default {
   },
   data: () => {
     return {
+      scrollPosition: 0,
       name: "",
       youtubeCategory: "",
       bookGenre: "",
@@ -1261,6 +1270,16 @@ export default {
 
 #main-container {
   margin-top: 56px;
+}
+
+#progress-container-el {
+  /* background */
+  background-color: transparent !important;
+  margin-top: 64px;
+}
+#progress-el {
+  /* progress bar */
+  background-color: pink !important;
 }
 
 .category-container {
