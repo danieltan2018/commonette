@@ -7,7 +7,7 @@
       <div>Share your name</div>
       <v-layout row wrap justify-center>
         <v-flex xs12 md6 lg4 mx-4>
-          <v-text-field label="Name" v-model="name" :rules="inputRequiredRule"></v-text-field>
+          <v-text-field label="Name" v-model="name"></v-text-field>
         </v-flex>
       </v-layout>
       <v-layout>
@@ -129,7 +129,7 @@
         <v-layout row wrap justify-center mb-0>
           <v-flex xs12 md6 lg4>
             <div>List your preferred languages</div>
-            <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple :rules="inputRequiredRule">
+            <v-autocomplete v-model="movieLanguage" :items="inputMovieLang" label="Language" multiple>
               <template #selection="{ item }">
                 <v-chip close color="rgb(90, 90, 160)" outlined @click:close="delLang(item)">{{ item }}</v-chip>
               </template>
