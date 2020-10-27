@@ -290,7 +290,6 @@ export default {
   },
   data: () => {
     return {
-      scrollPosition: 0,
       name: "",
       youtubeCategory: "",
       bookGenre: "",
