@@ -1,22 +1,8 @@
 <template>
   <v-main class="home">
-    movie: {{movieTop}}<br>
-    spotify: {{spotifyTop}}<br>
-    book:{{ bookTop }}<br>
-    users: {{roomUsers}}
-    <!-- <div class="row">
-      <div class="col-lg-4" >
-        <v-card type="chart" dark>
-          <div class="chart-area">
-            <line-chart style="height: 100%" chart-id="purple-line-chart" :chart-data="purpleLineChart.chartData" :gradient-colors="purpleLineChart.gradientColors" :gradient-stops="purpleLineChart.gradientStops" :extra-options="purpleLineChart.extraOptions">
-            </line-chart>
-          </div>
-        </v-card>
-      </div>
-    </div> -->
-    <div class="row" v-if="youtubeReady">
+    <div class="row">
       <div class="col-1"></div>
-      <div class="col-4">
+      <div class="col-5" data-aos="fade-down-right" data-aos-duration="1000" v-if="youtubeReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="red" large>mdi-youtube</v-icon>
@@ -28,30 +14,7 @@
           </div>
         </v-card>
       </div>
-      <div class="col-1"></div>
-      <div class="col-5"></div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col-5"></div>
-      <div class="col-1"></div>
-      <div class="col-4">
-        <v-card type="chart" dark>
-          <v-card-title>
-            <v-icon color="rgb(255, 0, 128)" large>mdi-movie-open</v-icon>Movie
-          </v-card-title>
-          <div class="chart-area">
-            <bar-chart style="height: 100%" chart-id="movieStats" :chart-data="movieBarChart.chartData" :gradient-stops="movieBarChart.gradientStops" :extra-options="movieBarChart.extraOptions">
-            </bar-chart>
-          </div>
-        </v-card>
-      </div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col-4">
+      <div class="col-5" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="500" v-if="bookReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="blue" large>mdi-book</v-icon>Book
@@ -63,14 +26,21 @@
         </v-card>
       </div>
       <div class="col-1"></div>
-      <div class="col-5"></div>
-      <div class="col-1"></div>
     </div>
     <div class="row">
       <div class="col-1"></div>
-      <div class="col-5"></div>
-      <div class="col-1"></div>
-      <div class="col-4">
+      <div class="col-5" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="1000" v-if="movieReady">
+        <v-card type="chart" dark>
+          <v-card-title>
+            <v-icon color="rgb(255, 0, 128)" large>mdi-movie-open</v-icon>Movie
+          </v-card-title>
+          <div class="chart-area">
+            <bar-chart style="height: 100%" chart-id="movieStats" :chart-data="movieBarChart.chartData" :gradient-stops="movieBarChart.gradientStops" :extra-options="movieBarChart.extraOptions">
+            </bar-chart>
+          </div>
+        </v-card>
+      </div>
+      <div class="col-5" data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1500" v-if="spotifyReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="green" large>mdi-spotify</v-icon>Spotify
@@ -83,28 +53,16 @@
       </div>
       <div class="col-1"></div>
     </div>
-    <!-- <div class="row">
-      <div class="col-lg-4">
-        <v-card type="chart" dark>
-          <div class="chart-area">
-            <line-chart style="height: 100%" chart-id="green-line-chart" :chart-data="greenLineChart.chartData" :gradient-stops="greenLineChart.gradientStops" :extra-options="greenLineChart.extraOptions">
-            </line-chart>
-          </div>
-        </v-card>
-      </div>
-    </div> -->
   </v-main>
 </template>
 
 <script>
-// import LineChart from '../components/Charts/LineChart';
 import BarChart from "../components/Charts/BarChart";
 import * as chartConfigs from "../components/Charts/config";
 import config from "../config";
 import axios from "axios";
 export default {
   components: {
-    // LineChart,
     BarChart,
   },
   props: {
@@ -117,85 +75,56 @@ export default {
     roomUsers: [],
     userCount: 0,
     youtubeReady: false,
-    bookTop: [],
-    movieTop: [],
-    spotifyTop: [],
-    // purpleLineChart: {
-    //   extraOptions: chartConfigs.purpleChartOptions,
-    //   chartData: {
-    //     labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-    //     datasets: [{
-    //       label: "Data",
-    //       fill: true,
-    //       borderColor: config.colors.primary,
-    //       borderWidth: 2,
-    //       borderDash: [],
-    //       borderDashOffset: 0.0,
-    //       pointBackgroundColor: config.colors.primary,
-    //       pointBorderColor: 'rgba(255,255,255,0)',
-    //       pointHoverBackgroundColor: config.colors.primary,
-    //       pointBorderWidth: 20,
-    //       pointHoverRadius: 4,
-    //       pointHoverBorderWidth: 15,
-    //       pointRadius: 4,
-    //       data: [80, 100, 70, 80, 120, 80],
-    //     }]
-    //   },
-    //   gradientColors: config.colors.primaryGradient,
-    //   gradientStops: [1, 0.2, 0],
-    // },
-    // greenLineChart: {
-    //   extraOptions: chartConfigs.greenChartOptions,
-    //   chartData: {
-    //     labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
-    //     datasets: [{
-    //       label: "My First dataset",
-    //       fill: true,
-    //       borderColor: config.colors.danger,
-    //       borderWidth: 2,
-    //       borderDash: [],
-    //       borderDashOffset: 0.0,
-    //       pointBackgroundColor: config.colors.danger,
-    //       pointBorderColor: 'rgba(255,255,255,0)',
-    //       pointHoverBackgroundColor: config.colors.danger,
-    //       pointBorderWidth: 20,
-    //       pointHoverRadius: 4,
-    //       pointHoverBorderWidth: 15,
-    //       pointRadius: 4,
-    //       data: [90, 27, 60, 12, 80],
-    //     }]
-    //   },
-    //   gradientColors: ['rgba(66,134,121,0.15)', 'rgba(66,134,121,0.0)', 'rgba(66,134,121,0)'],
-    //   gradientStops: [1, 0.4, 0],
-    // },
-    bookBarChart: {
-      extraOptions: chartConfigs.barChartOptions,
-      chartData: {
-        labels: ["Business"],
-        datasets: [
-          {
-            label: "No. of Users",
-            fill: true,
-            borderColor: config.colors.info,
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            data: [15],
-          },
-        ],
-      },
-      gradientColors: config.colors.primaryGradient,
-      gradientStops: [1, 0.4, 0],
-    },
+    bookReady: false,
+    movieReady: false,
+    spotifyReady: false,
     youtubeBarChart: {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
         labels: [],
         datasets: [
           {
-            label: "No. of Users",
+            label: "Weight",
             fill: true,
             borderColor: "red",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: [],
+          },
+        ],
+      },
+      gradientColors: config.colors.primaryGradient,
+      gradientStops: [1, 0.4, 0],
+    },
+    bookBarChart: {
+      extraOptions: chartConfigs.barChartOptions,
+      chartData: {
+        labels: [],
+        datasets: [
+          {
+            label: "Weight",
+            fill: true,
+            borderColor: config.colors.info,
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: [],
+          },
+        ],
+      },
+      gradientColors: config.colors.primaryGradient,
+      gradientStops: [1, 0.4, 0],
+    },
+    movieBarChart: {
+      extraOptions: chartConfigs.barChartOptions,
+      chartData: {
+        labels: [],
+        datasets: [
+          {
+            label: "Weight",
+            fill: true,
+            borderColor: "rgb(255, 0, 128)",
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
@@ -209,35 +138,16 @@ export default {
     spotifyBarChart: {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
-        labels: ["k-pop", "pop"],
+        labels: [],
         datasets: [
           {
-            label: "No. of Users",
+            label: "Weight",
             fill: true,
             borderColor: "green",
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: [12, 8],
-          },
-        ],
-      },
-      gradientColors: config.colors.primaryGradient,
-      gradientStops: [1, 0.4, 0],
-    },
-    movieBarChart: {
-      extraOptions: chartConfigs.barChartOptions,
-      chartData: {
-        labels: ["Comedy", "Biography"],
-        datasets: [
-          {
-            label: "No. of Users",
-            fill: true,
-            borderColor: "rgb(255, 0, 128)",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            data: [12, 4],
+            data: [],
           },
         ],
       },
@@ -288,9 +198,21 @@ export default {
           this.youtubeBarChart.chartData.datasets[0].data.push(value);
         }
         this.youtubeReady = true;
-        this.bookTop = response.data.book;
-        this.movieTop = response.data.movie;
-        this.spotifyTop = response.data.spotify;
+        for (const [key, value] of Object.entries(response.data.book)) {
+          this.bookBarChart.chartData.labels.push(key);
+          this.bookBarChart.chartData.datasets[0].data.push(value);
+        }
+        this.bookReady = true;
+        for (const [key, value] of Object.entries(response.data.movie)) {
+          this.movieBarChart.chartData.labels.push(key);
+          this.movieBarChart.chartData.datasets[0].data.push(value);
+        }
+        this.movieReady = true;
+        for (const [key, value] of Object.entries(response.data.spotify)) {
+          this.spotifyBarChart.chartData.labels.push(key);
+          this.spotifyBarChart.chartData.datasets[0].data.push(value);
+        }
+        this.spotifyReady = true;
       });
     },
   },
