@@ -319,6 +319,14 @@ export default {
       artistSuggestions: [],
       track: null,
       trackSuggestions: [],
+      artistId: null,
+      trackId: null,
+      artistIds: [],
+      trackIds: [],
+      artistDic: {},
+      trackDic: {},
+      roomCode: localStorage.getItem("roomCode"),
+      roomName: localStorage.getItem("roomName"),
       inputRequiredRule: [(v) => v.length > 0 || "Required"],
       autocompleteMax3Rule: [
         (v) => v.length > 0 || "Required",
@@ -344,37 +352,20 @@ export default {
       nameNone: false,
       languages: ["English", "Mandarin", "Malay", "Tamil"],
       inputYoutube: [
-        "Shorts",
         "Entertainment",
         "News & Politics",
         "Howto & Style",
         "Education",
         "Gaming",
-        "Videoblogging",
         "People & Blogs",
         "Comedy",
-        "Trailers",
         "Science & Technology",
-        "Shows",
-        "Sci-Fi/Fantasy",
-        "Thriller",
         "Film & Animation",
         "Autos & Vehicles",
         "Music",
-        "Horror",
-        "Foreign",
         "Pets & Animals",
         "Sports",
-        "Travel & Events",
-        "Short Movies",
-        "Anime/Animation",
-        "Movies",
-        "Family",
-        "Drama",
-        "Documentary",
-        "Comedy",
-        "Classics",
-        "Action/Adventure",
+        "Travel & Events"
       ],
       youtubeCategories: {
         "Film & Animation": "1",
@@ -954,7 +945,7 @@ export default {
       },
     },
     sTracks: {
-      immediate: true,
+      immediate: false,
       handler() {
         if (this.sTracks != []) {
           document.getElementById("sTDisplay").style.display = "inline";
@@ -962,7 +953,7 @@ export default {
       },
     },
     sArtists: {
-      immediate: true,
+      immediate: false,
       handler() {
         if (this.sArtists != []) {
           document.getElementById("sADisplay").style.display = "inline";
@@ -986,6 +977,7 @@ export default {
       if (this.validate()) {
         console.log("All Clear");
         // Send data to backend
+        this.sendQuestionnaireData();
       } else {
         this.showAlerts();
         console.log("Error la");
@@ -1097,16 +1089,20 @@ export default {
               let names = [];
               for (let i = 0; i < items.length; i++) {
                 names.push(items[i]["name"]);
+                this.artistDic[items[i]["name"]] = items[i]["id"];
               }
-              console.log("names:", names);
+            //   console.log("names:", names);
+            console.log("artistDic", this.artistDic);
               this.artistSuggestions = names;
             } else if (type === "track") {
               let items = response.data.tracks.items;
               let names = [];
               for (let i = 0; i < items.length; i++) {
                 names.push(items[i]["name"]);
+                this.trackDic[items[i]["name"]] = items[i]["id"];
               }
-              console.log("names:", names);
+            //   console.log("names:", names);
+            console.log("trackDic", this.trackDic);
               this.trackSuggestions = names;
             }
           })
@@ -1124,6 +1120,128 @@ export default {
       if (!this.sTracks.includes(value) && value != "") {
         this.sTracks.push(value);
       }
+    },
+    navigateRoute(newpath) {
+      this.$router.push(newpath);
+    },
+    getSpotifyID(query, type) {
+      axios({
+        url: "/spotify-token",
+        method: "GET",
+      }).then((auth) => {
+        axios({
+          method: "GET",
+          url: "https://api.spotify.com/v1/search",
+          params: {
+            q: query,
+            type: type,
+            limit: 10,
+          },
+          headers: auth.data,
+        })
+          .then((response) => {
+            var id = "";
+            if (type === "artist") {
+              // artists > items > id
+              let items = response.data.artists.items;
+              for (let i = 0; i < items.length; i++) {
+                id = items[i]["id"];
+                if (id !== null) {
+                    break;
+                }
+              }
+            //   console.log("id:", id);
+              this.artistId = id;
+              console.log("artistId in getSpotifyID", this.artistId);
+            } else if (type === "track") {
+              let items = response.data.tracks.items;
+              for (let i = 0; i < items.length; i++) {
+                id = items[i]["id"];
+                if (id !== null) {
+                    break;
+                }
+              }
+            //   console.log("id:", id);
+              this.trackId = id;
+              console.log("trackId in getSpotifyID", this.trackId);
+            }
+            // console.log("return id:", id)
+          })
+          .catch((e) => {
+            console.log(e.response.data);
+          });
+      });
+    },
+    sendQuestionnaireData() {
+      // make spotify genres all lowercase
+      let spotify_genres = this.sGenres;
+      let spotify_genres_lower = [];
+      for (let genre of spotify_genres) {
+        spotify_genres_lower.push(genre.toLowerCase());
+      }
+
+      // process to get youtube video ids
+      let youtubes = this.youtubes;
+      let youtubes_id = [];
+      for (let youtube of youtubes) {
+        if (youtube in this.youtubeCategories) {
+          youtubes_id.push(this.youtubeCategories[youtube])
+        }
+      }
+
+      // process to get ids of spotify artists and tracks
+      // Need to figure out how to wait for getSpotifyID response, if not the ids will be undefined.
+      for (let artist of this.sArtists) {
+        let id = this.artistDic[artist];
+        this.artistIds.push(id);
+      }
+      for (var track of this.sTracks) {
+        let id = this.trackDic[track]
+        this.trackIds.push(id)
+      }
+
+    //   console.log("roomCode", this.roomCode);
+    //   console.log("roomName", this.roomName);
+      console.log("youtubes", this.youtubes);
+      console.log("youtubes_id", youtubes_id);
+    //   console.log("books", this.books);
+    //   console.log("movies", this.movies);
+    //   console.log("movieImdb", this.movieImdb);
+    //   console.log("movieLanguage", this.movieLanguage);
+    //   console.log("sGenres", this.sGenres);
+      console.log("sArtists", this.sArtists);
+      console.log("artistIds", this.artistIds);
+      console.log("sTracks", this.sTracks);
+      console.log("trackIds", this.trackIds);
+      axios({
+        url: "/add-questionnaire/" + this.roomCode,
+        method: "POST",
+        data: {
+            name: this.roomName,
+            youtube: youtubes_id,
+            book: this.books,
+            movie: {
+                genre: this.movies,
+                imdb: this.movieImdb,
+                language: this.movieLanguage,
+            },
+            spotify: {
+                genre: spotify_genres_lower,
+                artist: this.artistIds,
+                track: this.trackIds,
+            }
+        }
+      })
+        .then((response) => {
+          console.log("response", response);
+          // If all inputs are filled, navigate to recommend.
+          this.navigateRoute("/recommend");
+          // If any of the inputs are blank, navigate to questionnaire again.
+        })
+        .catch((e) => {
+          console.log("e", e);
+          this.navigateRoute("/questionnaire");
+        });
     },
     remove(tag, list) {
       if (list == "youtubes")
