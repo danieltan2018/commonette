@@ -1,6 +1,5 @@
 <template>
   <v-main class="home">
-    youtube: {{youtubeTop}}<br>
     movie: {{movieTop}}<br>
     spotify: {{spotifyTop}}<br>
     book:{{ bookTop }}<br>
@@ -15,7 +14,7 @@
         </v-card>
       </div>
     </div> -->
-    <div class="row">
+    <div class="row" v-if="youtubeReady">
       <div class="col-1"></div>
       <div class="col-4">
         <v-card type="chart" dark>
@@ -117,7 +116,7 @@ export default {
   data: () => ({
     roomUsers: [],
     userCount: 0,
-    youtubeTop: [],
+    youtubeReady: false,
     bookTop: [],
     movieTop: [],
     spotifyTop: [],
@@ -191,7 +190,7 @@ export default {
     youtubeBarChart: {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
-        labels: ["Film & Animation", "Entertainment"],
+        labels: [],
         datasets: [
           {
             label: "No. of Users",
@@ -200,7 +199,7 @@ export default {
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: [9, 8],
+            data: [],
           },
         ],
       },
@@ -272,7 +271,7 @@ export default {
                 gender: person.gender,
               });
             }
-            localStorage.setItem("roomUsers", JSON.stringify(roomUsers));
+            localStorage.setItem("roomUsers", JSON.stringify(this.roomUsers));
             this.userCount = this.roomUsers.length;
           } else {
             this.$bus.$emit("updated", "joined");
@@ -283,17 +282,16 @@ export default {
         .catch(() => {
           this.navigateRoute("/");
         });
-      axios
-        .get("/dashboard/" + this.roomCode)
-        .then((response) => {
-          this.youtubeTop = response.data.youtube;
-          this.bookTop = response.data.book;
-          this.movieTop = response.data.movie;
-          this.spotifyTop = response.data.spotify;
-        })
-        .catch(() => {
-          this.navigateRoute("/questionnaire");
-        });
+      axios.get("/dashboard/" + this.roomCode).then((response) => {
+        for (const [key, value] of Object.entries(response.data.youtube)) {
+          this.youtubeBarChart.chartData.labels.push(key);
+          this.youtubeBarChart.chartData.datasets[0].data.push(value);
+        }
+        this.youtubeReady = true;
+        this.bookTop = response.data.book;
+        this.movieTop = response.data.movie;
+        this.spotifyTop = response.data.spotify;
+      });
     },
   },
 };
