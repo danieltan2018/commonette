@@ -45,9 +45,13 @@
                 <img src="../images/landing5.png" alt="" class="move">
               </div>
               <div class="home__data">
-                <h1 class="home__title">Commonette</h1>
-                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
-                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
+                <div data-aos="zoom-in">
+                  <h1 class="home__title">Commonette</h1>
+                  <div data-aos="zoom-in" data-aos-delay="500">
+                    <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
+                    <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -86,7 +90,7 @@
           </v-container>
         </v-theme-provider>
       </v-img> -->
-
+      <!-- 
       <section id="about">
 
         <div class="py-12"></div>
@@ -112,9 +116,9 @@
         </v-container>
 
         <v-divider class="mb-1"></v-divider>
-        <v-divider></v-divider>
+        <v-divider></v-divider> -->
 
-        <!-- <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
+      <!-- <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
           <div v-if="i % 2 == 0">
             <v-row height=500>
               <v-col cols='5' md='5'>
@@ -143,12 +147,12 @@
           </div>
         </v-responsive> -->
 
-        <!-- align-center body text -->
-        <v-responsive class="mx-auto title font-weight-light " max-width="720">
+      <!-- align-center body text -->
+      <!-- <v-responsive class="mx-auto title font-weight-light " max-width="720">
           <br><br>
         </v-responsive>
 
-      </section>
+      </section> -->
 
       <section id="mediums" color="rgb(54, 54, 79)">
         <div class="py-12"></div>
@@ -160,17 +164,19 @@
           </v-responsive>
           <v-row>
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" md="3">
-              <v-card class="py-12 px-4 rounded-xl" color="#E3E9F2" flat>
-                <v-theme-provider dark>
-                  <div>
-                    <v-avatar color="primary" size="88">
-                      <v-icon large v-text="icon"></v-icon>
-                    </v-avatar>
-                  </div>
-                </v-theme-provider>
-                <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title" style="color:rgb(48, 48, 68);"></v-card-title>
-                <v-card-text class="subtitle-1" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
-              </v-card>
+              <div data-aos="flip-up" data-aos-delay="100">
+                <v-card class="py-12 px-4 rounded-xl" color="#E3E9F2" flat>
+                  <v-theme-provider dark>
+                    <div>
+                      <v-avatar color="primary" size="88">
+                        <v-icon large v-text="icon"></v-icon>
+                      </v-avatar>
+                    </div>
+                  </v-theme-provider>
+                  <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title" style="color:rgb(48, 48, 68);"></v-card-title>
+                  <v-card-text class="subtitle-1" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
+                </v-card>
+              </div>
             </v-col>
           </v-row>
         </v-container>
@@ -189,30 +195,32 @@
             </v-responsive>
             <v-row dense>
               <v-col v-for="(item, i) in items" :key="i" cols="12" lg='4' style="padding:10px">
-                <v-card color="#50587C" shaped>
-                  <div class="d-flex flex-no-wrap justify-space-between">
-                    <div>
-                      <v-card-text class="headline" v-text="item.title" style="color: #ebebeb; text-align: left;"></v-card-text>
+                <div data-aos="fade-up">
+                  <v-card color="#50587C" shaped>
+                    <div class="d-flex flex-no-wrap justify-space-between">
+                      <div>
+                        <v-card-text class="headline" v-text="item.title" style="color: #ebebeb; text-align: left;"></v-card-text>
 
-                      <v-card-subtitle v-text="item.description" style="color:#ebebeb; text-align: left"></v-card-subtitle>
+                        <v-card-subtitle v-text="item.description" style="color:#ebebeb; text-align: left"></v-card-subtitle>
 
-                      <v-card-actions>
-                        <!-- custom button here -->
-                        <v-btn v-if="item.artist === 'Ellie Goulding'" class="ml-2 mt-3" fab icon height="40px" right width="40px">
-                          <v-icon>mdi-play</v-icon>
-                        </v-btn>
+                        <v-card-actions>
+                          <!-- custom button here -->
+                          <v-btn v-if="item.artist === 'Ellie Goulding'" class="ml-2 mt-3" fab icon height="40px" right width="40px">
+                            <v-icon>mdi-play</v-icon>
+                          </v-btn>
 
-                        <v-btn v-else class="ml-2 mt-5 mb-3" color="#F1F4F9" rounded small :href="item.site" target="_blank">
-                          ABOUT API
-                        </v-btn>
-                      </v-card-actions>
+                          <v-btn v-else class="ml-2 mt-5 mb-3" color="#F1F4F9" rounded small :href="item.site" target="_blank">
+                            ABOUT API
+                          </v-btn>
+                        </v-card-actions>
+                      </div>
+
+                      <v-avatar class="ma-4" size="105" tile>
+                        <v-img :src="item.src" contain></v-img>
+                      </v-avatar>
                     </div>
-
-                    <v-avatar class="ma-4" size="105" tile>
-                      <v-img :src="item.src" contain></v-img>
-                    </v-avatar>
-                  </div>
-                </v-card>
+                  </v-card>
+                </div>
               </v-col>
             </v-row>
           </v-container>
