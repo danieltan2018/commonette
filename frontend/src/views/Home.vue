@@ -97,8 +97,25 @@
           <v-divider></v-divider>
         </v-responsive>
         
-        
-        <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
+        <v-container fluid class="my-5">
+          <div v-for="(story, i) in stories" :key=i>
+            <v-row>
+              <v-col md=6 sm=12>
+                picture here
+                <v-parallax class="bottom-gradient" :src="story.src"></v-parallax>
+              </v-col>
+              <v-col md=6 sm=12>
+                text here
+              </v-col>
+            </v-row>
+          </div>
+          
+        </v-container>
+
+        <v-divider class="mb-1"></v-divider>
+        <v-divider></v-divider>
+
+        <!-- <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
           <div v-if="i % 2 == 0">
             <v-row height=500>
               <v-col cols='5' md='5'>
@@ -125,7 +142,7 @@
             </v-col>
           </v-row>
           </div>
-        </v-responsive>
+        </v-responsive> -->
 
         
         <!-- align-center body text -->
