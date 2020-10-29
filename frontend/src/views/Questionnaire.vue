@@ -1396,7 +1396,7 @@ export default {
 }
 #progress-el {
   /* progress bar */
-  background-color: pink !important;
+  background-color: #5DC0BF !important;
   height: 6px !important;
 }
 
