@@ -977,6 +977,7 @@ export default {
       if (this.validate()) {
         console.log("All Clear");
         // Send data to backend
+
         this.sendQuestionnaireData();
       } else {
         this.showAlerts();
@@ -1091,7 +1092,6 @@ export default {
                 names.push(items[i]["name"]);
                 this.artistDic[items[i]["name"]] = items[i]["id"];
               }
-            //   console.log("names:", names);
             console.log("artistDic", this.artistDic);
               this.artistSuggestions = names;
             } else if (type === "track") {
@@ -1101,7 +1101,6 @@ export default {
                 names.push(items[i]["name"]);
                 this.trackDic[items[i]["name"]] = items[i]["id"];
               }
-            //   console.log("names:", names);
             console.log("trackDic", this.trackDic);
               this.trackSuggestions = names;
             }
@@ -1124,54 +1123,6 @@ export default {
     navigateRoute(newpath) {
       this.$router.push(newpath);
     },
-    getSpotifyID(query, type) {
-      axios({
-        url: "/spotify-token",
-        method: "GET",
-      }).then((auth) => {
-        axios({
-          method: "GET",
-          url: "https://api.spotify.com/v1/search",
-          params: {
-            q: query,
-            type: type,
-            limit: 10,
-          },
-          headers: auth.data,
-        })
-          .then((response) => {
-            var id = "";
-            if (type === "artist") {
-              // artists > items > id
-              let items = response.data.artists.items;
-              for (let i = 0; i < items.length; i++) {
-                id = items[i]["id"];
-                if (id !== null) {
-                    break;
-                }
-              }
-            //   console.log("id:", id);
-              this.artistId = id;
-              console.log("artistId in getSpotifyID", this.artistId);
-            } else if (type === "track") {
-              let items = response.data.tracks.items;
-              for (let i = 0; i < items.length; i++) {
-                id = items[i]["id"];
-                if (id !== null) {
-                    break;
-                }
-              }
-            //   console.log("id:", id);
-              this.trackId = id;
-              console.log("trackId in getSpotifyID", this.trackId);
-            }
-            // console.log("return id:", id)
-          })
-          .catch((e) => {
-            console.log(e.response.data);
-          });
-      });
-    },
     sendQuestionnaireData() {
       // make spotify genres all lowercase
       let spotify_genres = this.sGenres;
@@ -1190,7 +1141,6 @@ export default {
       }
 
       // process to get ids of spotify artists and tracks
-      // Need to figure out how to wait for getSpotifyID response, if not the ids will be undefined.
       for (let artist of this.sArtists) {
         let id = this.artistDic[artist];
         this.artistIds.push(id);
@@ -1200,19 +1150,18 @@ export default {
         this.trackIds.push(id)
       }
 
-    //   console.log("roomCode", this.roomCode);
-    //   console.log("roomName", this.roomName);
-      console.log("youtubes", this.youtubes);
+    //   console.log("youtubes", this.youtubes);
       console.log("youtubes_id", youtubes_id);
-    //   console.log("books", this.books);
-    //   console.log("movies", this.movies);
-    //   console.log("movieImdb", this.movieImdb);
-    //   console.log("movieLanguage", this.movieLanguage);
-    //   console.log("sGenres", this.sGenres);
-      console.log("sArtists", this.sArtists);
+      console.log("books", this.books);
+      console.log("movies", this.movies);
+      console.log("movieImdb", this.movieImdb);
+      console.log("movieLanguage", this.movieLanguage);
+      console.log("sGenres", this.sGenres);
+    //   console.log("sArtists", this.sArtists);
       console.log("artistIds", this.artistIds);
-      console.log("sTracks", this.sTracks);
+    //   console.log("sTracks", this.sTracks);
       console.log("trackIds", this.trackIds);
+
       axios({
         url: "/add-questionnaire/" + this.roomCode,
         method: "POST",
@@ -1234,9 +1183,7 @@ export default {
       })
         .then((response) => {
           console.log("response", response);
-          // If all inputs are filled, navigate to recommend.
           this.navigateRoute("/recommend");
-          // If any of the inputs are blank, navigate to questionnaire again.
         })
         .catch((e) => {
           console.log("e", e);
