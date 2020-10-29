@@ -247,6 +247,9 @@ export default {
   created() {
     this.initialise();
   },
+  mounted: function () {
+    window.scrollTo(0, 0);
+  },
   methods: {
     navigateRoute(newpath) {
       this.$router.push(newpath);

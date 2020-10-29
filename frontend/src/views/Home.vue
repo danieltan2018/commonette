@@ -28,7 +28,7 @@
           </v-card-text>
           <v-card-actions class="justify-center">
             <v-btn color="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
-            <v-btn color="success" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">Recommendations</v-btn>
+            <v-btn color="success" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">View Room</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -435,7 +435,7 @@ export default {
             if (flag) {
               this.navigateRoute("/questionnaire");
             } else {
-              this.navigateRoute("/recommend");
+              this.navigateRoute("/dashboard/" + this.roomCode);
             }
           })
           .catch((error) => {
