@@ -79,7 +79,7 @@ def recommend(room_code):
         if (len(room["questionnaire"]) == 0):
             return "At least one user needs to complete the questionnaire", 400
 
-        return jsonify(utility.generate_api(room["questionnaire"]), True), 200
+        return jsonify(utility.generate_api(room["questionnaire"], True)), 200
     except Exception as e:
         return f"{e}", 400
 
@@ -96,7 +96,7 @@ def dashboard(room_code):
         if (len(room["questionnaire"]) == 0):
             return "At least one user needs to complete the questionnaire", 400
 
-        return jsonify(utility.generate_api(room["questionnaire"]), False), 200
+        return jsonify(utility.generate_api(room["questionnaire"], False)), 200
     except Exception as e:
         return f"{e}", 400
 
