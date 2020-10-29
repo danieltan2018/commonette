@@ -46,8 +46,8 @@
               </div>
               <div class="home__data">
                 <h1 class="home__title">Commonette</h1>
-                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room
-                </v-btn>
+                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
+                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
               </div>
             </div>
           </div>
