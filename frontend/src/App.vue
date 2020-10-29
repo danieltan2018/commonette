@@ -20,7 +20,7 @@
                 <h3>In this room:</h3>
               </v-list-item-title>
             </v-list-item>
-            <v-list-item v-for="item in roomUsers" :key="item.name">
+            <v-list-item v-for="item in roomUsers" :key="item">
               <v-list-item-title>
                 <v-icon>mdi-account-outline</v-icon> {{item.name}}
               </v-list-item-title>

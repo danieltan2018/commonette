@@ -27,12 +27,15 @@ const routes = [
     }
   },
   {
-    path: '/dashboard',
+    path: '/dashboard/:roomCode',
     name: 'Dashboard',
     component: () => import('../views/Dashboard.vue'),
-    meta: {
-      requiresRoom: true
-    }
+    props: true
+  },
+  {
+    path: '*',
+    name: 'Default',
+    component: () => import('../views/404.vue'),
   }
 ]
 

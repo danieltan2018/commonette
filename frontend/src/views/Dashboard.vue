@@ -38,7 +38,9 @@
       <div class="col-1"></div>
       <div class="col-4">
         <v-card type="chart" dark>
-          <v-card-title><v-icon color="rgb(255, 0, 128)" large>mdi-movie-open</v-icon>Movie</v-card-title>
+          <v-card-title>
+            <v-icon color="rgb(255, 0, 128)" large>mdi-movie-open</v-icon>Movie
+          </v-card-title>
           <div class="chart-area">
             <bar-chart style="height: 100%" chart-id="movieStats" :chart-data="movieBarChart.chartData" :gradient-stops="movieBarChart.gradientStops" :extra-options="movieBarChart.extraOptions">
             </bar-chart>
@@ -51,7 +53,9 @@
       <div class="col-1"></div>
       <div class="col-4">
         <v-card type="chart" dark>
-          <v-card-title><v-icon color="blue" large>mdi-book</v-icon>Book</v-card-title>
+          <v-card-title>
+            <v-icon color="blue" large>mdi-book</v-icon>Book
+          </v-card-title>
           <div class="chart-area">
             <bar-chart style="height: 100%" chart-id="bookStats" :chart-data="bookBarChart.chartData" :gradient-stops="bookBarChart.gradientStops" :extra-options="bookBarChart.extraOptions">
             </bar-chart>
@@ -68,7 +72,9 @@
       <div class="col-1"></div>
       <div class="col-4">
         <v-card type="chart" dark>
-          <v-card-title><v-icon color="green" large>mdi-spotify</v-icon>Spotify</v-card-title>
+          <v-card-title>
+            <v-icon color="green" large>mdi-spotify</v-icon>Spotify
+          </v-card-title>
           <div class="chart-area">
             <bar-chart style="height: 100%" chart-id="spotifyStats" :chart-data="spotifyBarChart.chartData" :gradient-stops="spotifyBarChart.gradientStops" :extra-options="spotifyBarChart.extraOptions">
             </bar-chart>
@@ -92,14 +98,20 @@
 
 <script>
 // import LineChart from '../components/Charts/LineChart';
-import BarChart from '../components/Charts/BarChart';
-import * as chartConfigs from '../components/Charts/config';
-import config from '../config';
+import BarChart from "../components/Charts/BarChart";
+import * as chartConfigs from "../components/Charts/config";
+import config from "../config";
 import axios from "axios";
 export default {
   components: {
     // LineChart,
     BarChart,
+  },
+  props: {
+    roomCode: {
+      type: String,
+      default: "",
+    },
   },
   data: () => ({
     userCount: JSON.parse(localStorage.getItem("roomUsers")).length,
@@ -158,16 +170,18 @@ export default {
     bookBarChart: {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
-        labels: ['Business'],
-        datasets: [{
-          label: "No. of Users",
-          fill: true,
-          borderColor: config.colors.info,
-          borderWidth: 2,
-          borderDash: [],
-          borderDashOffset: 0.0,
-          data: [15],
-        }]
+        labels: ["Business"],
+        datasets: [
+          {
+            label: "No. of Users",
+            fill: true,
+            borderColor: config.colors.info,
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: [15],
+          },
+        ],
       },
       gradientColors: config.colors.primaryGradient,
       gradientStops: [1, 0.4, 0],
@@ -176,15 +190,17 @@ export default {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
         labels: ["Film & Animation", "Entertainment"],
-        datasets: [{
-          label: "No. of Users",
-          fill: true,
-          borderColor: "red",
-          borderWidth: 2,
-          borderDash: [],
-          borderDashOffset: 0.0,
-          data: [9, 8],
-        }]
+        datasets: [
+          {
+            label: "No. of Users",
+            fill: true,
+            borderColor: "red",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: [9, 8],
+          },
+        ],
       },
       gradientColors: config.colors.primaryGradient,
       gradientStops: [1, 0.4, 0],
@@ -193,15 +209,17 @@ export default {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
         labels: ["k-pop", "pop"],
-        datasets: [{
-          label: "No. of Users",
-          fill: true,
-          borderColor: "green",
-          borderWidth: 2,
-          borderDash: [],
-          borderDashOffset: 0.0,
-          data: [12,8],
-        }]
+        datasets: [
+          {
+            label: "No. of Users",
+            fill: true,
+            borderColor: "green",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: [12, 8],
+          },
+        ],
       },
       gradientColors: config.colors.primaryGradient,
       gradientStops: [1, 0.4, 0],
@@ -210,19 +228,21 @@ export default {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
         labels: ["Comedy", "Biography"],
-        datasets: [{
-          label: "No. of Users",
-          fill: true,
-          borderColor: "rgb(255, 0, 128)",
-          borderWidth: 2,
-          borderDash: [],
-          borderDashOffset: 0.0,
-          data: [12,4],
-        }]
+        datasets: [
+          {
+            label: "No. of Users",
+            fill: true,
+            borderColor: "rgb(255, 0, 128)",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: [12, 4],
+          },
+        ],
       },
       gradientColors: config.colors.primaryGradient,
       gradientStops: [1, 0.4, 0],
-    }
+    },
   }),
   created() {
     this.initialise();
@@ -232,8 +252,34 @@ export default {
       this.$router.push(newpath);
     },
     initialise() {
+      axios({
+        url: "/room/" + this.roomCode,
+        method: "GET",
+      })
+        .then((response) => {
+          localStorage.clear();
+          localStorage.setItem("roomName", response.data.room_name);
+          localStorage.setItem("roomCode", this.roomCode);
+          if (response.data.questionnaire) {
+            let roomUsers = [];
+            for (var person of response.data.questionnaire) {
+              roomUsers.push({
+                name: person.name,
+                age: person.age,
+              });
+            }
+            localStorage.setItem("roomUsers", JSON.stringify(roomUsers));
+          } else {
+            this.$bus.$emit("updated", "joined");
+            this.navigateRoute("/questionnaire");
+          }
+          this.$bus.$emit("updated", "joined");
+        })
+        .catch(() => {
+          this.navigateRoute("/");
+        });
       axios
-        .get("/dashboard/" + localStorage.getItem("roomCode"))
+        .get("/dashboard/" + this.roomCode)
         .then((response) => {
           this.youtubeTop = response.data.youtube;
           this.bookTop = response.data.book;
@@ -244,11 +290,11 @@ export default {
           this.navigateRoute("/questionnaire");
         });
     },
-  }
+  },
 };
 </script>
 <style>
-.home{
+.home {
   background-color: rgb(81, 81, 118);
   justify-content: center;
 }
