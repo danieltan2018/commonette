@@ -68,7 +68,7 @@ def add_questionnaire(room_code):
 
 
 @app.route('/recommend/<string:room_code>', methods=['GET'])
-def update(room_code):
+def recommend(room_code):
 
     try:
         questionnaire_data = request.get_json()
@@ -85,7 +85,7 @@ def update(room_code):
 
 
 @app.route('/dashboard/<string:room_code>', methods=['GET'])
-def update(room_code):
+def dashboard(room_code):
 
     try:
         questionnaire_data = request.get_json()
