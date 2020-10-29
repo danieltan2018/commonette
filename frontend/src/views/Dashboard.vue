@@ -233,12 +233,12 @@ export default {
     },
     initialise() {
       axios
-        .get("/recommend/" + localStorage.getItem("roomCode"))
+        .get("/dashboard/" + localStorage.getItem("roomCode"))
         .then((response) => {
-          this.youtubeTop = response.data.youtube.videoMore.split(",");
-          this.bookTop = response.data.book.subject.split(",");
-          this.movieTop = response.data.movie.genre.split(",");
-          this.spotifyTop = response.data.spotify.seed_genres.split(",");
+          this.youtubeTop = response.data.youtube;
+          this.bookTop = response.data.book;
+          this.movieTop = response.data.movie;
+          this.spotifyTop = response.data.spotify;
         })
         .catch(() => {
           this.navigateRoute("/questionnaire");
