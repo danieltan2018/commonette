@@ -270,7 +270,7 @@ export default {
             for (var person of response.data.questionnaire) {
               roomUsers.push({
                 name: person.name,
-                age: person.age,
+                gender: person.gender,
               });
             }
             localStorage.setItem("roomUsers", JSON.stringify(roomUsers));
