@@ -3,7 +3,8 @@
     youtube: {{youtubeTop}}<br>
     movie: {{movieTop}}<br>
     spotify: {{spotifyTop}}<br>
-    book:{{ bookTop }}
+    book:{{ bookTop }}<br>
+    users: {{roomUsers}}
     <!-- <div class="row">
       <div class="col-lg-4" >
         <v-card type="chart" dark>
@@ -114,6 +115,7 @@ export default {
     },
   },
   data: () => ({
+    roomUsers: JSON.parse(localStorage.getItem("roomUsers")),
     userCount: JSON.parse(localStorage.getItem("roomUsers")).length,
     youtubeTop: [],
     bookTop: [],
