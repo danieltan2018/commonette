@@ -115,8 +115,8 @@ export default {
     },
   },
   data: () => ({
-    roomUsers: JSON.parse(localStorage.getItem("roomUsers")),
-    userCount: JSON.parse(localStorage.getItem("roomUsers")).length,
+    roomUsers: [],
+    userCount: 0,
     youtubeTop: [],
     bookTop: [],
     movieTop: [],
@@ -266,14 +266,14 @@ export default {
           localStorage.setItem("roomName", response.data.room_name);
           localStorage.setItem("roomCode", this.roomCode);
           if (response.data.questionnaire) {
-            let roomUsers = [];
             for (var person of response.data.questionnaire) {
-              roomUsers.push({
+              this.roomUsers.push({
                 name: person.name,
                 gender: person.gender,
               });
             }
             localStorage.setItem("roomUsers", JSON.stringify(roomUsers));
+            this.userCount = this.roomUsers.length;
           } else {
             this.$bus.$emit("updated", "joined");
             this.navigateRoute("/questionnaire");
