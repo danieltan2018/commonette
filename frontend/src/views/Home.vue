@@ -48,6 +48,9 @@
                 <h1 class="home__title">Commonette</h1>
                 <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room
                 </v-btn>
+                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">
+                  Join Room
+                </v-btn>
               </div>
             </div>
           </div>
@@ -89,16 +92,20 @@
 
       <section id="about">
 
-
         <div class="py-12"></div>
+
         <h2 class="display-2 font-weight-light mb-3">Optional Title Here?</h2>
         <v-responsive class="mx-auto mb-8" width="56">
           <v-divider class="mb-1"></v-divider>
           <v-divider></v-divider>
         </v-responsive>
-        
-        
-        <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
+
+        <v-container class="my-5" fluid>
+            
+          <v-flex></v-flex>
+        </v-container>
+
+        <!-- <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
           <div v-if="i % 2 == 0">
             <v-row height=500>
               <v-col cols='5' md='5'>
@@ -114,25 +121,23 @@
           </div>
           <div v-else>
             <v-row height=500>
-            <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
-              <div class="py-10"></div>
-              <h2 class="display-4 text-left mx-auto">{{ story.title }}</h2>
-              <h2 class="display-2 text-left mx-auto my-4">{{ story.subtitle }}</h2>
-              <p class="headline text-left mx-6">{{ story.message }}</p>
-            </v-col>
-            <v-col cols='5' md='5'>
-              <v-parallax class="bottom-gradient align-left" height=500 :src="story.src"></v-parallax>
-            </v-col>
-          </v-row>
+              <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
+                <div class="py-10"></div>
+                <h2 class="display-4 text-left mx-auto">{{ story.title }}</h2>
+                <h2 class="display-2 text-left mx-auto my-4">{{ story.subtitle }}</h2>
+                <p class="headline text-left mx-6">{{ story.message }}</p>
+              </v-col>
+              <v-col cols='5' md='5'>
+                <v-parallax class="bottom-gradient align-left" height=500 :src="story.src"></v-parallax>
+              </v-col>
+            </v-row>
           </div>
-        </v-responsive>
+        </v-responsive> -->
 
-        
         <!-- align-center body text -->
         <v-responsive class="mx-auto title font-weight-light " max-width="720">
           <br><br>
         </v-responsive>
-
 
       </section>
 
@@ -165,7 +170,7 @@
 
       <v-theme-provider id="api" light>
         <!-- <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80"> -->
-        <div>  
+        <div>
           <v-container>
             <div class="py-6"></div>
             <h2 class="display-2 font-weight-bold mb-3" color="rgb(72, 72, 103)">APIs Used</h2>
@@ -250,23 +255,30 @@ export default {
         {
           title: "Suprise yourself",
           subtitle: "and your friends",
-          message: "Tired of being indecisive about what movie to watch? Not sure what kind of music to listen to when you're with a group of friends? Trying to find the perfect movie watch with your date without yawning? We have...",
-          src: "https://images.pexels.com/photos/3768177/pexels-photo-3768177.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-          alt: "https://images.pexels.com/photos/2253849/pexels-photo-2253849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          message:
+            "Tired of being indecisive about what movie to watch? Not sure what kind of music to listen to when you're with a group of friends? Trying to find the perfect movie watch with your date without yawning? We have...",
+          src:
+            "https://images.pexels.com/photos/3768177/pexels-photo-3768177.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          alt:
+            "https://images.pexels.com/photos/2253849/pexels-photo-2253849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
         {
           title: "Recommendations",
           subtitle: "catered to you and your friends",
           message: "We will ask you to fill a questionnaire where...",
-          src: "https://images.pexels.com/photos/2719510/pexels-photo-2719510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-          alt: "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          src:
+            "https://images.pexels.com/photos/2719510/pexels-photo-2719510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          alt:
+            "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
         {
           title: "Countless of recommendations",
           subtitle: "all at your fingertips",
           message: "The results are then aggregated and sent to...",
-          src: "https://images.pexels.com/photos/4488194/pexels-photo-4488194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-          alt: "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          src:
+            "https://images.pexels.com/photos/4488194/pexels-photo-4488194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          alt:
+            "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
       ],
 
@@ -277,7 +289,8 @@ export default {
           src:
             "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
           title: "YouTube Data API",
-          description: "The YouTube Data API lets you incorporate functions normally executed on the YouTube website into your own website or application. ",
+          description:
+            "The YouTube Data API lets you incorporate functions normally executed on the YouTube website into your own website or application. ",
           site: "https://developers.google.com/youtube/v3/docs/videos/list",
         },
         {
@@ -308,14 +321,14 @@ export default {
           src:
             "https://upload.wikimedia.org/wikipedia/commons/b/ba/Google_Books_logo_2015.svg",
           title: "Google Books API",
-          description: "The Books API is a way to search and access the world's book contents, as well as to create and view personalization around that content.",
+          description:
+            "The Books API is a way to search and access the world's book contents, as well as to create and view personalization around that content.",
           site: "https://developers.google.com/books",
         },
         {
           color: "#fafafa",
           textcolor: "color: black",
-          src:
-            require("../images/OTT.png"),
+          src: require("../images/OTT.png"),
           title: "OTT details API",
           description:
             "Get Streaming details of Movie and TV Shows. We support 150+ Streaming platforms in US and India such as HBO, YouTube, Netflix , Primve Video, Hotstar, Hulu, etc . ",
@@ -465,221 +478,228 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
 </script>
 
 <style lang="scss">
-
 /*===== GOOGLE FONTS =====*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 /*===== VARIABLES CSS =====*/
-:root{
-    --header-height: 3rem;
+:root {
+  --header-height: 3rem;
 
-    /*===== Colors =====*/
-    --first-color: rgb(81, 81, 118);
-    --first-color-dark: rgb(72, 72, 103);
-    --first-color-darken: rgb(48, 48, 68);
-    --white-color: #ebebeb;
-    // #FCF8F8
+  /*===== Colors =====*/
+  --first-color: rgb(81, 81, 118);
+  --first-color-dark: rgb(72, 72, 103);
+  --first-color-darken: rgb(48, 48, 68);
+  --white-color: #ebebeb;
+  // #FCF8F8
 
-    /*===== Font and typography =====*/
-    --body-font: 'Poppins', sans-serif;
-    --big-font-size: 2.5rem;
-    --normal-font-size: .938rem;
-  
-    /*===== z index =====*/
-    --z-fixed: 100;
+  /*===== Font and typography =====*/
+  --body-font: "Poppins", sans-serif;
+  --big-font-size: 2.5rem;
+  --normal-font-size: 0.938rem;
+
+  /*===== z index =====*/
+  --z-fixed: 100;
 }
 
-@media screen and (min-width: 768px){
-    :root{
-        --big-font-size: 5rem;
-        --normal-font-size: 1rem;
-    }
+@media screen and (min-width: 768px) {
+  :root {
+    --big-font-size: 5rem;
+    --normal-font-size: 1rem;
+  }
 }
 
 /*===== BASE =====*/
-*,::before,::after{
-    box-sizing: border-box;
+*,
+::before,
+::after {
+  box-sizing: border-box;
 }
 
-body{
-    margin: var(--header-height) 0 0 0;
-    padding: 0;
-    font-family: var(--body-font);
-    font-size: var(--normal-font-size);
-    font-weight: 500;
+body {
+  margin: var(--header-height) 0 0 0;
+  padding: 0;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  font-weight: 500;
 }
 
-h1,p,ul{
-    margin: 0;
+h1,
+p,
+ul {
+  margin: 0;
 }
 
-ul{
-    padding: 0;
-    list-style: none;
+ul {
+  padding: 0;
+  list-style: none;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-img{
-    max-width: 100%;
-    height: auto;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /*===== LAYOUT =====*/
-.bd-grid{
-    max-width: 1024px;
-    display: grid;
-    grid-template-columns: 100%;
-    column-gap: 2rem;
-    width: calc(100% - 2rem);
-    margin-left: 1rem;
-    margin-right: 1rem;
+.bd-grid {
+  max-width: 1024px;
+  display: grid;
+  grid-template-columns: 100%;
+  column-gap: 2rem;
+  width: calc(100% - 2rem);
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
-.l-header{
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: var(--z-fixed);
-    background-color: var(--first-color);
+.l-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  background-color: var(--first-color);
 }
-
 
 /*=== Show menu ===*/
-.show{
-    right: 0;
+.show {
+  right: 0;
 }
 
 /*===== HOME =====*/
-.home{
-    background-color: var(--first-color);
-    overflow: hidden;
+.home {
+  background-color: var(--first-color);
+  overflow: hidden;
 
-    &__container{
-        height: calc(100vh - var(--header-height));
-        grid-template-rows: repeat(2, max-content);
-        row-gap: 1.5rem;
-    }
-    &__img{
-        position: relative;
-        padding-top: 1.5rem;
-        justify-self: center;
-        width: 302px;
-        height: 233px;
+  &__container {
+    height: calc(100vh - var(--header-height));
+    grid-template-rows: repeat(2, max-content);
+    row-gap: 1.5rem;
+  }
+  &__img {
+    position: relative;
+    padding-top: 1.5rem;
+    justify-self: center;
+    width: 302px;
+    height: 233px;
 
-        & img{
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+    & img {
+      position: absolute;
+      top: 0;
+      left: 0;
     }
-    &__data{
-        color: var(--white-color);
-    }
-    &__title{
-        font-size: var(--big-font-size);
-        line-height: 1.3;
-        margin-bottom: 1rem;
-    }
-    &__description{
-        margin-bottom: 2.5rem;
-    }
+  }
+  &__data {
+    color: var(--white-color);
+  }
+  &__title {
+    font-size: var(--big-font-size);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  &__description {
+    margin-bottom: 2.5rem;
+  }
 
-    &__button{
-        display: inline-block;
-        background-color: var(--first-color-dark);
-        color: var(--white-color);
-        padding: 1.125rem 2rem;
-        border-radius: .5rem; 
-    
-        &:hover{
-            background-color: var(--first-color-darken);
-        }
+  &__button {
+    display: inline-block;
+    background-color: var(--first-color-dark);
+    color: var(--white-color);
+    padding: 1.125rem 2rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+      background-color: var(--first-color-darken);
     }
+  }
 }
 
-#api, #about{
-  background-color:#E3E9F2;
+#api,
+#about {
+  background-color: #e3e9f2;
 }
 
 /* ===== MEDIA QUERIES=====*/
-@media screen and(min-width: 768px){
-    body{
-        margin: 0;
+@media screen and(min-width: 768px) {
+  body {
+    margin: 0;
+  }
+
+  .nav {
+    height: calc(var(--header-height) + 1.5rem);
+
+    &__toggle,
+    &__close {
+      display: none;
     }
-
-    .nav{
-        height: calc(var(--header-height) + 1.5rem);
-
-        &__toggle,&__close{
-            display: none;
-        }
-        &__list{
-            display: flex;
-        }
-        &__item{
-            margin-left: 3rem;
-            margin-bottom: 0;
-        }
+    &__list {
+      display: flex;
     }
-
-    .home{
-        &__container{
-            height: 100vh;
-            grid-template-columns: repeat(2, max-content);
-            grid-template-rows: 1fr;
-            row-gap: 0;
-            align-items: center;
-            justify-content: center;
-        }
-        &__data{
-          text-align: left;
-        }
-        &__img{
-            order: 1;
-            width: 375px;
-            height: 289px;
-
-            & img{
-                width: 375px;
-            }
-        }
+    &__item {
+      margin-left: 3rem;
+      margin-bottom: 0;
     }
+  }
+
+  .home {
+    &__container {
+      height: 100vh;
+      grid-template-columns: repeat(2, max-content);
+      grid-template-rows: 1fr;
+      row-gap: 0;
+      align-items: center;
+      justify-content: center;
+    }
+    &__data {
+      text-align: left;
+    }
+    &__img {
+      order: 1;
+      width: 375px;
+      height: 289px;
+
+      & img {
+        width: 375px;
+      }
+    }
+  }
 }
 
-@media screen and(min-width: 1024px){
-    .bd-grid{
-        margin-left: auto;
-        margin-right: auto;
-    }
+@media screen and(min-width: 1024px) {
+  .bd-grid {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .home{
-        &__container{
-            justify-content: initial;
-            column-gap: 4.5rem;
-        }
-        &__img{
-            width: 604px;
-            height: 466px;
-            & img{
-                width: 604px;
-            }
-        }
+  .home {
+    &__container {
+      justify-content: initial;
+      column-gap: 4.5rem;
     }
+    &__img {
+      width: 604px;
+      height: 466px;
+      & img {
+        width: 604px;
+      }
+    }
+  }
 }
-
 </style>
 
 <style>
-  /* for stories */
-  .bottom-gradient {
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
-  }
-  .v-parallax__image {
-    /* transform: none !important; */
-    /* width: 100% !important; */
-  }
+/* for stories */
+.bottom-gradient {
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.4) 0%,
+    transparent 72px
+  );
+}
+.v-parallax__image {
+  /* transform: none !important; */
+  /* width: 100% !important; */
+}
 </style>
 
