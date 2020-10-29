@@ -977,7 +977,7 @@ export default {
       if (this.validate()) {
         console.log("All Clear");
         // Send data to backend
-        
+
         this.sendQuestionnaireData();
       } else {
         this.showAlerts();
@@ -1182,7 +1182,7 @@ export default {
         }
       })
         .then((response) => {
-          console.log("response", response);.
+          console.log("response", response);
           this.navigateRoute("/recommend");
         })
         .catch((e) => {
