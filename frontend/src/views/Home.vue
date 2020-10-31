@@ -46,30 +46,33 @@
             <div class="home__data">
               <div data-aos="zoom-in">
                 <h1 class="home__title">Commonette</h1>
-                <div data-aos="zoom-in" data-aos-delay="500">
-                  <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
-                  <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
-                </div>
+                <v-row align="center" class="white--text mx-auto" justify="center">
+                  <div data-aos="zoom-in" data-aos-delay="500">
+                    <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
+                    <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
+                    <div class="py-12"></div>
+                    <v-theme-provider dark>
+                      <v-row align="center" class="white--text mx-auto" justify="center">
+                        <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#about')">
+                          <v-icon>mdi-chevron-double-down</v-icon>
+                        </v-btn>
+                      </v-row>
+                    </v-theme-provider>
+                  </div>
+                </v-row>
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
       <section id="about">
-
-        <div class="py-12"></div>
-        <h2 class="display-2 font-weight-light mb-3">Optional Title Here?</h2>
-        <v-responsive class="mx-auto mb-8" width="56">
-          <v-divider class="mb-1"></v-divider>
-          <v-divider></v-divider>
-        </v-responsive>
-
         <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
           <div v-if="i % 2 == 0">
             <v-row height=500>
               <v-col cols='5' md='5'>
-                <v-parallax class="bottom-gradient" height=700 :src="story.src"></v-parallax>
+                <v-img class="bottom-gradient" height=700 :src="story.src"></v-img>
               </v-col>
               <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
                 <div class="py-10"></div>
@@ -88,7 +91,7 @@
                 <p class="headline text-left mx-6">{{ story.message }}</p>
               </v-col>
               <v-col cols='5' md='5'>
-                <v-parallax class="bottom-gradient align-left" height=500 :src="story.src"></v-parallax>
+                <v-img class="bottom-gradient align-left" height=500 :src="story.src"></v-img>
               </v-col>
             </v-row>
           </div>
@@ -178,7 +181,6 @@
             </v-row>
           </v-container>
         </div>
-        <!-- </v-parallax> -->
       </v-theme-provider>
     </v-main>
   </div>
