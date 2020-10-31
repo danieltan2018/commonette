@@ -32,65 +32,30 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <main class="l-main">
-        <!--===== HOME =====-->
-        <section class="home" id="home">
-          <div class="home">
-            <div class="home__container bd-grid">
-              <div class="home__img">
-                <img src="../images/landing1.png" data-speed="5" alt="" class="move">
-                <img src="../images/landing2.png" data-speed="5" alt="" class="move">
-                <img src="../images/landing3.png" data-speed="-2" alt="" class="move">
-                <img src="../images/landing4.png" alt="" class="move">
-                <img src="../images/landing5.png" alt="" class="move">
-              </div>
-              <div class="home__data">
-                <div data-aos="zoom-in">
-                  <h1 class="home__title">Commonette</h1>
-                  <div data-aos="zoom-in" data-aos-delay="500">
-                    <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
-                    <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
-                  </div>
+
+      <section class="home" id="home">
+        <div class="home">
+          <div class="home__container bd-grid">
+            <div class="home__img">
+              <img src="../images/landing1.png" data-speed="5" alt="" class="move">
+              <img src="../images/landing2.png" data-speed="5" alt="" class="move">
+              <img src="../images/landing3.png" data-speed="-2" alt="" class="move">
+              <img src="../images/landing4.png" alt="" class="move">
+              <img src="../images/landing5.png" alt="" class="move">
+            </div>
+            <div class="home__data">
+              <div data-aos="zoom-in">
+                <h1 class="home__title">Commonette</h1>
+                <div data-aos="zoom-in" data-aos-delay="500">
+                  <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
+                  <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      <!-- <v-img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80">
-        <v-theme-provider light>
-          <v-container fill-height>
-            <v-row align="center" class="white--text mx-auto" justify="center">
-              <v-col class="white--text text-center" cols="12" tag="h1">
-                <span :class="[
-                    $vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2',
-                  ]" class="font-weight-light">
-                  WELCOME TO
-                </span>
-                <br />
-                <span :class="[
-                    $vuetify.breakpoint.smAndDown ? 'display-3' : 'display-4',
-                  ]" class="font-weight-black">
-                  COMMONETTE
-                </span>
-              </v-col>
-              <v-row justify="center">
-                <v-btn elevation="2" large class="ma-2" color="primary" v-on:click="createRoomPopup = true">
-                  Create Room
-                </v-btn>
-                <v-btn elevation="2" large class="ma-2" color="secondary" @click="$vuetify.goTo('#about')">
-                  About
-                </v-btn>
-                <v-btn elevation="2" large class="ma-2" color="primary" v-on:click="joinRoomPopup = true">
-                  Join Room
-                </v-btn>
-              </v-row>
-            </v-row>
-          </v-container>
-        </v-theme-provider>
-      </v-img> -->
-      <!-- 
       <section id="about">
 
         <div class="py-12"></div>
@@ -100,25 +65,7 @@
           <v-divider></v-divider>
         </v-responsive>
 
-        <v-container fluid class="my-5">
-          <div v-for="(story, i) in stories" :key=i>
-            <v-row>
-              <v-col md=6 sm=12>
-                picture here
-                <v-parallax class="bottom-gradient" :src="story.src"></v-parallax>
-              </v-col>
-              <v-col md=6 sm=12>
-                text here
-              </v-col>
-            </v-row>
-          </div>
-
-        </v-container>
-
-        <v-divider class="mb-1"></v-divider>
-        <v-divider></v-divider> -->
-
-      <!-- <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
+        <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
           <div v-if="i % 2 == 0">
             <v-row height=500>
               <v-col cols='5' md='5'>
@@ -134,25 +81,20 @@
           </div>
           <div v-else>
             <v-row height=500>
-            <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
-              <div class="py-10"></div>
-              <h2 class="display-4 text-left mx-auto">{{ story.title }}</h2>
-              <h2 class="display-2 text-left mx-auto my-4">{{ story.subtitle }}</h2>
-              <p class="headline text-left mx-6">{{ story.message }}</p>
-            </v-col>
-            <v-col cols='5' md='5'>
-              <v-parallax class="bottom-gradient align-left" height=500 :src="story.src"></v-parallax>
-            </v-col>
-          </v-row>
+              <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
+                <div class="py-10"></div>
+                <h2 class="display-4 text-left mx-auto">{{ story.title }}</h2>
+                <h2 class="display-2 text-left mx-auto my-4">{{ story.subtitle }}</h2>
+                <p class="headline text-left mx-6">{{ story.message }}</p>
+              </v-col>
+              <v-col cols='5' md='5'>
+                <v-parallax class="bottom-gradient align-left" height=500 :src="story.src"></v-parallax>
+              </v-col>
+            </v-row>
           </div>
-        </v-responsive> -->
-
-      <!-- align-center body text -->
-      <!-- <v-responsive class="mx-auto title font-weight-light " max-width="720">
-          <br><br>
         </v-responsive>
 
-      </section> -->
+      </section>
 
       <section id="mediums" color="rgb(54, 54, 79)">
         <div class="py-12"></div>
@@ -184,7 +126,6 @@
       </section>
 
       <v-theme-provider id="api" light>
-        <!-- <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 1000" src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80"> -->
         <div>
           <v-container>
             <div class="py-6"></div>
@@ -204,12 +145,7 @@
                         <v-card-subtitle v-text="item.description" style="color:#ebebeb; text-align: left"></v-card-subtitle>
 
                         <v-card-actions>
-                          <!-- custom button here -->
-                          <v-btn v-if="item.artist === 'Ellie Goulding'" class="ml-2 mt-3" fab icon height="40px" right width="40px">
-                            <v-icon>mdi-play</v-icon>
-                          </v-btn>
-
-                          <v-btn v-else class="ml-2 mt-5 mb-3" color="#F1F4F9" rounded small :href="item.site" target="_blank">
+                          <v-btn class="ml-2 mt-5 mb-3" color="#F1F4F9" rounded small :href="item.site" target="_blank">
                             ABOUT API
                           </v-btn>
                         </v-card-actions>
