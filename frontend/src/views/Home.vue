@@ -33,65 +33,66 @@
         </v-card>
       </v-dialog>
 
-      <section class="home" id="home">
-        <div class="home">
-          <div class="home__container bd-grid">
-            <div class="home__img">
-              <img src="../images/landing1.png" data-speed="5" alt="" class="move">
-              <img src="../images/landing2.png" data-speed="5" alt="" class="move">
-              <img src="../images/landing3.png" data-speed="-2" alt="" class="move">
-              <img src="../images/landing4.png" alt="" class="move">
-              <img src="../images/landing5.png" alt="" class="move">
+      <section id="home">
+        <div class="home__container bd-grid">
+          <div class="home__img">
+            <img src="../images/landing1.png" data-speed="5" alt="" class="move">
+            <img src="../images/landing2.png" data-speed="5" alt="" class="move">
+            <img src="../images/landing3.png" data-speed="-2" alt="" class="move">
+            <img src="../images/landing4.png" alt="" class="move">
+            <img src="../images/landing5.png" alt="" class="move">
+          </div>
+          <div class="home__data">
+            <div data-aos="zoom-in">
+              <h1 class="home__title">Commonette</h1>
             </div>
-            <div class="home__data">
-              <div data-aos="zoom-in">
-                <h1 class="home__title">Commonette</h1>
-                <v-row align="center" class="white--text mx-auto" justify="center">
-                  <div data-aos="zoom-in" data-aos-delay="500">
-                    <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
-                    <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
-                    <div class="py-12"></div>
-                    <v-theme-provider dark>
-                      <v-row align="center" class="white--text mx-auto" justify="center">
-                        <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#about')">
-                          <v-icon>mdi-chevron-double-down</v-icon>
-                        </v-btn>
-                      </v-row>
-                    </v-theme-provider>
-                  </div>
-                </v-row>
+            <v-row align="center" class="white--text mx-auto" justify="center">
+              <div data-aos="zoom-in" data-aos-delay="300">
+                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
               </div>
+              <div data-aos="zoom-in" data-aos-delay="600">
+                <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
+              </div>
+            </v-row>
+            <div class="py-12"></div>
+            <div data-aos="zoom-in" data-aos-delay="900">
+              <v-theme-provider dark>
+                <v-row align="center" class="white--text mx-auto" justify="center">
+                  <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#about')">
+                    <v-icon>mdi-chevron-double-down</v-icon>
+                  </v-btn>
+                </v-row>
+              </v-theme-provider>
             </div>
           </div>
-
         </div>
       </section>
 
       <section id="about">
-        <v-responsive v-for="(story, i) in stories" :key=i max-width="100%" height="500px">
-          <div v-if="i % 2 == 0">
-            <v-row height=500>
-              <v-col cols='5' md='5'>
-                <v-img class="bottom-gradient" height=700 :src="story.src"></v-img>
+        <v-responsive v-for="(story, i) in stories" :key=i height="500px">
+          <div v-if="i % 2 == 0" data-aos="fade-right" data-aos-duration="2000">
+            <v-row>
+              <v-col cols="6">
+                <v-img height=500px :src="story.src"></v-img>
               </v-col>
-              <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
-                <div class="py-10"></div>
+              <v-col cols="6">
                 <h2 class="display-4 text-right mx-auto">{{ story.title }}</h2>
                 <h2 class="display-2 text-right mx-auto my-4">{{ story.subtitle }}</h2>
+                <div class="py-10"></div>
                 <p class="headline text-right mx-6">{{ story.message }}</p>
               </v-col>
             </v-row>
           </div>
-          <div v-else>
-            <v-row height=500>
-              <v-col cols='7' md='7' class="py-6 px-12 fluid text-wrap" max-width="50%">
-                <div class="py-10"></div>
+          <div v-else data-aos="fade-left" data-aos-duration="2000">
+            <v-row>
+              <v-col cols="6">
                 <h2 class="display-4 text-left mx-auto">{{ story.title }}</h2>
                 <h2 class="display-2 text-left mx-auto my-4">{{ story.subtitle }}</h2>
+                <div class="py-10"></div>
                 <p class="headline text-left mx-6">{{ story.message }}</p>
               </v-col>
-              <v-col cols='5' md='5'>
-                <v-img class="bottom-gradient align-left" height=500 :src="story.src"></v-img>
+              <v-col cols="6">
+                <v-img max-height=500px :src="story.src"></v-img>
               </v-col>
             </v-row>
           </div>
@@ -109,7 +110,7 @@
           </v-responsive>
           <v-row>
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" md="3">
-              <div data-aos="flip-up" data-aos-delay="100">
+              <div data-aos="flip-up" :data-aos-delay="200*i" data-aos-duration="500">
                 <v-card class="py-12 px-4 rounded-xl" color="#E3E9F2" flat>
                   <v-theme-provider dark>
                     <div>
@@ -208,28 +209,30 @@ export default {
 
       stories: [
         {
-          title: "Suprise yourself",
-          subtitle: "and your friends",
+          title: "Surprise yourself",
+          subtitle: "Discover new content every day",
           message:
-            "Tired of being indecisive about what movie to watch? Not sure what kind of music to listen to when you're with a group of friends? Trying to find the perfect movie watch with your date without yawning? We have...",
+            "Can't find a good book to read? Trying to find the perfect movie to watch with your date?",
           src:
             "https://images.pexels.com/photos/3768177/pexels-photo-3768177.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
           alt:
             "https://images.pexels.com/photos/2253849/pexels-photo-2253849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
         {
-          title: "Recommendations",
-          subtitle: "catered to you and your friends",
-          message: "We will ask you to fill a questionnaire where...",
+          title: "Countless recommendations",
+          subtitle: "Catered to you and your friends",
+          message:
+            "From videos, movies and music to books, we've got you covered no matter what the occasion.",
           src:
             "https://images.pexels.com/photos/2719510/pexels-photo-2719510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
           alt:
             "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
         {
-          title: "Countless of recommendations",
-          subtitle: "all at your fingertips",
-          message: "The results are then aggregated and sent to...",
+          title: "Find common interests",
+          subtitle: "with your loved ones",
+          message:
+            "See at a glance the top interests of your group by inviting them to join!",
           src:
             "https://images.pexels.com/photos/4488194/pexels-photo-4488194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
           alt:
@@ -299,12 +302,6 @@ export default {
           text: "See recommended videos for you and your friends.",
         },
         {
-          icon: "mdi-spotify green",
-          title: "Spotify",
-          text:
-            "Generate Spotify recommendations from you and your friends' favourite songs.",
-        },
-        {
           icon: "mdi-book blue",
           title: "Books",
           text: "Find books ",
@@ -313,6 +310,12 @@ export default {
           icon: "mdi-movie-open pink",
           title: "Movies",
           text: "I don't know what I'm doing",
+        },
+        {
+          icon: "mdi-spotify green",
+          title: "Spotify",
+          text:
+            "Generate Spotify recommendations from you and your friends' favourite songs.",
         },
       ],
     };
@@ -395,21 +398,6 @@ export default {
     },
   },
 };
-
-// /*===== MENU SHOW Y HIDDEN =====*/
-// const navMenu = document.getElementById('nav-menu'),
-//     toggleMenu = document.getElementById('nav-toggle'),
-//     closeMenu = document.getElementById('nav-close')
-
-// // SHOW
-// toggleMenu.addEventListener('click', ()=>{
-//     navMenu.classList.toggle('show')
-// })
-
-// // HIDDEN
-// closeMenu.addEventListener('click', ()=>{
-//     navMenu.classList.remove('show')
-// })
 
 // /*===== MOUSEMOVE HOME IMG =====*/
 document.addEventListener("mousemove", move);
@@ -655,10 +643,6 @@ img {
     rgba(0, 0, 0, 0.4) 0%,
     transparent 72px
   );
-}
-.v-parallax__image {
-  /* transform: none !important; */
-  /* width: 100% !important; */
 }
 </style>
 
