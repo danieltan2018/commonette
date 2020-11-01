@@ -14,9 +14,17 @@
           </v-flex>
         </v-layout>
         <v-layout>
-          <div class="mx-auto mb-6">
+          <div class="mx-auto mb-4">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="nameNone">Please Enter Your Name!</v-alert>
           </div>
+        </v-layout>
+        <div>Share your gender</div>
+        <v-layout row wrap justify-center>
+          <v-flex xs12 md6 lg4 mx-4>
+            <v-radio-group v-model="gender">
+              <v-radio v-for="n in genders" :key="n" :label="`${n}`" :value="n"></v-radio>
+            </v-radio-group>
+          </v-flex>
         </v-layout>
 
         <v-container id="youtubeCategory" class="category-container">
@@ -291,6 +299,7 @@ export default {
   data: () => {
     return {
       name: "",
+      gender: "Male",
       youtubeCategory: "",
       bookGenre: "",
       movieGenre: "",
@@ -350,6 +359,7 @@ export default {
       sGNone: false,
       sGExceed: false,
       nameNone: false,
+      genders: ["Male", "Female"],
       languages: ["English", "Mandarin", "Malay", "Tamil"],
       inputYoutube: [
         "Entertainment",
@@ -365,7 +375,7 @@ export default {
         "Music",
         "Pets & Animals",
         "Sports",
-        "Travel & Events"
+        "Travel & Events",
       ],
       youtubeCategories: {
         "Film & Animation": "1",
@@ -505,7 +515,7 @@ export default {
         "Thai",
         "Turkish",
         "Ukrainian",
-        "Vietnamese"
+        "Vietnamese",
       ],
       inputSpotifyGenre: [
         "Acoustic",
@@ -822,7 +832,7 @@ export default {
                 names.push(items[i]["name"]);
                 this.artistDic[items[i]["name"]] = items[i]["id"];
               }
-            console.log("artistDic", this.artistDic);
+              console.log("artistDic", this.artistDic);
               this.artistSuggestions = names;
             } else if (type === "track") {
               let items = response.data.tracks.items;
@@ -831,7 +841,7 @@ export default {
                 names.push(items[i]["name"]);
                 this.trackDic[items[i]["name"]] = items[i]["id"];
               }
-            console.log("trackDic", this.trackDic);
+              console.log("trackDic", this.trackDic);
               this.trackSuggestions = names;
             }
           })
@@ -866,7 +876,7 @@ export default {
       let youtubes_id = [];
       for (let youtube of youtubes) {
         if (youtube in this.youtubeCategories) {
-          youtubes_id.push(this.youtubeCategories[youtube])
+          youtubes_id.push(this.youtubeCategories[youtube]);
         }
       }
 
@@ -876,40 +886,36 @@ export default {
         this.artistIds.push(id);
       }
       for (var track of this.sTracks) {
-        let id = this.trackDic[track]
-        this.trackIds.push(id)
+        let id = this.trackDic[track];
+        this.trackIds.push(id);
       }
 
-    //   console.log("youtubes", this.youtubes);
-      console.log("youtubes_id", youtubes_id);
-      console.log("books", this.books);
-      console.log("movies", this.movies);
-      console.log("movieImdb", this.movieImdb);
-      console.log("movieLanguage", this.movieLanguage);
-      console.log("sGenres", this.sGenres);
-    //   console.log("sArtists", this.sArtists);
-      console.log("artistIds", this.artistIds);
-    //   console.log("sTracks", this.sTracks);
-      console.log("trackIds", this.trackIds);
+      // process gender
+      var genderData = "";
+      if (this.gender == "Male")
+        genderData = "M"
+      else
+        genderData = "F"
 
       axios({
         url: "/add-questionnaire/" + this.roomCode,
         method: "POST",
         data: {
-            name: this.roomName,
-            youtube: youtubes_id,
-            book: this.books,
-            movie: {
-                genre: this.movies,
-                imdb: this.movieImdb,
-                language: this.movieLanguage,
-            },
-            spotify: {
-                genre: spotify_genres_lower,
-                artist: this.artistIds,
-                track: this.trackIds,
-            }
-        }
+          name: this.roomName,
+          youtube: youtubes_id,
+          book: this.books,
+          movie: {
+            genre: this.movies,
+            imdb: this.movieImdb,
+            language: this.movieLanguage,
+          },
+          spotify: {
+            genre: spotify_genres_lower,
+            artist: this.artistIds,
+            track: this.trackIds,
+          },
+          gender: genderData
+        },
       })
         .then((response) => {
           console.log("response", response);
@@ -945,7 +951,6 @@ export default {
         this.sGenres = this.sGenres.filter(function (e) {
           return e !== tag;
         });
-      // console.log(list);
     },
     validate() {
       this.resetAlerts();
@@ -1073,7 +1078,7 @@ export default {
 }
 #progress-el {
   /* progress bar */
-  background-color: #5DC0BF !important;
+  background-color: #5dc0bf !important;
   height: 6px !important;
 }
 
