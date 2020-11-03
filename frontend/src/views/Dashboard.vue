@@ -1,6 +1,64 @@
 <template>
   <v-main class="home">
     <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6" style="color:white">
+        <h1>Here are some statistics!</h1><br>
+        <h2>Total No. Of Users In Room: <b style="color:#F6CA83">{{userCount}}</b></h2>
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <v-row>
+      <v-col cols="2"></v-col>
+      <v-col cols="12">
+        <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='deep-purple accent-4' bottom left overlap>
+          <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:200px; width:165px'></v-img>
+          <v-img v-else src='../images/Nezuko.png' style='height:200px; width:200px'></v-img>
+        </v-badge>
+      </v-col>
+      <v-col cols="2"></v-col>
+    </v-row>
+    <!-- <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10" id="display">
+        <v-badge color="deep-purple accent-4" content="Tanjiro" bottom left overlap>
+          <img src="../images/Tanjiro.png" style="height:200px; width:165px" alt="">
+        </v-badge>
+        <v-badge color="deep-purple accent-4" content="Nezuko" bottom left overlap>
+          <img src="../images/Nezuko.png" style="height:200px; width:200px" alt="">
+        </v-badge>
+      </div>
+      <div class="col-1"></div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-2">
+        <v-simple-table dark dense>
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-center">Rank</th>
+                <th class="text-center">Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in rankings" :key="item.weight">
+                <td>{{ item.rank }}</td>
+                <td>{{ item.weight }}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </div>
+      <div class="col-4" style="color:white">
+        <br><br>Categories or Genres ranked were assigned weights!
+        <br><br>Total Weights were calculated to display the <b style="color:#5DC0BF">TOP</b> Categories/Genres below!
+      </div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row">
       <div class="col-1"></div>
       <div class="col-5" data-aos="fade-down-right" data-aos-duration="1000" v-if="youtubeReady">
         <v-card type="chart" dark>
@@ -29,7 +87,7 @@
     </div>
     <div class="row">
       <div class="col-1"></div>
-      <div class="col-5" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="1000" v-if="movieReady">
+      <div class="col-5" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="600" v-if="movieReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="rgb(255, 0, 128)" large>mdi-movie-open</v-icon>Movie
@@ -40,7 +98,7 @@
           </div>
         </v-card>
       </div>
-      <div class="col-5" data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1500" v-if="spotifyReady">
+      <div class="col-5" data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1000" v-if="spotifyReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="green" large>mdi-spotify</v-icon>Spotify
@@ -78,6 +136,9 @@ export default {
     bookReady: false,
     movieReady: false,
     spotifyReady: false,
+    femaleSpeed: 3,
+    maleSpeed: -3,
+    usersDisplay: [],
     youtubeBarChart: {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
@@ -154,6 +215,13 @@ export default {
       gradientColors: config.colors.primaryGradient,
       gradientStops: [1, 0.4, 0],
     },
+    rankings: [
+      { rank: '1', weight: 5 },
+      { rank: '2', weight: 4 },
+      { rank: '3', weight: 3 },
+      { rank: '4', weight: 2 },
+      { rank: '5', weight: 1 }
+    ]
   }),
   created() {
     this.initialise();
@@ -161,7 +229,45 @@ export default {
   mounted: function () {
     window.scrollTo(0, 0);
   },
+  // watch: {
+  //   roomUsers: {
+  //     immediate: true,
+  //     handler() {
+  //       if (this.roomUsers != []) {
+  //         // console.log(this.roomUsers);
+  //         var users = this.roomUsers;
+  //         var display = ""
+  //         for (var user of users) {
+
+  //           if (user.gender == "M") {
+  //             display = " <v-badge color='deep-purple accent-4' content='" + user.name + "' bottom left overlap>\
+  //                           <img src='../images/Tanjiro.png' style='height:200px; width:165px' alt=''>\
+  //                         </v-badge>";
+  //           }
+  //           else {
+  //             display = " <v-badge color='deep-purple accent-4' content='" + user.name + "' bottom left overlap>\
+  //                           <img src='../images/Nezuko.png' style='height:200px; width:200px' alt=''>\
+  //                         </v-badge>";
+  //           }
+
+  //           // document.getElementById("display").innerHTML += display;
+  //         }
+  //       }
+  //     }
+  //   }
+  // },
   methods: {
+    getImage(gender) {
+      var image = "";
+      if (gender == "F") {
+        image = "../images/Nezuko.png";
+      }
+      else {
+        image = "../images/Tanjiro.png";
+      }
+
+      return image;
+    },
     navigateRoute(newpath) {
       this.$router.push(newpath);
     },
@@ -179,6 +285,7 @@ export default {
               this.roomUsers.push({
                 name: person.name,
                 gender: person.gender,
+                image: this.getImage(person.gender)
               });
             }
             localStorage.setItem("roomUsers", JSON.stringify(this.roomUsers));
@@ -217,6 +324,20 @@ export default {
     },
   },
 };
+
+// /*===== MOUSEMOVE HOME IMG =====*/
+document.addEventListener("mousemove", move);
+function move(e) {
+  this.querySelectorAll(".move").forEach((layer) => {
+    const speed = layer.getAttribute("data-speed");
+
+    const x = (window.innerWidth - e.pageX * speed) / 120;
+    const y = (window.innerHeight - e.pageY * speed) / 120;
+
+    layer.style.transform = `translateX(${x}px) translateY(${y}px)`;
+  });
+}
+
 </script>
 <style>
 .home {
