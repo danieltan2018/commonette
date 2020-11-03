@@ -814,7 +814,7 @@ export default {
         url: "/add-questionnaire/" + this.roomCode,
         method: "POST",
         data: {
-          name: this.roomName,
+          name: this.name,
           youtube: youtubes_id,
           book: this.books,
           movie: {
