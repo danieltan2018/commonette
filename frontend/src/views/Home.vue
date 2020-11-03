@@ -122,7 +122,6 @@
                             </div>
                         </v-theme-provider>
                         <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title" style="color:rgb(48, 48, 68);"></v-card-title>
-                        <v-card-text class="subtitle-1" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
                     </v-card>
                 </template>
                 <template v-slot:back>
