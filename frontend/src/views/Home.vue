@@ -111,25 +111,25 @@
           <v-row>
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" md="3">
               <div data-aos="flip-up" :data-aos-delay="200*i" data-aos-duration="500">
-              <vue-flip active-click width="280px" height="320px">
-                <template v-slot:front>
+                <vue-flip active-click width="280px" height="320px">
+                  <template v-slot:front>
                     <v-card width="280px" height="320px" class="py-12 px-4 rounded-xl" color="#E3E9F2" flat>
-                        <v-theme-provider dark>
-                            <div>
-                            <v-avatar color="primary" size="88">
-                                <v-icon large v-text="icon"></v-icon>
-                            </v-avatar>
-                            </div>
-                        </v-theme-provider>
-                        <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title" style="color:rgb(48, 48, 68);"></v-card-title>
+                      <v-theme-provider dark>
+                        <div>
+                          <v-avatar color="primary" size="88">
+                            <v-icon large v-text="icon"></v-icon>
+                          </v-avatar>
+                        </div>
+                      </v-theme-provider>
+                      <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title" style="color:rgb(48, 48, 68);"></v-card-title>
                     </v-card>
-                </template>
-                <template v-slot:back>
+                  </template>
+                  <template v-slot:back>
                     <v-card width="280px" height="320px" class="py-12 px-4 rounded-xl" color="#E3E9F2" flat>
-                        <v-card-text class="subtitle-1" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
+                      <v-card-text class="subtitle-1" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
                     </v-card>
-                </template>
-              </vue-flip>
+                  </template>
+                </vue-flip>
               </div>
             </v-col>
           </v-row>

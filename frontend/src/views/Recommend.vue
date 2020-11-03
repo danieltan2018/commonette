@@ -228,8 +228,8 @@ export default {
       axios
         .get(
           "https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=SG&videoCategoryId=" +
-            this.recommend.youtube.videoCategory +
-            "&key=AIzaSyA7Y61l8cbCs3iBaovaUT9iv8eczTikK9k"
+          this.recommend.youtube.videoCategory +
+          "&key=AIzaSyA7Y61l8cbCs3iBaovaUT9iv8eczTikK9k"
         )
         .then((response) => {
           this.youtubeResults = this.shuffle(response.data.items);
@@ -249,8 +249,8 @@ export default {
       axios
         .get(
           "https://www.googleapis.com/books/v1/volumes?q=subject:" +
-            this.recommend.book.subject +
-            "&langRestrict=en&maxResults=40"
+          this.recommend.book.subject +
+          "&langRestrict=en&maxResults=40"
         )
         .then((response) => {
           this.bookResults = this.shuffle(response.data.items);

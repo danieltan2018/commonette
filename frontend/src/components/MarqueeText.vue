@@ -1,55 +1,55 @@
 <script>
-  export default {
-    name: 'MarqueeText',
-    functional: true,
-    props: {
-      duration: {
-        type: Number,
-        default: 20
-      },
-      repeat: {
-        type: Number,
-        default: 2,
-        validator: function (val) {
-          return val > 0
-        }
-      },
-      paused: {
-        type: Boolean,
-        default: false
-      },
-      reverse: {
-        type: Boolean,
-        default: false
+export default {
+  name: 'MarqueeText',
+  functional: true,
+  props: {
+    duration: {
+      type: Number,
+      default: 20
+    },
+    repeat: {
+      type: Number,
+      default: 2,
+      validator: function (val) {
+        return val > 0
       }
     },
-    render(h, { $style, props: { duration, repeat, paused, reverse }, children, data: { staticClass, key, on } }) {
-      const text = h('div', {
-        class: $style.text,
-        style: {
-          animationDuration: `${duration}s`,
-          animationDirection: reverse ? 'reverse' : undefined
-        }
-      }, children)
-      return h('div', {
-        key,
-        on,
-        class: [
-          staticClass,
-          $style.wrap
-        ]
-      }, [
-        h('div', {
-          class: [
-            paused
-              ? $style.paused
-              : undefined,
-            $style.content
-          ]
-        }, Array(repeat).fill(text))
-      ])
+    paused: {
+      type: Boolean,
+      default: false
+    },
+    reverse: {
+      type: Boolean,
+      default: false
     }
+  },
+  render(h, { $style, props: { duration, repeat, paused, reverse }, children, data: { staticClass, key, on } }) {
+    const text = h('div', {
+      class: $style.text,
+      style: {
+        animationDuration: `${duration}s`,
+        animationDirection: reverse ? 'reverse' : undefined
+      }
+    }, children)
+    return h('div', {
+      key,
+      on,
+      class: [
+        staticClass,
+        $style.wrap
+      ]
+    }, [
+      h('div', {
+        class: [
+          paused
+            ? $style.paused
+            : undefined,
+          $style.content
+        ]
+      }, Array(repeat).fill(text))
+    ])
   }
+}
 </script>
 
 <style module>

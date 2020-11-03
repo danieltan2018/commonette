@@ -10,18 +10,18 @@
       <br>
     </span>
 
-    <div class="row">
-      <div class="col-3"></div>
-      <div class="col-6" style="color:white">
-        <h1>Here are some statistics!</h1><br>
-        <h2>Total No. Of Users In Room: <b style="color:#F6CA83">{{userCount}}</b></h2>
-      </div>
-      <div class="col-3"></div>
-    </div>
-
     <v-row>
       <v-col cols="3"></v-col>
-      <v-col cols="6">
+      <v-col cols="6" style="color:white">
+        <h1>Here are some statistics!</h1><br>
+        <h2>Total No. Of Users In Room: <b style="color:#F6CA83">{{userCount}}</b></h2>
+      </v-col>
+      <v-col cols="3"></v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="2"></v-col>
+      <v-col cols="8">
         <marquee-text :repeat="3" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
           <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='purple accent-4' bottom left overlap>
             <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
@@ -29,12 +29,12 @@
           </v-badge>
         </marquee-text>
       </v-col>
-      <v-col cols="3"></v-col>
+      <v-col cols="2"></v-col>
     </v-row>
 
-    <div class="row">
-      <div class="col-3"></div>
-      <div class="col-2">
+    <v-row>
+      <v-col cols="4"></v-col>
+      <v-col cols="4">
         <v-simple-table dark dense>
           <template v-slot:default>
             <thead>
@@ -51,16 +51,20 @@
             </tbody>
           </template>
         </v-simple-table>
-      </div>
-      <div class="col-4" style="color:white">
-        <br><br>Categories or Genres ranked were assigned weights!
+      </v-col>
+      <v-col cols="4"></v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="2"></v-col>
+      <v-col cols="8" style="color:white">
+        Categories or Genres ranked were assigned weights!
         <br><br>Total Weights were calculated to display the <b style="color:#5DC0BF">TOP</b> Categories/Genres below!
-      </div>
-      <div class="col-3"></div>
-    </div>
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col-5" data-aos="fade-down-right" data-aos-duration="1000" v-if="youtubeReady">
+      </v-col>
+      <v-col cols="2"></v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="1"></v-col>
+      <v-col cols="5" data-aos="fade-down-right" data-aos-duration="1000" v-if="youtubeReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="red" large>mdi-youtube</v-icon>
@@ -71,8 +75,8 @@
             </bar-chart>
           </div>
         </v-card>
-      </div>
-      <div class="col-5" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="500" v-if="bookReady">
+      </v-col>
+      <v-col cols="5" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="500" v-if="bookReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="blue" large>mdi-book</v-icon>Book
@@ -82,12 +86,12 @@
             </bar-chart>
           </div>
         </v-card>
-      </div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col-5" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="600" v-if="movieReady">
+      </v-col>
+      <v-col cols="1"></v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="1"></v-col>
+      <v-col cols="5" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="600" v-if="movieReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="rgb(255, 0, 128)" large>mdi-movie-open</v-icon>Movie
@@ -97,8 +101,8 @@
             </bar-chart>
           </div>
         </v-card>
-      </div>
-      <div class="col-5" data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1000" v-if="spotifyReady">
+      </v-col>
+      <v-col cols="5" data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1000" v-if="spotifyReady">
         <v-card type="chart" dark>
           <v-card-title>
             <v-icon color="green" large>mdi-spotify</v-icon>Spotify
@@ -108,9 +112,9 @@
             </bar-chart>
           </div>
         </v-card>
-      </div>
-      <div class="col-1"></div>
-    </div>
+      </v-col>
+      <v-col cols="1"></v-col>
+    </v-row>
   </v-main>
 </template>
 
@@ -229,8 +233,8 @@ export default {
   mounted: function () {
     window.scrollTo(0, 0);
   },
-  computed:{
-    marqueeSpeed:function(){
+  computed: {
+    marqueeSpeed: function () {
       return this.roomUsers.length * 7;
     }
   },
