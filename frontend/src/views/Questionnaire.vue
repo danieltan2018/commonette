@@ -272,7 +272,6 @@ export default {
       books: [],
       movies: [],
       sArtists: [],
-      sTracks: [],
       sGenres: [],
       youtubeSelection: null,
       youtubeTag: null,
@@ -282,20 +281,13 @@ export default {
       movieTag: null,
       sArtistSelection: null,
       sArtistTag: null,
-      sTrackSelection: null,
-      sTrackTag: null,
       sGenreSelection: null,
       sGenreTag: null,
       artist: null,
       artistSuggestions: [],
-      track: null,
-      trackSuggestions: [],
       artistId: null,
-      trackId: null,
       artistIds: [],
-      trackIds: [],
       artistDic: {},
-      trackDic: {},
       roomCode: localStorage.getItem("roomCode"),
       roomName: localStorage.getItem("roomName"),
       inputRequiredRule: [(v) => v.length > 0 || "Required"],
@@ -316,8 +308,6 @@ export default {
       mvLangNone: false,
       sANone: false,
       sAExceed: false,
-      sTNone: false,
-      sTExceed: false,
       sGNone: false,
       sGExceed: false,
       nameNone: false,
@@ -646,14 +636,6 @@ export default {
         }
       },
     },
-    sTracks: {
-      immediate: false,
-      handler() {
-        if (this.sTracks != []) {
-          document.getElementById("sTDisplay").style.display = "inline";
-        }
-      },
-    },
     sArtists: {
       immediate: false,
       handler() {
@@ -745,18 +727,6 @@ export default {
         });
       }
     },
-    dragStartSTrack() {
-      if (this.sTracks[this.sTrackSelection]) {
-        this.sTrackTag = this.sTracks[this.sTrackSelection];
-      } else this.sTrackTag = null;
-    },
-    dragEndSTrack() {
-      if (this.sTrackTag) {
-        this.sTrack.forEach((x, i) => {
-          if (x === this.sTrackTag) this.sTrackSelection = i;
-        });
-      }
-    },
     dragStartSGenre() {
       if (this.sGenres[this.sGenreSelection]) {
         this.sGenreTag = this.sGenres[this.sGenreSelection];
@@ -796,15 +766,6 @@ export default {
               }
               console.log("artistDic", this.artistDic);
               this.artistSuggestions = names;
-            } else if (type === "track") {
-              let items = response.data.tracks.items;
-              let names = [];
-              for (let i = 0; i < items.length; i++) {
-                names.push(items[i]["name"]);
-                this.trackDic[items[i]["name"]] = items[i]["id"];
-              }
-              console.log("trackDic", this.trackDic);
-              this.trackSuggestions = names;
             }
           })
           .catch((e) => {
@@ -815,11 +776,6 @@ export default {
     addSpotifyArtist(value) {
       if (!this.sArtists.includes(value) && value != "") {
         this.sArtists.push(value);
-      }
-    },
-    addSpotifyTrack(value) {
-      if (!this.sTracks.includes(value) && value != "") {
-        this.sTracks.push(value);
       }
     },
     navigateRoute(newpath) {
@@ -841,15 +797,10 @@ export default {
           youtubes_id.push(this.youtubeCategories[youtube]);
         }
       }
-
-      // process to get ids of spotify artists and tracks
+      // process to get ids of spotify artists
       for (let artist of this.sArtists) {
         let id = this.artistDic[artist];
         this.artistIds.push(id);
-      }
-      for (var track of this.sTracks) {
-        let id = this.trackDic[track];
-        this.trackIds.push(id);
       }
 
       // process gender
@@ -874,13 +825,12 @@ export default {
           spotify: {
             genre: spotify_genres_lower,
             artist: this.artistIds,
-            track: this.trackIds,
           },
           gender: genderData
         },
       })
         .then((response) => {
-          console.log("response", response);
+          console.log("questionnaire response", response);
           this.navigateRoute("/recommend");
         })
         .catch((e) => {
@@ -905,10 +855,6 @@ export default {
         this.sArtists = this.sArtists.filter(function (e) {
           return e !== tag;
         });
-      else if (list == "sTracks")
-        this.sTracks = this.sTracks.filter(function (e) {
-          return e !== tag;
-        });
       else if (list == "sGenres")
         this.sGenres = this.sGenres.filter(function (e) {
           return e !== tag;
@@ -922,7 +868,6 @@ export default {
         this.books.length == 0 ||
         this.movieLanguage.length == 0 ||
         this.sArtists.length == 0 ||
-        this.sTracks.length == 0 ||
         this.sGenres.length == 0
       ) {
         return false;
@@ -932,7 +877,6 @@ export default {
         this.movies.length > 5 ||
         this.books.length > 5 ||
         this.sArtists.length > 3 ||
-        this.sTracks.length > 3 ||
         this.sGenres.length > 5
       ) {
         return false;
@@ -956,9 +900,6 @@ export default {
       if (this.sArtists.length == 0) this.sANone = true;
       else if (this.sArtists.length > 3) this.sAExceed = true;
 
-      if (this.sTracks.length == 0) this.sTNone = true;
-      else if (this.sTracks.length > 3) this.sTExceed = true;
-
       if (this.sGenres.length == 0) this.sGNone = true;
       else if (this.sGenres.length > 5) this.sGExceed = true;
     },
@@ -972,8 +913,6 @@ export default {
       this.mvLangNone = false;
       this.sANone = false;
       this.sAExceed = false;
-      this.sTNone = false;
-      this.sTExceed = false;
       this.sGNone = false;
       this.sGExceed = false;
       this.nameNone = false;
