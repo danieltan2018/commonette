@@ -35,7 +35,7 @@
       </v-card>
     </v-dialog>
 
-    <section id="all" v-if="recommend" style="background-color:rgb(81, 81, 118)">
+    <section id="all" v-if="recommend && bookDisplay" style="background-color:rgb(81, 81, 118)">
       <span>
         <br>
         <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
@@ -43,7 +43,7 @@
         <br>
       </span>
 
-      <v-sheet class="mx-auto" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
+      <v-sheet class="mx-auto" elevation="8" v-if="youtubeDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="red">
@@ -101,7 +101,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="movieDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="pink">
@@ -130,7 +130,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="spotifyDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="green">
@@ -158,8 +158,13 @@
           </v-slide-item>
         </v-slide-group>
       </v-sheet>
-
     </section>
+
+    <!-- Handle slowest API - Books -->
+    <h1 v-else>
+      Loading...
+    </h1>
+
   </v-main>
 </template>
 
