@@ -18,7 +18,6 @@ def generate_api(questionnaire_data, process):
     movie_language_weights = {}
     spotify_genre_weights = {}
     spotify_artist_weights = {}
-    spotify_track_weights = {}
 
     for user_data in questionnaire_data:
         # youtube
@@ -100,17 +99,6 @@ def generate_api(questionnaire_data, process):
 
                 current_weight -= 1
 
-            # spotify - track
-            track = spotify["track"]
-            current_weight = 5
-            for i in range(len(track)):
-                if track[i] in spotify_track_weights:
-                    spotify_track_weights[track[i]] += current_weight
-                else:
-                    spotify_track_weights[track[i]] = current_weight
-
-                current_weight -= 1
-
     # sort dictionary
     youtube_weights = {k: v for k, v in sorted(
         youtube_weights.items(), key=lambda item: item[1], reverse=True)}
@@ -124,16 +112,13 @@ def generate_api(questionnaire_data, process):
         spotify_genre_weights.items(), key=lambda item: item[1], reverse=True)}
     spotify_artist_weights = {k: v for k, v in sorted(
         spotify_artist_weights.items(), key=lambda item: item[1], reverse=True)}
-    spotify_track_weights = {k: v for k, v in sorted(
-        spotify_track_weights.items(), key=lambda item: item[1], reverse=True)}
 
     # number of items to return
     no_youtube = min(len(youtube_weights), 3)
     no_movie_genre = min(len(movie_genre_weights), 3)
     no_movie_language = min(len(movie_language_weights), 3)
-    no_spotify_genre = min(len(spotify_genre_weights), 3)
+    no_spotify_genre = min(len(spotify_genre_weights), 2)
     no_spotify_artist = min(len(spotify_artist_weights), 3)
-    no_spotify_track = min(len(spotify_track_weights), 3)
 
     api_param = {}
 
@@ -144,7 +129,7 @@ def generate_api(questionnaire_data, process):
         api_param["movie"] = {"genre": ",".join(list(movie_genre_weights.keys())[0:no_movie_genre]), "language": ",".join(
             list(movie_language_weights.keys())[0:no_movie_language]), "min_imdb": movie_min_imdb}
         api_param["spotify"] = {"seed_genres": ",".join(list(spotify_genre_weights.keys())[0:no_spotify_genre]), "seed_artists": ",".join(list(
-            spotify_artist_weights.keys())[0:no_spotify_artist]), "seed_tracks": ",".join(list(spotify_track_weights.keys())[0:no_spotify_track])}
+            spotify_artist_weights.keys())[0:no_spotify_artist])}
     else:
         youtube_categories = {'1': 'Film & Animation', '2': 'Autos & Vehicles', '10': 'Music', '15': 'Pets & Animals', '17': 'Sports', '19': 'Travel & Events', '20': 'Gaming',
                               '22': 'People & Blogs', '23': 'Comedy', '24': 'Entertainment', '25': 'News & Politics', '26': 'Howto & Style', '27': 'Education', '28': 'Science & Technology'}

@@ -14,9 +14,17 @@
           </v-flex>
         </v-layout>
         <v-layout>
-          <div class="mx-auto mb-6">
+          <div class="mx-auto mb-4">
             <v-alert color="red" elevation="4" dense outlined type="error" v-if="nameNone">Please Enter Your Name!</v-alert>
           </div>
+        </v-layout>
+        <div>Share your gender</div>
+        <v-layout row wrap justify-center>
+          <v-flex xs12 md6 lg4 mx-4>
+            <v-radio-group v-model="gender">
+              <v-radio v-for="n in genders" :key="n" :label="`${n}`" :value="n"></v-radio>
+            </v-radio-group>
+          </v-flex>
         </v-layout>
 
         <v-container id="youtubeCategory" class="category-container">
@@ -193,44 +201,6 @@
 
           <div class="mb-12"></div>
 
-          <div mb-2>Select up to 3 of your favourite tracks</div>
-          <v-layout row wrap justify-center>
-            <v-flex xs12 md6 lg4>
-              <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
-              <div v-if="track">
-                <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" small rounded outlined color="blue">{{suggest}}</v-btn>
-              </div>
-            </v-flex>
-          </v-layout>
-          <div id="sTDisplay" style="display:none">
-            <div>Drag to Rank</div>
-            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-            <v-layout row wrap justify-center mb-4>
-              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
-                <v-card-text>
-                  <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
-                    <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
-                      <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')" outlined color="rgb(90, 90, 160)">
-                        <v-avatar left color="rgb(90, 90, 160)">
-                          <span style="color:white;">{{i+1}}</span>
-                        </v-avatar>
-                        {{tag}}
-                      </v-chip>
-                    </draggable>
-                  </v-chip-group>
-                </v-card-text>
-              </v-card>
-            </v-layout>
-          </div>
-          <v-layout>
-            <div class="mx-auto mb-6">
-              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTNone">Please Select At Least ONE!</v-alert>
-              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTExceed">Please Select Maximum THREE!</v-alert>
-            </div>
-          </v-layout>
-
-          <div class="mb-12"></div>
-
           <div class="mb-8"></div>
           <div>Select up to 5 of your favourite genres</div>
           <v-layout row wrap justify-center>
@@ -291,6 +261,7 @@ export default {
   data: () => {
     return {
       name: "",
+      gender: "Male",
       youtubeCategory: "",
       bookGenre: "",
       movieGenre: "",
@@ -350,6 +321,7 @@ export default {
       sGNone: false,
       sGExceed: false,
       nameNone: false,
+      genders: ["Male", "Female"],
       languages: ["English", "Mandarin", "Malay", "Tamil"],
       inputYoutube: [
         "Entertainment",
@@ -365,7 +337,7 @@ export default {
         "Music",
         "Pets & Animals",
         "Sports",
-        "Travel & Events"
+        "Travel & Events",
       ],
       youtubeCategories: {
         "Film & Animation": "1",
@@ -457,325 +429,55 @@ export default {
       ],
       inputMovieLang: [
         "Abkhazian",
-        "Aboriginal",
-        "Acholi",
-        "Afar",
         "Afrikaans",
-        "Akan",
         "Albanian",
-        "Algonquin",
-        "American Sign Language",
-        "Amharic",
         "Apache languages",
         "Arabic",
-        "Aragonese",
-        "Aramaic",
         "Armenian",
-        "Aromanian",
-        "Assamese",
-        "Assyrian Neo-Aramaic",
-        "Athapascan languages",
-        "Australian Sign Language",
-        "Awadhi",
-        "Aymara",
-        "Azerbaijani",
-        "Bable",
-        "Baka",
-        "Balinese",
-        "Bambara",
-        "Bashkir",
-        "Basque",
-        "Bassari",
-        "Belarusian",
-        "Bemba",
         "Bengali",
-        "Berber languages",
-        "Bhojpuri",
-        "Bicolano",
-        "Bislama",
-        "Bodo",
-        "Bosnian",
-        "Brazilian Sign Language",
-        "Breton",
-        "British Sign Language",
-        "Bulgarian",
-        "Burmese",
         "Cantonese",
         "Catalan",
-        "Central American Indian languages",
-        "Chamorro",
-        "Chaozhou",
-        "Chechen",
-        "Cherokee",
-        "Cheyenne",
-        "Chhattisgarhi",
         "Chinese",
-        "Cornish",
-        "Corsican",
-        "Cree",
-        "Creek",
-        "Crimean Tatar",
         "Croatian",
-        "Crow",
         "Czech",
         "Danish",
-        "Dari",
-        "Dinka",
-        "Divehi",
-        "Dogri",
-        "Dutch",
-        "Dyula",
-        "Dzongkha",
-        "East-Greenlandic",
-        "Eastern Frisian",
-        "Egyptian (Ancient)",
         "English",
-        "Esperanto",
-        "Estonian",
-        "Ewe",
-        "Faliasch",
-        "Faroese",
         "Filipino",
         "Finnish",
-        "Flemish",
-        "Fon",
         "French",
-        "French Sign Language",
-        "Frisian",
-        "Fulah",
-        "Fur",
-        "Ga",
-        "Gaelic",
-        "Galician",
-        "Gallegan",
-        "Georgian",
         "German",
-        "German Sign Language",
         "Greek",
-        "Greek, Ancient (to 1453)",
-        "Greenlandic",
-        "Guarani",
-        "Gujarati",
-        "Gumatj",
-        "Haida",
-        "Haitian",
-        "Haitian; Haitian Creole",
-        "Hakka",
-        "Haryanvi",
-        "Hassanya",
-        "Hausa",
-        "Hawaiian",
         "Hebrew",
-        "Herero",
-        "Himachali",
         "Hindi",
-        "Hmong",
         "Hokkien",
-        "Hopi",
         "Hungarian",
-        "Ibo",
-        "Icelandic",
-        "Icelandic Sign Language",
-        "Igbo",
-        "Indian Sign Language",
         "Indonesian",
-        "Interlingue",
-        "Inuktitut",
-        "Inupiaq",
         "Irish",
-        "Irula",
         "Italian",
         "Japanese",
-        "Japanese Sign Language",
-        "Javanese",
-        "Jola-Fonyi",
-        "Ju'hoan",
-        "Kabuverdianu",
-        "Kabyle",
-        "Kalaallisut",
-        "Kalmyk-Oirat",
-        "Kannada",
-        "Karen",
-        "Kashmiri",
-        "Kazakh",
-        "Khanty",
-        "Khasi",
-        "Khmer",
-        "Kikuyu",
-        "Kinyarwanda",
-        "Kirghiz",
-        "Kirundi",
-        "Klingon",
-        "Kodava",
-        "Konkani",
         "Korean",
-        "Korean Sign Language",
-        "Kriolu",
-        "Kru",
-        "Kudmali",
-        "Kuna",
-        "Kurdish",
-        "Ladakhi",
-        "Ladino",
-        "Lao",
         "Latin",
         "Latvian",
-        "Letzeburgesch",
-        "Lingala",
-        "Lithuanian",
-        "Low German",
-        "Luxembourgish",
-        "Macedonian",
-        "Magahi",
-        "Maithili",
-        "Malagasy",
         "Malay",
         "Malayalam",
-        "Malinka",
-        "Maltese",
         "Mandarin",
-        "Mandingo",
-        "Manipuri",
-        "Maori",
-        "Mapudungun",
-        "Marathi",
-        "Mari",
-        "Marshall",
-        "Marshallese",
-        "Masai",
-        "Maya",
-        "Mende",
-        "Micmac",
-        "Middle English",
-        "Min Nan",
-        "Minangkabau",
-        "Mirandese",
-        "Mixtec",
-        "Mizo",
-        "Mohawk",
-        "Moldavian",
         "Mongolian",
-        "Montagnais",
-        "Morisyen",
-        "Nagpuri",
-        "Nahuatl",
-        "Nama",
-        "Navajo",
-        "Neapolitan",
-        "Nenets",
-        "Nepali",
-        "Norse, Old",
-        "North American Indian",
-        "North Ndebele",
-        "Northern Sami",
-        "Norwegian",
-        "Norwegian Nynorsk",
-        "Nushi",
-        "Nyanja",
-        "Occitan",
-        "Ojibwa",
-        "Ojihimba",
-        "Old English",
-        "Oriya",
-        "Papiamento",
-        "Parsee",
-        "Pawnee",
         "Persian",
-        "Peul",
         "Polish",
-        "Polynesian",
         "Portuguese",
-        "Pular",
         "Punjabi",
-        "Purepecha",
-        "Pushto",
-        "Quechua",
-        "Quenya",
-        "Raeto-Romance",
-        "Rajasthani",
-        "Rhaetian",
-        "Romanian",
-        "Romany",
         "Russian",
-        "Russian Sign Language",
-        "Ryukyuan",
-        "Saami",
-        "Samoan",
-        "Sanskrit",
-        "Sardinian",
-        "Scanian",
         "Scots",
         "Scottish Gaelic",
-        "Serbian",
-        "Serbo-Croatian",
-        "Shanghainese",
-        "Shona",
-        "Shoshoni",
-        "Shuar",
-        "Sicilian",
-        "Sign Languages",
-        "Sindarin",
-        "Sindhi",
-        "Sinhalese",
-        "Sioux",
-        "Slovak",
-        "Slovenian",
         "Somali",
-        "Songhay",
-        "Soninke",
-        "Sorbian languages",
-        "Southern Sotho",
         "Spanish",
-        "Spanish Sign Language",
-        "Sranan",
-        "Sumerian",
-        "Swahili",
-        "Swati",
         "Swedish",
-        "Swiss German",
-        "Syriac",
         "Tagalog",
-        "Tahitian",
-        "Tajik",
-        "Tamashek",
         "Tamil",
-        "Tarahumara",
-        "Tatar",
-        "Telugu",
-        "Teochew",
         "Thai",
-        "Tibetan",
-        "Tigrigna",
-        "Tigrinya",
-        "Tlingit",
-        "Tok Pisin",
-        "Tonga",
-        "Tsonga",
-        "Tswana",
-        "Tulu",
-        "Tupi",
         "Turkish",
-        "Turkmen",
-        "Tuvinian",
-        "Tzotzil",
-        "Uighur",
         "Ukrainian",
-        "Ukrainian Sign Language",
-        "Ungwatsi",
-        "Urdu",
-        "Uzbek",
         "Vietnamese",
-        "Vimeo - Official Chinese Language Version",
-        "Visayan",
-        "Washoe",
-        "Wayuu",
-        "Welsh",
-        "Wolof",
-        "Xhosa",
-        "Yakut",
-        "Yiddish",
-        "Yoruba",
-        "Zulu",
       ],
       inputSpotifyGenre: [
         "Acoustic",
@@ -1092,7 +794,7 @@ export default {
                 names.push(items[i]["name"]);
                 this.artistDic[items[i]["name"]] = items[i]["id"];
               }
-            console.log("artistDic", this.artistDic);
+              console.log("artistDic", this.artistDic);
               this.artistSuggestions = names;
             } else if (type === "track") {
               let items = response.data.tracks.items;
@@ -1101,7 +803,7 @@ export default {
                 names.push(items[i]["name"]);
                 this.trackDic[items[i]["name"]] = items[i]["id"];
               }
-            console.log("trackDic", this.trackDic);
+              console.log("trackDic", this.trackDic);
               this.trackSuggestions = names;
             }
           })
@@ -1136,7 +838,7 @@ export default {
       let youtubes_id = [];
       for (let youtube of youtubes) {
         if (youtube in this.youtubeCategories) {
-          youtubes_id.push(this.youtubeCategories[youtube])
+          youtubes_id.push(this.youtubeCategories[youtube]);
         }
       }
 
@@ -1146,40 +848,36 @@ export default {
         this.artistIds.push(id);
       }
       for (var track of this.sTracks) {
-        let id = this.trackDic[track]
-        this.trackIds.push(id)
+        let id = this.trackDic[track];
+        this.trackIds.push(id);
       }
 
-    //   console.log("youtubes", this.youtubes);
-      console.log("youtubes_id", youtubes_id);
-      console.log("books", this.books);
-      console.log("movies", this.movies);
-      console.log("movieImdb", this.movieImdb);
-      console.log("movieLanguage", this.movieLanguage);
-      console.log("sGenres", this.sGenres);
-    //   console.log("sArtists", this.sArtists);
-      console.log("artistIds", this.artistIds);
-    //   console.log("sTracks", this.sTracks);
-      console.log("trackIds", this.trackIds);
+      // process gender
+      var genderData = "";
+      if (this.gender == "Male")
+        genderData = "M"
+      else
+        genderData = "F"
 
       axios({
         url: "/add-questionnaire/" + this.roomCode,
         method: "POST",
         data: {
-            name: this.roomName,
-            youtube: youtubes_id,
-            book: this.books,
-            movie: {
-                genre: this.movies,
-                imdb: this.movieImdb,
-                language: this.movieLanguage,
-            },
-            spotify: {
-                genre: spotify_genres_lower,
-                artist: this.artistIds,
-                track: this.trackIds,
-            }
-        }
+          name: this.roomName,
+          youtube: youtubes_id,
+          book: this.books,
+          movie: {
+            genre: this.movies,
+            imdb: this.movieImdb,
+            language: this.movieLanguage,
+          },
+          spotify: {
+            genre: spotify_genres_lower,
+            artist: this.artistIds,
+            track: this.trackIds,
+          },
+          gender: genderData
+        },
       })
         .then((response) => {
           console.log("response", response);
@@ -1215,7 +913,6 @@ export default {
         this.sGenres = this.sGenres.filter(function (e) {
           return e !== tag;
         });
-      // console.log(list);
     },
     validate() {
       this.resetAlerts();
@@ -1343,7 +1040,7 @@ export default {
 }
 #progress-el {
   /* progress bar */
-  background-color: #5DC0BF !important;
+  background-color: #5dc0bf !important;
   height: 6px !important;
 }
 
