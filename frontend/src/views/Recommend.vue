@@ -43,7 +43,7 @@
         <br>
       </span>
 
-      <v-sheet class="mx-auto" elevation="8" v-if="youtubeResults" color="rgb(81, 81, 118)">
+      <v-sheet class="mx-auto" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="red">
@@ -53,8 +53,8 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="video in youtubeDisplay" :key="video.id">
-            <v-container grid-list-md>
+          <v-slide-item v-for="(video,i) in youtubeDisplay" :key="video.id">
+            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i">
               <v-icon class="d-flex justify-content-end" color="red" v-on:click="remove('youtube', video.id)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" width="250px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
                 <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
@@ -72,7 +72,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookResults" color="rgb(81, 81, 118)">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="blue">
@@ -82,8 +82,8 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="book in bookDisplay" :key="book.id">
-            <v-container grid-list-md>
+          <v-slide-item v-for="(book,i) in bookDisplay" :key="book.id">
+            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i">
               <v-icon class="d-flex justify-end" color="red" v-on:click="remove('book', book.id)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="bookCard(book.volumeInfo.title, book.volumeInfo.authors.toString(), book.volumeInfo.description, book.volumeInfo.previewLink, book.volumeInfo.imageLinks.thumbnail)">
                 <v-img :src="book.volumeInfo.imageLinks.thumbnail" height="300px" contain></v-img>
@@ -101,7 +101,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="movieResults" color="rgb(81, 81, 118)">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="pink">
@@ -111,8 +111,8 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="movie in movieDisplay" :key="movie.imdbid">
-            <v-container grid-list-md>
+          <v-slide-item v-for="(movie,i) in movieDisplay" :key="movie.imdbid">
+            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i">
               <v-icon class="d-flex justify-end" color="red" v-on:click="remove('movie', movie.imdbid)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.imageurl[0], movie.imdbid)">
                 <v-img :src="movie.imageurl[0]" height="300px" contain></v-img>
@@ -130,7 +130,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="spotifyResults" color="rgb(81, 81, 118)">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="green">
@@ -140,8 +140,8 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="song in spotifyDisplay" :key="song.id">
-            <v-container v-if="song.id" grid-list-md>
+          <v-slide-item v-for="(song,i) in spotifyDisplay" :key="song.id">
+            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i">
               <v-icon class="d-flex justify-end" color="red" v-on:click="remove('spotify', song.id)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" max-width="150px" v-on:click="spotifyCard(song.name, song.album.name, song.album.release_date, song.artists, song.id)">
                 <v-img :src="song.album.images[1].url" contain></v-img>
