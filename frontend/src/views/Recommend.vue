@@ -83,7 +83,7 @@
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
           <v-slide-item v-for="(book,i) in bookDisplay" :key="book.id">
-            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i">
+            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i" v-if="book.volumeInfo.authors && book.volumeInfo.imageLinks">
               <v-icon class="d-flex justify-end" color="red" v-on:click="remove('book', book.id)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="bookCard(book.volumeInfo.title, book.volumeInfo.authors.toString(), book.volumeInfo.description, book.volumeInfo.previewLink, book.volumeInfo.imageLinks.thumbnail)">
                 <v-img :src="book.volumeInfo.imageLinks.thumbnail" height="300px" contain></v-img>
@@ -112,7 +112,7 @@
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
           <v-slide-item v-for="(movie,i) in movieDisplay" :key="movie.imdbid">
-            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i">
+            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i" v-if="movie.imageurl[0]">
               <v-icon class="d-flex justify-end" color="red" v-on:click="remove('movie', movie.imdbid)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.imageurl[0], movie.imdbid)">
                 <v-img :src="movie.imageurl[0]" height="300px" contain></v-img>
@@ -162,7 +162,7 @@
 
     <!-- Handle slowest API - Books -->
     <h1 v-else>
-      Loading...
+      Running magic algorithms...
     </h1>
 
   </v-main>
