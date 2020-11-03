@@ -20,27 +20,17 @@
     </div>
 
     <v-row>
-      <v-col cols="2"></v-col>
-      <v-col cols="12">
-        <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='deep-purple accent-4' bottom left overlap>
-          <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:200px; width:165px'></v-img>
-          <v-img v-else src='../images/Nezuko.png' style='height:200px; width:200px'></v-img>
-        </v-badge>
+      <v-col cols="3"></v-col>
+      <v-col cols="6">
+        <marquee-text :repeat="3" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
+          <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='purple accent-4' bottom left overlap>
+            <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
+            <v-img v-else src='../images/Nezuko.png' style='height:150px; width:140px'></v-img>
+          </v-badge>
+        </marquee-text>
       </v-col>
-      <v-col cols="2"></v-col>
+      <v-col cols="3"></v-col>
     </v-row>
-    <!-- <div class="row">
-      <div class="col-1"></div>
-      <div class="col-10" id="display">
-        <v-badge color="deep-purple accent-4" content="Tanjiro" bottom left overlap>
-          <img src="../images/Tanjiro.png" style="height:200px; width:165px" alt="">
-        </v-badge>
-        <v-badge color="deep-purple accent-4" content="Nezuko" bottom left overlap>
-          <img src="../images/Nezuko.png" style="height:200px; width:200px" alt="">
-        </v-badge>
-      </div>
-      <div class="col-1"></div>
-    </div> -->
 
     <div class="row">
       <div class="col-3"></div>
@@ -127,11 +117,13 @@
 <script>
 import BarChart from "../components/Charts/BarChart";
 import * as chartConfigs from "../components/Charts/config";
+import MarqueeText from '../components/MarqueeText.vue'
 import config from "../config";
 import axios from "axios";
 export default {
   components: {
     BarChart,
+    MarqueeText
   },
   props: {
     roomCode: {
@@ -146,9 +138,7 @@ export default {
     bookReady: false,
     movieReady: false,
     spotifyReady: false,
-    femaleSpeed: 3,
-    maleSpeed: -3,
-    usersDisplay: [],
+    isPaused: false,
     youtubeBarChart: {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
@@ -239,33 +229,11 @@ export default {
   mounted: function () {
     window.scrollTo(0, 0);
   },
-  // watch: {
-  //   roomUsers: {
-  //     immediate: true,
-  //     handler() {
-  //       if (this.roomUsers != []) {
-  //         // console.log(this.roomUsers);
-  //         var users = this.roomUsers;
-  //         var display = ""
-  //         for (var user of users) {
-
-  //           if (user.gender == "M") {
-  //             display = " <v-badge color='deep-purple accent-4' content='" + user.name + "' bottom left overlap>\
-  //                           <img src='../images/Tanjiro.png' style='height:200px; width:165px' alt=''>\
-  //                         </v-badge>";
-  //           }
-  //           else {
-  //             display = " <v-badge color='deep-purple accent-4' content='" + user.name + "' bottom left overlap>\
-  //                           <img src='../images/Nezuko.png' style='height:200px; width:200px' alt=''>\
-  //                         </v-badge>";
-  //           }
-
-  //           // document.getElementById("display").innerHTML += display;
-  //         }
-  //       }
-  //     }
-  //   }
-  // },
+  computed:{
+    marqueeSpeed:function(){
+      return this.roomUsers.length * 7;
+    }
+  },
   methods: {
     getImage(gender) {
       var image = "";
@@ -334,19 +302,6 @@ export default {
     },
   },
 };
-
-// /*===== MOUSEMOVE HOME IMG =====*/
-document.addEventListener("mousemove", move);
-function move(e) {
-  this.querySelectorAll(".move").forEach((layer) => {
-    const speed = layer.getAttribute("data-speed");
-
-    const x = (window.innerWidth - e.pageX * speed) / 120;
-    const y = (window.innerHeight - e.pageY * speed) / 120;
-
-    layer.style.transform = `translateX(${x}px) translateY(${y}px)`;
-  });
-}
 
 </script>
 <style>
