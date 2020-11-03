@@ -17,6 +17,7 @@
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",
     "vue-flip": "^1.0.2",
+    "vue-marquee-text-component": "^1.2.0",
     "vue-router": "^3.4.8",
     "vue-scroll-progress": "^1.1.5",
     "vuedraggable": "^2.24.3",
