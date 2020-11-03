@@ -174,7 +174,7 @@
           </v-layout>
           <div id="sADisplay" style="display:none">
             <div>Drag to Rank</div>
-            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
+            <div class="mb-4">(1 - Most Favourite, 3 - Least Favourite)</div>
             <v-layout row wrap justify-center>
               <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
                 <v-card-text>
