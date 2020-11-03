@@ -18,7 +18,6 @@ def generate_api(questionnaire_data, process):
     movie_language_weights = {}
     spotify_genre_weights = {}
     spotify_artist_weights = {}
-    spotify_track_weights = {}
 
     for user_data in questionnaire_data:
         # youtube
@@ -100,17 +99,6 @@ def generate_api(questionnaire_data, process):
 
                 current_weight -= 1
 
-            # spotify - track
-            track = spotify["track"]
-            current_weight = 5
-            for i in range(len(track)):
-                if track[i] in spotify_track_weights:
-                    spotify_track_weights[track[i]] += current_weight
-                else:
-                    spotify_track_weights[track[i]] = current_weight
-
-                current_weight -= 1
-
     # sort dictionary
     youtube_weights = {k: v for k, v in sorted(
         youtube_weights.items(), key=lambda item: item[1], reverse=True)}
@@ -124,8 +112,6 @@ def generate_api(questionnaire_data, process):
         spotify_genre_weights.items(), key=lambda item: item[1], reverse=True)}
     spotify_artist_weights = {k: v for k, v in sorted(
         spotify_artist_weights.items(), key=lambda item: item[1], reverse=True)}
-    spotify_track_weights = {k: v for k, v in sorted(
-        spotify_track_weights.items(), key=lambda item: item[1], reverse=True)}
 
     # number of items to return
     no_youtube = min(len(youtube_weights), 3)
