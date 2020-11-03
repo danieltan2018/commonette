@@ -201,44 +201,6 @@
 
           <div class="mb-12"></div>
 
-          <div mb-2>Select up to 3 of your favourite tracks</div>
-          <v-layout row wrap justify-center>
-            <v-flex xs12 md6 lg4>
-              <v-text-field v-model="track" v-on:keyup="searchSpotify(track, 'track')" label="Track"></v-text-field>
-              <div v-if="track">
-                <v-btn v-for="suggest in trackSuggestions" :key="suggest" v-on:click="addSpotifyTrack(suggest)" class="suggest-button" small rounded outlined color="blue">{{suggest}}</v-btn>
-              </div>
-            </v-flex>
-          </v-layout>
-          <div id="sTDisplay" style="display:none">
-            <div>Drag to Rank</div>
-            <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
-            <v-layout row wrap justify-center mb-4>
-              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
-                <v-card-text>
-                  <v-chip-group v-model="sTrackSelection" column active-class="primary--text">
-                    <draggable v-model="sTracks" @start="dragStartSTrack" @end="dragEndSTrack">
-                      <v-chip v-for="(tag, i) in sTracks" :key="i" draggable close @click:close="remove(tag, 'sTracks')" outlined color="rgb(90, 90, 160)">
-                        <v-avatar left color="rgb(90, 90, 160)">
-                          <span style="color:white;">{{i+1}}</span>
-                        </v-avatar>
-                        {{tag}}
-                      </v-chip>
-                    </draggable>
-                  </v-chip-group>
-                </v-card-text>
-              </v-card>
-            </v-layout>
-          </div>
-          <v-layout>
-            <div class="mx-auto mb-6">
-              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTNone">Please Select At Least ONE!</v-alert>
-              <v-alert color="red" elevation="4" dense outlined type="error" v-if="sTExceed">Please Select Maximum THREE!</v-alert>
-            </div>
-          </v-layout>
-
-          <div class="mb-12"></div>
-
           <div class="mb-8"></div>
           <div>Select up to 5 of your favourite genres</div>
           <v-layout row wrap justify-center>
