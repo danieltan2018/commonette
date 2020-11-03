@@ -1,5 +1,15 @@
 <template>
   <v-main class="home">
+
+    <span>
+      <br>
+      <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
+      <br>
+      <v-btn large v-on:click="navigateRoute('/recommend')">View Recommendations</v-btn>
+      <br>
+      <br>
+    </span>
+
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6" style="color:white">
