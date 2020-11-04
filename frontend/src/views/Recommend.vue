@@ -36,13 +36,21 @@
     </v-dialog>
 
     <section id="all" v-if="recommend && bookDisplay" style="background-color:rgb(81, 81, 118)">
-      <span>
-        <br>
-        <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
-        <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
-        <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
-        <br>
-      </span>
+      <v-layout>
+        <v-row>
+          <v-col>
+            <v-img height=150 contain src="../images/Nezuko.png"></v-img>
+          </v-col>
+          <v-col>
+            <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
+            <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
+            <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
+          </v-col>
+          <v-col>
+            <v-img height=150 contain src="../images/Tanjiro.png"></v-img>
+          </v-col>
+        </v-row>
+      </v-layout>
 
       <v-sheet class="mx-auto" elevation="8" v-if="youtubeDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
@@ -229,8 +237,8 @@ export default {
       axios
         .get(
           "https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=SG&videoCategoryId=" +
-          this.recommend.youtube.videoCategory +
-          "&key=AIzaSyA7Y61l8cbCs3iBaovaUT9iv8eczTikK9k"
+            this.recommend.youtube.videoCategory +
+            "&key=AIzaSyA7Y61l8cbCs3iBaovaUT9iv8eczTikK9k"
         )
         .then((response) => {
           this.youtubeResults = this.shuffle(response.data.items);
@@ -250,8 +258,8 @@ export default {
       axios
         .get(
           "https://www.googleapis.com/books/v1/volumes?q=subject:" +
-          this.recommend.book.subject +
-          "&langRestrict=en&maxResults=40"
+            this.recommend.book.subject +
+            "&langRestrict=en&maxResults=40"
         )
         .then((response) => {
           this.bookResults = this.shuffle(response.data.items);
