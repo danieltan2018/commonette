@@ -4,11 +4,16 @@
     <span>
       <br>
       <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
+      <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
       <br>
       <v-btn large v-on:click="navigateRoute('/recommend')">View Recommendations</v-btn>
       <br>
       <br>
     </span>
+  
+    <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="pink" @click="toTop">
+      <v-icon>mdi-arrow-up</v-icon>
+    </v-btn>
 
     <v-row>
       <v-col cols="3"></v-col>
@@ -23,7 +28,7 @@
       <v-col cols="2"></v-col>
       <v-col cols="8">
         <marquee-text :repeat="3" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
-          <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='purple accent-4' bottom left overlap>
+          <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
             <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
             <v-img v-else src='../images/Nezuko.png' style='height:150px; width:140px'></v-img>
           </v-badge>
@@ -143,6 +148,7 @@ export default {
     movieReady: false,
     spotifyReady: false,
     isPaused: false,
+    fab: false,
     youtubeBarChart: {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
@@ -239,6 +245,14 @@ export default {
     }
   },
   methods: {
+    onScroll(e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop() {
+      this.$vuetify.goTo(0)
+    },
     getImage(gender) {
       var image = "";
       if (gender == "F") {
