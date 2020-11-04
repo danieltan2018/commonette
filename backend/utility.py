@@ -76,7 +76,7 @@ def generate_api(questionnaire_data, process):
 
             # spotify - genre
             genre = spotify["genre"]
-            current_weight = 3
+            current_weight = 5
             for i in range(len(genre)):
                 if genre[i] in spotify_genre_weights:
                     spotify_genre_weights[genre[i]] += current_weight
@@ -87,7 +87,7 @@ def generate_api(questionnaire_data, process):
 
             # spotify - artist
             artist = spotify["artist"]
-            current_weight = 5
+            current_weight = 3
             for i in range(len(artist)):
                 if artist[i] in spotify_artist_weights:
                     spotify_artist_weights[artist[i]] += current_weight
