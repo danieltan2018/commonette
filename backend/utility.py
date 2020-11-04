@@ -64,14 +64,11 @@ def generate_api(questionnaire_data, process):
 
             # movie - language
             language = movie["language"]
-            current_weight = 5
             for i in range(len(language)):
                 if language[i] in movie_language_weights:
-                    movie_language_weights[language[i]] += current_weight
+                    movie_language_weights[language[i]] += 1
                 else:
-                    movie_language_weights[language[i]] = current_weight
-
-                current_weight -= 1
+                    movie_language_weights[language[i]] = 1
 
         # spotify
         if "spotify" in user_data:
@@ -79,7 +76,7 @@ def generate_api(questionnaire_data, process):
 
             # spotify - genre
             genre = spotify["genre"]
-            current_weight = 5
+            current_weight = 3
             for i in range(len(genre)):
                 if genre[i] in spotify_genre_weights:
                     spotify_genre_weights[genre[i]] += current_weight
@@ -137,8 +134,9 @@ def generate_api(questionnaire_data, process):
         for (key, value) in youtube_weights.items():
             youtube_decoded[youtube_categories[key]] = value
         api_param["youtube"] = youtube_decoded
-        api_param["book"] = book_weights
         api_param["movie"] = movie_genre_weights
+        api_param["movieLang"] = movie_language_weights
+        api_param["book"] = book_weights
         api_param["spotify"] = spotify_genre_weights
 
     return api_param
