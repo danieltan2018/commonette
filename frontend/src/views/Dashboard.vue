@@ -10,8 +10,8 @@
       <br>
       <br>
     </span>
-  
-    <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="pink" @click="toTop">
+
+    <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="pink" @click="$vuetify.goTo(0)">
       <v-icon>mdi-arrow-up</v-icon>
     </v-btn>
 
@@ -126,13 +126,13 @@
 <script>
 import BarChart from "../components/Charts/BarChart";
 import * as chartConfigs from "../components/Charts/config";
-import MarqueeText from '../components/MarqueeText.vue'
+import MarqueeText from "../components/MarqueeText.vue";
 import config from "../config";
 import axios from "axios";
 export default {
   components: {
     BarChart,
-    MarqueeText
+    MarqueeText,
   },
   props: {
     roomCode: {
@@ -226,12 +226,12 @@ export default {
       gradientStops: [1, 0.4, 0],
     },
     rankings: [
-      { rank: '1', weight: 5 },
-      { rank: '2', weight: 4 },
-      { rank: '3', weight: 3 },
-      { rank: '4', weight: 2 },
-      { rank: '5', weight: 1 }
-    ]
+      { rank: "1", weight: 5 },
+      { rank: "2", weight: 4 },
+      { rank: "3", weight: 3 },
+      { rank: "4", weight: 2 },
+      { rank: "5", weight: 1 },
+    ],
   }),
   created() {
     this.initialise();
@@ -242,27 +242,13 @@ export default {
   computed: {
     marqueeSpeed: function () {
       return this.roomUsers.length * 7;
-    }
+    },
   },
   methods: {
     onScroll(e) {
-      if (typeof window === 'undefined') return
-      const top = window.pageYOffset || e.target.scrollTop || 0
-      this.fab = top > 20
-    },
-    toTop() {
-      this.$vuetify.goTo(0)
-    },
-    getImage(gender) {
-      var image = "";
-      if (gender == "F") {
-        image = "../images/Nezuko.png";
-      }
-      else {
-        image = "../images/Tanjiro.png";
-      }
-
-      return image;
+      if (typeof window === "undefined") return;
+      const top = window.pageYOffset || e.target.scrollTop || 0;
+      this.fab = top > 20;
     },
     navigateRoute(newpath) {
       this.$router.push(newpath);
@@ -281,7 +267,6 @@ export default {
               this.roomUsers.push({
                 name: person.name,
                 gender: person.gender,
-                image: this.getImage(person.gender)
               });
             }
             localStorage.setItem("roomUsers", JSON.stringify(this.roomUsers));
@@ -320,7 +305,6 @@ export default {
     },
   },
 };
-
 </script>
 <style>
 .home {
