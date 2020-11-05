@@ -72,8 +72,8 @@
       <v-col cols="5" data-aos="fade-down-right" data-aos-duration="1000" v-if="youtubeReady">
         <v-card type="chart" dark>
           <v-card-title>
-            <v-icon color="red" large>mdi-youtube</v-icon>
-            Youtube
+            <v-icon color="red" style="margin-right:5px" large>mdi-youtube</v-icon>
+            Top Youtube Categories
           </v-card-title>
           <div class="chart-area">
             <bar-chart style="height: 100%" chart-id="youtubeStats" :chart-data="youtubeBarChart.chartData" :gradient-stops="youtubeBarChart.gradientStops" :extra-options="youtubeBarChart.extraOptions">
@@ -84,7 +84,8 @@
       <v-col cols="5" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="500" v-if="bookReady">
         <v-card type="chart" dark>
           <v-card-title>
-            <v-icon color="blue" large>mdi-book</v-icon>Book
+            <v-icon color="blue" style="margin-right:5px" large>mdi-book</v-icon>
+            Top Book Genres
           </v-card-title>
           <div class="chart-area">
             <bar-chart style="height: 100%" chart-id="bookStats" :chart-data="bookBarChart.chartData" :gradient-stops="bookBarChart.gradientStops" :extra-options="bookBarChart.extraOptions">
@@ -99,7 +100,8 @@
       <v-col cols="5" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="600" v-if="movieReady">
         <v-card type="chart" dark>
           <v-card-title>
-            <v-icon color="rgb(255, 0, 128)" large>mdi-movie-open</v-icon>Movie
+            <v-icon color="rgb(255, 0, 128)" style="margin-right:5px" large>mdi-movie-open</v-icon>
+            Top Movie Genres
           </v-card-title>
           <div class="chart-area">
             <bar-chart style="height: 100%" chart-id="movieStats" :chart-data="movieBarChart.chartData" :gradient-stops="movieBarChart.gradientStops" :extra-options="movieBarChart.extraOptions">
@@ -110,7 +112,8 @@
       <v-col cols="5" data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1000" v-if="spotifyReady">
         <v-card type="chart" dark>
           <v-card-title>
-            <v-icon color="green" large>mdi-spotify</v-icon>Spotify
+            <v-icon color="green" style="margin-right:5px" large>mdi-spotify</v-icon>
+            Top Spotify Genres
           </v-card-title>
           <div class="chart-area">
             <bar-chart style="height: 100%" chart-id="spotifyStats" :chart-data="spotifyBarChart.chartData" :gradient-stops="spotifyBarChart.gradientStops" :extra-options="spotifyBarChart.extraOptions">
@@ -121,16 +124,18 @@
       <v-col cols="1"></v-col>
     </v-row>
     <v-row>
-        <v-col cols="1"></v-col>
-        <v-col cols="5" id="chart">
-            <!-- Put piechart for language here -->
-            <pie-chart :chart-data="languagePieChart.chartData">
-            </pie-chart>
-        </v-col>
-        <v-col cols="5">
-            <pie-chart :chart-data="genderPieChart.chartData">
-            </pie-chart>
-        </v-col>
+      <v-col cols="1"></v-col>
+      <v-col cols="5" id="chart">
+        <!-- Put piechart for language here -->
+        <h3 style="color:white">Movie Languages Selected<br></h3>
+        <pie-chart :chart-data="languagePieChart.chartData" v-if="langReady">
+        </pie-chart>
+      </v-col>
+      <v-col cols="5">
+        <h3 style="color:white">Gender Population<br></h3>
+        <pie-chart :chart-data="genderPieChart.chartData" v-if="genderReady">
+        </pie-chart>
+      </v-col>
     </v-row>
   </v-main>
 </template>
@@ -168,64 +173,53 @@ export default {
     bookReady: false,
     movieReady: false,
     spotifyReady: false,
+    langReady: false,
+    genderReady: false,
     isPaused: false,
     fab: false,
     // The piechart doesn't display the data unless I click on the available data label.
     languagePieChart: {
-        // extraOptions: chartConfigs.pieChartOptions,
-        chartData: {
-            labels: ["Nothing"],
-            datasets: [{
-                data: ["1"],
-                borderColor: [
-                    'white',
-                    'white',
-                // 'rgb(75,0,130, 0.8)',
-                // 'rgb(0, 0, 139, 0.8)',          
-                ],
-                backgroundColor: [
-                    'rgb(173,216,230,0.8)',
-                    'rgb(135,206,250,0.8)',
-                    'rgb(30,144,255,0.8)',
-                    'rgb(106,90,205,0.8)',
-                    'rgb(199,21,133,0.8)',
-                    'rgb(75,0,130, 0.8)',
-                    'rgb(0, 0, 139, 0.8)',              
-                ],
-            }]
-        }
+      // extraOptions: chartConfigs.pieChartOptions,
+      chartData: {
+        labels: [],
+        datasets: [{
+          data: [],
+          borderColor: [
+            'rgb(81, 81, 118)',
+            'rgb(81, 81, 118)',
+            'rgb(81, 81, 118)',
+            'rgb(81, 81, 118)',
+            'rgb(81, 81, 118)',
+            'rgb(81, 81, 118)'
+          ],
+          backgroundColor: [
+            'rgb(173,216,230,0.8)',
+            'rgb(135,206,250,0.8)',
+            'rgb(30,144,255,0.8)',
+            'rgb(106,90,205,0.8)',
+            'rgb(199,21,133,0.8)',
+            'rgb(75,0,130, 0.8)',
+            'rgb(0, 0, 139, 0.8)',
+          ],
+        }]
+      }
     },
     genderPieChart: {
-        chartData: {
-            labels: ["Female", "Male"],
-            datasets: [{
-                data: [],
-                borderWidth: 1,
-                borderColor: [
-                    'white',
-                    'white',
-                // 'rgb(75,0,130, 0.8)',
-                // 'rgb(0, 0, 139, 0.8)',          
-                ],
-                backgroundColor: [
-                'rgb(75,0,130, 0.8)',
-                'rgb(0, 0, 139, 0.8)',              
-                ],
-            }]
-        },
-        options: {
-            legend: {
-                display: true,
-                labels: {
-                    fontColor: 'white'
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: false
-        },
-        // mounted () {
-        //     this.renderChart(this.chartData, this.options)
-        // }
+      chartData: {
+        labels: ["Female", "Male"],
+        datasets: [{
+          data: [],
+          borderWidth: 1,
+          borderColor: [
+            'rgb(81, 81, 118)',
+            'rgb(81, 81, 118)'
+          ],
+          backgroundColor: [
+            '#FFD6F2',
+            '#9DD2FB',
+          ],
+        }]
+      }
     },
     youtubeBarChart: {
       extraOptions: chartConfigs.barChartOptions,
@@ -352,19 +346,20 @@ export default {
             // Use roomUsers to get the num of female & males. (Continue...)
             console.log("this.roomUsers", this.roomUsers);
             for (let user of this.roomUsers) {
-                console.log("room user:", user);
-                if (user.gender == "M") {
-                    this.maleCount += 1;
-                    console.log("maleCount:", this.maleCount);
-                }
+              console.log("room user:", user);
+              if (user.gender == "M") {
+                this.maleCount += 1;
+                console.log("maleCount:", this.maleCount);
+              }
 
-                if (user.gender == "F") {
-                    this.femaleCount += 1;
-                    console.log("femaleCount:", this.femaleCount)
-                }
+              if (user.gender == "F") {
+                this.femaleCount += 1;
+                console.log("femaleCount:", this.femaleCount)
+              }
             }
             this.genderPieChart.chartData.datasets[0].data.push(this.femaleCount);
             this.genderPieChart.chartData.datasets[0].data.push(this.maleCount);
+            this.genderReady = true;
             console.log("genderData:", this.genderPieChart.chartData.datasets[0].data);
           } else {
             this.$bus.$emit("updated", "joined");
@@ -391,14 +386,15 @@ export default {
           this.movieBarChart.chartData.datasets[0].data.push(value);
         }
         this.movieReady = true;
-        
+
         // My Language Part
         for (const [key, value] of Object.entries(response.data.movieLang)) {
-            this.languagePieChart.chartData.labels.push(key);
-            this.languagePieChart.chartData.datasets[0].data.push(value);
-            console.log("datasets", this.languagePieChart.chartData.datasets);
-            console.log("key:", key, "value:", value);
+          this.languagePieChart.chartData.labels.push(key);
+          this.languagePieChart.chartData.datasets[0].data.push(value);
+          console.log("datasets", this.languagePieChart.chartData.datasets);
+          console.log("key:", key, "value:", value);
         }
+        this.langReady = true;
 
         for (const [key, value] of Object.entries(response.data.spotify)) {
           this.spotifyBarChart.chartData.labels.push(key);
