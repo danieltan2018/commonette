@@ -24,41 +24,31 @@
       <v-col cols="3"></v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols="2"></v-col>
-      <v-col cols="8">
-        <marquee-text :repeat="3" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
+    <v-row  v-if="roomUsers.length != 1">
+      <v-col cols="4"></v-col>
+      <v-col cols="4">
+        <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
           <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
             <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
             <v-img v-else src='../images/Nezuko.png' style='height:150px; width:140px'></v-img>
           </v-badge>
         </marquee-text>
       </v-col>
-      <v-col cols="2"></v-col>
+      <v-col cols="4"></v-col>
+    </v-row>
+    <v-row  v-else>
+      <v-col cols="5"></v-col>
+      <v-col cols="2">
+        <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
+          <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
+            <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
+            <v-img v-else src='../images/Nezuko.png' style='height:150px; width:140px'></v-img>
+          </v-badge>
+        </marquee-text>
+      </v-col>
+      <v-col cols="5"></v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols="4"></v-col>
-      <v-col cols="4">
-        <v-simple-table dark dense>
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-center">Rank</th>
-                <th class="text-center">Weight</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in rankings" :key="item.weight">
-                <td>{{ item.rank }}</td>
-                <td>{{ item.weight }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
-      </v-col>
-      <v-col cols="4"></v-col>
-    </v-row>
     <v-row>
       <v-col cols="2"></v-col>
       <v-col cols="8" style="color:white">
@@ -155,7 +145,6 @@ export default {
   components: {
     BarChart,
     MarqueeText,
-    // PieChart,
     "pie-chart": PieChart,
   },
   props: {
@@ -311,7 +300,7 @@ export default {
   },
   computed: {
     marqueeSpeed: function () {
-      return this.roomUsers.length * 7;
+      return this.roomUsers.length * 5;
     },
   },
   methods: {
@@ -418,7 +407,7 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss">
 .home {
   background-color: rgb(81, 81, 118);
   justify-content: center;
