@@ -72,27 +72,33 @@
         <v-responsive v-for="(story, i) in stories" :key=i height="500px">
           <div v-if="i % 2 == 0" data-aos="fade-right" data-aos-duration="2000">
             <v-row>
-              <v-col cols="6">
-                <v-img height=500px :src="story.src"></v-img>
+              <v-col cols=6>
+                <v-img height="500px" :src="story.src"></v-img>
               </v-col>
-              <v-col cols="6">
-                <h2 class="display-4 text-right mx-auto">{{ story.title }}</h2>
-                <h2 class="display-2 text-right mx-auto my-4">{{ story.subtitle }}</h2>
-                <div class="py-10"></div>
-                <p class="headline text-right mx-6">{{ story.message }}</p>
+              <v-col cols=6>
+                <div class="pt-5 pr-5">
+                  <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-right mx-auto">{{ story.title }}</h2>
+                  <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-right mx-auto my-4">{{ story.subtitle }}</h2>
+                  <!-- <div class="py-10"></div> -->
+                  <p class="text-body-1 text-right">{{ story.message }}</p>
+                  {{$vuetify.breakpoint.name}}
+                  
+                </div>
               </v-col>
             </v-row>
           </div>
           <div v-else data-aos="fade-left" data-aos-duration="2000">
             <v-row>
               <v-col cols="6">
-                <h2 class="display-4 text-left mx-auto">{{ story.title }}</h2>
-                <h2 class="display-2 text-left mx-auto my-4">{{ story.subtitle }}</h2>
-                <div class="py-10"></div>
-                <p class="headline text-left mx-6">{{ story.message }}</p>
+                <div class="pt-5 pl-5">
+                  <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto my-4">{{ story.title }}</h2>
+                  <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
+                  <!-- <div class="py-10"></div> -->
+                  <p class="text-body-1 text-left">{{ story.message }}</p>
+                </div>
               </v-col>
               <v-col cols="6">
-                <v-img max-height=500px :src="story.src"></v-img>
+                <v-img height=500px :src="story.src"></v-img>
               </v-col>
             </v-row>
           </div>
@@ -221,8 +227,8 @@ export default {
 
       stories: [
         {
-          title: "Surprise yourself",
-          subtitle: "Discover new content every day",
+          title: "Surprise yourself,",
+          subtitle: "and discover new content every day",
           message:
             "Can't find a good book to read? Trying to find the perfect movie to watch with your date?",
           src:
@@ -345,6 +351,15 @@ export default {
   },
 
   methods: {
+    fontSize() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return '220px'
+        case 'sm': return '400px'
+        case 'md': return '500px'
+        case 'lg': return '600px'
+        case 'xl': return '800px'
+      }
+    },
     navigateRoute(newpath) {
       this.$router.push(newpath);
     },
