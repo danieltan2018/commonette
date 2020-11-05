@@ -31,9 +31,22 @@
 
       <router-view></router-view>
 
-      <v-footer class="justify-center" color="rgb(54, 54, 79)" height="100">
+      <v-footer class="justify-center" color="rgb(54, 54, 79)" height="150">
         <div class="title font-weight-light grey--text text--lighten-1 text-center">
-          &copy; {{ (new Date()).getFullYear() }} — Commonette — IS216 G6T5
+          &copy; {{ (new Date()).getFullYear() }} — Commonette — IS216 G6T5<br>
+          APIs Used:<br>
+          <a href="https://rapidapi.com/gox-ai-gox-ai-default/api/ott-details/endpoints" target="_blank">
+            <img src="./images/OTT.png" style="height:40px; width:40px; margin-left:10px; margin-right:10px">
+          </a>
+          <a href="https://developers.google.com/youtube/v3/docs/videos/list" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png" style="height:25px; width:40px; margin-left:10px; margin-right:10px">
+          </a>
+          <a href="https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png" style="height:30px; width:30px; margin-left:10px; margin-right:10px">
+          </a>
+          <a href="https://developers.google.com/books" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Google_Books_logo_2015.svg" style="height:30px; width:60px; margin-left:10px; margin-right:10px">
+          </a>
         </div>
       </v-footer>
     </v-app>
