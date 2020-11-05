@@ -289,7 +289,6 @@ export default {
       artistIds: [],
       artistDic: {},
       roomCode: localStorage.getItem("roomCode"),
-      roomName: localStorage.getItem("roomName"),
       inputRequiredRule: [(v) => v.length > 0 || "Required"],
       autocompleteMax3Rule: [
         (v) => v.length > 0 || "Required",
@@ -759,23 +758,19 @@ export default {
             limit: 5,
           },
           headers: auth.data,
-        })
-          .then((response) => {
-            if (type === "artist") {
-              // artists > items > name
-              let items = response.data.artists.items;
-              let names = [];
-              for (let i = 0; i < items.length; i++) {
-                names.push(items[i]["name"]);
-                this.artistDic[items[i]["name"]] = items[i]["id"];
-              }
-              console.log("artistDic", this.artistDic);
-              this.artistSuggestions = names;
+        }).then((response) => {
+          if (type === "artist") {
+            // artists > items > name
+            let items = response.data.artists.items;
+            let names = [];
+            for (let i = 0; i < items.length; i++) {
+              names.push(items[i]["name"]);
+              this.artistDic[items[i]["name"]] = items[i]["id"];
             }
-          })
-          .catch((e) => {
-            console.log(e.response.data);
-          });
+            console.log("artistDic", this.artistDic);
+            this.artistSuggestions = names;
+          }
+        });
       });
     },
     addSpotifyArtist(value) {
@@ -787,9 +782,6 @@ export default {
           })
         
       }
-    },
-    navigateRoute(newpath) {
-      this.$router.push(newpath);
     },
     sendQuestionnaireData() {
       // make spotify genres all lowercase
@@ -815,10 +807,8 @@ export default {
 
       // process gender
       var genderData = "";
-      if (this.gender == "Male")
-        genderData = "M"
-      else
-        genderData = "F"
+      if (this.gender == "Male") genderData = "M";
+      else genderData = "F";
 
       axios({
         url: "/add-questionnaire/" + this.roomCode,
@@ -836,17 +826,11 @@ export default {
             genre: spotify_genres_lower,
             artist: this.artistIds,
           },
-          gender: genderData
+          gender: genderData,
         },
-      })
-        .then((response) => {
-          console.log("questionnaire response", response);
-          this.navigateRoute("/recommend");
-        })
-        .catch((e) => {
-          console.log("e", e);
-          this.navigateRoute("/questionnaire");
-        });
+      }).then(() => {
+        window.location.href = "/dashboard/" + this.roomCode;
+      });
     },
     remove(tag, list) {
       if (list == "youtubes")
@@ -944,7 +928,7 @@ export default {
 #progress-container-el {
   /* background */
   background-color: transparent !important;
-  margin-top: 64px;
+  margin-top: 48px;
 }
 #progress-el {
   /* progress bar */

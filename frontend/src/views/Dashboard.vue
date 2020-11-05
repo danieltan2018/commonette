@@ -156,7 +156,7 @@ export default {
     BarChart,
     MarqueeText,
     // PieChart,
-    "pie-chart": PieChart
+    "pie-chart": PieChart,
   },
   props: {
     roomCode: {
@@ -182,44 +182,42 @@ export default {
       // extraOptions: chartConfigs.pieChartOptions,
       chartData: {
         labels: [],
-        datasets: [{
-          data: [],
-          borderColor: [
-            'rgb(81, 81, 118)',
-            'rgb(81, 81, 118)',
-            'rgb(81, 81, 118)',
-            'rgb(81, 81, 118)',
-            'rgb(81, 81, 118)',
-            'rgb(81, 81, 118)'
-          ],
-          backgroundColor: [
-            'rgb(173,216,230,0.8)',
-            'rgb(135,206,250,0.8)',
-            'rgb(30,144,255,0.8)',
-            'rgb(106,90,205,0.8)',
-            'rgb(199,21,133,0.8)',
-            'rgb(75,0,130, 0.8)',
-            'rgb(0, 0, 139, 0.8)',
-          ],
-        }]
-      }
+        datasets: [
+          {
+            data: [],
+            borderColor: [
+              "rgb(81, 81, 118)",
+              "rgb(81, 81, 118)",
+              "rgb(81, 81, 118)",
+              "rgb(81, 81, 118)",
+              "rgb(81, 81, 118)",
+              "rgb(81, 81, 118)",
+            ],
+            backgroundColor: [
+              "rgb(173,216,230,0.8)",
+              "rgb(135,206,250,0.8)",
+              "rgb(30,144,255,0.8)",
+              "rgb(106,90,205,0.8)",
+              "rgb(199,21,133,0.8)",
+              "rgb(75,0,130, 0.8)",
+              "rgb(0, 0, 139, 0.8)",
+            ],
+          },
+        ],
+      },
     },
     genderPieChart: {
       chartData: {
         labels: ["Female", "Male"],
-        datasets: [{
-          data: [],
-          borderWidth: 1,
-          borderColor: [
-            'rgb(81, 81, 118)',
-            'rgb(81, 81, 118)'
-          ],
-          backgroundColor: [
-            '#FFD6F2',
-            '#9DD2FB',
-          ],
-        }]
-      }
+        datasets: [
+          {
+            data: [],
+            borderWidth: 1,
+            borderColor: ["rgb(81, 81, 118)", "rgb(81, 81, 118)"],
+            backgroundColor: ["#FFD6F2", "#9DD2FB"],
+          },
+        ],
+      },
     },
     youtubeBarChart: {
       extraOptions: chartConfigs.barChartOptions,
@@ -325,6 +323,15 @@ export default {
     navigateRoute(newpath) {
       this.$router.push(newpath);
     },
+    processData(dict) {
+      var items = Object.keys(dict).map(function (key) {
+        return [key, dict[key]];
+      });
+      items.sort(function (first, second) {
+        return second[1] - first[1];
+      });
+      return items.slice(0, 5);
+    },
     initialise() {
       axios({
         url: "/room/" + this.roomCode,
@@ -354,13 +361,18 @@ export default {
 
               if (user.gender == "F") {
                 this.femaleCount += 1;
-                console.log("femaleCount:", this.femaleCount)
+                console.log("femaleCount:", this.femaleCount);
               }
             }
-            this.genderPieChart.chartData.datasets[0].data.push(this.femaleCount);
+            this.genderPieChart.chartData.datasets[0].data.push(
+              this.femaleCount
+            );
             this.genderPieChart.chartData.datasets[0].data.push(this.maleCount);
             this.genderReady = true;
-            console.log("genderData:", this.genderPieChart.chartData.datasets[0].data);
+            console.log(
+              "genderData:",
+              this.genderPieChart.chartData.datasets[0].data
+            );
           } else {
             this.$bus.$emit("updated", "joined");
             this.navigateRoute("/questionnaire");
@@ -371,17 +383,17 @@ export default {
           this.navigateRoute("/");
         });
       axios.get("/dashboard/" + this.roomCode).then((response) => {
-        for (const [key, value] of Object.entries(response.data.youtube)) {
+        for (const [key, value] of this.processData(response.data.youtube)) {
           this.youtubeBarChart.chartData.labels.push(key);
           this.youtubeBarChart.chartData.datasets[0].data.push(value);
         }
         this.youtubeReady = true;
-        for (const [key, value] of Object.entries(response.data.book)) {
+        for (const [key, value] of this.processData(response.data.book)) {
           this.bookBarChart.chartData.labels.push(key);
           this.bookBarChart.chartData.datasets[0].data.push(value);
         }
         this.bookReady = true;
-        for (const [key, value] of Object.entries(response.data.movie)) {
+        for (const [key, value] of this.processData(response.data.movie)) {
           this.movieBarChart.chartData.labels.push(key);
           this.movieBarChart.chartData.datasets[0].data.push(value);
         }
@@ -396,7 +408,7 @@ export default {
         }
         this.langReady = true;
 
-        for (const [key, value] of Object.entries(response.data.spotify)) {
+        for (const [key, value] of this.processData(response.data.spotify)) {
           this.spotifyBarChart.chartData.labels.push(key);
           this.spotifyBarChart.chartData.datasets[0].data.push(value);
         }
