@@ -165,48 +165,15 @@
 
       <v-theme-provider id="api" light>
         <div>
-          <v-container>
-            <div class="py-6"></div>
-            <h2 class="display-2 font-weight-bold mb-3" color="rgb(72, 72, 103)">APIs Used</h2>
-            <v-responsive class="mx-auto mb-12" width="56">
-              <v-divider class="mb-1"></v-divider>
-              <v-divider></v-divider>
-            </v-responsive>
-            <v-row dense>
-              <v-col v-for="(item, i) in items" :key="i" cols="12" lg='4' style="padding:10px">
-                <div data-aos="fade-up">
-                  <v-card color="#50587C" shaped>
-                    <div class="d-flex flex-no-wrap justify-space-between">
-                      <div>
-                        <v-card-text class="headline" v-text="item.title" style="color: #ebebeb; text-align: left;"></v-card-text>
-
-                        <v-card-subtitle v-text="item.description" style="color:#ebebeb; text-align: left"></v-card-subtitle>
-
-                        <v-card-actions>
-                          <v-btn class="ml-2 mt-5 mb-3" color="#F1F4F9" rounded small :href="item.site" target="_blank">
-                            ABOUT API
-                          </v-btn>
-                        </v-card-actions>
-                      </div>
-
-                      <v-avatar class="ma-4" :size="iconSize()" tile>
-                        <v-img :src="item.src" contain></v-img>
-                      </v-avatar>
-                    </div>
-                  </v-card>
-                </div>
-              </v-col>
-            </v-row>
-          </v-container>
-          <v-responsive class="mx-auto mb-12" width="56">
+          <!-- <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1"></v-divider>
             <v-divider></v-divider>
-          </v-responsive>
+          </v-responsive> -->
           <v-container>
-            <h2 class="display-1 font-weight-bold mb-3" style="color:rgb(54, 54, 79)">
+            <h2 class="display-1 font-weight-bold mb-3" style="color:rgb(54, 54, 79); margin-top:10px;">
               What are you waiting for?
             </h2>
-            <v-row class="mx-auto" justify="center">
+            <v-row class="mx-auto" justify="center" style="margin-bottom:10px">
               <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true" color="#50587C" style="color:white">
                 Create Room
               </v-btn>
@@ -277,62 +244,6 @@ export default {
             "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
       ],
-
-      items: [
-        {
-          color: "#fafafa",
-          textcolor: "color: black",
-          src:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
-          title: "YouTube Data API",
-          description:
-            "The YouTube Data API lets you incorporate functions normally executed on the YouTube website into your own website or application. ",
-          site: "https://developers.google.com/youtube/v3/docs/videos/list",
-        },
-        {
-          color: "#191414",
-          textcolor: "color: #FFFFFF",
-          src:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png",
-          title: "Spotify Search API",
-          description:
-            "Get Spotify Catalog information about albums, artists, playlists, tracks, shows or episodes that match a keyword string.",
-          site:
-            "https://developer.spotify.com/documentation/web-api/reference/search/search/",
-        },
-        {
-          color: "#191414",
-          textcolor: "color: #FFFFFF",
-          src:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png",
-          title: "Spotify Recommendations API",
-          description:
-            "Create a playlist-style listening experience based on seed artists, tracks and genres.",
-          site:
-            "https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/",
-        },
-        {
-          color: "#fafafa",
-          textcolor: "color: black",
-          src:
-            "https://upload.wikimedia.org/wikipedia/commons/b/ba/Google_Books_logo_2015.svg",
-          title: "Google Books API",
-          description:
-            "The Books API is a way to search and access the world's book contents, as well as to create and view personalization around that content.",
-          site: "https://developers.google.com/books",
-        },
-        {
-          color: "#fafafa",
-          textcolor: "color: black",
-          src: require("../images/OTT.png"),
-          title: "OTT details API",
-          description:
-            "Get Streaming details of Movie and TV Shows. We support 150+ Streaming platforms in US and India such as HBO, YouTube, Netflix , Primve Video, Hotstar, Hulu, etc . ",
-          site:
-            "https://rapidapi.com/gox-ai-gox-ai-default/api/ott-details/endpoints",
-        },
-      ],
-
       mediums: [
         {
           icon: "mdi-youtube red",
