@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main style="background-color:rgb(81, 81, 118)">
 
     <v-dialog v-model="showDetails" @keydown.esc="showDetails=false; details={};" max-width="800px" persistent>
       <v-card>
@@ -35,15 +35,15 @@
       </v-card>
     </v-dialog>
 
-    <section id="all" v-if="recommend && bookDisplay" style="background-color:rgb(81, 81, 118)">
-      <v-layout>
+    <section id="all" v-if="recommend && bookDisplay">
+      <v-container fluid>
         <v-row>
           <v-col class="hidden-sm-and-down" md="4">
             <RotatingImage image="Nezuko"></RotatingImage>
           </v-col>
           <v-col class="hidden-md-and-up">
-              <RotatingImage image="Nezuko"></RotatingImage>
-              <RotatingImage image="Tanjiro"></RotatingImage>
+            <RotatingImage image="Nezuko"></RotatingImage>
+            <RotatingImage image="Tanjiro"></RotatingImage>
           </v-col>
           <v-col md="4" class="animate__animated animate__backInDown">
             <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
@@ -54,7 +54,7 @@
             <RotatingImage image="Tanjiro"></RotatingImage>
           </v-col>
         </v-row>
-      </v-layout>
+      </v-container>
 
       <v-sheet class="mx-auto" elevation="8" v-if="youtubeDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
         <v-toolbar color="#E3E9F2" dense>
@@ -184,11 +184,11 @@
 <script>
 import axios from "axios";
 import RotatingImage from "../components/RotatingImage/RotatingImage.vue";
-import 'animate.css';
+import "animate.css";
 
 export default {
-  components:{
-    RotatingImage
+  components: {
+    RotatingImage,
   },
   data: () => ({
     roomName: localStorage.getItem("roomName"),
