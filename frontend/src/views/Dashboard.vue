@@ -120,6 +120,18 @@
       </v-col>
       <v-col cols="1"></v-col>
     </v-row>
+    <v-row>
+        <v-col cols="1"></v-col>
+        <v-col cols="5" id="chart">
+            <!-- Put piechart for language here -->
+            <pie-chart :chart-data="languagePieChart.chartData">
+            </pie-chart>
+        </v-col>
+        <v-col cols="5">
+            <pie-chart :chart-data="genderPieChart.chartData">
+            </pie-chart>
+        </v-col>
+    </v-row>
   </v-main>
 </template>
 
@@ -129,10 +141,17 @@ import * as chartConfigs from "../components/Charts/config";
 import MarqueeText from "../components/MarqueeText.vue";
 import config from "../config";
 import axios from "axios";
+
+// import Vue from "vue";
+// import ApexCharts from 'apexcharts'
+import PieChart from "../components/Charts/PieChart";
+
 export default {
   components: {
     BarChart,
     MarqueeText,
+    // PieChart,
+    "pie-chart": PieChart
   },
   props: {
     roomCode: {
@@ -143,12 +162,71 @@ export default {
   data: () => ({
     roomUsers: [],
     userCount: 0,
+    maleCount: 0,
+    femaleCount: 0,
     youtubeReady: false,
     bookReady: false,
     movieReady: false,
     spotifyReady: false,
     isPaused: false,
     fab: false,
+    // The piechart doesn't display the data unless I click on the available data label.
+    languagePieChart: {
+        // extraOptions: chartConfigs.pieChartOptions,
+        chartData: {
+            labels: ["Nothing"],
+            datasets: [{
+                data: ["1"],
+                borderColor: [
+                    'white',
+                    'white',
+                // 'rgb(75,0,130, 0.8)',
+                // 'rgb(0, 0, 139, 0.8)',          
+                ],
+                backgroundColor: [
+                    'rgb(173,216,230,0.8)',
+                    'rgb(135,206,250,0.8)',
+                    'rgb(30,144,255,0.8)',
+                    'rgb(106,90,205,0.8)',
+                    'rgb(199,21,133,0.8)',
+                    'rgb(75,0,130, 0.8)',
+                    'rgb(0, 0, 139, 0.8)',              
+                ],
+            }]
+        }
+    },
+    genderPieChart: {
+        chartData: {
+            labels: ["Female", "Male"],
+            datasets: [{
+                data: [],
+                borderWidth: 1,
+                borderColor: [
+                    'white',
+                    'white',
+                // 'rgb(75,0,130, 0.8)',
+                // 'rgb(0, 0, 139, 0.8)',          
+                ],
+                backgroundColor: [
+                'rgb(75,0,130, 0.8)',
+                'rgb(0, 0, 139, 0.8)',              
+                ],
+            }]
+        },
+        options: {
+            legend: {
+                display: true,
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        },
+        // mounted () {
+        //     this.renderChart(this.chartData, this.options)
+        // }
+    },
     youtubeBarChart: {
       extraOptions: chartConfigs.barChartOptions,
       chartData: {
@@ -271,6 +349,23 @@ export default {
             }
             localStorage.setItem("roomUsers", JSON.stringify(this.roomUsers));
             this.userCount = this.roomUsers.length;
+            // Use roomUsers to get the num of female & males. (Continue...)
+            console.log("this.roomUsers", this.roomUsers);
+            for (let user of this.roomUsers) {
+                console.log("room user:", user);
+                if (user.gender == "M") {
+                    this.maleCount += 1;
+                    console.log("maleCount:", this.maleCount);
+                }
+
+                if (user.gender == "F") {
+                    this.femaleCount += 1;
+                    console.log("femaleCount:", this.femaleCount)
+                }
+            }
+            this.genderPieChart.chartData.datasets[0].data.push(this.femaleCount);
+            this.genderPieChart.chartData.datasets[0].data.push(this.maleCount);
+            console.log("genderData:", this.genderPieChart.chartData.datasets[0].data);
           } else {
             this.$bus.$emit("updated", "joined");
             this.navigateRoute("/questionnaire");
@@ -296,6 +391,15 @@ export default {
           this.movieBarChart.chartData.datasets[0].data.push(value);
         }
         this.movieReady = true;
+        
+        // My Language Part
+        for (const [key, value] of Object.entries(response.data.movieLang)) {
+            this.languagePieChart.chartData.labels.push(key);
+            this.languagePieChart.chartData.datasets[0].data.push(value);
+            console.log("datasets", this.languagePieChart.chartData.datasets);
+            console.log("key:", key, "value:", value);
+        }
+
         for (const [key, value] of Object.entries(response.data.spotify)) {
           this.spotifyBarChart.chartData.labels.push(key);
           this.spotifyBarChart.chartData.datasets[0].data.push(value);
