@@ -45,7 +45,7 @@
               <RotatingImage image="Nezuko"></RotatingImage>
               <RotatingImage image="Tanjiro"></RotatingImage>
           </v-col>
-          <v-col md="4">
+          <v-col md="4" class="animate__animated animate__backInDown">
             <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
             <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
             <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
@@ -184,6 +184,7 @@
 <script>
 import axios from "axios";
 import RotatingImage from "../components/RotatingImage/RotatingImage.vue";
+import 'animate.css';
 
 export default {
   components:{
