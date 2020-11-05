@@ -137,7 +137,7 @@
           <v-row class="justify-center align-center">
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" sm="6" md='4' lg='3' class="justify-content-between align-center">
               <div data-aos="flip-up" :data-aos-delay="200*i" data-aos-duration="500">
-                <vue-flip active-click width="280px" height="320px" class="mx-auto"> 
+                <vue-flip active-click width="280px" height="320px" class="mx-auto">
                   <template v-slot:front>
                     <v-card width="280px" height="320px" class="mx-auto py-12 px-4 rounded-xl justify-space-between" color="#E3E9F2" flat>
                       <v-theme-provider dark>
@@ -470,6 +470,9 @@ function move(e) {
 // gsap.from('.nav__item', {opacity: 0, duration: 1, delay: 2.1, y: 30, stagger: 0.2,})
 
 // HOME
+gsap.config({
+  nullTargetWarn: false,
+});
 gsap.from(".home__title", { opacity: 0, duration: 1, delay: 1.6, y: 30 });
 gsap.from(".home__description", { opacity: 0, duration: 1, delay: 1.8, y: 30 });
 gsap.from(".home__button", { opacity: 0, duration: 1, delay: 2.1, y: 30 });
