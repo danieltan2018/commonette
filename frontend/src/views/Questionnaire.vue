@@ -603,7 +603,7 @@ export default {
     movieGenre: {
       immediate: true,
       handler(value) {
-        if (!this.movies.includes(value) && value != "") {
+        if (!this.movies.includes(value) && value != "" && typeof(value) != "undefined") {
           document.getElementById("mvDisplay").style.display = "inline";
           this.movies.push(value);
         }
@@ -612,7 +612,7 @@ export default {
     youtubeCategory: {
       immediate: true,
       handler(value) {
-        if (!this.youtubes.includes(value) && value != "") {
+        if (!this.youtubes.includes(value) && value != "" && typeof(value) != "undefined") {
           document.getElementById("ytDisplay").style.display = "inline";
           this.youtubes.push(value);
         }
@@ -621,7 +621,7 @@ export default {
     bookGenre: {
       immediate: true,
       handler(value) {
-        if (!this.books.includes(value) && value != "") {
+        if (!this.books.includes(value) && value != "" && typeof(value) != "undefined") {
           document.getElementById("bkDisplay").style.display = "inline";
           this.books.push(value);
         }
@@ -630,7 +630,7 @@ export default {
     spotifyGenre: {
       immediate: true,
       handler(value) {
-        if (!this.sGenres.includes(value) && value != "") {
+        if (!this.sGenres.includes(value) && value != "" && typeof(value) != "undefined") {
           document.getElementById("sGDisplay").style.display = "inline";
           this.sGenres.push(value);
         }
