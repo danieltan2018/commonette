@@ -127,9 +127,9 @@
       </section>
 
       <section id="mediums" color="rgb(54, 54, 79)">
-        <div class="py-12"></div>
+        <div class="py-6"></div>
         <v-container class="text-center">
-          <h2 class="display-2 font-weight-bold mb-3" style="color:#ebebeb">What recommendations you can expect</h2>
+          <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4  mb-3" style="color:#ebebeb">What is recommended?</h2>
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1" color="#ebebeb"></v-divider>
             <v-divider color="#ebebeb"></v-divider>
@@ -137,7 +137,7 @@
           <v-row class="justify-center align-center">
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" sm="6" md='4' lg='3' class="justify-content-between align-center">
               <div data-aos="flip-up" :data-aos-delay="200*i" data-aos-duration="500">
-                <vue-flip active-click width="280px" height="320px" class="mx-auto"> 
+                <vue-flip active-click width="280px" height="320px" class="mx-auto">
                   <template v-slot:front>
                     <v-card width="280px" height="320px" class="mx-auto py-12 px-4 rounded-xl justify-space-between" color="#E3E9F2" flat>
                       <v-theme-provider dark>
@@ -189,7 +189,7 @@
                         </v-card-actions>
                       </div>
 
-                      <v-avatar class="ma-4" size="105" tile>
+                      <v-avatar class="ma-4" :size="iconSize()" tile>
                         <v-img :src="item.src" contain></v-img>
                       </v-avatar>
                     </div>
@@ -336,7 +336,7 @@ export default {
       mediums: [
         {
           icon: "mdi-youtube red",
-          title: "YouTube",
+          title: "YouTube Videos",
           text: "See recommended videos for you and your friends.",
         },
         {
@@ -351,7 +351,7 @@ export default {
         },
         {
           icon: "mdi-spotify green",
-          title: "Spotify",
+          title: "Music",
           text:
             "Generate Spotify recommendations from you and your friends' favourite songs.",
         },
@@ -371,18 +371,18 @@ export default {
   },
 
   methods: {
-    cardSize() {
+    iconSize() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          return "220px";
+          return "60px";
         case "sm":
-          return "400px";
+          return "75px";
         case "md":
-          return "500px";
+          return "90px";
         case "lg":
-          return "600px";
+          return "105px";
         case "xl":
-          return "800px";
+          return "105px";
       }
     },
     navigateRoute(newpath) {
