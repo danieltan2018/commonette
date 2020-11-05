@@ -38,15 +38,19 @@
     <section id="all" v-if="recommend && bookDisplay" style="background-color:rgb(81, 81, 118)">
       <v-layout>
         <v-row>
-          <v-col>
+          <v-col class="hidden-sm-and-down" md="4">
             <RotatingImage image="Nezuko"></RotatingImage>
           </v-col>
-          <v-col>
+          <v-col class="hidden-md-and-up">
+              <RotatingImage image="Nezuko"></RotatingImage>
+              <RotatingImage image="Tanjiro"></RotatingImage>
+          </v-col>
+          <v-col md="4">
             <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
             <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
             <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
           </v-col>
-          <v-col>
+          <v-col class="hidden-sm-and-down" md="4">
             <RotatingImage image="Tanjiro"></RotatingImage>
           </v-col>
         </v-row>
