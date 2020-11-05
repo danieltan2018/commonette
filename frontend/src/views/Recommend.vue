@@ -39,7 +39,7 @@
       <v-layout>
         <v-row>
           <v-col>
-            <v-img height=150 contain src="../images/Nezuko.png"></v-img>
+            <RotatingImage image="Nezuko"></RotatingImage>
           </v-col>
           <v-col>
             <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
@@ -47,7 +47,7 @@
             <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
           </v-col>
           <v-col>
-            <v-img height=150 contain src="../images/Tanjiro.png"></v-img>
+            <RotatingImage image="Tanjiro"></RotatingImage>
           </v-col>
         </v-row>
       </v-layout>
@@ -179,7 +179,12 @@
 
 <script>
 import axios from "axios";
+import RotatingImage from "../components/RotatingImage/RotatingImage.vue";
+
 export default {
+  components:{
+    RotatingImage
+  },
   data: () => ({
     roomName: localStorage.getItem("roomName"),
     roomCode: localStorage.getItem("roomCode"),
