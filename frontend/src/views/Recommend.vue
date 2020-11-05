@@ -174,9 +174,11 @@
     </section>
 
     <!-- Handle slowest API - Books -->
-    <h1 v-else>
-      Running magic algorithms...
-    </h1>
+    <v-container fluid fill-height v-else>
+      <v-layout justify-center align-center>
+        <breeding-rhombus-spinner :animation-duration="500" :size="65" color="#ff1d5e" />
+      </v-layout>
+    </v-container>
 
   </v-main>
 </template>
@@ -185,10 +187,12 @@
 import axios from "axios";
 import RotatingImage from "../components/RotatingImage/RotatingImage.vue";
 import "animate.css";
+import { BreedingRhombusSpinner } from "epic-spinners";
 
 export default {
   components: {
     RotatingImage,
+    BreedingRhombusSpinner,
   },
   data: () => ({
     roomName: localStorage.getItem("roomName"),
