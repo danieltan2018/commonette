@@ -134,12 +134,12 @@
             <v-divider class="mb-1" color="#ebebeb"></v-divider>
             <v-divider color="#ebebeb"></v-divider>
           </v-responsive>
-          <v-row>
-            <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" md="3">
+          <v-row class="justify-center align-center">
+            <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" sm="6" md='4' lg='3' class="justify-content-between align-center">
               <div data-aos="flip-up" :data-aos-delay="200*i" data-aos-duration="500">
-                <vue-flip active-click width="280px" height="320px">
+                <vue-flip active-click width="280px" height="320px" class="mx-auto"> 
                   <template v-slot:front>
-                    <v-card width="280px" height="320px" class="py-12 px-4 rounded-xl" color="#E3E9F2" flat>
+                    <v-card width="280px" height="320px" class="mx-auto py-12 px-4 rounded-xl justify-space-between" color="#E3E9F2" flat>
                       <v-theme-provider dark>
                         <div>
                           <v-avatar color="primary" size="88">
@@ -151,7 +151,7 @@
                     </v-card>
                   </template>
                   <template v-slot:back>
-                    <v-card width="280px" height="320px" class="py-12 px-4 rounded-xl" color="#E3E9F2" flat>
+                    <v-card width="280px" height="320px" class="mx-auto py-12 px-4 rounded-xl" color="#E3E9F2" flat>
                       <v-card-text class="subtitle-1" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
                     </v-card>
                   </template>
@@ -371,7 +371,7 @@ export default {
   },
 
   methods: {
-    fontSize() {
+    cardSize() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
           return "220px";
