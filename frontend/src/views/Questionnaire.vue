@@ -603,44 +603,49 @@ export default {
     movieGenre: {
       immediate: true,
       handler(value) {
-        if (!this.movies.includes(value) && value != "" && typeof(value) != "undefined") {
+        if (!this.movies.includes(value) && value != "" && typeof (value) != "undefined") {
           document.getElementById("mvDisplay").style.display = "inline";
           this.movies.push(value);
+          this.$nextTick(() => {
+            this.movieGenre = undefined;
+          })
+
         }
       },
     },
     youtubeCategory: {
       immediate: true,
       handler(value) {
-        if (!this.youtubes.includes(value) && value != "" && typeof(value) != "undefined") {
+        if (!this.youtubes.includes(value) && value != "" && typeof (value) != "undefined") {
           document.getElementById("ytDisplay").style.display = "inline";
           this.youtubes.push(value);
+          this.$nextTick(() => {
+            this.youtubeCategory = undefined;
+          })
         }
       },
     },
     bookGenre: {
       immediate: true,
       handler(value) {
-        if (!this.books.includes(value) && value != "" && typeof(value) != "undefined") {
+        if (!this.books.includes(value) && value != "" && typeof (value) != "undefined") {
           document.getElementById("bkDisplay").style.display = "inline";
           this.books.push(value);
+          this.$nextTick(() => {
+            this.bookGenre = undefined;
+          })
         }
       },
     },
     spotifyGenre: {
       immediate: true,
       handler(value) {
-        if (!this.sGenres.includes(value) && value != "" && typeof(value) != "undefined") {
+        if (!this.sGenres.includes(value) && value != "" && typeof (value) != "undefined") {
           document.getElementById("sGDisplay").style.display = "inline";
           this.sGenres.push(value);
-        }
-      },
-    },
-    sArtists: {
-      immediate: false,
-      handler() {
-        if (this.sArtists != []) {
-          document.getElementById("sADisplay").style.display = "inline";
+          this.$nextTick(() => {
+            this.spotifyGenre = undefined;
+          })
         }
       },
     },
@@ -774,8 +779,13 @@ export default {
       });
     },
     addSpotifyArtist(value) {
-      if (!this.sArtists.includes(value) && value != "") {
+      if (!this.sArtists.includes(value) && value != "" && value != undefined) {
+        document.getElementById("sADisplay").style.display = "inline";
         this.sArtists.push(value);
+        this.$nextTick(() => {
+            this.artist = undefined;
+          })
+        
       }
     },
     navigateRoute(newpath) {
