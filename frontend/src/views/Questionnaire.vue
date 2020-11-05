@@ -612,7 +612,7 @@ export default {
     youtubeCategory: {
       immediate: true,
       handler(value) {
-        if (!this.youtubes.includes(value) && value != "") {
+        if (!this.youtubes.includes(value) && value != "" && typeof(value) != "undefined") {
           document.getElementById("ytDisplay").style.display = "inline";
           this.youtubes.push(value);
         }
