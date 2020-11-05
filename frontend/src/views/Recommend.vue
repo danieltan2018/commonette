@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main style="background-color:rgb(81, 81, 118)">
 
     <v-dialog v-model="showDetails" @keydown.esc="showDetails=false; details={};" max-width="800px" persistent>
       <v-card>
@@ -35,15 +35,15 @@
       </v-card>
     </v-dialog>
 
-    <section id="all" v-if="recommend && bookDisplay" style="background-color:rgb(81, 81, 118)">
-      <v-layout>
+    <section id="all" v-if="recommend && bookDisplay">
+      <v-container fluid>
         <v-row>
           <v-col class="hidden-sm-and-down" md="4">
             <RotatingImage image="Nezuko"></RotatingImage>
           </v-col>
           <v-col class="hidden-md-and-up">
-              <RotatingImage image="Nezuko"></RotatingImage>
-              <RotatingImage image="Tanjiro"></RotatingImage>
+            <RotatingImage image="Nezuko"></RotatingImage>
+            <RotatingImage image="Tanjiro"></RotatingImage>
           </v-col>
           <v-col md="4" class="animate__animated animate__backInDown">
             <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
@@ -54,9 +54,9 @@
             <RotatingImage image="Tanjiro"></RotatingImage>
           </v-col>
         </v-row>
-      </v-layout>
+      </v-container>
 
-      <v-sheet class="mx-auto" elevation="8" v-if="youtubeDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
+      <v-sheet class="mx-auto" elevation="8" v-if="youtubeDisplay" color="rgb(81, 81, 118)">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="red">
@@ -66,8 +66,8 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="(video,i) in youtubeDisplay" :key="video.id">
-            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i">
+          <v-slide-item v-for="(video) in youtubeDisplay" :key="video.id">
+            <v-container grid-list-md>
               <v-icon class="d-flex justify-content-end" color="red" v-on:click="remove('youtube', video.id)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" width="250px" v-on:click="youtubeCard(video.snippet.title, video.snippet.channelTitle, video.snippet.description, video.id)">
                 <v-img :src="video.snippet.thumbnails.medium.url" contain></v-img>
@@ -85,7 +85,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="blue">
@@ -95,8 +95,8 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="(book,i) in bookDisplay" :key="book.id">
-            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i" v-if="book.volumeInfo.authors && book.volumeInfo.imageLinks">
+          <v-slide-item v-for="(book) in bookDisplay" :key="book.id">
+            <v-container grid-list-md v-if="book.volumeInfo.authors && book.volumeInfo.imageLinks">
               <v-icon class="d-flex justify-end" color="red" v-on:click="remove('book', book.id)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="bookCard(book.volumeInfo.title, book.volumeInfo.authors.toString(), book.volumeInfo.description, book.volumeInfo.previewLink, book.volumeInfo.imageLinks.thumbnail)">
                 <v-img :src="book.volumeInfo.imageLinks.thumbnail" height="300px" contain></v-img>
@@ -114,7 +114,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="movieDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="movieDisplay" color="rgb(81, 81, 118)">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="pink">
@@ -124,8 +124,8 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="(movie,i) in movieDisplay" :key="movie.imdbid">
-            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i" v-if="movie.imageurl[0]">
+          <v-slide-item v-for="(movie) in movieDisplay" :key="movie.imdbid">
+            <v-container grid-list-md v-if="movie.imageurl[0]">
               <v-icon class="d-flex justify-end" color="red" v-on:click="remove('movie', movie.imdbid)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" width="200px" v-on:click="movieCard(movie.title, movie.synopsis, movie.released, movie.imageurl[0], movie.imdbid)">
                 <v-img :src="movie.imageurl[0]" height="300px" contain></v-img>
@@ -143,7 +143,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="spotifyDisplay" color="rgb(81, 81, 118)" data-aos="zoom-out-up" data-aos-duration="500">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="spotifyDisplay" color="rgb(81, 81, 118)">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title>
             <v-icon large color="green">
@@ -153,8 +153,8 @@
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="(song,i) in spotifyDisplay" :key="song.id">
-            <v-container grid-list-md data-aos="fade-left" :data-aos-delay="100*i">
+          <v-slide-item v-for="(song) in spotifyDisplay" :key="song.id">
+            <v-container grid-list-md>
               <v-icon class="d-flex justify-end" color="red" v-on:click="remove('spotify', song.id)">mdi-close-circle</v-icon>
               <v-card class="mx-auto" max-width="150px" v-on:click="spotifyCard(song.name, song.album.name, song.album.release_date, song.artists, song.id)">
                 <v-img :src="song.album.images[1].url" contain></v-img>
@@ -184,11 +184,11 @@
 <script>
 import axios from "axios";
 import RotatingImage from "../components/RotatingImage/RotatingImage.vue";
-import 'animate.css';
+import "animate.css";
 
 export default {
-  components:{
-    RotatingImage
+  components: {
+    RotatingImage,
   },
   data: () => ({
     roomName: localStorage.getItem("roomName"),
