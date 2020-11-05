@@ -69,9 +69,21 @@
       </section>
 
       <section id="about">
-        <v-responsive v-for="(story, i) in stories" :key=i height="500px">
+        <v-responsive v-for="(story, i) in stories" :key=i>
           <div v-if="i % 2 == 0" data-aos="fade-right" data-aos-duration="2000">
-            <v-row>
+            <v-row v-if="$vuetify.breakpoint.name == 'xs'">
+              <v-col cols=12>
+                <v-img height="220px" :src="story.src"></v-img>
+              </v-col>
+              <v-col cols=12>
+                <div class="pt-5 px-5">
+                  <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto">{{ story.title }}</h2>
+                  <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
+                  <p class="text-body-1 text-left">{{ story.message }}</p>
+                </div>
+              </v-col>
+            </v-row>
+            <v-row v-else>
               <v-col cols=6>
                 <v-img height="500px" :src="story.src"></v-img>
               </v-col>
@@ -79,21 +91,29 @@
                 <div class="pt-5 pr-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-right mx-auto">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-right mx-auto my-4">{{ story.subtitle }}</h2>
-                  <!-- <div class="py-10"></div> -->
                   <p class="text-body-1 text-right">{{ story.message }}</p>
-                  {{$vuetify.breakpoint.name}}
-                  
                 </div>
               </v-col>
             </v-row>
           </div>
           <div v-else data-aos="fade-left" data-aos-duration="2000">
-            <v-row>
+            <v-row v-if="$vuetify.breakpoint.name == 'xs'">
+              <v-col cols=12>
+                <v-img height="220px" :src="story.src"></v-img>
+              </v-col>
+              <v-col cols=12>
+                <div class="pt-5 px-5">
+                  <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto">{{ story.title }}</h2>
+                  <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
+                  <p class="text-body-1 text-left">{{ story.message }}</p>
+                </div>
+              </v-col>
+            </v-row>
+            <v-row v-else>
               <v-col cols="6">
                 <div class="pt-5 pl-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto my-4">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
-                  <!-- <div class="py-10"></div> -->
                   <p class="text-body-1 text-left">{{ story.message }}</p>
                 </div>
               </v-col>
@@ -207,7 +227,7 @@ import axios from "axios";
 import VueFlip from "vue-flip";
 export default {
   components: {
-    'vue-flip': VueFlip
+    "vue-flip": VueFlip,
   },
   data() {
     return {
@@ -353,11 +373,16 @@ export default {
   methods: {
     fontSize() {
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return '220px'
-        case 'sm': return '400px'
-        case 'md': return '500px'
-        case 'lg': return '600px'
-        case 'xl': return '800px'
+        case "xs":
+          return "220px";
+        case "sm":
+          return "400px";
+        case "md":
+          return "500px";
+        case "lg":
+          return "600px";
+        case "xl":
+          return "800px";
       }
     },
     navigateRoute(newpath) {
