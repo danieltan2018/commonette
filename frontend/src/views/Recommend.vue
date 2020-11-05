@@ -41,9 +41,14 @@
           <v-col class="hidden-sm-and-down" md="4">
             <RotatingImage image="Nezuko"></RotatingImage>
           </v-col>
-          <v-col class="hidden-md-and-up">
-            <RotatingImage image="Nezuko"></RotatingImage>
-            <RotatingImage image="Tanjiro"></RotatingImage>
+          <v-col class="hidden-md-and-up col-12">
+            <v-row>
+              <v-col class="col-3"></v-col>
+                <v-col class="col-3"><RotatingImage image="Nezuko"></RotatingImage>
+                </v-col>
+                <v-col class="col-3"><RotatingImage image="Tanjiro"></RotatingImage></v-col>
+                 <v-col class="col-3"></v-col>
+            </v-row>
           </v-col>
           <v-col md="4" class="animate__animated animate__backInDown">
             <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
