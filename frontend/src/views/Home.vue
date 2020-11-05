@@ -3,32 +3,32 @@
     <v-main>
       <v-dialog v-model="createRoomPopup" max-width="350">
         <v-card>
-          <v-card-title class="headline justify-center">Create New Room</v-card-title>
+          <v-card-title class="headline justify-center" style="color:#494C97">Create New Room</v-card-title>
           <v-card-text>
             <v-form @submit.prevent v-model="valid" ref="form">
-              <v-text-field label="Enter a room name" v-model="roomName" :rules="inputRequiredRule" autofocus v-on:keyup.enter="createRoom"></v-text-field>
+              <v-text-field label="Enter a room name" v-model="roomName" :rules="inputRequiredRule" autofocus v-on:keyup.enter="createRoom" color="#494C97"></v-text-field>
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
-              <v-btn color="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
+              <v-btn dark color="rgb(81, 81, 118)" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
       </v-dialog>
       <v-dialog v-model="joinRoomPopup" max-width="350">
         <v-card>
-          <v-card-title class="headline justify-center">Join Existing Room</v-card-title>
+          <v-card-title class="headline justify-center" style="color:#494C97">Join Existing Room</v-card-title>
           <v-card-text>
             <v-form @submit.prevent v-model="valid" ref="form">
-              <v-text-field label="Enter the room code" v-model="roomCode" :rules="inputRequiredRule" autofocus v-on:keyup.enter="joinRoom"></v-text-field>
+              <v-text-field label="Enter the room code" v-model="roomCode" :rules="inputRequiredRule" autofocus v-on:keyup.enter="joinRoom" color="#494C97"></v-text-field>
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
             </v-form>
           </v-card-text>
           <v-card-actions class="justify-center">
-            <v-btn color="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
-            <v-btn color="success" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">View Room</v-btn>
+            <v-btn dark color="rgb(81, 81, 118)" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
+            <v-btn dark color="#7579BD" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">View Room</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
