@@ -778,9 +778,9 @@ export default {
         document.getElementById("sADisplay").style.display = "inline";
         this.sArtists.push(value);
         this.$nextTick(() => {
-            this.artist = undefined;
-          })
-        
+          this.artist = undefined;
+        })
+
       }
     },
     sendQuestionnaireData() {
@@ -833,26 +833,48 @@ export default {
       });
     },
     remove(tag, list) {
-      if (list == "youtubes")
+      if (list == "youtubes") {
         this.youtubes = this.youtubes.filter(function (e) {
           return e !== tag;
         });
-      else if (list == "books")
+        console.log(this.youtubes);
+        console.log(this.youtubes.length);
+        if (this.youtubes.length == 0) {
+          document.getElementById("ytDisplay").style.display = "none";
+        }
+      }
+      else if (list == "books") {
         this.books = this.books.filter(function (e) {
           return e !== tag;
         });
-      else if (list == "movies")
+        if (this.books.length == 0) {
+          document.getElementById("bkDisplay").style.display = "none";
+        }
+      }
+      else if (list == "movies") {
         this.movies = this.movies.filter(function (e) {
           return e !== tag;
         });
-      else if (list == "sArtists")
+        if (this.movies.length == 0) {
+          document.getElementById("mvDisplay").style.display = "none";
+        }
+      }
+      else if (list == "sArtists") {
         this.sArtists = this.sArtists.filter(function (e) {
           return e !== tag;
         });
-      else if (list == "sGenres")
+        if (this.sArtists.length == 0) {
+          document.getElementById("sADisplay").style.display = "none";
+        }
+      }
+      else if (list == "sGenres") {
         this.sGenres = this.sGenres.filter(function (e) {
           return e !== tag;
         });
+        if (this.sGenres.length == 0) {
+          document.getElementById("sGDisplay").style.display = "none";
+        }
+      }
     },
     validate() {
       this.resetAlerts();
