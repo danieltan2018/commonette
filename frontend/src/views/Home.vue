@@ -44,7 +44,7 @@
           </div>
           <div class="home__data">
             <div data-aos="zoom-in">
-              <h1 class="home__title">Commonette</h1>
+              <h1 class="my-10 font-weight-bold text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-center">Commonette</h1>
             </div>
             <v-row align="center" class="white--text mx-auto" justify="center">
               <div data-aos="zoom-in" data-aos-delay="300">
