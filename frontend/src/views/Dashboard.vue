@@ -50,6 +50,21 @@
     </v-row>
 
     <v-row>
+      <v-col cols="1"></v-col>
+      <v-col cols="5" id="chart" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+        <!-- Put piechart for language here -->
+        <h3 style="color:white">Movie Languages Selected<br></h3>
+        <pie-chart :chart-data="languagePieChart.chartData" v-if="langReady">
+        </pie-chart>
+      </v-col>
+      <v-col cols="5" data-aos="fade-left" data-aos-delay="100" data-aos-duration="1000">
+        <h3 style="color:white">Gender Population<br></h3>
+        <pie-chart :chart-data="genderPieChart.chartData" v-if="genderReady">
+        </pie-chart>
+      </v-col>
+    </v-row>
+
+    <v-row>
       <v-col cols="2"></v-col>
       <v-col cols="8" style="color:white">
         Categories or Genres ranked were assigned weights!
@@ -113,20 +128,6 @@
       </v-col>
       <v-col cols="1"></v-col>
     </v-row>
-    <v-row>
-      <v-col cols="1"></v-col>
-      <v-col cols="5" id="chart">
-        <!-- Put piechart for language here -->
-        <h3 style="color:white">Movie Languages Selected<br></h3>
-        <pie-chart :chart-data="languagePieChart.chartData" v-if="langReady">
-        </pie-chart>
-      </v-col>
-      <v-col cols="5">
-        <h3 style="color:white">Gender Population<br></h3>
-        <pie-chart :chart-data="genderPieChart.chartData" v-if="genderReady">
-        </pie-chart>
-      </v-col>
-    </v-row>
   </v-main>
 </template>
 
@@ -136,9 +137,6 @@ import * as chartConfigs from "../components/Charts/config";
 import MarqueeText from "../components/MarqueeText.vue";
 import config from "../config";
 import axios from "axios";
-
-// import Vue from "vue";
-// import ApexCharts from 'apexcharts'
 import PieChart from "../components/Charts/PieChart";
 
 export default {
