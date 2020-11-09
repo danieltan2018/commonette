@@ -71,7 +71,7 @@
       <section id="about">
         <v-responsive v-for="(story, i) in stories" :key=i>
           <div v-if="i % 2 == 0" data-aos="fade-right" data-aos-duration="2000">
-            <v-row v-if="$vuetify.breakpoint.name == 'xs'">
+            <v-row v-if="$vuetify.breakpoint.smAndDown">
               <v-col cols=12>
                 <v-img height="220px" :src="story.src"></v-img>
               </v-col>
@@ -97,7 +97,7 @@
             </v-row>
           </div>
           <div v-else data-aos="fade-left" data-aos-duration="2000">
-            <v-row v-if="$vuetify.breakpoint.name == 'xs'">
+            <v-row v-if="$vuetify.breakpoint.smAndDown">
               <v-col cols=12>
                 <v-img height="220px" :src="story.src"></v-img>
               </v-col>
@@ -170,10 +170,10 @@
             <v-divider></v-divider>
           </v-responsive> -->
           <v-container>
-            <h2 class="display-1 font-weight-bold mb-3" style="color:rgb(54, 54, 79); margin-top:10px;">
+            <h2 class="text-lg-h4 text-md-h4 text-sm-h5 text-h6  my-3" style="color:rgb(54, 54, 79)">
               What are you waiting for?
             </h2>
-            <v-row class="mx-auto" justify="center" style="margin-bottom:10px">
+            <v-row class="mx-auto mb-3 justify-center">
               <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true" color="#50587C" style="color:white">
                 Create Room
               </v-btn>
