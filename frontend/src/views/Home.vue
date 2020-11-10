@@ -123,7 +123,6 @@
             </v-row>
           </div>
         </v-responsive>
-
       </section>
 
       <section id="mediums" color="rgb(54, 54, 79)">
@@ -276,20 +275,6 @@ export default {
   },
 
   methods: {
-    iconSize() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return "60px";
-        case "sm":
-          return "75px";
-        case "md":
-          return "90px";
-        case "lg":
-          return "105px";
-        case "xl":
-          return "105px";
-      }
-    },
     navigateRoute(newpath) {
       this.$router.push(newpath);
     },
@@ -382,6 +367,9 @@ gsap.from(".home__title", { opacity: 0, duration: 1, delay: 1.6, y: 30 });
 gsap.from(".home__description", { opacity: 0, duration: 1, delay: 1.8, y: 30 });
 gsap.from(".home__button", { opacity: 0, duration: 1, delay: 2.1, y: 30 });
 gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
+
+
+
 </script>
 
 <style lang="scss">
