@@ -79,7 +79,7 @@
                 <div class="pt-5 px-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
-                  <p class="text-body-1 text-left">{{ story.message }}</p>
+                  <p class="text-lg-h5 text-md-h6 text-body-1 text-left font-weight-regular">{{ story.message }}</p>
                 </div>
               </v-col>
             </v-row>
@@ -91,7 +91,7 @@
                 <div class="pt-5 pr-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-right mx-auto">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-right mx-auto my-4">{{ story.subtitle }}</h2>
-                  <p class="text-body-1 text-right">{{ story.message }}</p>
+                  <p class="text-lg-h5 text-md-h6 text-body-1 text-right font-weight-light">{{ story.message }}</p>
                 </div>
               </v-col>
             </v-row>
@@ -105,7 +105,7 @@
                 <div class="pt-5 px-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
-                  <p class="text-body-1 text-left">{{ story.message }}</p>
+                  <p class="text-lg-h5 text-md-h6 text-body-1 text-left font-weight-regular">{{ story.message }}</p>
                 </div>
               </v-col>
             </v-row>
@@ -114,7 +114,7 @@
                 <div class="pt-5 pl-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto my-4">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
-                  <p class="text-body-1 text-left">{{ story.message }}</p>
+                  <p class="text-lg-h5 text-md-h6 text-body-1 text-left font-weight-light">{{ story.message }}</p>
                 </div>
               </v-col>
               <v-col cols="6">
@@ -217,38 +217,32 @@ export default {
           title: "Surprise yourself,",
           subtitle: "and discover new content every day",
           message:
-            "Can't find a good book to read? Trying to find the perfect movie to watch with your date?",
+            "Can't find a good book to read? Sick of your usual playlists? Need a good YouTube rabbit hole to dive into? Use Commonette to discover content that you never knew you would love. ",
           src:
             "https://images.pexels.com/photos/3768177/pexels-photo-3768177.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-          alt:
-            "https://images.pexels.com/photos/2253849/pexels-photo-2253849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
         {
           title: "Countless recommendations",
-          subtitle: "Catered to you and your friends",
+          subtitle: "catered to you and your friends",
           message:
-            "From videos, movies and music to books, we've got you covered no matter what the occasion.",
+            "Answer a questionnaire to find out what entertainment mediums you and your friends are likely to enjoy! Videos, movies, books or music — we've got you covered no matter the occasion.",
           src:
             "https://images.pexels.com/photos/2719510/pexels-photo-2719510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-          alt:
-            "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
         {
-          title: "Find common interests",
-          subtitle: "with your loved ones",
+          title: "The easiest and most convenient way",
+          subtitle: "to find common interests between you and your friends",
           message:
-            "See at a glance the top interests of your group by inviting them to join!",
+            "You could be watching the perfect movie with your date or jamming to your favourite music with your friends in just a few clicks. It cannot get easier than this.",
           src:
             "https://images.pexels.com/photos/4488194/pexels-photo-4488194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-          alt:
-            "https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         },
       ],
       mediums: [
         {
           icon: "mdi-youtube red",
           title: "YouTube Videos",
-          text: "See recommended videos for you and your friends.",
+          text: "The ",
         },
         {
           icon: "mdi-book blue",
