@@ -128,17 +128,17 @@
       <section id="mediums" color="rgb(54, 54, 79)">
         <div class="py-6"></div>
         <v-container class="text-center">
-          <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4  mb-3" style="color:#ebebeb">What is recommended?</h2>
+          <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4  mb-3" style="color:#ebebeb">Entertainment mediums</h2>
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1" color="#ebebeb"></v-divider>
             <v-divider color="#ebebeb"></v-divider>
           </v-responsive>
-          <v-row class="justify-center align-center">
-            <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" sm="6" md='4' lg='3' class="justify-content-between align-center">
+          <v-row>
+            <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" sm="6" md='4' lg='3'>
               <div data-aos="flip-up" :data-aos-delay="200*i" data-aos-duration="500">
-                <vue-flip active-click width="280px" height="320px" class="mx-auto">
+                <vue-flip active-hover width="280px" height="320px" class="mx-auto">
                   <template v-slot:front>
-                    <v-card width="280px" height="320px" class="mx-auto py-12 px-4 rounded-xl justify-space-between" color="#E3E9F2" flat>
+                    <v-card width="280px" height="320px" class="mx-auto py-12 px-4 rounded-xl" color="#E3E9F2" flat>
                       <v-theme-provider dark>
                         <div>
                           <v-avatar color="primary" size="88">
@@ -147,11 +147,14 @@
                         </div>
                       </v-theme-provider>
                       <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title" style="color:rgb(48, 48, 68);"></v-card-title>
+                      <p class="text--disabled card-text-hover" @mouseover="hoverText(true, 'Flipping!', i)" @mouseout="hoverText(false, '', i)">Touch me!</p>
                     </v-card>
                   </template>
                   <template v-slot:back>
                     <v-card width="280px" height="320px" class="mx-auto py-12 px-4 rounded-xl" color="#E3E9F2" flat>
-                      <v-card-text class="subtitle-1" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
+                      <p v-if="title == 'Music'" class="subtitle-1 px-4 my-0 font-weight-bold text-left">How are Songs recommended?</p>
+                      <p v-else class="subtitle-1 px-4 my-0 font-weight-bold text-left">How are {{title}} recommended?</p>
+                      <v-card-text class="subtitle-1 text-left" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
                     </v-card>
                   </template>
                 </vue-flip>
@@ -241,23 +244,24 @@ export default {
         {
           icon: "mdi-youtube red",
           title: "YouTube Videos",
-          text: "The ",
+          text:
+            "Choose your favourite YouTube categories, and we will fetch common categories to be enjoyed by your group.",
         },
         {
           icon: "mdi-book blue",
           title: "Books",
-          text: "Find books ",
+          text: "Rank your favourite genres of books, and we will scour the internet to look for books that match those genres.",
         },
         {
           icon: "mdi-movie-open pink",
           title: "Movies",
-          text: "I don't know what I'm doing",
+          text: "By selecting your favourite genres and setting your minimum IMDB value, look for movies within those genres with a higher IMDB score.",
         },
         {
           icon: "mdi-spotify green",
           title: "Music",
           text:
-            "Generate Spotify recommendations from you and your friends' favourite songs.",
+            "By telling us your favourite songs and artists, we will generate new songs that are similar to your group's favourite artists and genres.",
         },
       ],
     };
@@ -275,6 +279,10 @@ export default {
   },
 
   methods: {
+    hoverText(over, msg, i) {
+      var text = document.getElementsByClassName("card-text-hover")[i];
+      text.innerHTML = over ? msg : "Touch me!";
+    },
     navigateRoute(newpath) {
       this.$router.push(newpath);
     },
@@ -367,9 +375,6 @@ gsap.from(".home__title", { opacity: 0, duration: 1, delay: 1.6, y: 30 });
 gsap.from(".home__description", { opacity: 0, duration: 1, delay: 1.8, y: 30 });
 gsap.from(".home__button", { opacity: 0, duration: 1, delay: 2.1, y: 30 });
 gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
-
-
-
 </script>
 
 <style lang="scss">
