@@ -17,14 +17,15 @@
         <v-icon>mdi-arrow-up</v-icon>
       </v-btn>
 
-      <div style="color: white;"> 
+      <div style="color: white;">
         <h1 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 mb-6">Here are some statistics!</h1>
-        <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6">Total number of users in this Room: <b style="color:#F6CA83">{{userCount}}</b></h2>
+        <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6">No. of Users in this Room: <b style="color:#F6CA83">{{userCount}}</b></h2>
       </div>
 
     </section>
 
-    <v-row v-if="roomUsers.length != 1">
+    <v-container fluid>
+      <v-row v-if="roomUsers.length != 1">
       <v-col cols="4"></v-col>
       <v-col cols="4">
         <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
@@ -36,18 +37,17 @@
       </v-col>
       <v-col cols="4"></v-col>
     </v-row>
-    <v-row v-else>
-      <v-col cols="5"></v-col>
-      <v-col cols="2">
-        <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
+      <v-row v-else>
+        <v-col cols="4"></v-col>
+        <v-col cols="4">
           <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
-            <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
-            <v-img v-else src='../images/Nezuko.png' style='height:150px; width:140px'></v-img>
+          <RotatingImage image="Nezuko" height="150" v-if="user.gender == 'F'" style="width:150px"></RotatingImage>
+          <RotatingImage image="Tanjiro" height="150" v-else style="width:150px"></RotatingImage>
           </v-badge>
-        </marquee-text>
-      </v-col>
-      <v-col cols="5"></v-col>
-    </v-row>
+        </v-col>
+        <v-col cols="4"></v-col>
+      </v-row>
+    </v-container>
 
     <v-container class="px-10">
       <v-row>
@@ -136,15 +136,18 @@
 import BarChart from "../components/Charts/BarChart";
 import * as chartConfigs from "../components/Charts/config";
 import MarqueeText from "../components/MarqueeText.vue";
+import PieChart from "../components/Charts/PieChart";
+import RotatingImage from "../components/RotatingImage/RotatingImage.vue";
 import config from "../config";
 import axios from "axios";
-import PieChart from "../components/Charts/PieChart";
+
 
 export default {
   components: {
     BarChart,
     MarqueeText,
     "pie-chart": PieChart,
+    RotatingImage,
   },
   props: {
     roomCode: {
@@ -165,7 +168,7 @@ export default {
     genderReady: false,
     isPaused: false,
     fab: false,
-    // The piechart doesn't display the data unless I click on the available data label.
+    height: 200,
     languagePieChart: {
       // extraOptions: chartConfigs.pieChartOptions,
       chartData: {
