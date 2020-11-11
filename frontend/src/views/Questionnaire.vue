@@ -7,7 +7,7 @@
 
         <p class="text-h4 font-weight-medium my-6">Questionnaire</p>
 
-        <div>Share your name</div>
+        <div id="Name">Share your name</div>
         <v-layout row wrap justify-center>
           <v-flex xs12 md6 lg4 mx-4>
             <v-text-field label="Name" v-model="name"></v-text-field>
@@ -27,7 +27,7 @@
           </v-flex>
         </v-layout>
 
-        <v-container id="youtubeCategory" class="category-container">
+        <v-container id="Youtube" class="category-container">
           <p class="text-h5 font-weight-medium mb-4">Youtube</p>
           <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
           <v-layout row wrap justify-center>
@@ -64,7 +64,7 @@
           </v-layout>
         </v-container>
 
-        <v-container id="bookiCategory" class="category-container">
+        <v-container id="Book" class="category-container">
           <p class="text-h5 font-weight-medium mb-4">Books</p>
           <div class="mb-4">Select up to 5 of your favourite book subjects</div>
           <v-layout row wrap justify-center>
@@ -101,9 +101,9 @@
           </v-layout>
         </v-container>
 
-        <v-container id="movieCategory" class="category-container">
+        <v-container id="Movie" class="category-container">
           <p class="text-h5 font-weight-medium mb-4">Movies</p>
-          <div class="mb-4">Select up to 5 of your favourite Youtube video categories</div>
+          <div class="mb-4">Select up to 5 of your favourite Movie Genres</div>
           <v-layout row wrap justify-center>
             <v-flex xs12 md6 lg4>
               <v-autocomplete v-model="movieGenre" :items="inputMovieGenre" label="Genre">
@@ -161,7 +161,7 @@
           </v-layout>
         </v-container>
 
-        <v-container id="Spotfy" class="category-container" mb-8>
+        <v-container id="Spotify" class="category-container" mb-8>
           <p class="text-h5 font-weight-medium mb-4">Spotify</p>
           <div mb-2>Select up to 3 of your favourite artists</div>
           <v-layout row wrap justify-center>
@@ -237,7 +237,7 @@
           </v-layout>
 
         </v-container>
-        <v-btn text class="success mx-0 mb-6" @click="submit">Let's Go</v-btn>
+        <v-btn text class="success mx-0 mb-6" @click="submit()">Let's Go</v-btn>
       </v-form>
     </v-container>
   </v-container>
@@ -598,6 +598,28 @@ export default {
       ],
     };
   },
+  computed:{
+    firstError(){
+      if (this.nameNone == true){
+        return 0;
+      }
+      else if (this.ytNone == true || this.ytExceed == true){
+        return "#Youtube";
+      }
+      else if (this.bkNone == true || this.bkExceed == true){
+        return "#Book";
+      }
+      else if (this.mvNone == true || this.mvExceed == true || this.mvLangNone == true){
+        return "#Movie";
+      }
+      else if (this.sANone == true || this.sAExceed == true || this.sGNone == true || this.sGExceed == true){
+        return "#Spotify";
+      }
+      else{
+        return "";
+      }
+    }
+  },
   watch: {
     movieGenre: {
       immediate: true,
@@ -664,13 +686,13 @@ export default {
     submit() {
       if (this.validate()) {
         console.log("All Clear");
-        // Send data to backend
-
         this.sendQuestionnaireData();
       } else {
         this.showAlerts();
         console.log("Error la");
-        this.$vuetify.goTo(0);
+        this.$nextTick(() => {
+          this.$vuetify.goTo(this.firstError);
+        });
       }
     },
     delLang(item) {
@@ -884,10 +906,7 @@ export default {
         this.books.length == 0 ||
         this.movieLanguage.length == 0 ||
         this.sArtists.length == 0 ||
-        this.sGenres.length == 0
-      ) {
-        return false;
-      } else if (
+        this.sGenres.length == 0 ||
         this.name == "" ||
         this.youtubes.length > 5 ||
         this.movies.length > 5 ||
@@ -905,11 +924,11 @@ export default {
       if (this.youtubes.length == 0) this.ytNone = true;
       else if (this.youtubes.length > 5) this.ytExceed = true;
 
-      if (this.movies.length == 0) this.mvNone = true;
-      else if (this.movies.length > 5) this.mvExceed = true;
-
       if (this.books.length == 0) this.bkNone = true;
       else if (this.books.length > 5) this.bkExceed = true;
+
+      if (this.movies.length == 0) this.mvNone = true;
+      else if (this.movies.length > 5) this.mvExceed = true;
 
       if (this.movieLanguage.length == 0) this.mvLangNone = true;
 
