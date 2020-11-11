@@ -6,7 +6,7 @@
           <v-card-title class="headline justify-center" style="color:#494C97">Create New Room</v-card-title>
           <v-card-text>
             <v-form @submit.prevent v-model="valid" ref="form">
-              <v-text-field label="Enter a room name" v-model="roomName" :rules="inputRequiredRule" autofocus v-on:keyup.enter="createRoom" color="#494C97"></v-text-field>
+              <v-text-field label="Enter a room name" v-model="roomName" :rules="inputRequiredRule" autofocus v-on:keyup.enter="createRoom" @keyup.enter="loader = 'loading1'" color="#494C97"></v-text-field>
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
@@ -20,7 +20,7 @@
           <v-card-title class="headline justify-center" style="color:#494C97">Join Existing Room</v-card-title>
           <v-card-text>
             <v-form @submit.prevent v-model="valid" ref="form">
-              <v-text-field label="Enter the room code" v-model="roomCode" :rules="inputRequiredRule" autofocus v-on:keyup.enter="joinRoom" color="#494C97"></v-text-field>
+              <v-text-field label="Enter the room code" v-model="roomCode" :rules="inputRequiredRule" autofocus v-on:keyup.enter="joinRoom" @keyup.enter="loader = 'loading1'" color="#494C97"></v-text-field>
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
