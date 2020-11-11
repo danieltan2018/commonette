@@ -661,16 +661,6 @@ export default {
     },
   },
   methods: {
-    getAlerts() {
-      var alert = document.getElementsByClassName("v-alert");
-      
-      if (alert[0] == undefined) {
-        return "undefined bro";
-      }
-      else {
-        return alert[0].parentNode.parentNode.parentNode;
-      }
-    },
     submit() {
       if (this.validate()) {
         console.log("All Clear");
@@ -680,8 +670,7 @@ export default {
       } else {
         this.showAlerts();
         console.log("Error la");
-        console.log(this.getAlerts());
-        this.$vuetify.goTo(this.getAlerts());
+        this.$vuetify.goTo(0);
       }
     },
     delLang(item) {
