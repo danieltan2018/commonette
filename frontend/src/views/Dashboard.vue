@@ -24,7 +24,7 @@
       <v-col cols="3"></v-col>
     </v-row>
 
-    <v-row  v-if="roomUsers.length != 1">
+    <v-row v-if="roomUsers.length != 1">
       <v-col cols="4"></v-col>
       <v-col cols="4">
         <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
@@ -36,7 +36,7 @@
       </v-col>
       <v-col cols="4"></v-col>
     </v-row>
-    <v-row  v-else>
+    <v-row v-else>
       <v-col cols="5"></v-col>
       <v-col cols="2">
         <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
@@ -49,20 +49,21 @@
       <v-col cols="5"></v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols="1"></v-col>
-      <v-col cols="5" id="chart" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
-        <!-- Put piechart for language here -->
-        <h3 style="color:white">Movie Languages Selected<br></h3>
-        <pie-chart :chart-data="languagePieChart.chartData" v-if="langReady">
-        </pie-chart>
-      </v-col>
-      <v-col cols="5" data-aos="fade-left" data-aos-delay="100" data-aos-duration="1000">
-        <h3 style="color:white">Gender Population<br></h3>
-        <pie-chart :chart-data="genderPieChart.chartData" v-if="genderReady">
-        </pie-chart>
-      </v-col>
-    </v-row>
+    <v-container class="px-10">
+      <v-row>
+        <v-col cols="12" sm=6 id="chart" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+          <!-- Put piechart for language here -->
+          <h3 style="color:white">Movie Languages Selected<br></h3>
+          <pie-chart :chart-data="languagePieChart.chartData" v-if="langReady">
+          </pie-chart>
+        </v-col>
+        <v-col cols="12" sm=6 data-aos="fade-left" data-aos-delay="100" data-aos-duration="1000">
+          <h3 style="color:white">Gender Population<br></h3>
+          <pie-chart :chart-data="genderPieChart.chartData" v-if="genderReady">
+          </pie-chart>
+        </v-col>
+      </v-row>
+    </v-container>
 
     <v-row>
       <v-col cols="2"></v-col>
@@ -72,62 +73,62 @@
       </v-col>
       <v-col cols="2"></v-col>
     </v-row>
-    <v-row>
-      <v-col cols="1"></v-col>
-      <v-col cols="5" data-aos="fade-down-right" data-aos-duration="1000" v-if="youtubeReady">
-        <v-card type="chart" dark>
-          <v-card-title>
-            <v-icon color="red" style="margin-right:5px" large>mdi-youtube</v-icon>
-            Top Youtube Categories
-          </v-card-title>
-          <div class="chart-area">
-            <bar-chart style="height: 100%" chart-id="youtubeStats" :chart-data="youtubeBarChart.chartData" :gradient-stops="youtubeBarChart.gradientStops" :extra-options="youtubeBarChart.extraOptions">
-            </bar-chart>
-          </div>
-        </v-card>
-      </v-col>
-      <v-col cols="5" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="500" v-if="bookReady">
-        <v-card type="chart" dark>
-          <v-card-title>
-            <v-icon color="blue" style="margin-right:5px" large>mdi-book</v-icon>
-            Top Book Genres
-          </v-card-title>
-          <div class="chart-area">
-            <bar-chart style="height: 100%" chart-id="bookStats" :chart-data="bookBarChart.chartData" :gradient-stops="bookBarChart.gradientStops" :extra-options="bookBarChart.extraOptions">
-            </bar-chart>
-          </div>
-        </v-card>
-      </v-col>
-      <v-col cols="1"></v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="1"></v-col>
-      <v-col cols="5" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="600" v-if="movieReady">
-        <v-card type="chart" dark>
-          <v-card-title>
-            <v-icon color="rgb(255, 0, 128)" style="margin-right:5px" large>mdi-movie-open</v-icon>
-            Top Movie Genres
-          </v-card-title>
-          <div class="chart-area">
-            <bar-chart style="height: 100%" chart-id="movieStats" :chart-data="movieBarChart.chartData" :gradient-stops="movieBarChart.gradientStops" :extra-options="movieBarChart.extraOptions">
-            </bar-chart>
-          </div>
-        </v-card>
-      </v-col>
-      <v-col cols="5" data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1000" v-if="spotifyReady">
-        <v-card type="chart" dark>
-          <v-card-title>
-            <v-icon color="green" style="margin-right:5px" large>mdi-spotify</v-icon>
-            Top Spotify Genres
-          </v-card-title>
-          <div class="chart-area">
-            <bar-chart style="height: 100%" chart-id="spotifyStats" :chart-data="spotifyBarChart.chartData" :gradient-stops="spotifyBarChart.gradientStops" :extra-options="spotifyBarChart.extraOptions">
-            </bar-chart>
-          </div>
-        </v-card>
-      </v-col>
-      <v-col cols="1"></v-col>
-    </v-row>
+
+    <v-container>
+      <v-row>
+        <v-col cols="12" md=6 data-aos="fade-down-right" data-aos-duration="1000" v-if="youtubeReady">
+          <v-card type="chart" dark>
+            <v-card-title>
+              <v-icon color="red" style="margin-right:5px" large>mdi-youtube</v-icon>
+              Top Youtube Categories
+            </v-card-title>
+            <div class="chart-area">
+              <bar-chart style="height: 100%" chart-id="youtubeStats" :chart-data="youtubeBarChart.chartData" :gradient-stops="youtubeBarChart.gradientStops" :extra-options="youtubeBarChart.extraOptions">
+              </bar-chart>
+            </div>
+          </v-card>
+        </v-col>
+        <v-col cols="12" md=6 data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="500" v-if="bookReady">
+          <v-card type="chart" dark>
+            <v-card-title>
+              <v-icon color="blue" style="margin-right:5px" large>mdi-book</v-icon>
+              Top Book Genres
+            </v-card-title>
+            <div class="chart-area">
+              <bar-chart style="height: 100%" chart-id="bookStats" :chart-data="bookBarChart.chartData" :gradient-stops="bookBarChart.gradientStops" :extra-options="bookBarChart.extraOptions">
+              </bar-chart>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md=6 data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="600" v-if="movieReady">
+          <v-card type="chart" dark>
+            <v-card-title>
+              <v-icon color="rgb(255, 0, 128)" style="margin-right:5px" large>mdi-movie-open</v-icon>
+              Top Movie Genres
+            </v-card-title>
+            <div class="chart-area">
+              <bar-chart style="height: 100%" chart-id="movieStats" :chart-data="movieBarChart.chartData" :gradient-stops="movieBarChart.gradientStops" :extra-options="movieBarChart.extraOptions">
+              </bar-chart>
+            </div>
+          </v-card>
+        </v-col>
+        <v-col cols="12" md=6 data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1000" v-if="spotifyReady">
+          <v-card type="chart" dark>
+            <v-card-title>
+              <v-icon color="green" style="margin-right:5px" large>mdi-spotify</v-icon>
+              Top Spotify Genres
+            </v-card-title>
+            <div class="chart-area">
+              <bar-chart style="height: 100%" chart-id="spotifyStats" :chart-data="spotifyBarChart.chartData" :gradient-stops="spotifyBarChart.gradientStops" :extra-options="spotifyBarChart.extraOptions">
+              </bar-chart>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+
   </v-main>
 </template>
 
