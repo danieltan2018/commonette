@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-img height=100 contain class="animate__animated animate__tada animate__infinite animate__slower" v-bind:src= "require('../../images/' + image + '.png')"></v-img>
+    <v-img id="img" v-bind:height="height" contain class="animate__animated animate__tada animate__infinite animate__slower" v-bind:src= "require('../../images/' + image + '.png')"></v-img>
   </div>
 </template>
 
@@ -10,7 +10,8 @@ import 'animate.css';
 export default {
   name: 'RotatingImage',
   props:{
-    "image": String
+    "image": String,
+    "height": Number,
   },
 }
 
