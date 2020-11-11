@@ -39,16 +39,16 @@
       <v-container fluid>
         <v-row>
           <v-col class="hidden-sm-and-down" md="4">
-            <RotatingImage image="Nezuko"></RotatingImage>
+            <RotatingImage image="Nezuko" height="100"></RotatingImage>
           </v-col>
           <v-col class="hidden-md-and-up col-12">
             <v-row>
               <v-col class="col-3"></v-col>
               <v-col class="col-3">
-                <RotatingImage image="Nezuko"></RotatingImage>
+                <RotatingImage image="Nezuko" height="100"></RotatingImage>
               </v-col>
               <v-col class="col-3">
-                <RotatingImage image="Tanjiro"></RotatingImage>
+                <RotatingImage image="Tanjiro" height="100"></RotatingImage>
               </v-col>
               <v-col class="col-3"></v-col>
             </v-row>
@@ -59,7 +59,7 @@
             <h4 style="color:#E3E9F2" class="animate__animated animate__flash animate__delay-5 animate__repeat-2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
           </v-col>
           <v-col class="hidden-sm-and-down" md="4">
-            <RotatingImage image="Tanjiro"></RotatingImage>
+            <RotatingImage image="Tanjiro" height="100"></RotatingImage>
           </v-col>
         </v-row>
       </v-container>
