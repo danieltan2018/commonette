@@ -1,28 +1,28 @@
 <template>
   <v-main class="home">
 
-    <section class="text-left px-10 pt-5">
+    <span>
+      <br>
+      <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
+      <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
+      <br>
+      <v-btn large v-on:click="navigateRoute('/recommend')">View Recommendations</v-btn>
+      <br>
+      <br>
+    </span>
 
-      <span>
-        <br>
-        <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
-        <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
-        <br>
-        <v-btn large v-on:click="navigateRoute('/recommend')">View Recommendations</v-btn>
-        <br>
-        <br>
-      </span>
+    <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="pink" @click="$vuetify.goTo(0)">
+      <v-icon>mdi-arrow-up</v-icon>
+    </v-btn>
 
-      <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="pink" @click="$vuetify.goTo(0)">
-        <v-icon>mdi-arrow-up</v-icon>
-      </v-btn>
-
-      <div style="color: white;">
-        <h1 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 mb-6">Here are some statistics!</h1>
-        <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6">No. of Users in this Room: <b style="color:#F6CA83">{{userCount}}</b></h2>
-      </div>
-
-    </section>
+    <v-row>
+      <v-col cols="3"></v-col>
+      <v-col cols="6" style="color:white">
+        <h1>Here are some statistics!</h1><br>
+        <h2>Total No. Of Users In Room: <b style="color:#F6CA83">{{userCount}}</b></h2>
+      </v-col>
+      <v-col cols="3"></v-col>
+    </v-row>
 
     <v-container fluid>
       <v-row v-if="roomUsers.length != 1">
@@ -412,6 +412,6 @@ export default {
 <style lang="scss">
 .home {
   background-color: rgb(81, 81, 118);
-  // justify-content: center;
+  justify-content: center;
 }
 </style>
