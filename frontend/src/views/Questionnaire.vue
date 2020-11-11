@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="sendingData == false">
     <VueScrollProgress></VueScrollProgress>
     <v-container fluid justify-center id="main-container">
 
@@ -241,6 +241,16 @@
       </v-form>
     </v-container>
   </v-container>
+
+  <!-- Handle slowest API - Books -->
+  <v-main v-else style="background-color:rgb(81, 81, 118)">
+    <v-container fluid fill-height>
+      <v-layout justify-center align-center>
+        <breeding-rhombus-spinner :animation-duration="500" :size="65" color="#ff1d5e" />
+        <h1 style="color:#E3E9F2">Running magic calculations...</h1>
+      </v-layout>
+    </v-container>
+  </v-main>
 </template>
 
 <script>
@@ -248,12 +258,14 @@ import Vue from "vue";
 import draggable from "vuedraggable";
 import axios from "axios";
 import VueScrollProgress from "vue-scroll-progress";
+import { BreedingRhombusSpinner } from "epic-spinners";
 
 Vue.use(VueScrollProgress);
 
 export default {
   components: {
     draggable,
+    BreedingRhombusSpinner
   },
   mounted: function () {
     window.scrollTo(0, 0);
@@ -310,6 +322,7 @@ export default {
       sGNone: false,
       sGExceed: false,
       nameNone: false,
+      sendingData: false,
       genders: ["Male", "Female"],
       languages: ["English", "Mandarin", "Malay", "Tamil"],
       inputYoutube: [
@@ -598,24 +611,24 @@ export default {
       ],
     };
   },
-  computed:{
-    firstError(){
-      if (this.nameNone == true){
+  computed: {
+    firstError() {
+      if (this.nameNone == true) {
         return 0;
       }
-      else if (this.ytNone == true || this.ytExceed == true){
+      else if (this.ytNone == true || this.ytExceed == true) {
         return "#Youtube";
       }
-      else if (this.bkNone == true || this.bkExceed == true){
+      else if (this.bkNone == true || this.bkExceed == true) {
         return "#Book";
       }
-      else if (this.mvNone == true || this.mvExceed == true || this.mvLangNone == true){
+      else if (this.mvNone == true || this.mvExceed == true || this.mvLangNone == true) {
         return "#Movie";
       }
-      else if (this.sANone == true || this.sAExceed == true || this.sGNone == true || this.sGExceed == true){
+      else if (this.sANone == true || this.sAExceed == true || this.sGNone == true || this.sGExceed == true) {
         return "#Spotify";
       }
-      else{
+      else {
         return "";
       }
     }
@@ -807,6 +820,7 @@ export default {
     },
     sendQuestionnaireData() {
       // make spotify genres all lowercase
+      this.sendingData = true;
       let spotify_genres = this.sGenres;
       let spotify_genres_lower = [];
       for (let genre of spotify_genres) {
