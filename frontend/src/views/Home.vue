@@ -54,8 +54,8 @@
                 <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
               </div>
             </v-row>
-            <div class="py-12"></div>
-            <div data-aos="zoom-in" data-aos-delay="900">
+            <div class="py-10">
+            <!-- <div data-aos="zoom-in" data-aos-delay="600"> -->
               <v-theme-provider dark>
                 <v-row align="center" class="white--text mx-auto" justify="center">
                   <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#about')">
@@ -69,40 +69,43 @@
       </section>
 
       <section id="about">
+        <div class="pt-10"></div>
         <v-responsive v-for="(story, i) in stories" :key=i>
-          <div v-if="i % 2 == 0" data-aos="fade-right" data-aos-duration="2000">
+          <div v-if="i % 2 == 0" data-aos="fade-right" data-aos-duration="2500">
             <v-row v-if="$vuetify.breakpoint.smAndDown">
               <v-col cols=12>
-                <v-img height="220px" :src="story.src"></v-img>
+                <v-img height="300px" style="height:300px;width:600px;" :src="story.src"></v-img>
               </v-col>
               <v-col cols=12>
-                <div class="pt-5 px-5">
-                  <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto">{{ story.title }}</h2>
+                <div class="px-5">
+                  <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4 text-left mx-auto">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
                   <p class="text-lg-h5 text-md-h6 text-body-1 text-left font-weight-regular">{{ story.message }}</p>
                 </div>
               </v-col>
             </v-row>
             <v-row v-else>
-              <v-col cols=6>
-                <v-img height="500px" :src="story.src"></v-img>
+              <v-col cols="1"></v-col>
+              <v-col cols="4">
+                <v-img height="350px" style="height:400px;width:700px;" :src="story.src"></v-img>
               </v-col>
-              <v-col cols=6>
+              <v-col cols="6">
                 <div class="pt-5 pr-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-right mx-auto">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-right mx-auto my-4">{{ story.subtitle }}</h2>
                   <p class="text-lg-h5 text-md-h6 text-body-1 text-right font-weight-light">{{ story.message }}</p>
                 </div>
               </v-col>
+              <v-col cols="1"></v-col>
             </v-row>
           </div>
-          <div v-else data-aos="fade-left" data-aos-duration="2000">
+          <div v-else data-aos="fade-left" data-aos-duration="2500">
             <v-row v-if="$vuetify.breakpoint.smAndDown">
               <v-col cols=12>
-                <v-img height="220px" :src="story.src"></v-img>
+                <v-img height="300px" style="height:300px;width:600px;" :src="story.src"></v-img>
               </v-col>
               <v-col cols=12>
-                <div class="pt-5 px-5">
+                <div class="px-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto">{{ story.title }}</h2>
                   <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto my-4">{{ story.subtitle }}</h2>
                   <p class="text-lg-h5 text-md-h6 text-body-1 text-left font-weight-regular">{{ story.message }}</p>
@@ -110,6 +113,7 @@
               </v-col>
             </v-row>
             <v-row v-else>
+              <v-col cols="1"></v-col>
               <v-col cols="6">
                 <div class="pt-5 pl-5">
                   <h2 class="text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-left mx-auto my-4">{{ story.title }}</h2>
@@ -117,12 +121,14 @@
                   <p class="text-lg-h5 text-md-h6 text-body-1 text-left font-weight-light">{{ story.message }}</p>
                 </div>
               </v-col>
-              <v-col cols="6">
-                <v-img height=500px :src="story.src"></v-img>
+              <v-col cols="4">
+                <v-img height="400px" style="height:400px;width:700px;" :src="story.src"></v-img>
               </v-col>
+              <v-col cols="1"></v-col>
             </v-row>
           </div>
         </v-responsive>
+        <div class="pb-10"></div>
       </section>
 
       <section id="mediums" color="rgb(54, 54, 79)">
@@ -216,28 +222,28 @@ export default {
 
       stories: [
         {
-          title: "Surprise yourself,",
-          subtitle: "and discover new content every day",
+          title: "",
+          subtitle: "Surprise yourself and discover new content every day",
           message:
             "Can't find a good book to read? Sick of your usual playlists? Need a good YouTube rabbit hole to dive into? Use Commonette to discover content that you never knew you would love. ",
           src:
-            "https://images.pexels.com/photos/3768177/pexels-photo-3768177.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+            require("../images/story1.jpg"),
         },
         {
-          title: "Countless recommendations",
-          subtitle: "catered to you and your friends",
+          title: "",
+          subtitle: "Countless recommendations catered to you and your friends",
           message:
             "Answer a questionnaire to find out what entertainment mediums you and your friends are likely to enjoy! Videos, movies, books or music — we've got you covered no matter the occasion.",
           src:
-            "https://images.pexels.com/photos/2719510/pexels-photo-2719510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+            require("../images/story2.jpg"),
         },
         {
-          title: "The easiest and most convenient way",
-          subtitle: "to find common interests between you and your friends",
+          title: "",
+          subtitle: "The easiest and most convenient way to find common interests",
           message:
-            "You could be watching the perfect movie with your date or jamming to your favourite music with your friends in just a few clicks. It cannot get easier than this.",
+            "You could be watching the perfect movie with your date or jamming to your favourite music with your friends in just a few clicks. It can't get any easier than this!",
           src:
-            "https://images.pexels.com/photos/4488194/pexels-photo-4488194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+            require("../images/story3.jpg"),
         },
       ],
       mediums: [
@@ -525,7 +531,8 @@ img {
 
 #api,
 #about {
-  background-color: #e3e9f2;
+  // background-color: #e3e9f2;
+  background-color:white;
 }
 
 /* ===== MEDIA QUERIES=====*/
