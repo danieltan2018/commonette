@@ -148,7 +148,7 @@
       <section id="mediums" color="rgb(54, 54, 79)">
         <div class="py-6"></div>
         <v-container class="text-center">
-          <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4 mb-3  mb-3" style="color:#ebebeb">Entertainment mediums</h2>
+          <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto mb-3 text-center" style="color:#ebebeb">Entertainment mediums</h2>
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1 white"></v-divider>
             <v-divider class="white"></v-divider>
