@@ -55,7 +55,11 @@
           </v-col>
           <v-col md="4" class="animate__animated animate__backInDown">
             <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
-            <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
+            <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}} </b>
+              <v-btn v-clipboard="roomCode" icon color="#E3E9F2">
+                <v-icon small>mdi-content-copy</v-icon>
+              </v-btn>
+            </h3>
             <h4 style="color:#E3E9F2" class="animate__animated animate__flash animate__delay-5 animate__repeat-2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
           </v-col>
           <v-col class="hidden-sm-and-down" md="4">
@@ -453,8 +457,8 @@ export default {
 };
 </script>
 <style>
-    :root {
-        --animate-duration: 3s;
-        --animate-delay: 0.9s;
-    }
+:root {
+  --animate-duration: 3s;
+  --animate-delay: 0.9s;
+}
 </style>
