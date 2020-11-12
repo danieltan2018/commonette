@@ -44,20 +44,27 @@
           </div>
           <div class="home__data">
             <div data-aos="zoom-in">
-              <h1 class="my-10 font-weight-bold text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-center">Commonette</h1>
+            <h1 class="my-10 font-weight-bold text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-center">Commonette</h1>
+            </div>
+            <div id="animated-description" data-aos="zoom-in" data-aos-delay="300">
+              <span class="stationary-word mx-2">We will recommend you</span>
+              <span class="animate-word"> YouTube videos</span>
+              <span class="animate-word"> Movies</span>
+              <span class="animate-word"> Books</span>
+              <span class="animate-word"> Music</span>
             </div>
             <v-row align="center" class="white--text mx-auto" justify="center">
-              <div data-aos="zoom-in" data-aos-delay="300">
+              <div data-aos="zoom-in" data-aos-delay="600">
                 <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
               </div>
-              <div data-aos="zoom-in" data-aos-delay="600">
+              <div data-aos="zoom-in" data-aos-delay="900">
                 <v-btn elevation="2" large class="ma-2 home__button" v-on:click="joinRoomPopup = true">Join Room</v-btn>
               </div>
             </v-row>
             <div class="py-10">
-            <!-- <div data-aos="zoom-in" data-aos-delay="600"> -->
+              <!-- <div data-aos="zoom-in" data-aos-delay="600"> -->
               <v-theme-provider dark>
-                <v-row align="center" class="white--text mx-auto" justify="center">
+                <v-row align="center" class="white--text mx-auto" justify="center" data-aos="zoom-in" data-aos-delay="1200">
                   <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#about')">
                     <v-icon>mdi-chevron-double-down</v-icon>
                   </v-btn>
@@ -226,24 +233,22 @@ export default {
           subtitle: "Surprise yourself and discover new content every day",
           message:
             "Can't find a good book to read? Sick of your usual playlists? Need a good YouTube rabbit hole to dive into? Use Commonette to discover content that you never knew you would love. ",
-          src:
-            require("../images/story1.jpg"),
+          src: require("../images/story1.jpg"),
         },
         {
           title: "",
           subtitle: "Countless recommendations catered to you and your friends",
           message:
             "Answer a questionnaire to find out what entertainment mediums you and your friends are likely to enjoy! Videos, movies, books or music — we've got you covered no matter the occasion.",
-          src:
-            require("../images/story2.jpg"),
+          src: require("../images/story2.jpg"),
         },
         {
           title: "",
-          subtitle: "The easiest and most convenient way to find common interests",
+          subtitle:
+            "The easiest and most convenient way to find common interests",
           message:
             "You could be watching the perfect movie with your date or jamming to your favourite music with your friends in just a few clicks. It can't get any easier than this!",
-          src:
-            require("../images/story3.jpg"),
+          src: require("../images/story3.jpg"),
         },
       ],
       mediums: [
@@ -256,12 +261,14 @@ export default {
         {
           icon: "mdi-book blue",
           title: "Books",
-          text: "Rank your favourite genres of books, and we will scour the internet to look for books that match those genres.",
+          text:
+            "Rank your favourite genres of books, and we will scour the internet to look for books that match those genres.",
         },
         {
           icon: "mdi-movie-open pink",
           title: "Movies",
-          text: "By selecting your favourite genres and setting your minimum IMDB value, look for movies within those genres with a higher IMDB score.",
+          text:
+            "By selecting your favourite genres and setting your minimum IMDB value, look for movies within those genres with a higher IMDB score.",
         },
         {
           icon: "mdi-spotify green",
@@ -271,6 +278,58 @@ export default {
         },
       ],
     };
+  },
+
+  mounted() {
+    // this.$nextTick(() => {
+    //   var word = document.getElementById("test");
+    //   setInterval(() => {
+    //     var currentAttr = word.getAttribute("class");
+    //     if (currentAttr == "test out") {
+    //       word.className = 'test behind'
+    //       console.log(word.className);
+    //       setTimeout(() => {
+    //         word.className = 'test in'
+    //       }, 400);
+    //     }
+    //     else {
+    //       word.setAttribute("class", "test out")
+    //     }
+    //     console.log("done: ", word)
+    //   }, 1500)
+    // })
+
+    this.$nextTick(() => {
+      var words = document.getElementsByClassName("animate-word");
+      var currentWordIndex = 0;
+
+      words[currentWordIndex].style.opacity = 1;
+
+      setInterval(() => {
+        var outgoingWord = words[currentWordIndex];
+        var incomingWord =
+          currentWordIndex == words.length - 1
+            ? words[0]
+            : words[currentWordIndex + 1];
+
+        // animate outgoing word out
+        outgoingWord.className = "animate-word out";
+
+        // animate incoming word in
+        incomingWord.className = "animate-word behind";
+        incomingWord.style.opacity = 1;
+        setTimeout(() => {
+          incomingWord.className = "animate-word in"
+        }, 400)
+        console.log(outgoingWord, incomingWord);
+
+        // update word order
+        currentWordIndex =
+          currentWordIndex == words.length - 1 ? 0 : currentWordIndex + 1;
+      }, 4000);
+
+      console.log(words);
+    });
   },
 
   watch: {
@@ -384,6 +443,28 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
 </script>
 
 <style lang="scss">
+.animate-word {
+  display: inline-block;
+  position: absolute;
+  transform: translateZ(50px);
+  transform-origin: 50% 50% 25px;
+  opacity: 0;
+}
+
+.animate-word.out {
+  transform: rotateX(90deg);
+  transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.animate-word.behind {
+  transform: rotateX(-90deg);
+}
+
+.animate-word.in {
+  transform: rotateX(0deg);
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
@@ -532,7 +613,7 @@ img {
 #api,
 #about {
   // background-color: #e3e9f2;
-  background-color:white;
+  background-color: white;
 }
 
 /* ===== MEDIA QUERIES=====*/
