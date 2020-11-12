@@ -1,5 +1,5 @@
 <template>
-  <v-main style="background-color:rgb(81, 81, 118)">
+  <v-main class="color-bg-primary">
 
     <v-dialog v-model="showDetails" @keydown.esc="showDetails=false; details={};" max-width="800px" persistent>
       <v-card>
@@ -54,13 +54,13 @@
             </v-row>
           </v-col>
           <v-col md="4" class="animate__animated animate__backInDown">
-            <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
-            <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}} </b>
+            <h1 class="color-white">Recommendations for <b class="color-highlight2">{{roomName}}</b></h1>
+            <h3 class="color-white">Invite your friends to join this room using the code <b class="color-highlight1">{{roomCode}} </b>
               <v-btn v-clipboard="roomCode" icon color="#E3E9F2">
                 <v-icon small>mdi-content-copy</v-icon>
               </v-btn>
             </h3>
-            <h4 style="color:#E3E9F2" class="animate__animated animate__flash animate__delay-5 animate__repeat-2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
+            <h4 class="color-white animate__animated animate__flash animate__delay-5 animate__repeat-2">Make sure to <font class="color-highlight2">save the code</font> before exiting!</h4>
           </v-col>
           <v-col class="hidden-sm-and-down" md="4">
             <RotatingImage image="Tanjiro" height="100"></RotatingImage>
@@ -74,7 +74,7 @@
             <v-icon large color="red" class="animate__animated animate__swing animate__infinite">
               mdi-youtube
             </v-icon>
-            <font style="font-size:18px"> YouTube</font>
+            <font class="media-header"> YouTube</font>
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
@@ -103,7 +103,7 @@
             <v-icon large color="blue" class="animate__animated animate__flip animate__infinite">
               mdi-book
             </v-icon>
-            <font style="font-size:18px"> Books</font>
+            <font class="media-header"> Books</font>
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
@@ -132,7 +132,7 @@
             <v-icon large color="pink" class="animate__animated animate__jello animate__infinite">
               mdi-movie-open
             </v-icon>
-            <font style="font-size:18px"> Movies</font>
+            <font class="media-header"> Movies</font>
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
@@ -189,7 +189,7 @@
     <v-container fluid fill-height v-else>
       <v-layout justify-center align-center>
         <breeding-rhombus-spinner :animation-duration="500" :size="65" color="#ff1d5e" />
-        <h1 style="color:#E3E9F2">Running magic algorithm...</h1>
+        <h1 class="color-white">Running magic algorithm...</h1>
       </v-layout>
     </v-container>
 
@@ -461,4 +461,30 @@ export default {
   --animate-duration: 3s;
   --animate-delay: 0.9s;
 }
+</style>
+
+<style lang="scss">
+@import "~@/styles/colors";
+
+.bg-primary{
+  background-color: $primary;
+}
+.color{
+  &-bg-primary{
+    background-color: $primary;
+  }
+  &-white{
+    color: $white;
+  }
+  &-highlight1{
+    color: $highlight1;
+  }
+  &-highlight2{
+    color: $highlight2;
+  }
+}
+.media-header{
+  font-size:18px;
+}
+
 </style>
