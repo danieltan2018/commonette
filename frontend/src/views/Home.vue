@@ -10,7 +10,7 @@
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
-              <v-btn dark class="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
+              <v-btn dark color="rgb(81, 81, 118)" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -27,7 +27,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions class="justify-center">
-            <v-btn dark class="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
+            <v-btn dark color="rgb(81, 81, 118)" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
             <v-btn dark color="#7579BD" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">View Room</v-btn>
           </v-card-actions>
         </v-card>
@@ -141,7 +141,7 @@
       <section id="mediums" color="rgb(54, 54, 79)">
         <div class="py-6"></div>
         <v-container class="text-center">
-          <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4 mb-3 white">Entertainment mediums</h2>
+          <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4 mb-3  mb-3" style="color:#ebebeb">Entertainment mediums</h2>
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1 white"></v-divider>
             <v-divider class="white"></v-divider>
@@ -585,7 +585,7 @@ img {
   }
 }
 
-.primary{
+.color-primary{
   color: $primary;
 }
 
