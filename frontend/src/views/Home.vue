@@ -43,16 +43,23 @@
             <img src="../images/landing5.png" alt="" class="move">
           </div>
           <div class="home__data">
-            <div data-aos="zoom-in">
-            <h1 class="my-10 font-weight-bold text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-center">Commonette</h1>
-            </div>
-            <div id="animated-description" data-aos="zoom-in" data-aos-delay="300">
-              <span class="stationary-word mx-2">We will recommend you</span>
-              <span class="animate-word"> YouTube videos</span>
-              <span class="animate-word"> Movies</span>
-              <span class="animate-word"> Books</span>
-              <span class="animate-word"> Music</span>
-            </div>
+
+            <v-row class="ml-4">
+              <div data-aos="zoom-in">
+                <h1 class="mt-10 font-weight-bold text-lg-h1 text-md-h2 text-sm-h3 text-h4 text-center">Commonette</h1>
+              </div>
+            </v-row>
+
+            <v-row class="ml-4">
+              <div id="animated-description" class="my-4" data-aos="zoom-in" data-aos-delay="300">
+                <span class="stationary-word mx-2 text-lg-h6 text-md-subtitle-1">We will recommend you</span>
+                <span class="animate-word text-lg-h6 text-md-subtitle-1"> YouTube videos.</span>
+                <span class="animate-word"> Movies.</span>
+                <span class="animate-word"> Books.</span>
+                <span class="animate-word"> Music.</span>
+              </div>
+            </v-row>
+
             <v-row align="center" class="white--text mx-auto" justify="center">
               <div data-aos="zoom-in" data-aos-delay="600">
                 <v-btn elevation="2" large class="ma-2 home__button" v-on:click="createRoomPopup = true"> Create Room</v-btn>
@@ -141,7 +148,7 @@
       <section id="mediums" color="rgb(54, 54, 79)">
         <div class="py-6"></div>
         <v-container class="text-center">
-          <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4 mb-3 white">Entertainment mediums</h2>
+          <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4 mb-3 white--text">Entertainment mediums</h2>
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1 white"></v-divider>
             <v-divider class="white"></v-divider>
@@ -178,7 +185,7 @@
         <div class="py-10"></div>
       </section>
 
-      <v-theme-provider id="api" light>
+      <v-theme-provider id="bottom" class="white">
         <div>
           <v-container>
             <h2 class="text-lg-h4 text-md-h4 text-sm-h5 text-h6  my-3" style="color:rgb(54, 54, 79)">
@@ -188,7 +195,7 @@
               <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true" color="#50587C" style="color:white">
                 Create Room
               </v-btn>
-              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2 bg-white">
+              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2" color="#50587C" style="color:white">
                 Join Room
               </v-btn>
             </v-row>
@@ -277,29 +284,14 @@ export default {
   },
 
   mounted() {
-    // this.$nextTick(() => {
-    //   var word = document.getElementById("test");
-    //   setInterval(() => {
-    //     var currentAttr = word.getAttribute("class");
-    //     if (currentAttr == "test out") {
-    //       word.className = 'test behind'
-    //       console.log(word.className);
-    //       setTimeout(() => {
-    //         word.className = 'test in'
-    //       }, 400);
-    //     }
-    //     else {
-    //       word.setAttribute("class", "test out")
-    //     }
-    //     console.log("done: ", word)
-    //   }, 1500)
-    // })
-
     this.$nextTick(() => {
       var words = document.getElementsByClassName("animate-word");
       var currentWordIndex = 0;
 
       words[currentWordIndex].style.opacity = 1;
+
+      var defaultClassName = words[0].className;
+      console.log(defaultClassName);
 
       setInterval(() => {
         var outgoingWord = words[currentWordIndex];
@@ -309,22 +301,22 @@ export default {
             : words[currentWordIndex + 1];
 
         // animate outgoing word out
-        outgoingWord.className = "animate-word out";
+        outgoingWord.className = defaultClassName + " out";
 
         // animate incoming word in
-        incomingWord.className = "animate-word behind";
+        incomingWord.className = defaultClassName + " behind";
         incomingWord.style.opacity = 1;
         setTimeout(() => {
-          incomingWord.className = "animate-word in"
-        }, 400)
-        console.log(outgoingWord, incomingWord);
+          incomingWord.className = defaultClassName + " in";
+        }, 400);
+        // console.log(outgoingWord, incomingWord);
 
         // update word order
         currentWordIndex =
           currentWordIndex == words.length - 1 ? 0 : currentWordIndex + 1;
-      }, 4000);
+      }, 2500);
 
-      console.log(words);
+      // console.log(words);
     });
   },
 
@@ -436,6 +428,8 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
 
 <style lang="scss">
 .animate-word {
+  width: 100%;
+  text-align: left;
   display: inline-block;
   position: absolute;
   transform: translateZ(50px);
@@ -585,14 +579,14 @@ img {
   }
 }
 
-.primary{
+.primary {
   color: $primary;
 }
 
-.white{
+.white {
   color: $white;
 }
-.bg-white{
+.bg-white {
   background-color: $white;
 }
 
