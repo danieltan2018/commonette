@@ -10,7 +10,7 @@
               <p v-if="errors" class="red--text">
                 {{ errorMessage }}
               </p>
-              <v-btn dark color="rgb(81, 81, 118)" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
+              <v-btn dark class="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="createRoom">Enter</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -27,7 +27,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions class="justify-center">
-            <v-btn dark color="rgb(81, 81, 118)" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
+            <v-btn dark class="primary" :loading="loading1" @click="loader = 'loading1'" :disabled="!valid" v-on:click="joinRoom(true)">New User</v-btn>
             <v-btn dark color="#7579BD" :loading="loading2" @click="loader = 'loading2'" :disabled="!valid" v-on:click="joinRoom(false)">View Room</v-btn>
           </v-card-actions>
         </v-card>
@@ -141,10 +141,10 @@
       <section id="mediums" color="rgb(54, 54, 79)">
         <div class="py-6"></div>
         <v-container class="text-center">
-          <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4  mb-3" style="color:#ebebeb">Entertainment mediums</h2>
+          <h2 class="text-lg-h2 text-md-h2 text-sm-h3 text-h4 mb-3 white">Entertainment mediums</h2>
           <v-responsive class="mx-auto mb-12" width="56">
-            <v-divider class="mb-1" color="#ebebeb"></v-divider>
-            <v-divider color="#ebebeb"></v-divider>
+            <v-divider class="mb-1 white"></v-divider>
+            <v-divider class="white"></v-divider>
           </v-responsive>
           <v-row>
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" sm="6" md='4' lg='3'>
@@ -180,10 +180,6 @@
 
       <v-theme-provider id="api" light>
         <div>
-          <!-- <v-responsive class="mx-auto mb-12" width="56">
-            <v-divider class="mb-1"></v-divider>
-            <v-divider></v-divider>
-          </v-responsive> -->
           <v-container>
             <h2 class="text-lg-h4 text-md-h4 text-sm-h5 text-h6  my-3" style="color:rgb(54, 54, 79)">
               What are you waiting for?
@@ -192,7 +188,7 @@
               <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true" color="#50587C" style="color:white">
                 Create Room
               </v-btn>
-              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2" color="#50587C" style="color:white">
+              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2 bg-white">
                 Join Room
               </v-btn>
             </v-row>
@@ -463,17 +459,11 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
 
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import "~@/styles/colors";
 
 /*===== VARIABLES CSS =====*/
 :root {
   --header-height: 3rem;
-
-  /*===== Colors =====*/
-  --first-color: rgb(81, 81, 118);
-  --first-color-dark: rgb(72, 72, 103);
-  --first-color-darken: rgb(48, 48, 68);
-  --white-color: #ebebeb;
-  // #FCF8F8
 
   /*===== Font and typography =====*/
   --body-font: "Poppins", sans-serif;
@@ -539,7 +529,7 @@ img {
   top: 0;
   left: 0;
   z-index: var(--z-fixed);
-  background-color: var(--first-color);
+  background-color: $primary;
 }
 
 /*=== Show menu ===*/
@@ -549,7 +539,7 @@ img {
 
 /*===== HOME =====*/
 .home {
-  background-color: var(--first-color);
+  background-color: $primary;
   overflow: hidden;
 
   &__container {
@@ -571,7 +561,7 @@ img {
     }
   }
   &__data {
-    color: var(--white-color);
+    color: $white;
   }
   &__title {
     font-size: var(--big-font-size);
@@ -584,21 +574,31 @@ img {
 
   &__button {
     display: inline-block;
-    background-color: var(--first-color-dark);
+    background-color: $primary-dark;
     color: var(--white-color);
     padding: 1.125rem 2rem;
     border-radius: 0.5rem;
 
     &:hover {
-      background-color: var(--first-color-darken);
+      background-color: $primary-darker;
     }
   }
 }
 
+.primary{
+  color: $primary;
+}
+
+.white{
+  color: $white;
+}
+.bg-white{
+  background-color: $white;
+}
+
 #api,
 #about {
-  // background-color: #e3e9f2;
-  background-color: white;
+  background-color: $white;
 }
 
 /* ===== MEDIA QUERIES=====*/
