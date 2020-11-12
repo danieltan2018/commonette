@@ -71,7 +71,7 @@
       <v-sheet class="mx-auto" elevation="8" v-if="youtubeDisplay" color="rgb(81, 81, 118)" data-aos="fade-right" data-aos-duration="1000">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title class="animate__animated animate__rubberBand">
-            <v-icon large color="red" class="animate__animated animate__swing animate__infinite">
+            <v-icon large color="red">
               mdi-youtube
             </v-icon>
             <font class="media-header"> YouTube</font>
@@ -100,7 +100,7 @@
       <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="fade-left" data-aos-duration="800">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title class="animate__animated animate__rubberBand">
-            <v-icon large color="blue" class="animate__animated animate__flip animate__infinite">
+            <v-icon large color="blue">
               mdi-book
             </v-icon>
             <font class="media-header"> Books</font>
@@ -129,7 +129,7 @@
       <v-sheet class="mx-auto dark-background" elevation="8" v-if="movieDisplay" color="rgb(81, 81, 118)" data-aos="fade-right" data-aos-duration="800">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title class="animate__animated animate__rubberBand">
-            <v-icon large color="pink" class="animate__animated animate__jello animate__infinite">
+            <v-icon large color="pink">
               mdi-movie-open
             </v-icon>
             <font class="media-header"> Movies</font>
@@ -158,7 +158,7 @@
       <v-sheet class="mx-auto dark-background" elevation="8" v-if="spotifyDisplay" color="rgb(81, 81, 118)" data-aos="fade-left" data-aos-duration="800">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title class="animate__animated animate__rubberBand">
-            <v-icon large color="green" class="animate__animated animate__tada animate__infinite">
+            <v-icon large color="green">
               mdi-spotify
             </v-icon>
             <font class="media-header"> Spotify</font>
