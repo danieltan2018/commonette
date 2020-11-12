@@ -3,7 +3,11 @@
 
     <span>
       <br>
-      <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
+      <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}} </b>
+        <v-btn v-clipboard="roomCode" icon color="#E3E9F2">
+          <v-icon small>mdi-content-copy</v-icon>
+        </v-btn>
+      </h3>
       <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
       <br>
       <v-btn large v-on:click="navigateRoute('/recommend')">View Recommendations</v-btn>
@@ -26,23 +30,23 @@
 
     <v-container fluid>
       <v-row v-if="roomUsers.length != 1">
-      <v-col cols="4"></v-col>
-      <v-col cols="4">
-        <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
-          <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
-            <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
-            <v-img v-else src='../images/Nezuko.png' style='height:150px; width:140px'></v-img>
-          </v-badge>
-        </marquee-text>
-      </v-col>
-      <v-col cols="4"></v-col>
-    </v-row>
+        <v-col cols="4"></v-col>
+        <v-col cols="4">
+          <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
+            <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
+              <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
+              <v-img v-else src='../images/Nezuko.png' style='height:150px; width:140px'></v-img>
+            </v-badge>
+          </marquee-text>
+        </v-col>
+        <v-col cols="4"></v-col>
+      </v-row>
       <v-row v-else>
         <v-col cols="4"></v-col>
         <v-col cols="4">
           <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
-          <RotatingImage image="Nezuko" height="150" v-if="user.gender == 'F'" style="width:150px"></RotatingImage>
-          <RotatingImage image="Tanjiro" height="150" v-else style="width:150px"></RotatingImage>
+            <RotatingImage image="Nezuko" height="150" v-if="user.gender == 'F'" style="width:150px"></RotatingImage>
+            <RotatingImage image="Tanjiro" height="150" v-else style="width:150px"></RotatingImage>
           </v-badge>
         </v-col>
         <v-col cols="4"></v-col>

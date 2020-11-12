@@ -55,7 +55,11 @@
           </v-col>
           <v-col md="4" class="animate__animated animate__backInDown">
             <h1 style="color:#E3E9F2">Recommendations for <b style="color:#F6CA83">{{roomName}}</b></h1>
-            <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}}</b></h3>
+            <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}} </b>
+              <v-btn v-clipboard="roomCode" icon color="#E3E9F2">
+                <v-icon small>mdi-content-copy</v-icon>
+              </v-btn>
+            </h3>
             <h4 style="color:#E3E9F2" class="animate__animated animate__flash animate__delay-5 animate__repeat-2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
           </v-col>
           <v-col class="hidden-sm-and-down" md="4">
@@ -64,7 +68,7 @@
         </v-row>
       </v-container>
 
-      <v-sheet class="mx-auto" elevation="8" v-if="youtubeDisplay" color="rgb(81, 81, 118)" data-aos="flip-up" data-aos-duration="1000">
+      <v-sheet class="mx-auto" elevation="8" v-if="youtubeDisplay" color="rgb(81, 81, 118)" data-aos="fade-right" data-aos-duration="1000">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title class="animate__animated animate__rubberBand">
             <v-icon large color="red" class="animate__animated animate__swing animate__infinite">
@@ -93,7 +97,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="zoom-in" data-aos-duration="800">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="bookDisplay" color="rgb(81, 81, 118)" data-aos="fade-left" data-aos-duration="800">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title class="animate__animated animate__rubberBand">
             <v-icon large color="blue" class="animate__animated animate__flip animate__infinite">
@@ -122,7 +126,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="movieDisplay" color="rgb(81, 81, 118)" data-aos="zoom-in" data-aos-duration="800">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="movieDisplay" color="rgb(81, 81, 118)" data-aos="fade-right" data-aos-duration="800">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title class="animate__animated animate__rubberBand">
             <v-icon large color="pink" class="animate__animated animate__jello animate__infinite">
@@ -151,7 +155,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-sheet class="mx-auto dark-background" elevation="8" v-if="spotifyDisplay" color="rgb(81, 81, 118)" data-aos="fade-up" data-aos-duration="800">
+      <v-sheet class="mx-auto dark-background" elevation="8" v-if="spotifyDisplay" color="rgb(81, 81, 118)" data-aos="fade-left" data-aos-duration="800">
         <v-toolbar color="#E3E9F2" dense>
           <v-toolbar-title class="animate__animated animate__rubberBand">
             <v-icon large color="green" class="animate__animated animate__tada animate__infinite">
@@ -453,8 +457,8 @@ export default {
 };
 </script>
 <style>
-    :root {
-        --animate-duration: 3s;
-        --animate-delay: 0.9s;
-    }
+:root {
+  --animate-duration: 3s;
+  --animate-delay: 0.9s;
+}
 </style>
