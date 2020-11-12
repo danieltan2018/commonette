@@ -161,7 +161,7 @@
             <v-icon large color="green" class="animate__animated animate__tada animate__infinite">
               mdi-spotify
             </v-icon>
-            <font style="font-size:18px"> Spotify</font>
+            <font class="media-header"> Spotify</font>
           </v-toolbar-title>
         </v-toolbar>
         <v-slide-group class="pa-4" active-class="success" show-arrows>
@@ -466,23 +466,6 @@ export default {
 <style lang="scss">
 @import "~@/styles/colors";
 
-.bg-primary{
-  background-color: $primary;
-}
-.color{
-  &-bg-primary{
-    background-color: $primary;
-  }
-  &-white{
-    color: $white;
-  }
-  &-highlight1{
-    color: $highlight1;
-  }
-  &-highlight2{
-    color: $highlight2;
-  }
-}
 .media-header{
   font-size:18px;
 }

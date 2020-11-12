@@ -4,3 +4,25 @@ $primary-darker: #303044;
 $white: #ebebeb;
 $highlight1: #5dc0bf;
 $highlight2: #F6CA83;
+
+.color {
+    &-bg-primary {
+        background-color: $primary;
+    }
+
+    &-white {
+        color: $white;
+    }
+
+    &-highlight1 {
+        color: $highlight1;
+    }
+
+    &-highlight2 {
+        color: $highlight2;
+    }
+}
+
+.bg-primary {
+    background-color: $primary;
+}
