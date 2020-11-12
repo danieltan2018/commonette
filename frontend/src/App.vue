@@ -3,7 +3,7 @@
     <v-app>
       <v-app-bar app fixed dense dark clipped-left color="rgb(54, 54, 79)">
         <v-toolbar-title class="headline">
-          <span>{{$vuetify.breakpoint.name}} (h: {{$vuetify.breakpoint.height}}, w: {{$vuetify.breakpoint.width}})</span>
+          <span>Commonette</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
 
