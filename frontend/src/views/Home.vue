@@ -55,7 +55,7 @@
               </div>
             </v-row>
             <div class="py-10">
-            <!-- <div data-aos="zoom-in" data-aos-delay="600"> -->
+              <!-- <div data-aos="zoom-in" data-aos-delay="600"> -->
               <v-theme-provider dark>
                 <v-row align="center" class="white--text mx-auto" justify="center">
                   <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#about')">
@@ -226,24 +226,22 @@ export default {
           subtitle: "Surprise yourself and discover new content every day",
           message:
             "Can't find a good book to read? Sick of your usual playlists? Need a good YouTube rabbit hole to dive into? Use Commonette to discover content that you never knew you would love. ",
-          src:
-            require("../images/story1.jpg"),
+          src: require("../images/story1.jpg"),
         },
         {
           title: "",
           subtitle: "Countless recommendations catered to you and your friends",
           message:
             "Answer a questionnaire to find out what entertainment mediums you and your friends are likely to enjoy! Videos, movies, books or music — we've got you covered no matter the occasion.",
-          src:
-            require("../images/story2.jpg"),
+          src: require("../images/story2.jpg"),
         },
         {
           title: "",
-          subtitle: "The easiest and most convenient way to find common interests",
+          subtitle:
+            "The easiest and most convenient way to find common interests",
           message:
             "You could be watching the perfect movie with your date or jamming to your favourite music with your friends in just a few clicks. It can't get any easier than this!",
-          src:
-            require("../images/story3.jpg"),
+          src: require("../images/story3.jpg"),
         },
       ],
       mediums: [
@@ -256,12 +254,14 @@ export default {
         {
           icon: "mdi-book blue",
           title: "Books",
-          text: "Rank your favourite genres of books, and we will scour the internet to look for books that match those genres.",
+          text:
+            "Rank your favourite genres of books, and we will scour the internet to look for books that match those genres.",
         },
         {
           icon: "mdi-movie-open pink",
           title: "Movies",
-          text: "By selecting your favourite genres and setting your minimum IMDB value, look for movies within those genres with a higher IMDB score.",
+          text:
+            "By selecting your favourite genres and setting your minimum IMDB value, look for movies within those genres with a higher IMDB score.",
         },
         {
           icon: "mdi-spotify green",
@@ -368,15 +368,11 @@ function move(e) {
   });
 }
 
-/*===== GSAP ANIMATION =====*/
-// // NAV
-// gsap.from('.nav__logo, .nav__toggle', {opacity: 0, duration: 1, delay:2, y: 10})
-// gsap.from('.nav__item', {opacity: 0, duration: 1, delay: 2.1, y: 30, stagger: 0.2,})
-
 // HOME
 gsap.config({
   nullTargetWarn: false,
 });
+
 gsap.from(".home__title", { opacity: 0, duration: 1, delay: 1.6, y: 30 });
 gsap.from(".home__description", { opacity: 0, duration: 1, delay: 1.8, y: 30 });
 gsap.from(".home__button", { opacity: 0, duration: 1, delay: 2.1, y: 30 });
@@ -402,9 +398,6 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
   --body-font: "Poppins", sans-serif;
   --big-font-size: 2.5rem;
   --normal-font-size: 0.938rem;
-
-  /*===== z index =====*/
-  --z-fixed: 100;
 }
 
 @media screen and (min-width: 768px) {
@@ -413,14 +406,6 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
     --normal-font-size: 1rem;
   }
 }
-
-// KIV mobile responsive
-// @media screen and (max-width: 900px) {
-//     .fitCard {
-//         width: 500px;
-//         align-content: center;
-//     }
-// }
 
 /*===== BASE =====*/
 *,
@@ -532,29 +517,13 @@ img {
 #api,
 #about {
   // background-color: #e3e9f2;
-  background-color:white;
+  background-color: white;
 }
 
 /* ===== MEDIA QUERIES=====*/
 @media screen and(min-width: 768px) {
   body {
     margin: 0;
-  }
-
-  .nav {
-    height: calc(var(--header-height) + 1.5rem);
-
-    &__toggle,
-    &__close {
-      display: none;
-    }
-    &__list {
-      display: flex;
-    }
-    &__item {
-      margin-left: 3rem;
-      margin-bottom: 0;
-    }
   }
 
   .home {
