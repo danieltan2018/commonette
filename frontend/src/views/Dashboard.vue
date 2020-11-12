@@ -3,12 +3,12 @@
 
     <span>
       <br>
-      <h3 style="color:#E3E9F2">Invite your friends to join this room using the code <b style="color:#5DC0BF">{{roomCode}} </b>
+      <h3 class="color-white">Invite your friends to join this room using the code <b class="color-highlight1">{{roomCode}} </b>
         <v-btn v-clipboard="roomCode" icon color="#E3E9F2">
           <v-icon small>mdi-content-copy</v-icon>
         </v-btn>
       </h3>
-      <h4 style="color:#E3E9F2">Make sure to <font style="color:#F6CA83">save the code</font> before exiting!</h4>
+      <h4 class="color-white">Make sure to <font class="color-highlight2">save the code</font> before exiting!</h4>
       <br>
       <v-btn large v-on:click="navigateRoute('/recommend')">View Recommendations</v-btn>
       <br>
@@ -21,9 +21,9 @@
 
     <v-row>
       <v-col cols="3"></v-col>
-      <v-col cols="6" style="color:white">
+      <v-col cols="6" class="color-white">
         <h1>Here are some statistics!</h1><br>
-        <h2>Total No. Of Users In Room: <b style="color:#F6CA83">{{userCount}}</b></h2>
+        <h2>Total No. Of Users In Room: <b class="color-highlight2">{{userCount}}</b></h2>
       </v-col>
       <v-col cols="3"></v-col>
     </v-row>
@@ -34,8 +34,8 @@
         <v-col cols="4">
           <marquee-text :repeat="1" :duration="marqueeSpeed" :paused="isPaused" @mouseenter="isPaused = !isPaused" @mouseleave="isPaused = false">
             <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
-              <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' style='height:160px; width:125px'></v-img>
-              <v-img v-else src='../images/Nezuko.png' style='height:150px; width:140px'></v-img>
+              <v-img v-if='user.gender == "M"' src='../images/Tanjiro.png' class="chibi-male"></v-img>
+              <v-img v-else src='../images/Nezuko.png' class="chibi-female"></v-img>
             </v-badge>
           </marquee-text>
         </v-col>
@@ -45,8 +45,8 @@
         <v-col cols="4"></v-col>
         <v-col cols="4">
           <v-badge v-for="user in roomUsers" :key="user.name" :content="user.name" color='teal' bottom left overlap>
-            <RotatingImage image="Nezuko" height="150" v-if="user.gender == 'F'" style="width:150px"></RotatingImage>
-            <RotatingImage image="Tanjiro" height="150" v-else style="width:150px"></RotatingImage>
+            <RotatingImage image="Nezuko" height="150" v-if="user.gender == 'F'" class="w-150"></RotatingImage>
+            <RotatingImage image="Tanjiro" height="150" v-else class="w-150"></RotatingImage>
           </v-badge>
         </v-col>
         <v-col cols="4"></v-col>
@@ -57,12 +57,12 @@
       <v-row>
         <v-col cols="12" sm=6 id="chart" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
           <!-- Put piechart for language here -->
-          <h3 style="color:white">Movie Languages Selected<br></h3>
+          <h3 class="color-white">Movie Languages Selected<br></h3>
           <pie-chart :chart-data="languagePieChart.chartData" v-if="langReady">
           </pie-chart>
         </v-col>
         <v-col cols="12" sm=6 data-aos="fade-left" data-aos-delay="100" data-aos-duration="1000">
-          <h3 style="color:white">Gender Population<br></h3>
+          <h3 class="color-white">Gender Population<br></h3>
           <pie-chart :chart-data="genderPieChart.chartData" v-if="genderReady">
           </pie-chart>
         </v-col>
@@ -71,9 +71,9 @@
 
     <v-row>
       <v-col cols="2"></v-col>
-      <v-col cols="8" style="color:white">
+      <v-col cols="8" class="color-white">
         Categories or Genres ranked were assigned weights!
-        <br><br>Total Weights were calculated to display the <b style="color:#5DC0BF">TOP</b> Categories/Genres below!
+        <br><br>Total Weights were calculated to display the <b class="color-highlight1">TOP</b> Categories/Genres below!
       </v-col>
       <v-col cols="2"></v-col>
     </v-row>
@@ -83,11 +83,11 @@
         <v-col cols="12" md=6 data-aos="fade-down-right" data-aos-duration="1000" v-if="youtubeReady">
           <v-card type="chart" dark>
             <v-card-title>
-              <v-icon color="red" style="margin-right:5px" large>mdi-youtube</v-icon>
+              <v-icon color="red" class="media-icons" large>mdi-youtube</v-icon>
               Top Youtube Categories
             </v-card-title>
             <div class="chart-area">
-              <bar-chart style="height: 100%" chart-id="youtubeStats" :chart-data="youtubeBarChart.chartData" :gradient-stops="youtubeBarChart.gradientStops" :extra-options="youtubeBarChart.extraOptions">
+              <bar-chart class="bar-chart" chart-id="youtubeStats" :chart-data="youtubeBarChart.chartData" :gradient-stops="youtubeBarChart.gradientStops" :extra-options="youtubeBarChart.extraOptions">
               </bar-chart>
             </div>
           </v-card>
@@ -95,11 +95,11 @@
         <v-col cols="12" md=6 data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="500" v-if="bookReady">
           <v-card type="chart" dark>
             <v-card-title>
-              <v-icon color="blue" style="margin-right:5px" large>mdi-book</v-icon>
+              <v-icon color="blue" class="media-icons" large>mdi-book</v-icon>
               Top Book Genres
             </v-card-title>
             <div class="chart-area">
-              <bar-chart style="height: 100%" chart-id="bookStats" :chart-data="bookBarChart.chartData" :gradient-stops="bookBarChart.gradientStops" :extra-options="bookBarChart.extraOptions">
+              <bar-chart class="bar-chart" chart-id="bookStats" :chart-data="bookBarChart.chartData" :gradient-stops="bookBarChart.gradientStops" :extra-options="bookBarChart.extraOptions">
               </bar-chart>
             </div>
           </v-card>
@@ -109,11 +109,11 @@
         <v-col cols="12" md=6 data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="600" v-if="movieReady">
           <v-card type="chart" dark>
             <v-card-title>
-              <v-icon color="rgb(255, 0, 128)" style="margin-right:5px" large>mdi-movie-open</v-icon>
+              <v-icon color="rgb(255, 0, 128)" class="media-icons" large>mdi-movie-open</v-icon>
               Top Movie Genres
             </v-card-title>
             <div class="chart-area">
-              <bar-chart style="height: 100%" chart-id="movieStats" :chart-data="movieBarChart.chartData" :gradient-stops="movieBarChart.gradientStops" :extra-options="movieBarChart.extraOptions">
+              <bar-chart class="bar-chart" chart-id="movieStats" :chart-data="movieBarChart.chartData" :gradient-stops="movieBarChart.gradientStops" :extra-options="movieBarChart.extraOptions">
               </bar-chart>
             </div>
           </v-card>
@@ -121,11 +121,11 @@
         <v-col cols="12" md=6 data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1000" v-if="spotifyReady">
           <v-card type="chart" dark>
             <v-card-title>
-              <v-icon color="green" style="margin-right:5px" large>mdi-spotify</v-icon>
+              <v-icon color="green" class="media-icons" large>mdi-spotify</v-icon>
               Top Spotify Genres
             </v-card-title>
             <div class="chart-area">
-              <bar-chart style="height: 100%" chart-id="spotifyStats" :chart-data="spotifyBarChart.chartData" :gradient-stops="spotifyBarChart.gradientStops" :extra-options="spotifyBarChart.extraOptions">
+              <bar-chart class="bar-chart" chart-id="spotifyStats" :chart-data="spotifyBarChart.chartData" :gradient-stops="spotifyBarChart.gradientStops" :extra-options="spotifyBarChart.extraOptions">
               </bar-chart>
             </div>
           </v-card>
@@ -144,7 +144,6 @@ import PieChart from "../components/Charts/PieChart";
 import RotatingImage from "../components/RotatingImage/RotatingImage.vue";
 import config from "../config";
 import axios from "axios";
-
 
 export default {
   components: {
@@ -414,8 +413,32 @@ export default {
 };
 </script>
 <style lang="scss">
+@import "~@/styles/colors";
+
 .home {
-  background-color: rgb(81, 81, 118);
+  background-color: $primary;
   justify-content: center;
+}
+
+.chibi {
+  &-male {
+    height: 160px;
+    width: 125px;
+  }
+  &-female {
+    height: 150px;
+    width: 140px;
+  }
+}
+.w {
+  &-150 {
+    width: 150;
+  }
+}
+.media-icons {
+  margin-right: 5px;
+}
+.bar-chart {
+  height: 100%;
 }
 </style>
