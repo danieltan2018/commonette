@@ -88,7 +88,7 @@
           <div v-if="i % 2 == 0" data-aos="fade-right" data-aos-duration="2500">
             <v-row v-if="$vuetify.breakpoint.smAndDown">
               <v-col cols=12>
-                <v-img height="300px" class="story-sm-and-down" :src="story.src"></v-img>
+                <v-img contain height="300px" class="story-sm-and-down" :src="story.src"></v-img>
               </v-col>
               <v-col cols=12>
                 <div class="px-5">
@@ -116,7 +116,7 @@
           <div v-else data-aos="fade-left" data-aos-duration="2500">
             <v-row v-if="$vuetify.breakpoint.smAndDown">
               <v-col cols=12>
-                <v-img height="300px" class="story-sm-and-down" :src="story.src"></v-img>
+                <v-img contain height="300px" class="story-sm-and-down" :src="story.src"></v-img>
               </v-col>
               <v-col cols=12>
                 <div class="px-5">
@@ -136,7 +136,7 @@
                 </div>
               </v-col>
               <v-col cols="4">
-                <v-img height="400px" class="story" :src="story.src"></v-img>
+                <v-img contain height="400px" class="story" :src="story.src"></v-img>
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>
