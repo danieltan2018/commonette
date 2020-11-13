@@ -36,7 +36,7 @@
               </v-autocomplete>
             </v-flex>
           </v-layout>
-          <div id="ytDisplay" style="display:none">
+          <div id="ytDisplay" class="rank-display-none">
             <div>Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
             <v-layout row wrap justify-center>
@@ -73,7 +73,7 @@
               </v-autocomplete>
             </v-flex>
           </v-layout>
-          <div id="bkDisplay" style="display:none">
+          <div id="bkDisplay" class="rank-display-none">
             <div>Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
             <v-layout row wrap justify-center>
@@ -110,7 +110,7 @@
               </v-autocomplete>
             </v-flex>
           </v-layout>
-          <div id="mvDisplay" style="display:none">
+          <div id="mvDisplay" class="rank-display-none">
             <div>Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
             <v-layout row wrap justify-center mb-4>
@@ -172,7 +172,7 @@
               </div>
             </v-flex>
           </v-layout>
-          <div id="sADisplay" style="display:none">
+          <div id="sADisplay" class="rank-display-none">
             <div>Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 3 - Least Favourite)</div>
             <v-layout row wrap justify-center>
@@ -209,7 +209,7 @@
               </v-autocomplete>
             </v-flex>
           </v-layout>
-          <div id="sGDisplay" style="display:none">
+          <div id="sGDisplay" class="rank-display-none">
             <div class="mb-4">Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
             <v-layout row wrap justify-center mb-4>
@@ -265,7 +265,7 @@ Vue.use(VueScrollProgress);
 export default {
   components: {
     draggable,
-    BreedingRhombusSpinner
+    BreedingRhombusSpinner,
   },
   mounted: function () {
     window.scrollTo(0, 0);
@@ -615,82 +615,99 @@ export default {
     firstError() {
       if (this.nameNone == true) {
         return 0;
-      }
-      else if (this.ytNone == true || this.ytExceed == true) {
+      } else if (this.ytNone == true || this.ytExceed == true) {
         return "#Youtube";
-      }
-      else if (this.bkNone == true || this.bkExceed == true) {
+      } else if (this.bkNone == true || this.bkExceed == true) {
         return "#Book";
-      }
-      else if (this.mvNone == true || this.mvExceed == true || this.mvLangNone == true) {
+      } else if (
+        this.mvNone == true ||
+        this.mvExceed == true ||
+        this.mvLangNone == true
+      ) {
         return "#Movie";
-      }
-      else if (this.sANone == true || this.sAExceed == true || this.sGNone == true || this.sGExceed == true) {
+      } else if (
+        this.sANone == true ||
+        this.sAExceed == true ||
+        this.sGNone == true ||
+        this.sGExceed == true
+      ) {
         return "#Spotify";
-      }
-      else {
+      } else {
         return "";
       }
-    }
+    },
   },
   watch: {
     movieGenre: {
       immediate: true,
       handler(value) {
-        if (!this.movies.includes(value) && value != "" && typeof (value) != "undefined") {
-          document.getElementById("mvDisplay").style.display = "inline";
+        if (
+          !this.movies.includes(value) &&
+          value != "" &&
+          typeof value != "undefined"
+        ) {
+          this.changeRankElementToInline("mvDisplay");
           this.movies.push(value);
           this.$nextTick(() => {
             this.movieGenre = undefined;
-          })
-
+          });
         }
       },
     },
     youtubeCategory: {
       immediate: true,
       handler(value) {
-        if (!this.youtubes.includes(value) && value != "" && typeof (value) != "undefined") {
-          document.getElementById("ytDisplay").style.display = "inline";
+        if (
+          !this.youtubes.includes(value) &&
+          value != "" &&
+          typeof value != "undefined"
+        ) {
+          this.changeRankElementToInline("ytDisplay");
           this.youtubes.push(value);
           this.$nextTick(() => {
             this.youtubeCategory = undefined;
-          })
+          });
         }
       },
     },
     bookGenre: {
       immediate: true,
       handler(value) {
-        if (!this.books.includes(value) && value != "" && typeof (value) != "undefined") {
-          document.getElementById("bkDisplay").style.display = "inline";
+        if (
+          !this.books.includes(value) &&
+          value != "" &&
+          typeof value != "undefined"
+        ) {
+          this.changeRankElementToInline("bkDisplay");
+
           this.books.push(value);
           this.$nextTick(() => {
             this.bookGenre = undefined;
-          })
+          });
         }
       },
     },
     spotifyGenre: {
       immediate: true,
       handler(value) {
-        if (!this.sGenres.includes(value) && value != "" && typeof (value) != "undefined") {
-          document.getElementById("sGDisplay").style.display = "inline";
+        if (
+          !this.sGenres.includes(value) &&
+          value != "" &&
+          typeof value != "undefined"
+        ) {
+          this.changeRankElementToInline("sGDisplay");
           this.sGenres.push(value);
           this.$nextTick(() => {
             this.spotifyGenre = undefined;
-          })
+          });
         }
       },
     },
     movies: {
       immediate: true,
       handler() {
-        if (
-          this.movies == [] &&
-          document.getElementById("mvDisplay").style.display == "inline"
-        ) {
-          document.getElementById("mvDisplay").style.display = "none";
+        if (this.movies == []) {
+          this.changeRankElementToNone("sADisplay");
         }
       },
     },
@@ -810,13 +827,22 @@ export default {
     },
     addSpotifyArtist(value) {
       if (!this.sArtists.includes(value) && value != "" && value != undefined) {
-        document.getElementById("sADisplay").style.display = "inline";
+        this.changeRankElementToInline("sADisplay");
         this.sArtists.push(value);
         this.$nextTick(() => {
           this.artist = undefined;
-        })
-
+        });
       }
+    },
+    changeRankElementToNone(id) {
+      let display = document.getElementById(id);
+      display.classList.remove("rank-display-inline");
+      display.classList.add("rank-display-none");
+    },
+    changeRankElementToInline(id) {
+      let display = document.getElementById(id);
+      display.classList.remove("rank-display-none");
+      display.classList.add("rank-display-inline");
     },
     sendQuestionnaireData() {
       // make spotify genres all lowercase
@@ -873,42 +899,36 @@ export default {
         this.youtubes = this.youtubes.filter(function (e) {
           return e !== tag;
         });
-        console.log(this.youtubes);
-        console.log(this.youtubes.length);
         if (this.youtubes.length == 0) {
-          document.getElementById("ytDisplay").style.display = "none";
+          this.changeRankElementToNone("ytDisplay");
         }
-      }
-      else if (list == "books") {
+      } else if (list == "books") {
         this.books = this.books.filter(function (e) {
           return e !== tag;
         });
         if (this.books.length == 0) {
-          document.getElementById("bkDisplay").style.display = "none";
+          this.changeRankElementToNone("bkDisplay");
         }
-      }
-      else if (list == "movies") {
+      } else if (list == "movies") {
         this.movies = this.movies.filter(function (e) {
           return e !== tag;
         });
         if (this.movies.length == 0) {
-          document.getElementById("mvDisplay").style.display = "none";
+          this.changeRankElementToNone("mvDisplay");
         }
-      }
-      else if (list == "sArtists") {
+      } else if (list == "sArtists") {
         this.sArtists = this.sArtists.filter(function (e) {
           return e !== tag;
         });
         if (this.sArtists.length == 0) {
-          document.getElementById("sADisplay").style.display = "none";
+          this.changeRankElementToNone("sADisplay");
         }
-      }
-      else if (list == "sGenres") {
+      } else if (list == "sGenres") {
         this.sGenres = this.sGenres.filter(function (e) {
           return e !== tag;
         });
         if (this.sGenres.length == 0) {
-          document.getElementById("sGDisplay").style.display = "none";
+          this.changeRankElementToNone("sGDisplay");
         }
       }
     },
@@ -970,7 +990,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .suggest-button {
   margin-right: 10px;
   margin-bottom: 10px;
@@ -994,5 +1014,13 @@ export default {
 .category-container {
   margin-top: 24px;
   margin-bottom: 24px;
+}
+.rank-display {
+  &-none {
+    display: none;
+  }
+  &-inline {
+    display: inline;
+  }
 }
 </style>
