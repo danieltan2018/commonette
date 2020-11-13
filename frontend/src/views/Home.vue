@@ -291,7 +291,6 @@ export default {
       words[currentWordIndex].style.opacity = 1;
 
       var defaultClassName = words[0].className;
-      console.log(defaultClassName);
 
       setInterval(() => {
         var outgoingWord = words[currentWordIndex];
@@ -309,14 +308,11 @@ export default {
         setTimeout(() => {
           incomingWord.className = defaultClassName + " in";
         }, 400);
-        // console.log(outgoingWord, incomingWord);
 
         // update word order
         currentWordIndex =
           currentWordIndex == words.length - 1 ? 0 : currentWordIndex + 1;
       }, 2500);
-
-      // console.log(words);
     });
   },
 

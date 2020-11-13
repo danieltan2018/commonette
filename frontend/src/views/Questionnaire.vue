@@ -715,11 +715,9 @@ export default {
   methods: {
     submit() {
       if (this.validate()) {
-        console.log("All Clear");
         this.sendQuestionnaireData();
       } else {
         this.showAlerts();
-        console.log("Error la");
         this.$nextTick(() => {
           this.$vuetify.goTo(this.firstError);
         });
@@ -743,7 +741,6 @@ export default {
           }
         });
       }
-      console.log(this.youtubes);
     },
     dragStartBook() {
       if (this.books[this.bookSelection]) {
@@ -796,7 +793,6 @@ export default {
       }
     },
     searchSpotify(query, type) {
-      console.log("query", query);
       axios({
         url: "/spotify-token",
         method: "GET",
@@ -819,7 +815,6 @@ export default {
               names.push(items[i]["name"]);
               this.artistDic[items[i]["name"]] = items[i]["id"];
             }
-            console.log("artistDic", this.artistDic);
             this.artistSuggestions = names;
           }
         });

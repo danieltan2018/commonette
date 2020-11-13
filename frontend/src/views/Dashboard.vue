@@ -345,17 +345,13 @@ export default {
             localStorage.setItem("roomUsers", JSON.stringify(this.roomUsers));
             this.userCount = this.roomUsers.length;
             // Use roomUsers to get the num of female & males. (Continue...)
-            console.log("this.roomUsers", this.roomUsers);
             for (let user of this.roomUsers) {
-              console.log("room user:", user);
               if (user.gender == "M") {
                 this.maleCount += 1;
-                console.log("maleCount:", this.maleCount);
               }
 
               if (user.gender == "F") {
                 this.femaleCount += 1;
-                console.log("femaleCount:", this.femaleCount);
               }
             }
             this.genderPieChart.chartData.datasets[0].data.push(
@@ -363,10 +359,6 @@ export default {
             );
             this.genderPieChart.chartData.datasets[0].data.push(this.maleCount);
             this.genderReady = true;
-            console.log(
-              "genderData:",
-              this.genderPieChart.chartData.datasets[0].data
-            );
           } else {
             this.$bus.$emit("updated", "joined");
             this.navigateRoute("/questionnaire");
@@ -397,8 +389,6 @@ export default {
         for (const [key, value] of Object.entries(response.data.movieLang)) {
           this.languagePieChart.chartData.labels.push(key);
           this.languagePieChart.chartData.datasets[0].data.push(value);
-          console.log("datasets", this.languagePieChart.chartData.datasets);
-          console.log("key:", key, "value:", value);
         }
         this.langReady = true;
 
