@@ -243,7 +243,7 @@
   </v-container>
 
   <!-- Handle slowest API - Books -->
-  <v-main v-else class="bg-primary">
+  <v-main v-else class="color-bg-primary">
     <v-container fluid fill-height>
       <v-layout justify-center align-center>
         <breeding-rhombus-spinner :animation-duration="500" :size="65" color="#ff1d5e" />

@@ -3,7 +3,7 @@
     <v-main>
       <v-dialog v-model="createRoomPopup" max-width="350">
         <v-card>
-          <v-card-title class="headline justify-center" style="color:#494C97">Create New Room</v-card-title>
+          <v-card-title class="headline justify-center card-title">Create New Room</v-card-title>
           <v-card-text>
             <v-form @submit.prevent v-model="valid" ref="form">
               <v-text-field label="Enter a room name" v-model="roomName" :rules="inputRequiredRule" autofocus v-on:keyup.enter="createRoom" @keyup.enter="loader = 'loading1'" color="#494C97"></v-text-field>
@@ -17,7 +17,7 @@
       </v-dialog>
       <v-dialog v-model="joinRoomPopup" max-width="350">
         <v-card>
-          <v-card-title class="headline justify-center" style="color:#494C97">Join Existing Room</v-card-title>
+          <v-card-title class="headline justify-center card-title">Join Existing Room</v-card-title>
           <v-card-text>
             <v-form @submit.prevent v-model="valid" ref="form">
               <v-text-field label="Enter the room code" v-model="roomCode" :rules="inputRequiredRule" autofocus v-on:keyup.enter="joinRoom" @keyup.enter="loader = 'loading1'" color="#494C97"></v-text-field>
@@ -88,7 +88,7 @@
           <div v-if="i % 2 == 0" data-aos="fade-right" data-aos-duration="2500">
             <v-row v-if="$vuetify.breakpoint.smAndDown">
               <v-col cols=12>
-                <v-img height="300px" style="height:300px;width:600px;" :src="story.src"></v-img>
+                <v-img height="300px" class="story-sm-and-down" :src="story.src"></v-img>
               </v-col>
               <v-col cols=12>
                 <div class="px-5">
@@ -101,7 +101,7 @@
             <v-row v-else>
               <v-col cols="1"></v-col>
               <v-col cols="4">
-                <v-img height="350px" style="height:400px;width:700px;" :src="story.src"></v-img>
+                <v-img height="350px" class="story" :src="story.src"></v-img>
               </v-col>
               <v-col cols="6">
                 <div class="pt-5 pr-5">
@@ -116,7 +116,7 @@
           <div v-else data-aos="fade-left" data-aos-duration="2500">
             <v-row v-if="$vuetify.breakpoint.smAndDown">
               <v-col cols=12>
-                <v-img height="300px" style="height:300px;width:600px;" :src="story.src"></v-img>
+                <v-img height="300px" class="story-sm-and-down" :src="story.src"></v-img>
               </v-col>
               <v-col cols=12>
                 <div class="px-5">
@@ -136,7 +136,7 @@
                 </div>
               </v-col>
               <v-col cols="4">
-                <v-img height="400px" style="height:400px;width:700px;" :src="story.src"></v-img>
+                <v-img height="400px" class="story" :src="story.src"></v-img>
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>
@@ -145,10 +145,10 @@
         <div class="pb-10"></div>
       </section>
 
-      <section id="mediums" color="rgb(54, 54, 79)">
+      <section id="mediums" class="color-primary-dark">
         <div class="py-6"></div>
         <v-container class="text-center">
-          <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto mb-3 text-center" style="color:#ebebeb">Entertainment mediums</h2>
+          <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto mb-3 text-center color-white">Entertainment mediums</h2>
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1 white"></v-divider>
             <v-divider class="white"></v-divider>
@@ -166,7 +166,7 @@
                           </v-avatar>
                         </div>
                       </v-theme-provider>
-                      <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title" style="color:rgb(48, 48, 68);"></v-card-title>
+                      <v-card-title class="justify-center font-weight-black text-uppercase color-primary-darker" v-text="title"></v-card-title>
                       <p class="text--disabled card-text-hover" @mouseover="hoverText(true, 'Flipping!', i)" @mouseout="hoverText(false, '', i)">Touch me!</p>
                     </v-card>
                   </template>
@@ -174,7 +174,7 @@
                     <v-card width="280px" height="320px" class="mx-auto py-12 px-4 rounded-xl" color="#E3E9F2" flat>
                       <p v-if="title == 'Music'" class="subtitle-1 px-4 my-0 font-weight-bold text-left">How are Songs recommended?</p>
                       <p v-else class="subtitle-1 px-4 my-0 font-weight-bold text-left">How are {{title}} recommended?</p>
-                      <v-card-text class="subtitle-1 text-left" style="color:rgb(72, 72, 103)" v-text="text"> </v-card-text>
+                      <v-card-text class="subtitle-1 text-left color-primary-dark" v-text="text"> </v-card-text>
                     </v-card>
                   </template>
                 </vue-flip>
@@ -185,17 +185,17 @@
         <div class="py-10"></div>
       </section>
 
-      <v-theme-provider id="bottom" class="white">
+      <v-theme-provider id="bottom" class="color-bg-white">
         <div>
           <v-container>
-            <h2 class="text-lg-h4 text-md-h4 text-sm-h5 text-h6  my-3" style="color:rgb(54, 54, 79)">
+            <h2 class="text-lg-h4 text-md-h4 text-sm-h5 text-h6  my-3 color-primary-darker">
               What are you waiting for?
             </h2>
             <v-row class="mx-auto mb-3 justify-center">
-              <v-btn elevation="2" large class="ma-2" v-on:click="createRoomPopup = true" color="#50587C" style="color:white">
+              <v-btn elevation="2" large class="ma-2 color-white" v-on:click="createRoomPopup = true" color="#50587C">
                 Create Room
               </v-btn>
-              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2" color="#50587C" style="color:white">
+              <v-btn elevation="2" large v-on:click="joinRoomPopup = true" class="ma-2 color-white" color="#50587C">
                 Join Room
               </v-btn>
             </v-row>
@@ -579,7 +579,7 @@ img {
   }
 }
 
-.color-primary{
+.color-primary {
   color: $primary;
 }
 
@@ -593,6 +593,18 @@ img {
 #api,
 #about {
   background-color: $white;
+}
+.card-title {
+  color: $primary-light !important;
+}
+.story {
+  height: 400px;
+  width: 700px;
+
+  &-sm-and-down {
+    height: 300px;
+    width: 600px;
+  }
 }
 
 /* ===== MEDIA QUERIES=====*/
