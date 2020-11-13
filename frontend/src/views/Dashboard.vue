@@ -432,7 +432,7 @@ export default {
 }
 .w {
   &-150 {
-    width: 150;
+    width: 150px;
   }
 }
 .media-icons {
