@@ -150,8 +150,8 @@
         <v-container class="text-center">
           <h2 class="text-lg-h3 text-md-h4 text-sm-h5 text-h6 text-left mx-auto mb-3 text-center color-white">Entertainment mediums</h2>
           <v-responsive class="mx-auto mb-12" width="56">
-            <v-divider class="mb-1 white"></v-divider>
-            <v-divider class="white"></v-divider>
+            <v-divider class="mb-1 color-white"></v-divider>
+            <v-divider class="color-white"></v-divider>
           </v-responsive>
           <v-row>
             <v-col v-for="({ icon, title, text }, i) in mediums" :key="i" cols="12" sm="6" md='4' lg='3'>
@@ -423,6 +423,27 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
 </script>
 
 <style lang="scss">
+@import "~@/styles/colors";
+
+#api,
+#about {
+  background-color: $white;
+}
+
+.card-title {
+  color: $primary-light !important;
+}
+
+.story {
+  height: 400px;
+  width: 700px;
+
+  &-sm-and-down {
+    height: 300px;
+    width: 600px;
+  }
+}
+
 .animate-word {
   width: 100%;
   text-align: left;
@@ -449,7 +470,6 @@ gsap.from(".home__img", { opacity: 0, duration: 1, delay: 1.3, y: 30 });
 
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-@import "~@/styles/colors";
 
 /*===== VARIABLES CSS =====*/
 :root {
@@ -522,11 +542,6 @@ img {
   background-color: $primary;
 }
 
-/*=== Show menu ===*/
-.show {
-  right: 0;
-}
-
 /*===== HOME =====*/
 .home {
   background-color: $primary;
@@ -572,34 +587,6 @@ img {
     &:hover {
       background-color: $primary-darker;
     }
-  }
-}
-
-.color-primary {
-  color: $primary;
-}
-
-.white {
-  color: $white;
-}
-.bg-white {
-  background-color: $white;
-}
-
-#api,
-#about {
-  background-color: $white;
-}
-.card-title {
-  color: $primary-light !important;
-}
-.story {
-  height: 400px;
-  width: 700px;
-
-  &-sm-and-down {
-    height: 300px;
-    width: 600px;
   }
 }
 
