@@ -236,14 +236,14 @@ export default {
           subtitle: "Surprise yourself and discover new content every day",
           message:
             "Can't find a good book to read? Sick of your usual playlists? Need a good YouTube rabbit hole to dive into? Use Commonette to discover content that you never knew you would love. ",
-          src: require("../images/story1.jpg"),
+          src: require("../images/story1.png"),
         },
         {
           title: "",
           subtitle: "Countless recommendations catered to you and your friends",
           message:
             "Answer a questionnaire to find out what entertainment mediums you and your friends are likely to enjoy! Videos, movies, books or music — we've got you covered no matter the occasion.",
-          src: require("../images/story2.jpg"),
+          src: require("../images/story2.png"),
         },
         {
           title: "",
@@ -251,7 +251,7 @@ export default {
             "The easiest and most convenient way to find common interests",
           message:
             "You could be watching the perfect movie with your date or jamming to your favourite music with your friends in just a few clicks. It can't get any easier than this!",
-          src: require("../images/story3.jpg"),
+          src: require("../images/story3.png"),
         },
       ],
       mediums: [
