@@ -40,13 +40,13 @@
             <div>Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
             <v-layout row wrap justify-center>
-              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
-                <v-card-text style="align-items:center">
+              <v-card max-width="700px" width="100%" class="mx-auto mb-5 rank-card">
+                <v-card-text class="rank-card-text">
                   <v-chip-group v-model="youtubeSelection" column active-class="primary--text">
                     <draggable v-model="youtubes" @start="dragStartYoutube" @end="dragEndYoutube">
                       <v-chip v-for="(tag, i) in youtubes" :key="i" draggable close @click:close="remove(tag, 'youtubes')" outlined color="rgb(90, 90, 160)">
                         <v-avatar left color="rgb(90, 90, 160)">
-                          <span style="color:white;">{{i+1}}</span>
+                          <span class="color-white">{{i+1}}</span>
                         </v-avatar>
                         {{tag}}
                       </v-chip>
@@ -77,13 +77,13 @@
             <div>Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
             <v-layout row wrap justify-center>
-              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+              <v-card max-width="700px" width="100%" class="mx-auto mb-5 rank-card">
                 <v-card-text>
                   <v-chip-group v-model="bookSelection" column active-class="primary--text">
                     <draggable v-model="books" @start="dragStartBook" @end="dragEndBook">
                       <v-chip v-for="(tag, i) in books" :key="i" draggable close @click:close="remove(tag, 'books')" outlined color="rgb(90, 90, 160)">
                         <v-avatar left color="rgb(90, 90, 160)">
-                          <span style="color:white;">{{i+1}}</span>
+                          <span class="color-white">{{i+1}}</span>
                         </v-avatar>
                         {{tag}}
                       </v-chip>
@@ -114,13 +114,13 @@
             <div>Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
             <v-layout row wrap justify-center mb-4>
-              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+              <v-card max-width="700px" width="100%" class="mx-auto mb-1 rank-card">
                 <v-card-text>
                   <v-chip-group v-model="movieSelection" column active-class="primary--text">
                     <draggable v-model="movies" @start="dragStartMovie" @end="dragEndMovie">
                       <v-chip v-for="(tag, i) in movies" :key="i" draggable close @click:close="remove(tag, 'movies')" outlined color="rgb(90, 90, 160)">
                         <v-avatar left color="rgb(90, 90, 160)">
-                          <span style="color:white;">{{i+1}}</span>
+                          <span class="color-white">{{i+1}}</span>
                         </v-avatar>
                         {{tag}}
                       </v-chip>
@@ -176,13 +176,13 @@
             <div>Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 3 - Least Favourite)</div>
             <v-layout row wrap justify-center>
-              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-5">
+              <v-card max-width="700px" width="100%" class="mx-auto mb-5 rank-card">
                 <v-card-text>
                   <v-chip-group v-model="sArtistSelection" column active-class="primary--text">
                     <draggable v-model="sArtists" @start="dragStartSArtist" @end="dragEndSArtist">
                       <v-chip v-for="(tag, i) in sArtists" :key="i" draggable close @click:close="remove(tag, 'sArtists')" outlined color="rgb(90, 90, 160)">
                         <v-avatar left color="rgb(90, 90, 160)">
-                          <span style="color:white;">{{i+1}}</span>
+                          <span class="color-white">{{i+1}}</span>
                         </v-avatar>
                         {{tag}}
                       </v-chip>
@@ -213,13 +213,13 @@
             <div class="mb-4">Drag to Rank</div>
             <div class="mb-4">(1 - Most Favourite, 5 - Least Favourite)</div>
             <v-layout row wrap justify-center mb-4>
-              <v-card style="padding-left: 10px" max-width="700px" width="100%" class="mx-auto mb-1">
+              <v-card max-width="700px" width="100%" class="mx-auto mb-1 rank-card">
                 <v-card-text>
                   <v-chip-group v-model="sGenreSelection" column active-class="primary--text">
                     <draggable v-model="sGenres" @start="dragStartSGenre" @end="dragEndSGenre">
                       <v-chip v-for="(tag, i) in sGenres" :key="i" draggable close @click:close="remove(tag, 'sGenres')" outlined color="rgb(90, 90, 160)">
                         <v-avatar left color="rgb(90, 90, 160)">
-                          <span style="color:white;">{{i+1}}</span>
+                          <span class="color-white">{{i+1}}</span>
                         </v-avatar>
                         {{tag}}
                       </v-chip>
@@ -237,17 +237,17 @@
           </v-layout>
 
         </v-container>
-        <v-btn text class="success mx-0 mb-6" @click="submit()">Let's Go</v-btn>
+        <v-btn color="#5dc0bf" class="mx-0 mb-6 submit-btn" @click="submit()">Let's Go</v-btn>
       </v-form>
     </v-container>
   </v-container>
 
   <!-- Handle slowest API - Books -->
-  <v-main v-else style="background-color:rgb(81, 81, 118)">
+  <v-main v-else class="bg-primary">
     <v-container fluid fill-height>
       <v-layout justify-center align-center>
         <breeding-rhombus-spinner :animation-duration="500" :size="65" color="#ff1d5e" />
-        <h1 style="color:#E3E9F2">Running magic calculations...</h1>
+        <h1 class="color-white">Running magic calculations...</h1>
       </v-layout>
     </v-container>
   </v-main>
@@ -991,6 +991,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~@/styles/colors";
+
 .suggest-button {
   margin-right: 10px;
   margin-bottom: 10px;
@@ -1007,7 +1009,7 @@ export default {
 }
 #progress-el {
   /* progress bar */
-  background-color: #5dc0bf !important;
+  background-color: $highlight1 !important;
   height: 6px !important;
 }
 
@@ -1022,5 +1024,15 @@ export default {
   &-inline {
     display: inline;
   }
+}
+.rank-card {
+  padding-left: 10px;
+}
+.rank-card-text {
+  align-items: center;
+}
+
+.submit-btn {
+  color: $white !important;
 }
 </style>
