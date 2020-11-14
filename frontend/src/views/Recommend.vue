@@ -56,9 +56,17 @@
           <v-col md="4" class="animate__animated animate__backInDown">
             <h1 class="color-white">Recommendations for <b class="color-highlight2">{{roomName}}</b></h1>
             <h3 class="color-white">Invite your friends to join this room using the code <b class="color-highlight1">{{roomCode}} </b>
-              <v-btn v-clipboard="roomCode" icon color="#E3E9F2">
+              <v-btn v-clipboard="roomCode" icon color="#E3E9F2" @click="snackbar = true">
                 <v-icon small>mdi-content-copy</v-icon>
               </v-btn>
+              <v-snackbar v-model="snackbar" :timeout="2000">
+                Copied to clipboard!
+                <template v-slot:action="{ attrs }">
+                  <v-btn color="#E3E9F2" text v-bind="attrs" @click="snackbar = false">
+                    Close
+                  </v-btn>
+                </template>
+              </v-snackbar>
             </h3>
             <h4 class="color-white animate__animated animate__flash animate__delay-5 animate__repeat-2">Make sure to <font class="color-highlight2">save the code</font> before exiting!</h4>
           </v-col>
@@ -208,6 +216,7 @@ export default {
     BreedingRhombusSpinner,
   },
   data: () => ({
+    snackbar: false,
     roomName: localStorage.getItem("roomName"),
     roomCode: localStorage.getItem("roomCode"),
     recommend: null,
@@ -466,8 +475,7 @@ export default {
 <style lang="scss">
 @import "~@/styles/colors";
 
-.media-header{
-  font-size:18px;
+.media-header {
+  font-size: 18px;
 }
-
 </style>

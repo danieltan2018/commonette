@@ -4,9 +4,17 @@
     <span>
       <br>
       <h3 class="color-white">Invite your friends to join this room using the code <b class="color-highlight1">{{roomCode}} </b>
-        <v-btn v-clipboard="roomCode" icon color="#E3E9F2">
+        <v-btn v-clipboard="roomCode" icon color="#E3E9F2" @click="snackbar = true">
           <v-icon small>mdi-content-copy</v-icon>
         </v-btn>
+        <v-snackbar v-model="snackbar" :timeout="2000">
+          Copied to clipboard!
+          <template v-slot:action="{ attrs }">
+            <v-btn color="#E3E9F2" text v-bind="attrs" @click="snackbar = false">
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
       </h3>
       <h4 class="color-white">Make sure to <font class="color-highlight2">save the code</font> before exiting!</h4>
       <br>
@@ -159,6 +167,7 @@ export default {
     },
   },
   data: () => ({
+    snackbar: false,
     roomUsers: [],
     userCount: 0,
     maleCount: 0,
