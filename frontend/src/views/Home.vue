@@ -53,10 +53,10 @@
             <v-row class="ml-4">
               <div id="animated-description" class="my-4" data-aos="zoom-in" data-aos-delay="300">
                 <span class="stationary-word mx-2 text-lg-h6 text-md-subtitle-1">We will recommend you</span>
-                <span class="animate-word text-lg-h6 text-md-subtitle-1"> YouTube videos.</span>
-                <span class="animate-word"> Movies.</span>
-                <span class="animate-word"> Books.</span>
-                <span class="animate-word"> Music.</span>
+                <span class="animate-word text-lg-h6 text-md-subtitle-1" style="color: #f44336;"> YouTube videos.</span>
+                <span class="animate-word" style="color: #2196f3;"> Movies.</span>
+                <span class="animate-word" style="color: #e91e63;"> Books.</span>
+                <span class="animate-word" style="color: #4caf50;"> Music.</span>
               </div>
             </v-row>
 
