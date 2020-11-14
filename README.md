@@ -82,6 +82,8 @@ TO ADD: Watch our youtube [video](youtube.com).
 - [Responsive Landing Page](https://github.com/bedimcode/responsive-landing-page-coffee3d)
 - [Cartoon Vectors](https://www.freepik.com/vectors/cartoon)
 - [People Vectors](https://www.freepik.com/vectors/people)
+- [Nezuko Image](https://www.zerochan.net/2579685)
+- [Tanjiro Image](https://www.zerochan.net/2579684)
 
 
 
