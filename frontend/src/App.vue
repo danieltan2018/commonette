@@ -12,7 +12,7 @@
             <v-btn text icon v-on="on">
               <v-icon>mdi-account-group</v-icon>
             </v-btn>
-            {{ roomName }}'s Room
+            {{ roomName }}
           </template>
           <v-list dense>
             <v-list-item>
