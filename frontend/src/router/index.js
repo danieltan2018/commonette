@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Redirect from '../views/404.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/app',
     name: 'Home',
     component: Home
   },
@@ -35,7 +36,7 @@ const routes = [
   {
     path: '*',
     name: 'Default',
-    component: () => import('../views/404.vue'),
+    component: Redirect
   }
 ]
 

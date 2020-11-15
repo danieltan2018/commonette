@@ -1,7 +1,7 @@
 <script>
 export default {
   beforeCreate() {
-    this.$router.push("/");
+    this.$router.push("/app");
   },
 };
 </script>
