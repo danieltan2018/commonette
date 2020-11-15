@@ -36,10 +36,10 @@ TO ADD: Watch our youtube [video](https://youtu.be/rct3AHYej5U).
 
 ## Setup - Frontend
 
-1. Go to frontend folder
+1. Go to app folder
 
    ```bash
-   $ cd frontend
+   $ cd app
    ```
 
 2. Setup project and install libraries
@@ -48,7 +48,7 @@ TO ADD: Watch our youtube [video](https://youtu.be/rct3AHYej5U).
    $ npm install
    ```
 
-3. Update backend url on `line 12` in `frontend/src/main.js` 
+3. Update backend url on `line 12` in `app/src/main.js` 
 
    ```javascript
    // update link with backend url
