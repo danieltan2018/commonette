@@ -6,7 +6,7 @@ An all-in-one recommendation platform that allows users to get recommendations f
 
 Try a live demo [here](commonette.smusis.com).
 
-TO ADD: Watch our youtube [video](youtube.com).
+TO ADD: Watch our youtube [video](https://youtu.be/rct3AHYej5U).
 
 
 
